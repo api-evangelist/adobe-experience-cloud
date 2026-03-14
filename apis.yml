@@ -1,0 +1,17 @@
+name: Adobe Experience Cloud
+description: >-
+  APIs for Adobe Experience Cloud, Adobes integrated suite of
+  applications for digital marketing, analytics, advertising, and
+  commerce, providing tools for content management, personalization,
+  and customer journey orchestration.
+url: https://business.adobe.com/products/experience-cloud.html
+created: "2025-01-01"
+modified: "2025-01-01"
+specificationVersion: "0.18"
+tags:
+- Adobe Experience Cloud
+- Digital Marketing
+- Analytics
+maintainers:
+- FN: Kin Lane
+  email: info@apievangelist.com
