@@ -1,0 +1,1060 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Platform API
+  description: >-
+    The Adobe Experience Platform API provides RESTful access to the core
+    services of Adobe Experience Platform, including data ingestion, unified
+    profile management, identity resolution, dataset management, schema
+    registry, query service, and segmentation. It enables developers to build
+    and manage real-time customer profiles, ingest batch and streaming data,
+    define XDM schemas, and orchestrate data workflows programmatically.
+  version: 1.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/experience-platform-apis/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+  - url: https://platform.adobe.io
+    description: Adobe Experience Platform Production API
+security:
+  - bearerAuth: []
+  - apiKey: []
+tags:
+  - name: Schemas
+    description: Operations for managing XDM schemas via the Schema Registry
+  - name: Datasets
+    description: Operations for managing datasets in the Data Lake
+  - name: Batches
+    description: Operations for batch data ingestion
+  - name: Profiles
+    description: Operations for accessing unified customer profiles
+  - name: Segments
+    description: Operations for managing audience segments
+  - name: Identities
+    description: Operations for identity namespace management
+  - name: Queries
+    description: Operations for the Query Service
+  - name: Classes
+    description: Operations for managing XDM classes
+  - name: Sandboxes
+    description: Operations for managing platform sandboxes
+paths:
+  /data/foundation/schemaregistry/tenant/schemas:
+    get:
+      operationId: listSchemas
+      summary: List schemas
+      description: >-
+        Returns a paginated list of XDM schemas defined in the tenant container.
+        Each schema entry includes its title, description, and meta information
+        such as the schema ID and version.
+      tags:
+        - Schemas
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+        - name: limit
+          in: query
+          description: Maximum number of results per page.
+          schema:
+            type: integer
+            default: 20
+        - name: start
+          in: query
+          description: Pagination cursor for the next page of results.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A paginated list of schemas.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+        '403':
+          description: Insufficient permissions.
+    post:
+      operationId: createSchema
+      summary: Create a schema
+      description: >-
+        Creates a new XDM schema in the tenant container. The request body must
+        include the schema title, allOf references to a base class, and any
+        mixin or field group references.
+      tags:
+        - Schemas
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SchemaInput'
+      responses:
+        '201':
+          description: Schema created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schema'
+        '400':
+          description: Invalid schema definition.
+        '401':
+          description: Authentication credentials are missing or invalid.
+  /data/foundation/schemaregistry/tenant/schemas/{schemaId}:
+    get:
+      operationId: getSchema
+      summary: Get a schema
+      description: >-
+        Retrieves the full definition of an XDM schema by its URL-encoded schema
+        ID, including all field definitions, mixins, and class references.
+      tags:
+        - Schemas
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+        - name: schemaId
+          in: path
+          required: true
+          description: URL-encoded schema meta:altId or $id.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Schema definition returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schema'
+        '404':
+          description: Schema not found.
+    put:
+      operationId: updateSchema
+      summary: Update a schema
+      description: >-
+        Replaces the entire definition of an existing XDM schema with the
+        provided request body.
+      tags:
+        - Schemas
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+        - name: schemaId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SchemaInput'
+      responses:
+        '200':
+          description: Schema updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Schema'
+        '400':
+          description: Invalid schema definition.
+        '404':
+          description: Schema not found.
+    delete:
+      operationId: deleteSchema
+      summary: Delete a schema
+      description: >-
+        Deletes a tenant-defined XDM schema. Only schemas that are not
+        referenced by datasets or other resources can be deleted.
+      tags:
+        - Schemas
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+        - name: schemaId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Schema deleted successfully.
+        '404':
+          description: Schema not found.
+        '409':
+          description: Schema is in use and cannot be deleted.
+  /data/foundation/catalog/dataSets:
+    get:
+      operationId: listDatasets
+      summary: List datasets
+      description: >-
+        Returns a list of datasets registered in the Data Catalog for the
+        current sandbox. Each dataset includes its name, schema reference,
+        creation date, and status.
+      tags:
+        - Datasets
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: start
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of datasets.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/Dataset'
+        '401':
+          description: Authentication credentials are missing or invalid.
+    post:
+      operationId: createDataset
+      summary: Create a dataset
+      description: >-
+        Creates a new dataset in the Data Catalog. The request body must include
+        a name and a reference to an existing XDM schema. Optionally configure
+        tags, file format, and ingestion settings.
+      tags:
+        - Datasets
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatasetInput'
+      responses:
+        '201':
+          description: Dataset created successfully.
+          headers:
+            Location:
+              description: URI of the newly created dataset.
+              schema:
+                type: string
+        '400':
+          description: Invalid dataset definition.
+  /data/foundation/catalog/dataSets/{datasetId}:
+    get:
+      operationId: getDataset
+      summary: Get a dataset
+      description: >-
+        Retrieves the metadata and configuration for a single dataset by its
+        dataset ID.
+      tags:
+        - Datasets
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+        - name: datasetId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Dataset details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dataset'
+        '404':
+          description: Dataset not found.
+    delete:
+      operationId: deleteDataset
+      summary: Delete a dataset
+      description: >-
+        Deletes a dataset and all associated batches from the Data Catalog.
+        This action cannot be undone.
+      tags:
+        - Datasets
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+        - name: datasetId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Dataset deleted successfully.
+        '404':
+          description: Dataset not found.
+  /data/foundation/import/batches:
+    post:
+      operationId: createBatch
+      summary: Create a batch
+      description: >-
+        Creates a new batch for data ingestion into a specified dataset. Returns
+        a batch ID that can be used to upload files and signal batch completion.
+      tags:
+        - Batches
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - datasetId
+                - inputFormat
+              properties:
+                datasetId:
+                  type: string
+                inputFormat:
+                  type: object
+                  properties:
+                    format:
+                      type: string
+                      enum:
+                        - parquet
+                        - json
+                        - csv
+      responses:
+        '201':
+          description: Batch created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Batch'
+        '400':
+          description: Invalid batch configuration.
+  /data/foundation/import/batches/{batchId}:
+    get:
+      operationId: getBatch
+      summary: Get batch status
+      description: >-
+        Retrieves the current status and metadata for a batch ingestion
+        operation identified by its batch ID.
+      tags:
+        - Batches
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+        - name: batchId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Batch status returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Batch'
+        '404':
+          description: Batch not found.
+  /data/core/ups/access/entities:
+    get:
+      operationId: getProfileEntities
+      summary: Get profile entities
+      description: >-
+        Retrieves unified profile entities by identity. Provide an identity
+        namespace and value to look up profile records, experience events,
+        or other entity types associated with a specific individual.
+      tags:
+        - Profiles
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+        - name: schema.name
+          in: query
+          required: true
+          description: XDM schema name for the entity type.
+          schema:
+            type: string
+        - name: entityId
+          in: query
+          required: true
+          description: The identity value to look up.
+          schema:
+            type: string
+        - name: entityIdNS
+          in: query
+          required: true
+          description: Identity namespace code.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Profile entity data returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileEntity'
+        '404':
+          description: No profile found for the given identity.
+  /data/core/ups/segment/definitions:
+    get:
+      operationId: listSegmentDefinitions
+      summary: List segment definitions
+      description: >-
+        Returns a paginated list of audience segment definitions configured in
+        the platform. Each segment includes its name, PQL expression, and
+        evaluation status.
+      tags:
+        - Segments
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: A list of segment definitions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentDefinitionList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+    post:
+      operationId: createSegmentDefinition
+      summary: Create a segment definition
+      description: >-
+        Creates a new audience segment definition using a Profile Query Language
+        (PQL) expression. The segment will be evaluated against the unified
+        profile store.
+      tags:
+        - Segments
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentDefinitionInput'
+      responses:
+        '201':
+          description: Segment definition created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentDefinition'
+        '400':
+          description: Invalid segment definition.
+  /data/core/ups/segment/definitions/{segmentId}:
+    get:
+      operationId: getSegmentDefinition
+      summary: Get a segment definition
+      description: >-
+        Retrieves a single segment definition by its ID, including the PQL
+        expression, merge policy, and evaluation schedule.
+      tags:
+        - Segments
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+        - name: segmentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Segment definition returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentDefinition'
+        '404':
+          description: Segment definition not found.
+    delete:
+      operationId: deleteSegmentDefinition
+      summary: Delete a segment definition
+      description: >-
+        Deletes a segment definition by its ID. Segment jobs already running
+        will complete but no new evaluations will occur.
+      tags:
+        - Segments
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+        - name: segmentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Segment definition deleted successfully.
+        '404':
+          description: Segment definition not found.
+  /data/foundation/identity/namespaces:
+    get:
+      operationId: listIdentityNamespaces
+      summary: List identity namespaces
+      description: >-
+        Returns a list of all identity namespaces available in the current IMS
+        organization, including standard namespaces (ECID, Email, Phone) and
+        custom namespaces.
+      tags:
+        - Identities
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+      responses:
+        '200':
+          description: A list of identity namespaces.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IdentityNamespace'
+        '401':
+          description: Authentication credentials are missing or invalid.
+    post:
+      operationId: createIdentityNamespace
+      summary: Create an identity namespace
+      description: >-
+        Creates a custom identity namespace for use in identity resolution and
+        profile unification. The namespace must have a unique code and name.
+      tags:
+        - Identities
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IdentityNamespaceInput'
+      responses:
+        '201':
+          description: Identity namespace created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdentityNamespace'
+        '400':
+          description: Invalid namespace definition.
+  /data/foundation/query/queries:
+    get:
+      operationId: listQueries
+      summary: List queries
+      description: >-
+        Returns a paginated list of queries that have been submitted to the
+        Query Service, including their SQL statements, status, and execution
+        metadata.
+      tags:
+        - Queries
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: A list of queries.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+    post:
+      operationId: createQuery
+      summary: Submit a query
+      description: >-
+        Submits a new SQL query to the Query Service for execution against
+        datasets in the Data Lake. Returns a query ID that can be used to
+        poll for results.
+      tags:
+        - Queries
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - dbName
+                - sql
+              properties:
+                dbName:
+                  type: string
+                  description: The database name (sandbox name).
+                sql:
+                  type: string
+                  description: The SQL query to execute.
+                name:
+                  type: string
+                  description: Optional name for the query.
+      responses:
+        '202':
+          description: Query submitted for execution.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Query'
+        '400':
+          description: Invalid SQL syntax.
+  /data/foundation/query/queries/{queryId}:
+    get:
+      operationId: getQuery
+      summary: Get query status
+      description: >-
+        Retrieves the status, execution metadata, and results reference for a
+        previously submitted query.
+      tags:
+        - Queries
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+        - name: queryId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Query status returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Query'
+        '404':
+          description: Query not found.
+  /data/foundation/schemaregistry/tenant/classes:
+    get:
+      operationId: listClasses
+      summary: List classes
+      description: >-
+        Returns a paginated list of XDM classes in the tenant container. Classes
+        define the base structure and behavior type for schemas.
+      tags:
+        - Classes
+      parameters:
+        - $ref: '#/components/parameters/sandboxHeader'
+      responses:
+        '200':
+          description: A list of XDM classes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+  /data/foundation/sandbox-management/sandboxes:
+    get:
+      operationId: listSandboxes
+      summary: List sandboxes
+      description: >-
+        Returns a list of all sandboxes available in the current IMS
+        organization, including development and production sandboxes.
+      tags:
+        - Sandboxes
+      parameters: []
+      responses:
+        '200':
+          description: A list of sandboxes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SandboxList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+    post:
+      operationId: createSandbox
+      summary: Create a sandbox
+      description: >-
+        Creates a new development sandbox within the IMS organization. Production
+        sandboxes can only be created by system administrators.
+      tags:
+        - Sandboxes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - title
+                - type
+              properties:
+                name:
+                  type: string
+                title:
+                  type: string
+                type:
+                  type: string
+                  enum:
+                    - development
+                    - production
+      responses:
+        '201':
+          description: Sandbox created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sandbox'
+        '400':
+          description: Invalid sandbox configuration.
+  /data/foundation/sandbox-management/sandboxes/{sandboxName}:
+    get:
+      operationId: getSandbox
+      summary: Get a sandbox
+      description: >-
+        Retrieves details for a single sandbox including its name, title, type,
+        state, and region.
+      tags:
+        - Sandboxes
+      parameters:
+        - name: sandboxName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Sandbox details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sandbox'
+        '404':
+          description: Sandbox not found.
+    delete:
+      operationId: deleteSandbox
+      summary: Delete a sandbox
+      description: >-
+        Deletes a development sandbox and all its contained resources. Production
+        sandboxes cannot be deleted, only reset.
+      tags:
+        - Sandboxes
+      parameters:
+        - name: sandboxName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Sandbox deleted successfully.
+        '404':
+          description: Sandbox not found.
+components:
+  parameters:
+    sandboxHeader:
+      name: x-sandbox-name
+      in: header
+      required: true
+      description: The name of the sandbox to operate in.
+      schema:
+        type: string
+        default: prod
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+  schemas:
+    SchemaList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Schema'
+        _page:
+          type: object
+          properties:
+            count:
+              type: integer
+    Schema:
+      type: object
+      properties:
+        $id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+        meta:altId:
+          type: string
+        version:
+          type: string
+    SchemaInput:
+      type: object
+      required:
+        - title
+        - type
+        - allOf
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+        allOf:
+          type: array
+          items:
+            type: object
+            properties:
+              $ref:
+                type: string
+    Dataset:
+      type: object
+      properties:
+        name:
+          type: string
+        schemaRef:
+          type: object
+          properties:
+            id:
+              type: string
+            contentType:
+              type: string
+        fileDescription:
+          type: object
+          properties:
+            format:
+              type: string
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        status:
+          type: string
+    DatasetInput:
+      type: object
+      required:
+        - name
+        - schemaRef
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        schemaRef:
+          type: object
+          required:
+            - id
+            - contentType
+          properties:
+            id:
+              type: string
+            contentType:
+              type: string
+    Batch:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum:
+            - loading
+            - staging
+            - success
+            - failed
+            - abandoned
+        created:
+          type: string
+          format: date-time
+        completed:
+          type: string
+          format: date-time
+    ProfileEntity:
+      type: object
+      properties:
+        entity:
+          type: object
+        lastModifiedAt:
+          type: string
+          format: date-time
+    SegmentDefinitionList:
+      type: object
+      properties:
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/SegmentDefinition'
+        page:
+          type: object
+          properties:
+            totalCount:
+              type: integer
+    SegmentDefinition:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        expression:
+          type: object
+          properties:
+            type:
+              type: string
+            value:
+              type: string
+        mergePolicyId:
+          type: string
+        evaluationInfo:
+          type: object
+    SegmentDefinitionInput:
+      type: object
+      required:
+        - name
+        - expression
+        - schema
+        - mergePolicyId
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        expression:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+                - PQL
+            value:
+              type: string
+            format:
+              type: string
+              enum:
+                - pql/text
+                - pql/json
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+        mergePolicyId:
+          type: string
+    IdentityNamespace:
+      type: object
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        idType:
+          type: string
+        standard:
+          type: boolean
+    IdentityNamespaceInput:
+      type: object
+      required:
+        - name
+        - code
+        - idType
+      properties:
+        name:
+          type: string
+        code:
+          type: string
+        description:
+          type: string
+        idType:
+          type: string
+          enum:
+            - COOKIE
+            - DEVICE
+            - CROSS_DEVICE
+            - EMAIL
+            - PHONE
+    QueryList:
+      type: object
+      properties:
+        queries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Query'
+        _page:
+          type: object
+          properties:
+            totalCount:
+              type: integer
+    Query:
+      type: object
+      properties:
+        id:
+          type: string
+        dbName:
+          type: string
+        sql:
+          type: string
+        name:
+          type: string
+        state:
+          type: string
+          enum:
+            - SUBMITTED
+            - IN_PROGRESS
+            - SUCCESS
+            - FAILED
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        rowCount:
+          type: integer
+    ClassList:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              $id:
+                type: string
+              title:
+                type: string
+              description:
+                type: string
+    SandboxList:
+      type: object
+      properties:
+        sandboxes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sandbox'
+    Sandbox:
+      type: object
+      properties:
+        name:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        state:
+          type: string
+        region:
+          type: string

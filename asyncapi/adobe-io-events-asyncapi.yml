@@ -1,0 +1,472 @@
+asyncapi: 2.6.0
+info:
+  title: Adobe I/O Events
+  version: 1.0.0
+  description: >-
+    Adobe I/O Events enables developers to receive near-real-time notifications
+    from Adobe services via webhooks and journal polling. Events are emitted
+    when significant changes occur across Adobe Experience Cloud products
+    including Experience Platform, Creative Cloud, Campaign, and Analytics.
+    Developers register webhook endpoints or poll a journaling API to consume
+    events for building reactive integrations and automated workflows.
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/events/docs/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+  webhook:
+    url: https://{yourDomain}/webhook
+    protocol: https
+    description: >-
+      Your webhook endpoint that receives Adobe I/O Events via HTTP POST.
+      Must respond to a challenge request for registration verification.
+    variables:
+      yourDomain:
+        default: example.com
+        description: Your registered webhook domain.
+  journal:
+    url: https://events.adobe.io
+    protocol: https
+    description: >-
+      Adobe I/O Events journaling API for polling events. Use this as an
+      alternative to webhooks for reliable, at-least-once event delivery.
+channels:
+  experience-platform/dataset-ingestion:
+    description: >-
+      Events emitted when batch ingestion operations complete or fail on
+      Adobe Experience Platform datasets.
+    subscribe:
+      operationId: onDatasetIngestionEvent
+      summary: Receive dataset ingestion events
+      description: >-
+        Triggered when a batch ingestion operation on an Experience Platform
+        dataset completes successfully or fails. Includes the batch ID,
+        dataset ID, and ingestion status.
+      tags:
+        - name: Experience Platform
+        - name: Data Ingestion
+      message:
+        $ref: '#/components/messages/DatasetIngestionEvent'
+  experience-platform/profile-update:
+    description: >-
+      Events emitted when unified profile records are created or updated in
+      Adobe Experience Platform.
+    subscribe:
+      operationId: onProfileUpdateEvent
+      summary: Receive profile update events
+      description: >-
+        Triggered when a unified customer profile is created or updated in
+        Experience Platform. Includes the profile identity and the nature of
+        the change.
+      tags:
+        - name: Experience Platform
+        - name: Profiles
+      message:
+        $ref: '#/components/messages/ProfileUpdateEvent'
+  experience-platform/segment-evaluation:
+    description: >-
+      Events emitted when audience segment evaluation jobs complete in
+      Adobe Experience Platform.
+    subscribe:
+      operationId: onSegmentEvaluationEvent
+      summary: Receive segment evaluation events
+      description: >-
+        Triggered when a segment evaluation job completes, indicating the
+        segment membership has been recalculated. Includes the segment ID,
+        job ID, and resulting profile count.
+      tags:
+        - name: Experience Platform
+        - name: Segmentation
+      message:
+        $ref: '#/components/messages/SegmentEvaluationEvent'
+  analytics/report-suite-change:
+    description: >-
+      Events emitted when configuration changes are made to Adobe Analytics
+      report suites.
+    subscribe:
+      operationId: onReportSuiteChangeEvent
+      summary: Receive report suite change events
+      description: >-
+        Triggered when a report suite configuration is modified, including
+        changes to processing rules, classification uploads, and data source
+        configurations.
+      tags:
+        - name: Analytics
+        - name: Configuration
+      message:
+        $ref: '#/components/messages/ReportSuiteChangeEvent'
+  campaign/delivery-status:
+    description: >-
+      Events emitted when Adobe Campaign email or message deliveries change
+      status, including sends, bounces, and opens.
+    subscribe:
+      operationId: onDeliveryStatusEvent
+      summary: Receive delivery status events
+      description: >-
+        Triggered when the delivery status of a Campaign message changes.
+        Includes the delivery ID, recipient, and new status such as sent,
+        delivered, bounced, or opened.
+      tags:
+        - name: Campaign
+        - name: Delivery
+      message:
+        $ref: '#/components/messages/DeliveryStatusEvent'
+  campaign/workflow-execution:
+    description: >-
+      Events emitted when Adobe Campaign workflow executions start, complete,
+      or encounter errors.
+    subscribe:
+      operationId: onWorkflowExecutionEvent
+      summary: Receive workflow execution events
+      description: >-
+        Triggered when a Campaign workflow starts, finishes, or fails. Includes
+        the workflow ID, execution status, and any error details.
+      tags:
+        - name: Campaign
+        - name: Workflows
+      message:
+        $ref: '#/components/messages/WorkflowExecutionEvent'
+  target/activity-state-change:
+    description: >-
+      Events emitted when Adobe Target activities change state, such as
+      activation, deactivation, or archival.
+    subscribe:
+      operationId: onActivityStateChangeEvent
+      summary: Receive activity state change events
+      description: >-
+        Triggered when a Target activity transitions between states. Includes
+        the activity ID, name, previous state, and new state.
+      tags:
+        - name: Target
+        - name: Activities
+      message:
+        $ref: '#/components/messages/ActivityStateChangeEvent'
+  journey-optimizer/journey-step:
+    description: >-
+      Events emitted when profiles progress through journey steps in Adobe
+      Journey Optimizer.
+    subscribe:
+      operationId: onJourneyStepEvent
+      summary: Receive journey step events
+      description: >-
+        Triggered when a profile enters, exits, or completes a step within
+        a Journey Optimizer journey. Includes the journey ID, step ID,
+        profile identity, and step outcome.
+      tags:
+        - name: Journey Optimizer
+        - name: Journeys
+      message:
+        $ref: '#/components/messages/JourneyStepEvent'
+components:
+  messages:
+    DatasetIngestionEvent:
+      name: DatasetIngestionEvent
+      title: Dataset Ingestion Event
+      summary: Notification of a dataset batch ingestion completion or failure.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/DatasetIngestionPayload'
+    ProfileUpdateEvent:
+      name: ProfileUpdateEvent
+      title: Profile Update Event
+      summary: Notification of a unified profile creation or update.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ProfileUpdatePayload'
+    SegmentEvaluationEvent:
+      name: SegmentEvaluationEvent
+      title: Segment Evaluation Event
+      summary: Notification of a segment evaluation job completion.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/SegmentEvaluationPayload'
+    ReportSuiteChangeEvent:
+      name: ReportSuiteChangeEvent
+      title: Report Suite Change Event
+      summary: Notification of an Analytics report suite configuration change.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ReportSuiteChangePayload'
+    DeliveryStatusEvent:
+      name: DeliveryStatusEvent
+      title: Delivery Status Event
+      summary: Notification of a Campaign delivery status change.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/DeliveryStatusPayload'
+    WorkflowExecutionEvent:
+      name: WorkflowExecutionEvent
+      title: Workflow Execution Event
+      summary: Notification of a Campaign workflow execution status change.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/WorkflowExecutionPayload'
+    ActivityStateChangeEvent:
+      name: ActivityStateChangeEvent
+      title: Activity State Change Event
+      summary: Notification of a Target activity state transition.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ActivityStateChangePayload'
+    JourneyStepEvent:
+      name: JourneyStepEvent
+      title: Journey Step Event
+      summary: Notification of a profile progressing through a journey step.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/JourneyStepPayload'
+  schemas:
+    EventEnvelope:
+      type: object
+      description: Common envelope for all Adobe I/O Events.
+      properties:
+        event_id:
+          type: string
+          description: Unique identifier for this event instance.
+        event:
+          type: object
+          description: The event payload.
+        recipient_client_id:
+          type: string
+          description: The client ID of the registered integration.
+    DatasetIngestionPayload:
+      type: object
+      properties:
+        event_id:
+          type: string
+        event:
+          type: object
+          properties:
+            body:
+              type: object
+              properties:
+                datasetId:
+                  type: string
+                batchId:
+                  type: string
+                status:
+                  type: string
+                  enum:
+                    - success
+                    - failed
+                recordCount:
+                  type: integer
+                completedAt:
+                  type: string
+                  format: date-time
+            header:
+              type: object
+              properties:
+                eventType:
+                  type: string
+                imsOrgId:
+                  type: string
+                source:
+                  type: string
+    ProfileUpdatePayload:
+      type: object
+      properties:
+        event_id:
+          type: string
+        event:
+          type: object
+          properties:
+            body:
+              type: object
+              properties:
+                identityMap:
+                  type: object
+                changeType:
+                  type: string
+                  enum:
+                    - created
+                    - updated
+                modifiedAt:
+                  type: string
+                  format: date-time
+            header:
+              type: object
+              properties:
+                eventType:
+                  type: string
+                imsOrgId:
+                  type: string
+    SegmentEvaluationPayload:
+      type: object
+      properties:
+        event_id:
+          type: string
+        event:
+          type: object
+          properties:
+            body:
+              type: object
+              properties:
+                segmentId:
+                  type: string
+                jobId:
+                  type: string
+                status:
+                  type: string
+                  enum:
+                    - succeeded
+                    - failed
+                profileCount:
+                  type: integer
+                completedAt:
+                  type: string
+                  format: date-time
+            header:
+              type: object
+              properties:
+                eventType:
+                  type: string
+    ReportSuiteChangePayload:
+      type: object
+      properties:
+        event_id:
+          type: string
+        event:
+          type: object
+          properties:
+            body:
+              type: object
+              properties:
+                rsid:
+                  type: string
+                changeType:
+                  type: string
+                changedBy:
+                  type: string
+                changedAt:
+                  type: string
+                  format: date-time
+            header:
+              type: object
+              properties:
+                eventType:
+                  type: string
+    DeliveryStatusPayload:
+      type: object
+      properties:
+        event_id:
+          type: string
+        event:
+          type: object
+          properties:
+            body:
+              type: object
+              properties:
+                deliveryId:
+                  type: string
+                recipientEmail:
+                  type: string
+                status:
+                  type: string
+                  enum:
+                    - sent
+                    - delivered
+                    - bounced
+                    - opened
+                    - clicked
+                timestamp:
+                  type: string
+                  format: date-time
+            header:
+              type: object
+              properties:
+                eventType:
+                  type: string
+    WorkflowExecutionPayload:
+      type: object
+      properties:
+        event_id:
+          type: string
+        event:
+          type: object
+          properties:
+            body:
+              type: object
+              properties:
+                workflowId:
+                  type: string
+                executionStatus:
+                  type: string
+                  enum:
+                    - started
+                    - completed
+                    - failed
+                    - paused
+                errorMessage:
+                  type: string
+                timestamp:
+                  type: string
+                  format: date-time
+            header:
+              type: object
+              properties:
+                eventType:
+                  type: string
+    ActivityStateChangePayload:
+      type: object
+      properties:
+        event_id:
+          type: string
+        event:
+          type: object
+          properties:
+            body:
+              type: object
+              properties:
+                activityId:
+                  type: integer
+                activityName:
+                  type: string
+                previousState:
+                  type: string
+                newState:
+                  type: string
+                changedAt:
+                  type: string
+                  format: date-time
+            header:
+              type: object
+              properties:
+                eventType:
+                  type: string
+    JourneyStepPayload:
+      type: object
+      properties:
+        event_id:
+          type: string
+        event:
+          type: object
+          properties:
+            body:
+              type: object
+              properties:
+                journeyId:
+                  type: string
+                journeyVersionId:
+                  type: string
+                stepId:
+                  type: string
+                profileId:
+                  type: string
+                stepStatus:
+                  type: string
+                  enum:
+                    - entered
+                    - completed
+                    - timedOut
+                    - error
+                timestamp:
+                  type: string
+                  format: date-time
+            header:
+              type: object
+              properties:
+                eventType:
+                  type: string

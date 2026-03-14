@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "adobe-experience-cloud-campaign.json",
+  "title": "Adobe Experience Cloud Campaign",
+  "description": "A marketing campaign entity representing a coordinated marketing effort across channels such as email, SMS, push, and in-app, used in both Adobe Campaign and Journey Optimizer for audience targeting and message delivery.",
+  "type": "object",
+  "properties": {
+    "campaignId": {
+      "type": "string",
+      "description": "The unique identifier for the campaign."
+    },
+    "name": {
+      "type": "string",
+      "description": "The human-readable name of the campaign."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the campaign purpose and goals."
+    },
+    "channel": {
+      "type": "string",
+      "enum": ["email", "sms", "push", "inApp", "directMail"],
+      "description": "The primary delivery channel."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "scheduled", "live", "paused", "completed", "cancelled"],
+      "description": "The current status of the campaign."
+    },
+    "audience": {
+      "type": "object",
+      "description": "The target audience for the campaign.",
+      "properties": {
+        "segmentId": {
+          "type": "string",
+          "description": "The segment defining the target audience."
+        },
+        "estimatedSize": {
+          "type": "integer",
+          "description": "Estimated number of profiles in the target audience."
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "description": "The message content configuration.",
+      "properties": {
+        "subject": {
+          "type": "string",
+          "description": "The message subject line (for email)."
+        },
+        "body": {
+          "type": "string",
+          "description": "The message body content."
+        },
+        "templateId": {
+          "type": "string",
+          "description": "Reference to a content template."
+        },
+        "sender": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string",
+              "format": "email"
+            }
+          }
+        }
+      }
+    },
+    "schedule": {
+      "type": "object",
+      "description": "The campaign delivery schedule.",
+      "properties": {
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the campaign delivery begins."
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the campaign delivery ends."
+        },
+        "timezone": {
+          "type": "string",
+          "description": "The timezone for schedule evaluation."
+        },
+        "recurring": {
+          "type": "boolean",
+          "description": "Whether this is a recurring campaign."
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "description": "Campaign performance metrics.",
+      "properties": {
+        "sent": {
+          "type": "integer",
+          "description": "Number of messages sent."
+        },
+        "delivered": {
+          "type": "integer",
+          "description": "Number of messages delivered."
+        },
+        "opened": {
+          "type": "integer",
+          "description": "Number of messages opened."
+        },
+        "clicked": {
+          "type": "integer",
+          "description": "Number of link clicks."
+        },
+        "bounced": {
+          "type": "integer",
+          "description": "Number of bounced messages."
+        },
+        "unsubscribed": {
+          "type": "integer",
+          "description": "Number of unsubscribes."
+        }
+      }
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the campaign was created."
+    },
+    "lastModified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the campaign was last modified."
+    }
+  },
+  "required": ["campaignId", "name", "channel"]
+}

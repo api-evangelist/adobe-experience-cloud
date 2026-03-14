@@ -1,0 +1,132 @@
+{
+  "@context": {
+    "@vocab": "https://ns.adobe.com/experience/",
+    "aep": "https://ns.adobe.com/experience/platform/",
+    "xdm": "https://ns.adobe.com/xdm/",
+    "schema": "https://schema.org/",
+    "adobe": "https://ns.adobe.com/",
+    "id": "@id",
+    "type": "@type",
+    "Profile": {
+      "@id": "xdm:Profile",
+      "@context": {
+        "profileId": "xdm:profileId",
+        "identityMap": "xdm:identityMap",
+        "person": "xdm:person",
+        "personalEmail": "xdm:personalEmail",
+        "mobilePhone": "xdm:mobilePhone",
+        "homeAddress": "xdm:homeAddress",
+        "segmentMembership": "xdm:segmentMembership",
+        "consents": "xdm:consents",
+        "firstName": "xdm:firstName",
+        "lastName": "xdm:lastName",
+        "fullName": "xdm:fullName",
+        "birthDate": {
+          "@id": "xdm:birthDate",
+          "@type": "schema:Date"
+        },
+        "gender": "xdm:gender",
+        "address": {
+          "@id": "schema:address",
+          "@type": "schema:PostalAddress"
+        },
+        "email": "schema:email"
+      }
+    },
+    "ExperienceEvent": {
+      "@id": "xdm:ExperienceEvent",
+      "@context": {
+        "eventId": "xdm:eventId",
+        "eventType": "xdm:eventType",
+        "timestamp": {
+          "@id": "xdm:timestamp",
+          "@type": "schema:DateTime"
+        },
+        "web": "xdm:web",
+        "commerce": "xdm:commerce",
+        "device": "xdm:device",
+        "environment": "xdm:environment"
+      }
+    },
+    "Segment": {
+      "@id": "aep:SegmentDefinition",
+      "@context": {
+        "segmentId": "aep:segmentId",
+        "expression": "aep:segmentExpression",
+        "evaluationType": "aep:evaluationType",
+        "mergePolicyId": "aep:mergePolicyId",
+        "profileCount": "aep:segmentProfileCount",
+        "status": "aep:segmentStatus"
+      }
+    },
+    "Journey": {
+      "@id": "adobe:journey/Journey",
+      "@context": {
+        "journeyId": "adobe:journey/journeyId",
+        "entryCondition": "adobe:journey/entryCondition",
+        "activities": "adobe:journey/activities",
+        "version": "adobe:journey/version",
+        "status": "adobe:journey/status"
+      }
+    },
+    "Campaign": {
+      "@id": "adobe:campaign/Campaign",
+      "@context": {
+        "campaignId": "adobe:campaign/campaignId",
+        "channel": "adobe:campaign/channel",
+        "audience": "adobe:campaign/audience",
+        "schedule": "adobe:campaign/schedule",
+        "metrics": "adobe:campaign/metrics"
+      }
+    },
+    "Offer": {
+      "@id": "adobe:offer/Offer",
+      "@context": {
+        "offerId": "adobe:offer/offerId",
+        "offerType": "adobe:offer/offerType",
+        "representations": "adobe:offer/representations",
+        "eligibilityRule": "adobe:offer/eligibilityRule",
+        "priority": "adobe:offer/priority",
+        "cappingConstraint": "adobe:offer/cappingConstraint"
+      }
+    },
+    "Activity": {
+      "@id": "adobe:target/Activity",
+      "@context": {
+        "activityId": "adobe:target/activityId",
+        "activityType": "adobe:target/activityType",
+        "state": "adobe:target/state",
+        "experiences": "adobe:target/experiences"
+      }
+    },
+    "ReportSuite": {
+      "@id": "adobe:analytics/ReportSuite",
+      "@context": {
+        "rsid": "adobe:analytics/rsid",
+        "currency": "adobe:analytics/currency",
+        "timezone": "adobe:analytics/timezone"
+      }
+    },
+    "Dataset": {
+      "@id": "aep:Dataset",
+      "@context": {
+        "datasetId": "aep:datasetId",
+        "schemaRef": "aep:schemaRef",
+        "fileDescription": "aep:fileDescription"
+      }
+    },
+    "name": "schema:name",
+    "description": "schema:description",
+    "created": {
+      "@id": "schema:dateCreated",
+      "@type": "schema:DateTime"
+    },
+    "lastModified": {
+      "@id": "schema:dateModified",
+      "@type": "schema:DateTime"
+    },
+    "tags": "schema:keywords",
+    "owner": "schema:creator",
+    "status": "schema:status"
+  }
+}

@@ -1,0 +1,795 @@
+openapi: 3.1.0
+info:
+  title: Adobe Target API
+  description: >-
+    The Adobe Target API provides programmatic access to Adobe Target for
+    managing activities, audiences, offers, properties, and environments. It
+    enables developers to create and manage A/B tests, experience targeting,
+    multivariate tests, and automated personalization activities, as well as
+    deliver personalized content via the delivery API.
+  version: 1.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/target/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+  - url: https://mc.adobe.io/{tenant}
+    description: Adobe Target Admin API
+    variables:
+      tenant:
+        default: mytenant
+        description: Your Adobe Target tenant name.
+  - url: https://delivery.adobetarget.com
+    description: Adobe Target Delivery API
+tags:
+  - name: Activities
+    description: Operations for managing Target activities (A/B, XT, MVT, AP)
+  - name: Audiences
+    description: Operations for managing Target audiences
+  - name: Offers
+    description: Operations for managing content offers
+  - name: Properties
+    description: Operations for managing enterprise properties
+  - name: Environments
+    description: Operations for managing environments
+  - name: Delivery
+    description: Operations for real-time content delivery
+security:
+  - bearerAuth: []
+  - apiKey: []
+paths:
+  /target/activities:
+    get:
+      operationId: listActivities
+      summary: List activities
+      description: >-
+        Returns a paginated list of all Target activities (A/B tests, experience
+        targeting, multivariate tests, and automated personalization) in the
+        tenant. Each entry includes the activity ID, name, type, state, and
+        modification date.
+      tags:
+        - Activities
+      parameters:
+        - name: limit
+          in: query
+          description: Maximum number of activities to return.
+          schema:
+            type: integer
+            default: 10
+        - name: offset
+          in: query
+          description: Number of activities to skip for pagination.
+          schema:
+            type: integer
+            default: 0
+        - name: sortBy
+          in: query
+          description: Field to sort results by.
+          schema:
+            type: string
+            enum:
+              - name
+              - id
+              - modifiedAt
+      responses:
+        '200':
+          description: A paginated list of activities.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+        '403':
+          description: Insufficient permissions.
+    post:
+      operationId: createActivity
+      summary: Create an activity
+      description: >-
+        Creates a new Target activity of the specified type (AB, XT, MVT, or
+        Automated Personalization). The request body must include the activity
+        name, type, and at least one experience with associated offers.
+      tags:
+        - Activities
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivityInput'
+      responses:
+        '200':
+          description: Activity created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+        '400':
+          description: Invalid activity definition.
+        '401':
+          description: Authentication credentials are missing or invalid.
+  /target/activities/{activityId}:
+    get:
+      operationId: getActivity
+      summary: Get an activity
+      description: >-
+        Retrieves the full configuration and metadata of a single Target
+        activity by its activity ID, including experiences, audiences,
+        metrics, and scheduling.
+      tags:
+        - Activities
+      parameters:
+        - name: activityId
+          in: path
+          required: true
+          description: The Target activity ID.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Activity details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+        '404':
+          description: Activity not found.
+    put:
+      operationId: updateActivity
+      summary: Update an activity
+      description: >-
+        Updates an existing Target activity with new configuration. The full
+        activity object must be provided in the request body.
+      tags:
+        - Activities
+      parameters:
+        - name: activityId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivityInput'
+      responses:
+        '200':
+          description: Activity updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+        '400':
+          description: Invalid activity definition.
+        '404':
+          description: Activity not found.
+    delete:
+      operationId: deleteActivity
+      summary: Delete an activity
+      description: >-
+        Permanently deletes a Target activity. Active activities should be
+        deactivated before deletion.
+      tags:
+        - Activities
+      parameters:
+        - name: activityId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Activity deleted successfully.
+        '404':
+          description: Activity not found.
+  /target/activities/{activityId}/state:
+    put:
+      operationId: updateActivityState
+      summary: Update activity state
+      description: >-
+        Activates, deactivates, or archives a Target activity by updating its
+        state. Valid state transitions depend on the current state.
+      tags:
+        - Activities
+      parameters:
+        - name: activityId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - state
+              properties:
+                state:
+                  type: string
+                  enum:
+                    - activated
+                    - deactivated
+                    - archived
+      responses:
+        '200':
+          description: Activity state updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+        '400':
+          description: Invalid state transition.
+        '404':
+          description: Activity not found.
+  /target/audiences:
+    get:
+      operationId: listAudiences
+      summary: List audiences
+      description: >-
+        Returns a paginated list of all audiences configured in Adobe Target.
+        Each audience includes its ID, name, description, and targeting rules.
+      tags:
+        - Audiences
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: A paginated list of audiences.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudienceList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+    post:
+      operationId: createAudience
+      summary: Create an audience
+      description: >-
+        Creates a new audience in Adobe Target with the specified name and
+        targeting rules.
+      tags:
+        - Audiences
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudienceInput'
+      responses:
+        '200':
+          description: Audience created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audience'
+        '400':
+          description: Invalid audience definition.
+  /target/audiences/{audienceId}:
+    get:
+      operationId: getAudience
+      summary: Get an audience
+      description: >-
+        Retrieves the full definition of a single audience by its audience ID,
+        including all targeting rules and conditions.
+      tags:
+        - Audiences
+      parameters:
+        - name: audienceId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Audience details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audience'
+        '404':
+          description: Audience not found.
+    put:
+      operationId: updateAudience
+      summary: Update an audience
+      description: >-
+        Updates an existing audience with new targeting rules or metadata.
+      tags:
+        - Audiences
+      parameters:
+        - name: audienceId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudienceInput'
+      responses:
+        '200':
+          description: Audience updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audience'
+        '404':
+          description: Audience not found.
+    delete:
+      operationId: deleteAudience
+      summary: Delete an audience
+      description: >-
+        Permanently deletes an audience. Audiences in use by active activities
+        cannot be deleted.
+      tags:
+        - Audiences
+      parameters:
+        - name: audienceId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Audience deleted successfully.
+        '404':
+          description: Audience not found.
+  /target/offers:
+    get:
+      operationId: listOffers
+      summary: List offers
+      description: >-
+        Returns a paginated list of content offers configured in Adobe Target.
+        Offers include HTML, JSON, and redirect offer types.
+      tags:
+        - Offers
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: A paginated list of offers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+    post:
+      operationId: createOffer
+      summary: Create an offer
+      description: >-
+        Creates a new content offer in Adobe Target. The offer can be HTML
+        content, a JSON payload, or a redirect URL.
+      tags:
+        - Offers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OfferInput'
+      responses:
+        '200':
+          description: Offer created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offer'
+        '400':
+          description: Invalid offer definition.
+  /target/offers/{offerId}:
+    get:
+      operationId: getOffer
+      summary: Get an offer
+      description: >-
+        Retrieves a single offer by its offer ID, including the content payload
+        and metadata.
+      tags:
+        - Offers
+      parameters:
+        - name: offerId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Offer details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offer'
+        '404':
+          description: Offer not found.
+    put:
+      operationId: updateOffer
+      summary: Update an offer
+      description: >-
+        Updates an existing offer with new content or metadata.
+      tags:
+        - Offers
+      parameters:
+        - name: offerId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OfferInput'
+      responses:
+        '200':
+          description: Offer updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offer'
+        '404':
+          description: Offer not found.
+    delete:
+      operationId: deleteOffer
+      summary: Delete an offer
+      description: >-
+        Permanently deletes an offer. Offers in use by active activities cannot
+        be deleted.
+      tags:
+        - Offers
+      parameters:
+        - name: offerId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Offer deleted successfully.
+        '404':
+          description: Offer not found.
+  /target/properties:
+    get:
+      operationId: listProperties
+      summary: List properties
+      description: >-
+        Returns a list of enterprise properties configured for the Adobe Target
+        tenant. Properties are used with enterprise permissions to control
+        access to activities and offers.
+      tags:
+        - Properties
+      responses:
+        '200':
+          description: A list of properties.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PropertyList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+  /target/environments:
+    get:
+      operationId: listEnvironments
+      summary: List environments
+      description: >-
+        Returns a list of environments (development, staging, production)
+        configured for the Adobe Target tenant.
+      tags:
+        - Environments
+      responses:
+        '200':
+          description: A list of environments.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnvironmentList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+  /rest/v1/delivery:
+    post:
+      operationId: deliverExperiences
+      summary: Deliver personalized experiences
+      description: >-
+        The Target Delivery API endpoint for fetching personalized content for
+        one or more mboxes. Used by client-side and server-side implementations
+        to retrieve offers, execute page load decisions, and prefetch content
+        for subsequent views.
+      tags:
+        - Delivery
+      parameters:
+        - name: client
+          in: query
+          required: true
+          description: Adobe Target client code.
+          schema:
+            type: string
+        - name: sessionId
+          in: query
+          required: true
+          description: Visitor session ID.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryRequest'
+      responses:
+        '200':
+          description: Personalized content delivered successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryResponse'
+        '400':
+          description: Invalid delivery request.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+  schemas:
+    ActivityList:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        activities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Activity'
+    Activity:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - ab
+            - xt
+            - mvt
+            - ap
+        state:
+          type: string
+          enum:
+            - approved
+            - deactivated
+            - archived
+        priority:
+          type: integer
+        modifiedAt:
+          type: string
+          format: date-time
+        startsAt:
+          type: string
+          format: date-time
+        endsAt:
+          type: string
+          format: date-time
+    ActivityInput:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - ab
+            - xt
+            - mvt
+            - ap
+        priority:
+          type: integer
+        startsAt:
+          type: string
+          format: date-time
+        endsAt:
+          type: string
+          format: date-time
+    AudienceList:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        audiences:
+          type: array
+          items:
+            $ref: '#/components/schemas/Audience'
+    Audience:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        targetRule:
+          type: object
+    AudienceInput:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        targetRule:
+          type: object
+    OfferList:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer'
+    Offer:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - content
+            - redirect
+            - dynamic
+        content:
+          type: string
+        modifiedAt:
+          type: string
+          format: date-time
+    OfferInput:
+      type: object
+      required:
+        - name
+        - type
+        - content
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+            - content
+            - redirect
+        content:
+          type: string
+    PropertyList:
+      type: object
+      properties:
+        properties:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              token:
+                type: string
+    EnvironmentList:
+      type: object
+      properties:
+        environments:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+    DeliveryRequest:
+      type: object
+      properties:
+        context:
+          type: object
+          properties:
+            channel:
+              type: string
+              enum:
+                - web
+                - mobile
+            userAgent:
+              type: string
+        execute:
+          type: object
+          properties:
+            mboxes:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  index:
+                    type: integer
+        prefetch:
+          type: object
+          properties:
+            views:
+              type: array
+              items:
+                type: object
+    DeliveryResponse:
+      type: object
+      properties:
+        requestId:
+          type: string
+        execute:
+          type: object
+          properties:
+            mboxes:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  options:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        content:
+                          type: string
+        prefetch:
+          type: object

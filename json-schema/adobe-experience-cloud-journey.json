@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "adobe-experience-cloud-journey.json",
+  "title": "Adobe Experience Cloud Journey",
+  "description": "A customer journey definition in Adobe Journey Optimizer representing an orchestrated sequence of actions, conditions, and wait steps that guide individual profiles through personalized multi-channel experiences.",
+  "type": "object",
+  "properties": {
+    "journeyId": {
+      "type": "string",
+      "description": "The unique identifier for the journey."
+    },
+    "name": {
+      "type": "string",
+      "description": "The human-readable name of the journey."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the journey purpose and flow."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "live", "stopped", "closed", "finished"],
+      "description": "The current lifecycle status of the journey."
+    },
+    "version": {
+      "type": "string",
+      "description": "The version identifier of the journey."
+    },
+    "entryCondition": {
+      "type": "object",
+      "description": "The conditions under which profiles enter the journey.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["segment", "event", "audience"],
+          "description": "The type of entry trigger."
+        },
+        "segmentId": {
+          "type": "string",
+          "description": "The segment ID for segment-based entry."
+        },
+        "eventId": {
+          "type": "string",
+          "description": "The event ID for event-based entry."
+        },
+        "schedule": {
+          "type": "object",
+          "description": "Scheduling configuration for recurring journeys.",
+          "properties": {
+            "frequency": {
+              "type": "string",
+              "enum": ["once", "daily", "weekly", "monthly"]
+            },
+            "startDate": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "endDate": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      }
+    },
+    "activities": {
+      "type": "array",
+      "description": "The ordered list of activities in the journey.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "activityId": {
+            "type": "string",
+            "description": "Unique identifier for this activity step."
+          },
+          "type": {
+            "type": "string",
+            "enum": ["action", "condition", "wait", "end", "email", "push", "sms", "customAction"],
+            "description": "The type of journey activity."
+          },
+          "name": {
+            "type": "string",
+            "description": "A label for this activity step."
+          },
+          "configuration": {
+            "type": "object",
+            "description": "Type-specific configuration for the activity."
+          },
+          "nextActivityId": {
+            "type": "string",
+            "description": "The ID of the next activity in the flow."
+          }
+        },
+        "required": ["activityId", "type"]
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "description": "Execution metrics for the journey.",
+      "properties": {
+        "totalEntered": {
+          "type": "integer",
+          "description": "Total profiles that have entered the journey."
+        },
+        "currentlyInJourney": {
+          "type": "integer",
+          "description": "Profiles currently progressing through the journey."
+        },
+        "totalExited": {
+          "type": "integer",
+          "description": "Profiles that have completed or exited the journey."
+        },
+        "totalErrored": {
+          "type": "integer",
+          "description": "Profiles that encountered errors."
+        }
+      }
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the journey was created."
+    },
+    "lastModified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the journey was last modified."
+    },
+    "publishedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the journey was last published."
+    }
+  },
+  "required": ["journeyId", "name"]
+}

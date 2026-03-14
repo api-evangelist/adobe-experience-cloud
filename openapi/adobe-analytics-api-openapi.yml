@@ -1,0 +1,996 @@
+openapi: 3.1.0
+info:
+  title: Adobe Analytics 2.0 API
+  description: >-
+    The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics
+    reporting, management, and configuration capabilities. It enables developers
+    to retrieve report data, manage report suites, configure calculated metrics,
+    segments, and dimensions, and administer users and permissions within Adobe
+    Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns
+    JSON responses.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+  - url: https://analytics.adobe.io
+    description: Adobe Analytics Production API
+security:
+  - bearerAuth: []
+  - apiKey: []
+tags:
+  - name: Reports
+    description: Operations for retrieving analytics report data
+  - name: Report Suites
+    description: Operations for managing report suites
+  - name: Segments
+    description: Operations for managing analytics segments
+  - name: Calculated Metrics
+    description: Operations for managing calculated metrics
+  - name: Dimensions
+    description: Operations for retrieving dimension metadata
+  - name: Metrics
+    description: Operations for retrieving metric metadata
+  - name: Users
+    description: Operations for managing analytics users
+  - name: Date Ranges
+    description: Operations for managing saved date ranges
+  - name: Projects
+    description: Operations for managing Analysis Workspace projects
+paths:
+  /api/{companyId}/reports:
+    post:
+      operationId: getReport
+      summary: Retrieve a report
+      description: >-
+        Submits a report request to Adobe Analytics and returns the resulting
+        data. The request body defines the report suite, dimensions, metrics,
+        date range, and any segment or filter criteria. Results are returned
+        as a ranked or trended data set in JSON format.
+      tags:
+        - Reports
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          description: The global company ID for the Analytics account.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportRequest'
+      responses:
+        '200':
+          description: Report data returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportResponse'
+        '400':
+          description: Invalid report request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Authentication credentials are missing or invalid.
+        '403':
+          description: Insufficient permissions to access the requested report suite.
+        '429':
+          description: Rate limit exceeded.
+  /api/{companyId}/reportsuites:
+    get:
+      operationId: listReportSuites
+      summary: List report suites
+      description: >-
+        Returns a paginated list of report suites available to the authenticated
+        user within the specified company. Each entry includes the report suite
+        ID, name, and configuration metadata.
+      tags:
+        - Report Suites
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          description: The global company ID for the Analytics account.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Maximum number of results to return per page.
+          schema:
+            type: integer
+            default: 10
+        - name: page
+          in: query
+          description: Page number for pagination.
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: A paginated list of report suites.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportSuiteList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+        '403':
+          description: Insufficient permissions.
+  /api/{companyId}/reportsuites/{rsid}:
+    get:
+      operationId: getReportSuite
+      summary: Get a report suite
+      description: >-
+        Retrieves the configuration details for a single report suite identified
+        by its report suite ID (rsid). Returns metadata including the name,
+        currency, timezone, and enabled features.
+      tags:
+        - Report Suites
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          description: The global company ID.
+          schema:
+            type: string
+        - name: rsid
+          in: path
+          required: true
+          description: The report suite ID.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Report suite details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportSuite'
+        '401':
+          description: Authentication credentials are missing or invalid.
+        '404':
+          description: Report suite not found.
+  /api/{companyId}/segments:
+    get:
+      operationId: listSegments
+      summary: List segments
+      description: >-
+        Returns a paginated list of segments available to the authenticated user.
+        Segments can be filtered by report suite, owner, or tag. Each entry
+        includes the segment ID, name, definition, and sharing status.
+      tags:
+        - Segments
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          description: The global company ID.
+          schema:
+            type: string
+        - name: rsids
+          in: query
+          description: Comma-separated list of report suite IDs to filter segments.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Maximum number of results to return.
+          schema:
+            type: integer
+            default: 10
+        - name: page
+          in: query
+          description: Page number for pagination.
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: A paginated list of segments.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+    post:
+      operationId: createSegment
+      summary: Create a segment
+      description: >-
+        Creates a new segment in Adobe Analytics. The request body must include
+        the segment name, report suite ID, and the segment definition with
+        container and rule criteria.
+      tags:
+        - Segments
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          description: The global company ID.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Segment'
+      responses:
+        '200':
+          description: Segment created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+        '400':
+          description: Invalid segment definition.
+        '401':
+          description: Authentication credentials are missing or invalid.
+  /api/{companyId}/segments/{segmentId}:
+    get:
+      operationId: getSegment
+      summary: Get a segment
+      description: >-
+        Retrieves the full definition and metadata for a single segment
+        identified by its segment ID.
+      tags:
+        - Segments
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: segmentId
+          in: path
+          required: true
+          description: The segment ID.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Segment details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+        '401':
+          description: Authentication credentials are missing or invalid.
+        '404':
+          description: Segment not found.
+    put:
+      operationId: updateSegment
+      summary: Update a segment
+      description: >-
+        Updates an existing segment with new definition or metadata. The full
+        segment object must be provided in the request body.
+      tags:
+        - Segments
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: segmentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Segment'
+      responses:
+        '200':
+          description: Segment updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+        '400':
+          description: Invalid segment definition.
+        '401':
+          description: Authentication credentials are missing or invalid.
+        '404':
+          description: Segment not found.
+    delete:
+      operationId: deleteSegment
+      summary: Delete a segment
+      description: >-
+        Permanently deletes a segment identified by its segment ID. This action
+        cannot be undone.
+      tags:
+        - Segments
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: segmentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Segment deleted successfully.
+        '401':
+          description: Authentication credentials are missing or invalid.
+        '404':
+          description: Segment not found.
+  /api/{companyId}/calculatedmetrics:
+    get:
+      operationId: listCalculatedMetrics
+      summary: List calculated metrics
+      description: >-
+        Returns a paginated list of calculated metrics available to the
+        authenticated user. Calculated metrics can be filtered by report suite,
+        owner, or tag.
+      tags:
+        - Calculated Metrics
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: rsids
+          in: query
+          description: Comma-separated report suite IDs to filter.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: A paginated list of calculated metrics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatedMetricList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+    post:
+      operationId: createCalculatedMetric
+      summary: Create a calculated metric
+      description: >-
+        Creates a new calculated metric in Adobe Analytics with the provided
+        name, definition formula, report suite, and polarity settings.
+      tags:
+        - Calculated Metrics
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculatedMetric'
+      responses:
+        '200':
+          description: Calculated metric created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatedMetric'
+        '400':
+          description: Invalid calculated metric definition.
+        '401':
+          description: Authentication credentials are missing or invalid.
+  /api/{companyId}/calculatedmetrics/{calculatedMetricId}:
+    get:
+      operationId: getCalculatedMetric
+      summary: Get a calculated metric
+      description: >-
+        Retrieves the full definition and metadata for a single calculated
+        metric identified by its ID.
+      tags:
+        - Calculated Metrics
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: calculatedMetricId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Calculated metric returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatedMetric'
+        '404':
+          description: Calculated metric not found.
+    put:
+      operationId: updateCalculatedMetric
+      summary: Update a calculated metric
+      description: >-
+        Updates an existing calculated metric with new definition or metadata.
+      tags:
+        - Calculated Metrics
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: calculatedMetricId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculatedMetric'
+      responses:
+        '200':
+          description: Calculated metric updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatedMetric'
+        '400':
+          description: Invalid definition.
+        '404':
+          description: Calculated metric not found.
+    delete:
+      operationId: deleteCalculatedMetric
+      summary: Delete a calculated metric
+      description: >-
+        Permanently deletes a calculated metric. This action cannot be undone.
+      tags:
+        - Calculated Metrics
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: calculatedMetricId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Calculated metric deleted successfully.
+        '404':
+          description: Calculated metric not found.
+  /api/{companyId}/dimensions:
+    get:
+      operationId: listDimensions
+      summary: List dimensions
+      description: >-
+        Returns all available dimensions for a specified report suite. Each
+        dimension includes its ID, name, description, data type, and
+        segmentable status.
+      tags:
+        - Dimensions
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: rsid
+          in: query
+          required: true
+          description: Report suite ID.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of dimensions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Dimension'
+        '401':
+          description: Authentication credentials are missing or invalid.
+  /api/{companyId}/metrics:
+    get:
+      operationId: listMetrics
+      summary: List metrics
+      description: >-
+        Returns all available metrics for a specified report suite. Each metric
+        includes its ID, name, description, data type, and polarity.
+      tags:
+        - Metrics
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: rsid
+          in: query
+          required: true
+          description: Report suite ID.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of metrics.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Metric'
+        '401':
+          description: Authentication credentials are missing or invalid.
+  /api/{companyId}/users:
+    get:
+      operationId: listUsers
+      summary: List users
+      description: >-
+        Returns a paginated list of users in the Analytics company. Each user
+        entry includes the user ID, login name, email, and assigned permission
+        groups.
+      tags:
+        - Users
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: A paginated list of users.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+  /api/{companyId}/users/{userId}:
+    get:
+      operationId: getUser
+      summary: Get a user
+      description: >-
+        Retrieves details for a single user identified by user ID, including
+        their login name, email, admin status, and permission group assignments.
+      tags:
+        - Users
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found.
+  /api/{companyId}/dateranges:
+    get:
+      operationId: listDateRanges
+      summary: List date ranges
+      description: >-
+        Returns a paginated list of saved date ranges available to the
+        authenticated user. Each entry includes the date range ID, name,
+        and definition.
+      tags:
+        - Date Ranges
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: A paginated list of date ranges.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DateRangeList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+  /api/{companyId}/projects:
+    get:
+      operationId: listProjects
+      summary: List projects
+      description: >-
+        Returns a paginated list of Analysis Workspace projects accessible to
+        the authenticated user. Each entry includes the project ID, name,
+        owner, and modification date.
+      tags:
+        - Projects
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: A paginated list of projects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+  /api/{companyId}/projects/{projectId}:
+    get:
+      operationId: getProject
+      summary: Get a project
+      description: >-
+        Retrieves the full definition and metadata for a single Analysis
+        Workspace project identified by its project ID.
+      tags:
+        - Projects
+      parameters:
+        - name: companyId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Project details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '404':
+          description: Project not found.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via Adobe I/O.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe I/O client API key.
+  schemas:
+    ReportRequest:
+      type: object
+      properties:
+        rsid:
+          type: string
+          description: Report suite ID.
+        globalFilters:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              dateRange:
+                type: string
+        metricContainer:
+          type: object
+          properties:
+            metrics:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+        dimension:
+          type: string
+        settings:
+          type: object
+          properties:
+            limit:
+              type: integer
+            page:
+              type: integer
+    ReportResponse:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+        firstPage:
+          type: boolean
+        lastPage:
+          type: boolean
+        numberOfElements:
+          type: integer
+        totalElements:
+          type: integer
+        rows:
+          type: array
+          items:
+            type: object
+            properties:
+              itemId:
+                type: string
+              value:
+                type: string
+              data:
+                type: array
+                items:
+                  type: number
+    ReportSuiteList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportSuite'
+        totalElements:
+          type: integer
+        totalPages:
+          type: integer
+    ReportSuite:
+      type: object
+      properties:
+        rsid:
+          type: string
+        name:
+          type: string
+        currency:
+          type: string
+        timezone:
+          type: integer
+        calendarType:
+          type: string
+    SegmentList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Segment'
+        totalElements:
+          type: integer
+        totalPages:
+          type: integer
+    Segment:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        rsid:
+          type: string
+        owner:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        definition:
+          type: object
+        tags:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+    CalculatedMetricList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/CalculatedMetric'
+        totalElements:
+          type: integer
+        totalPages:
+          type: integer
+    CalculatedMetric:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        rsid:
+          type: string
+        owner:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        polarity:
+          type: string
+          enum:
+            - positive
+            - negative
+        definition:
+          type: object
+    Dimension:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+        segmentable:
+          type: boolean
+    Metric:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+        polarity:
+          type: string
+    UserList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        totalElements:
+          type: integer
+        totalPages:
+          type: integer
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        loginId:
+          type: string
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        admin:
+          type: boolean
+    DateRangeList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              definition:
+                type: string
+        totalElements:
+          type: integer
+    ProjectList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+        totalElements:
+          type: integer
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        owner:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        modified:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorDescription:
+          type: string
+        errorId:
+          type: string

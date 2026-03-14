@@ -1,0 +1,694 @@
+openapi: 3.1.0
+info:
+  title: Adobe Campaign API
+  description: >-
+    The Adobe Campaign API provides RESTful access to Adobe Campaign Standard
+    and Classic capabilities for managing marketing campaigns, profiles,
+    services, workflows, transactional messages, and content. It enables
+    programmatic creation and execution of email, SMS, and push notification
+    campaigns, subscriber management, and real-time transactional messaging.
+  version: 1.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/campaign-standard-apis/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+  - url: https://mc.adobe.io/{organization}
+    description: Adobe Campaign Production API
+    variables:
+      organization:
+        default: myorg
+        description: Your Adobe Campaign organization identifier.
+security:
+  - bearerAuth: []
+  - apiKey: []
+tags:
+  - name: Profiles
+    description: Operations for managing subscriber profiles
+  - name: Services
+    description: Operations for managing subscription services
+  - name: Campaigns
+    description: Operations for managing marketing campaigns
+  - name: Workflows
+    description: Operations for managing automated workflows
+  - name: Transactional Messages
+    description: Operations for sending real-time transactional messages
+  - name: Content
+    description: Operations for managing email and landing page content
+  - name: Metadata
+    description: Operations for retrieving resource metadata
+paths:
+  /campaign/profileAndServices/profile:
+    get:
+      operationId: listProfiles
+      summary: List profiles
+      description: >-
+        Returns a paginated list of subscriber profiles in the Adobe Campaign
+        database. Profiles can be filtered by email, first name, last name,
+        and custom attributes using query parameters.
+      tags:
+        - Profiles
+      parameters:
+        - name: _lineCount
+          in: query
+          description: Maximum number of profiles to return per page.
+          schema:
+            type: integer
+            default: 25
+        - name: _lineStart
+          in: query
+          description: Starting line number for pagination.
+          schema:
+            type: integer
+            default: 0
+        - name: email
+          in: query
+          description: Filter profiles by email address.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A paginated list of profiles.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+    post:
+      operationId: createProfile
+      summary: Create a profile
+      description: >-
+        Creates a new subscriber profile in the Adobe Campaign database with
+        the provided attributes including email, first name, last name, and
+        any custom fields.
+      tags:
+        - Profiles
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileInput'
+      responses:
+        '201':
+          description: Profile created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+        '400':
+          description: Invalid profile data.
+        '409':
+          description: Profile with this email already exists.
+  /campaign/profileAndServices/profile/{profilePKey}:
+    get:
+      operationId: getProfile
+      summary: Get a profile
+      description: >-
+        Retrieves a single subscriber profile by its primary key (PKey),
+        including all standard and custom attributes.
+      tags:
+        - Profiles
+      parameters:
+        - name: profilePKey
+          in: path
+          required: true
+          description: The primary key of the profile.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Profile details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+        '404':
+          description: Profile not found.
+    patch:
+      operationId: updateProfile
+      summary: Update a profile
+      description: >-
+        Updates specific attributes of an existing subscriber profile using
+        a partial update. Only the fields provided in the request body will
+        be modified.
+      tags:
+        - Profiles
+      parameters:
+        - name: profilePKey
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileInput'
+      responses:
+        '200':
+          description: Profile updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+        '404':
+          description: Profile not found.
+    delete:
+      operationId: deleteProfile
+      summary: Delete a profile
+      description: >-
+        Permanently deletes a subscriber profile from the Adobe Campaign
+        database. This action cannot be undone.
+      tags:
+        - Profiles
+      parameters:
+        - name: profilePKey
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Profile deleted successfully.
+        '404':
+          description: Profile not found.
+  /campaign/profileAndServices/service:
+    get:
+      operationId: listServices
+      summary: List services
+      description: >-
+        Returns a paginated list of subscription services configured in Adobe
+        Campaign. Services represent mailing lists or subscription topics that
+        profiles can subscribe to.
+      tags:
+        - Services
+      parameters:
+        - name: _lineCount
+          in: query
+          schema:
+            type: integer
+            default: 25
+      responses:
+        '200':
+          description: A paginated list of services.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+    post:
+      operationId: createService
+      summary: Create a service
+      description: >-
+        Creates a new subscription service in Adobe Campaign with the specified
+        name, label, and configuration.
+      tags:
+        - Services
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceInput'
+      responses:
+        '201':
+          description: Service created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '400':
+          description: Invalid service definition.
+  /campaign/profileAndServices/service/{servicePKey}:
+    get:
+      operationId: getService
+      summary: Get a service
+      description: >-
+        Retrieves the details of a subscription service by its primary key.
+      tags:
+        - Services
+      parameters:
+        - name: servicePKey
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Service details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+        '404':
+          description: Service not found.
+  /campaign/profileAndServices/service/{servicePKey}/subscriptions:
+    post:
+      operationId: subscribeProfile
+      summary: Subscribe a profile to a service
+      description: >-
+        Subscribes an existing profile to the specified subscription service
+        by providing the profile primary key.
+      tags:
+        - Services
+      parameters:
+        - name: servicePKey
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - subscriber
+              properties:
+                subscriber:
+                  type: object
+                  properties:
+                    PKey:
+                      type: string
+      responses:
+        '201':
+          description: Subscription created successfully.
+        '400':
+          description: Invalid subscription request.
+        '404':
+          description: Service or profile not found.
+  /campaign/workflow:
+    get:
+      operationId: listWorkflows
+      summary: List workflows
+      description: >-
+        Returns a paginated list of workflows configured in Adobe Campaign.
+        Each workflow includes its ID, label, status, and schedule information.
+      tags:
+        - Workflows
+      parameters:
+        - name: _lineCount
+          in: query
+          schema:
+            type: integer
+            default: 25
+      responses:
+        '200':
+          description: A paginated list of workflows.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+  /campaign/workflow/{workflowPKey}:
+    get:
+      operationId: getWorkflow
+      summary: Get a workflow
+      description: >-
+        Retrieves the details of a single workflow by its primary key, including
+        its activities, transitions, and execution history.
+      tags:
+        - Workflows
+      parameters:
+        - name: workflowPKey
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Workflow details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workflow'
+        '404':
+          description: Workflow not found.
+  /campaign/workflow/{workflowPKey}/commands:
+    post:
+      operationId: executeWorkflowCommand
+      summary: Execute a workflow command
+      description: >-
+        Executes a command on a workflow such as start, pause, resume, or stop.
+        The command triggers the corresponding state transition in the workflow
+        execution engine.
+      tags:
+        - Workflows
+      parameters:
+        - name: workflowPKey
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - method
+              properties:
+                method:
+                  type: string
+                  enum:
+                    - start
+                    - pause
+                    - resume
+                    - stop
+      responses:
+        '200':
+          description: Workflow command executed successfully.
+        '400':
+          description: Invalid command for the current workflow state.
+        '404':
+          description: Workflow not found.
+  /campaign/mcAdobe/{transactionalMessageId}:
+    post:
+      operationId: sendTransactionalMessage
+      summary: Send a transactional message
+      description: >-
+        Triggers a real-time transactional message to a recipient. Transactional
+        messages are used for event-driven communications such as order
+        confirmations, password resets, and shipping notifications.
+      tags:
+        - Transactional Messages
+      parameters:
+        - name: transactionalMessageId
+          in: path
+          required: true
+          description: The transactional message template identifier.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionalMessageRequest'
+      responses:
+        '200':
+          description: Transactional message queued for delivery.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionalMessageResponse'
+        '400':
+          description: Invalid message request.
+        '404':
+          description: Transactional message template not found.
+  /campaign/mcAdobe/{transactionalMessageId}/{eventId}:
+    get:
+      operationId: getTransactionalMessageStatus
+      summary: Get transactional message status
+      description: >-
+        Retrieves the delivery status of a previously sent transactional
+        message by its event ID.
+      tags:
+        - Transactional Messages
+      parameters:
+        - name: transactionalMessageId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: eventId
+          in: path
+          required: true
+          description: The event ID returned when the message was triggered.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Message status returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionalMessageResponse'
+        '404':
+          description: Message event not found.
+  /campaign/profileAndServicesExt/resourceType:
+    get:
+      operationId: listMetadata
+      summary: List resource metadata
+      description: >-
+        Returns metadata about the available custom resources and their fields
+        in the Adobe Campaign data model. Useful for discovering extended
+        profile attributes and custom resource schemas.
+      tags:
+        - Metadata
+      responses:
+        '200':
+          description: Resource metadata returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        PKey:
+                          type: string
+                        name:
+                          type: string
+                        label:
+                          type: string
+        '401':
+          description: Authentication credentials are missing or invalid.
+  /campaign/email:
+    get:
+      operationId: listEmails
+      summary: List email deliveries
+      description: >-
+        Returns a paginated list of email deliveries including their subject,
+        status, and scheduling metadata.
+      tags:
+        - Content
+      parameters:
+        - name: _lineCount
+          in: query
+          schema:
+            type: integer
+            default: 25
+      responses:
+        '200':
+          description: A paginated list of email deliveries.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailList'
+        '401':
+          description: Authentication credentials are missing or invalid.
+  /campaign/email/{emailPKey}:
+    get:
+      operationId: getEmail
+      summary: Get an email delivery
+      description: >-
+        Retrieves the full details of an email delivery by its primary key,
+        including the subject, HTML content, sender, and delivery status.
+      tags:
+        - Content
+      parameters:
+        - name: emailPKey
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Email delivery details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email'
+        '404':
+          description: Email delivery not found.
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+  schemas:
+    ProfileList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Profile'
+        count:
+          type: object
+          properties:
+            value:
+              type: integer
+    Profile:
+      type: object
+      properties:
+        PKey:
+          type: string
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        phone:
+          type: string
+        created:
+          type: string
+          format: date-time
+        lastModified:
+          type: string
+          format: date-time
+    ProfileInput:
+      type: object
+      properties:
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        phone:
+          type: string
+    ServiceList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+    Service:
+      type: object
+      properties:
+        PKey:
+          type: string
+        name:
+          type: string
+        label:
+          type: string
+        mode:
+          type: string
+        created:
+          type: string
+          format: date-time
+    ServiceInput:
+      type: object
+      required:
+        - label
+      properties:
+        label:
+          type: string
+        name:
+          type: string
+        messageType:
+          type: string
+          enum:
+            - email
+            - sms
+    WorkflowList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Workflow'
+    Workflow:
+      type: object
+      properties:
+        PKey:
+          type: string
+        label:
+          type: string
+        status:
+          type: string
+          enum:
+            - started
+            - paused
+            - stopped
+            - finished
+            - error
+        startDate:
+          type: string
+          format: date-time
+        created:
+          type: string
+          format: date-time
+    TransactionalMessageRequest:
+      type: object
+      required:
+        - email
+        - ctx
+      properties:
+        email:
+          type: string
+          description: Recipient email address.
+        ctx:
+          type: object
+          description: Context data for personalizing the transactional message.
+    TransactionalMessageResponse:
+      type: object
+      properties:
+        PKey:
+          type: string
+        eventId:
+          type: string
+        status:
+          type: string
+          enum:
+            - pending
+            - processing
+            - delivered
+            - failed
+        email:
+          type: string
+    EmailList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Email'
+    Email:
+      type: object
+      properties:
+        PKey:
+          type: string
+        subject:
+          type: string
+        htmlContent:
+          type: string
+        status:
+          type: string
+        sender:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+        created:
+          type: string
+          format: date-time
