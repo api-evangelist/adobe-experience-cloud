@@ -137,8 +137,7 @@ common:
     type: Support
     description: 'null'
 created: '2025-01-01'
-modified: '2026-03-14'
-position: Consumer
+modified: '2026-03-16'
 description: >-
   Adobe Experience Cloud is an integrated suite of applications and services
   for digital marketing, analytics, advertising, and commerce. It provides
@@ -148,5 +147,5 @@ description: >-
   organizations to deliver personalized customer experiences at scale.
 maintainers:
   - FN: Kin Lane
-    email: info@apievangelist.com
+    email: kin@apievangelist.com
 specificationVersion: '0.19'
