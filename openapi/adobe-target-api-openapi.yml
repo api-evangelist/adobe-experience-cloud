@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Adobe Target API
+  title: Adobe Experience Cloud Adobe Target API
   description: >-
     The Adobe Target API provides programmatic access to Adobe Target for
     managing activities, audiences, offers, properties, and environments. It
@@ -43,7 +43,7 @@ paths:
   /target/activities:
     get:
       operationId: listActivities
-      summary: List activities
+      summary: Adobe Experience Cloud List activities
       description: >-
         Returns a paginated list of all Target activities (A/B tests, experience
         targeting, multivariate tests, and automated personalization) in the
@@ -86,7 +86,7 @@ paths:
           description: Insufficient permissions.
     post:
       operationId: createActivity
-      summary: Create an activity
+      summary: Adobe Experience Cloud Create an activity
       description: >-
         Creates a new Target activity of the specified type (AB, XT, MVT, or
         Automated Personalization). The request body must include the activity
@@ -113,7 +113,7 @@ paths:
   /target/activities/{activityId}:
     get:
       operationId: getActivity
-      summary: Get an activity
+      summary: Adobe Experience Cloud Get an activity
       description: >-
         Retrieves the full configuration and metadata of a single Target
         activity by its activity ID, including experiences, audiences,
@@ -138,7 +138,7 @@ paths:
           description: Activity not found.
     put:
       operationId: updateActivity
-      summary: Update an activity
+      summary: Adobe Experience Cloud Update an activity
       description: >-
         Updates an existing Target activity with new configuration. The full
         activity object must be provided in the request body.
@@ -169,7 +169,7 @@ paths:
           description: Activity not found.
     delete:
       operationId: deleteActivity
-      summary: Delete an activity
+      summary: Adobe Experience Cloud Delete an activity
       description: >-
         Permanently deletes a Target activity. Active activities should be
         deactivated before deletion.
@@ -189,7 +189,7 @@ paths:
   /target/activities/{activityId}/state:
     put:
       operationId: updateActivityState
-      summary: Update activity state
+      summary: Adobe Experience Cloud Update activity state
       description: >-
         Activates, deactivates, or archives a Target activity by updating its
         state. Valid state transitions depend on the current state.
@@ -230,7 +230,7 @@ paths:
   /target/audiences:
     get:
       operationId: listAudiences
-      summary: List audiences
+      summary: Adobe Experience Cloud List audiences
       description: >-
         Returns a paginated list of all audiences configured in Adobe Target.
         Each audience includes its ID, name, description, and targeting rules.
@@ -258,7 +258,7 @@ paths:
           description: Authentication credentials are missing or invalid.
     post:
       operationId: createAudience
-      summary: Create an audience
+      summary: Adobe Experience Cloud Create an audience
       description: >-
         Creates a new audience in Adobe Target with the specified name and
         targeting rules.
@@ -282,7 +282,7 @@ paths:
   /target/audiences/{audienceId}:
     get:
       operationId: getAudience
-      summary: Get an audience
+      summary: Adobe Experience Cloud Get an audience
       description: >-
         Retrieves the full definition of a single audience by its audience ID,
         including all targeting rules and conditions.
@@ -305,7 +305,7 @@ paths:
           description: Audience not found.
     put:
       operationId: updateAudience
-      summary: Update an audience
+      summary: Adobe Experience Cloud Update an audience
       description: >-
         Updates an existing audience with new targeting rules or metadata.
       tags:
@@ -333,7 +333,7 @@ paths:
           description: Audience not found.
     delete:
       operationId: deleteAudience
-      summary: Delete an audience
+      summary: Adobe Experience Cloud Delete an audience
       description: >-
         Permanently deletes an audience. Audiences in use by active activities
         cannot be deleted.
@@ -353,7 +353,7 @@ paths:
   /target/offers:
     get:
       operationId: listOffers
-      summary: List offers
+      summary: Adobe Experience Cloud List offers
       description: >-
         Returns a paginated list of content offers configured in Adobe Target.
         Offers include HTML, JSON, and redirect offer types.
@@ -381,7 +381,7 @@ paths:
           description: Authentication credentials are missing or invalid.
     post:
       operationId: createOffer
-      summary: Create an offer
+      summary: Adobe Experience Cloud Create an offer
       description: >-
         Creates a new content offer in Adobe Target. The offer can be HTML
         content, a JSON payload, or a redirect URL.
@@ -405,7 +405,7 @@ paths:
   /target/offers/{offerId}:
     get:
       operationId: getOffer
-      summary: Get an offer
+      summary: Adobe Experience Cloud Get an offer
       description: >-
         Retrieves a single offer by its offer ID, including the content payload
         and metadata.
@@ -428,7 +428,7 @@ paths:
           description: Offer not found.
     put:
       operationId: updateOffer
-      summary: Update an offer
+      summary: Adobe Experience Cloud Update an offer
       description: >-
         Updates an existing offer with new content or metadata.
       tags:
@@ -456,7 +456,7 @@ paths:
           description: Offer not found.
     delete:
       operationId: deleteOffer
-      summary: Delete an offer
+      summary: Adobe Experience Cloud Delete an offer
       description: >-
         Permanently deletes an offer. Offers in use by active activities cannot
         be deleted.
@@ -476,7 +476,7 @@ paths:
   /target/properties:
     get:
       operationId: listProperties
-      summary: List properties
+      summary: Adobe Experience Cloud List properties
       description: >-
         Returns a list of enterprise properties configured for the Adobe Target
         tenant. Properties are used with enterprise permissions to control
@@ -495,7 +495,7 @@ paths:
   /target/environments:
     get:
       operationId: listEnvironments
-      summary: List environments
+      summary: Adobe Experience Cloud List environments
       description: >-
         Returns a list of environments (development, staging, production)
         configured for the Adobe Target tenant.
@@ -513,7 +513,7 @@ paths:
   /rest/v1/delivery:
     post:
       operationId: deliverExperiences
-      summary: Deliver personalized experiences
+      summary: Adobe Experience Cloud Deliver personalized experiences
       description: >-
         The Target Delivery API endpoint for fetching personalized content for
         one or more mboxes. Used by client-side and server-side implementations

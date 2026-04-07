@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Adobe Experience Platform API
+  title: Adobe Experience Cloud Adobe Experience Platform API
   description: >-
     The Adobe Experience Platform API provides RESTful access to the core
     services of Adobe Experience Platform, including data ingestion, unified
@@ -44,7 +44,7 @@ paths:
   /data/foundation/schemaregistry/tenant/schemas:
     get:
       operationId: listSchemas
-      summary: List schemas
+      summary: Adobe Experience Cloud List schemas
       description: >-
         Returns a paginated list of XDM schemas defined in the tenant container.
         Each schema entry includes its title, description, and meta information
@@ -77,7 +77,7 @@ paths:
           description: Insufficient permissions.
     post:
       operationId: createSchema
-      summary: Create a schema
+      summary: Adobe Experience Cloud Create a schema
       description: >-
         Creates a new XDM schema in the tenant container. The request body must
         include the schema title, allOf references to a base class, and any
@@ -106,7 +106,7 @@ paths:
   /data/foundation/schemaregistry/tenant/schemas/{schemaId}:
     get:
       operationId: getSchema
-      summary: Get a schema
+      summary: Adobe Experience Cloud Get a schema
       description: >-
         Retrieves the full definition of an XDM schema by its URL-encoded schema
         ID, including all field definitions, mixins, and class references.
@@ -131,7 +131,7 @@ paths:
           description: Schema not found.
     put:
       operationId: updateSchema
-      summary: Update a schema
+      summary: Adobe Experience Cloud Update a schema
       description: >-
         Replaces the entire definition of an existing XDM schema with the
         provided request body.
@@ -163,7 +163,7 @@ paths:
           description: Schema not found.
     delete:
       operationId: deleteSchema
-      summary: Delete a schema
+      summary: Adobe Experience Cloud Delete a schema
       description: >-
         Deletes a tenant-defined XDM schema. Only schemas that are not
         referenced by datasets or other resources can be deleted.
@@ -186,7 +186,7 @@ paths:
   /data/foundation/catalog/dataSets:
     get:
       operationId: listDatasets
-      summary: List datasets
+      summary: Adobe Experience Cloud List datasets
       description: >-
         Returns a list of datasets registered in the Data Catalog for the
         current sandbox. Each dataset includes its name, schema reference,
@@ -217,7 +217,7 @@ paths:
           description: Authentication credentials are missing or invalid.
     post:
       operationId: createDataset
-      summary: Create a dataset
+      summary: Adobe Experience Cloud Create a dataset
       description: >-
         Creates a new dataset in the Data Catalog. The request body must include
         a name and a reference to an existing XDM schema. Optionally configure
@@ -245,7 +245,7 @@ paths:
   /data/foundation/catalog/dataSets/{datasetId}:
     get:
       operationId: getDataset
-      summary: Get a dataset
+      summary: Adobe Experience Cloud Get a dataset
       description: >-
         Retrieves the metadata and configuration for a single dataset by its
         dataset ID.
@@ -269,7 +269,7 @@ paths:
           description: Dataset not found.
     delete:
       operationId: deleteDataset
-      summary: Delete a dataset
+      summary: Adobe Experience Cloud Delete a dataset
       description: >-
         Deletes a dataset and all associated batches from the Data Catalog.
         This action cannot be undone.
@@ -290,7 +290,7 @@ paths:
   /data/foundation/import/batches:
     post:
       operationId: createBatch
-      summary: Create a batch
+      summary: Adobe Experience Cloud Create a batch
       description: >-
         Creates a new batch for data ingestion into a specified dataset. Returns
         a batch ID that can be used to upload files and signal batch completion.
@@ -331,7 +331,7 @@ paths:
   /data/foundation/import/batches/{batchId}:
     get:
       operationId: getBatch
-      summary: Get batch status
+      summary: Adobe Experience Cloud Get batch status
       description: >-
         Retrieves the current status and metadata for a batch ingestion
         operation identified by its batch ID.
@@ -356,7 +356,7 @@ paths:
   /data/core/ups/access/entities:
     get:
       operationId: getProfileEntities
-      summary: Get profile entities
+      summary: Adobe Experience Cloud Get profile entities
       description: >-
         Retrieves unified profile entities by identity. Provide an identity
         namespace and value to look up profile records, experience events,
@@ -395,7 +395,7 @@ paths:
   /data/core/ups/segment/definitions:
     get:
       operationId: listSegmentDefinitions
-      summary: List segment definitions
+      summary: Adobe Experience Cloud List segment definitions
       description: >-
         Returns a paginated list of audience segment definitions configured in
         the platform. Each segment includes its name, PQL expression, and
@@ -420,7 +420,7 @@ paths:
           description: Authentication credentials are missing or invalid.
     post:
       operationId: createSegmentDefinition
-      summary: Create a segment definition
+      summary: Adobe Experience Cloud Create a segment definition
       description: >-
         Creates a new audience segment definition using a Profile Query Language
         (PQL) expression. The segment will be evaluated against the unified
@@ -447,7 +447,7 @@ paths:
   /data/core/ups/segment/definitions/{segmentId}:
     get:
       operationId: getSegmentDefinition
-      summary: Get a segment definition
+      summary: Adobe Experience Cloud Get a segment definition
       description: >-
         Retrieves a single segment definition by its ID, including the PQL
         expression, merge policy, and evaluation schedule.
@@ -471,7 +471,7 @@ paths:
           description: Segment definition not found.
     delete:
       operationId: deleteSegmentDefinition
-      summary: Delete a segment definition
+      summary: Adobe Experience Cloud Delete a segment definition
       description: >-
         Deletes a segment definition by its ID. Segment jobs already running
         will complete but no new evaluations will occur.
@@ -492,7 +492,7 @@ paths:
   /data/foundation/identity/namespaces:
     get:
       operationId: listIdentityNamespaces
-      summary: List identity namespaces
+      summary: Adobe Experience Cloud List identity namespaces
       description: >-
         Returns a list of all identity namespaces available in the current IMS
         organization, including standard namespaces (ECID, Email, Phone) and
@@ -514,7 +514,7 @@ paths:
           description: Authentication credentials are missing or invalid.
     post:
       operationId: createIdentityNamespace
-      summary: Create an identity namespace
+      summary: Adobe Experience Cloud Create an identity namespace
       description: >-
         Creates a custom identity namespace for use in identity resolution and
         profile unification. The namespace must have a unique code and name.
@@ -540,7 +540,7 @@ paths:
   /data/foundation/query/queries:
     get:
       operationId: listQueries
-      summary: List queries
+      summary: Adobe Experience Cloud List queries
       description: >-
         Returns a paginated list of queries that have been submitted to the
         Query Service, including their SQL statements, status, and execution
@@ -565,7 +565,7 @@ paths:
           description: Authentication credentials are missing or invalid.
     post:
       operationId: createQuery
-      summary: Submit a query
+      summary: Adobe Experience Cloud Submit a query
       description: >-
         Submits a new SQL query to the Query Service for execution against
         datasets in the Data Lake. Returns a query ID that can be used to
@@ -605,7 +605,7 @@ paths:
   /data/foundation/query/queries/{queryId}:
     get:
       operationId: getQuery
-      summary: Get query status
+      summary: Adobe Experience Cloud Get query status
       description: >-
         Retrieves the status, execution metadata, and results reference for a
         previously submitted query.
@@ -630,7 +630,7 @@ paths:
   /data/foundation/schemaregistry/tenant/classes:
     get:
       operationId: listClasses
-      summary: List classes
+      summary: Adobe Experience Cloud List classes
       description: >-
         Returns a paginated list of XDM classes in the tenant container. Classes
         define the base structure and behavior type for schemas.
@@ -650,7 +650,7 @@ paths:
   /data/foundation/sandbox-management/sandboxes:
     get:
       operationId: listSandboxes
-      summary: List sandboxes
+      summary: Adobe Experience Cloud List sandboxes
       description: >-
         Returns a list of all sandboxes available in the current IMS
         organization, including development and production sandboxes.
@@ -668,7 +668,7 @@ paths:
           description: Authentication credentials are missing or invalid.
     post:
       operationId: createSandbox
-      summary: Create a sandbox
+      summary: Adobe Experience Cloud Create a sandbox
       description: >-
         Creates a new development sandbox within the IMS organization. Production
         sandboxes can only be created by system administrators.
@@ -706,7 +706,7 @@ paths:
   /data/foundation/sandbox-management/sandboxes/{sandboxName}:
     get:
       operationId: getSandbox
-      summary: Get a sandbox
+      summary: Adobe Experience Cloud Get a sandbox
       description: >-
         Retrieves details for a single sandbox including its name, title, type,
         state, and region.
@@ -729,7 +729,7 @@ paths:
           description: Sandbox not found.
     delete:
       operationId: deleteSandbox
-      summary: Delete a sandbox
+      summary: Adobe Experience Cloud Delete a sandbox
       description: >-
         Deletes a development sandbox and all its contained resources. Production
         sandboxes cannot be deleted, only reset.

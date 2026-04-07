@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Adobe Analytics 2.0 API
+  title: Adobe Experience Cloud Adobe Analytics 2.0 API
   description: >-
     The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics
     reporting, management, and configuration capabilities. It enables developers
@@ -44,7 +44,7 @@ paths:
   /api/{companyId}/reports:
     post:
       operationId: getReport
-      summary: Retrieve a report
+      summary: Adobe Experience Cloud Retrieve a report
       description: >-
         Submits a report request to Adobe Analytics and returns the resulting
         data. The request body defines the report suite, dimensions, metrics,
@@ -87,7 +87,7 @@ paths:
   /api/{companyId}/reportsuites:
     get:
       operationId: listReportSuites
-      summary: List report suites
+      summary: Adobe Experience Cloud List report suites
       description: >-
         Returns a paginated list of report suites available to the authenticated
         user within the specified company. Each entry includes the report suite
@@ -127,7 +127,7 @@ paths:
   /api/{companyId}/reportsuites/{rsid}:
     get:
       operationId: getReportSuite
-      summary: Get a report suite
+      summary: Adobe Experience Cloud Get a report suite
       description: >-
         Retrieves the configuration details for a single report suite identified
         by its report suite ID (rsid). Returns metadata including the name,
@@ -161,7 +161,7 @@ paths:
   /api/{companyId}/segments:
     get:
       operationId: listSegments
-      summary: List segments
+      summary: Adobe Experience Cloud List segments
       description: >-
         Returns a paginated list of segments available to the authenticated user.
         Segments can be filtered by report suite, owner, or tag. Each entry
@@ -203,7 +203,7 @@ paths:
           description: Authentication credentials are missing or invalid.
     post:
       operationId: createSegment
-      summary: Create a segment
+      summary: Adobe Experience Cloud Create a segment
       description: >-
         Creates a new segment in Adobe Analytics. The request body must include
         the segment name, report suite ID, and the segment definition with
@@ -237,7 +237,7 @@ paths:
   /api/{companyId}/segments/{segmentId}:
     get:
       operationId: getSegment
-      summary: Get a segment
+      summary: Adobe Experience Cloud Get a segment
       description: >-
         Retrieves the full definition and metadata for a single segment
         identified by its segment ID.
@@ -268,7 +268,7 @@ paths:
           description: Segment not found.
     put:
       operationId: updateSegment
-      summary: Update a segment
+      summary: Adobe Experience Cloud Update a segment
       description: >-
         Updates an existing segment with new definition or metadata. The full
         segment object must be provided in the request body.
@@ -306,7 +306,7 @@ paths:
           description: Segment not found.
     delete:
       operationId: deleteSegment
-      summary: Delete a segment
+      summary: Adobe Experience Cloud Delete a segment
       description: >-
         Permanently deletes a segment identified by its segment ID. This action
         cannot be undone.
@@ -333,7 +333,7 @@ paths:
   /api/{companyId}/calculatedmetrics:
     get:
       operationId: listCalculatedMetrics
-      summary: List calculated metrics
+      summary: Adobe Experience Cloud List calculated metrics
       description: >-
         Returns a paginated list of calculated metrics available to the
         authenticated user. Calculated metrics can be filtered by report suite,
@@ -372,7 +372,7 @@ paths:
           description: Authentication credentials are missing or invalid.
     post:
       operationId: createCalculatedMetric
-      summary: Create a calculated metric
+      summary: Adobe Experience Cloud Create a calculated metric
       description: >-
         Creates a new calculated metric in Adobe Analytics with the provided
         name, definition formula, report suite, and polarity settings.
@@ -404,7 +404,7 @@ paths:
   /api/{companyId}/calculatedmetrics/{calculatedMetricId}:
     get:
       operationId: getCalculatedMetric
-      summary: Get a calculated metric
+      summary: Adobe Experience Cloud Get a calculated metric
       description: >-
         Retrieves the full definition and metadata for a single calculated
         metric identified by its ID.
@@ -432,7 +432,7 @@ paths:
           description: Calculated metric not found.
     put:
       operationId: updateCalculatedMetric
-      summary: Update a calculated metric
+      summary: Adobe Experience Cloud Update a calculated metric
       description: >-
         Updates an existing calculated metric with new definition or metadata.
       tags:
@@ -467,7 +467,7 @@ paths:
           description: Calculated metric not found.
     delete:
       operationId: deleteCalculatedMetric
-      summary: Delete a calculated metric
+      summary: Adobe Experience Cloud Delete a calculated metric
       description: >-
         Permanently deletes a calculated metric. This action cannot be undone.
       tags:
@@ -491,7 +491,7 @@ paths:
   /api/{companyId}/dimensions:
     get:
       operationId: listDimensions
-      summary: List dimensions
+      summary: Adobe Experience Cloud List dimensions
       description: >-
         Returns all available dimensions for a specified report suite. Each
         dimension includes its ID, name, description, data type, and
@@ -524,7 +524,7 @@ paths:
   /api/{companyId}/metrics:
     get:
       operationId: listMetrics
-      summary: List metrics
+      summary: Adobe Experience Cloud List metrics
       description: >-
         Returns all available metrics for a specified report suite. Each metric
         includes its ID, name, description, data type, and polarity.
@@ -556,7 +556,7 @@ paths:
   /api/{companyId}/users:
     get:
       operationId: listUsers
-      summary: List users
+      summary: Adobe Experience Cloud List users
       description: >-
         Returns a paginated list of users in the Analytics company. Each user
         entry includes the user ID, login name, email, and assigned permission
@@ -591,7 +591,7 @@ paths:
   /api/{companyId}/users/{userId}:
     get:
       operationId: getUser
-      summary: Get a user
+      summary: Adobe Experience Cloud Get a user
       description: >-
         Retrieves details for a single user identified by user ID, including
         their login name, email, admin status, and permission group assignments.
@@ -620,7 +620,7 @@ paths:
   /api/{companyId}/dateranges:
     get:
       operationId: listDateRanges
-      summary: List date ranges
+      summary: Adobe Experience Cloud List date ranges
       description: >-
         Returns a paginated list of saved date ranges available to the
         authenticated user. Each entry includes the date range ID, name,
@@ -655,7 +655,7 @@ paths:
   /api/{companyId}/projects:
     get:
       operationId: listProjects
-      summary: List projects
+      summary: Adobe Experience Cloud List projects
       description: >-
         Returns a paginated list of Analysis Workspace projects accessible to
         the authenticated user. Each entry includes the project ID, name,
@@ -690,7 +690,7 @@ paths:
   /api/{companyId}/projects/{projectId}:
     get:
       operationId: getProject
-      summary: Get a project
+      summary: Adobe Experience Cloud Get a project
       description: >-
         Retrieves the full definition and metadata for a single Analysis
         Workspace project identified by its project ID.

@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: Adobe Campaign API
+  title: Adobe Experience Cloud Adobe Campaign API
   description: >-
     The Adobe Campaign API provides RESTful access to Adobe Campaign Standard
     and Classic capabilities for managing marketing campaigns, profiles,
@@ -43,7 +43,7 @@ paths:
   /campaign/profileAndServices/profile:
     get:
       operationId: listProfiles
-      summary: List profiles
+      summary: Adobe Experience Cloud List profiles
       description: >-
         Returns a paginated list of subscriber profiles in the Adobe Campaign
         database. Profiles can be filtered by email, first name, last name,
@@ -79,7 +79,7 @@ paths:
           description: Authentication credentials are missing or invalid.
     post:
       operationId: createProfile
-      summary: Create a profile
+      summary: Adobe Experience Cloud Create a profile
       description: >-
         Creates a new subscriber profile in the Adobe Campaign database with
         the provided attributes including email, first name, last name, and
@@ -106,7 +106,7 @@ paths:
   /campaign/profileAndServices/profile/{profilePKey}:
     get:
       operationId: getProfile
-      summary: Get a profile
+      summary: Adobe Experience Cloud Get a profile
       description: >-
         Retrieves a single subscriber profile by its primary key (PKey),
         including all standard and custom attributes.
@@ -130,7 +130,7 @@ paths:
           description: Profile not found.
     patch:
       operationId: updateProfile
-      summary: Update a profile
+      summary: Adobe Experience Cloud Update a profile
       description: >-
         Updates specific attributes of an existing subscriber profile using
         a partial update. Only the fields provided in the request body will
@@ -160,7 +160,7 @@ paths:
           description: Profile not found.
     delete:
       operationId: deleteProfile
-      summary: Delete a profile
+      summary: Adobe Experience Cloud Delete a profile
       description: >-
         Permanently deletes a subscriber profile from the Adobe Campaign
         database. This action cannot be undone.
@@ -180,7 +180,7 @@ paths:
   /campaign/profileAndServices/service:
     get:
       operationId: listServices
-      summary: List services
+      summary: Adobe Experience Cloud List services
       description: >-
         Returns a paginated list of subscription services configured in Adobe
         Campaign. Services represent mailing lists or subscription topics that
@@ -204,7 +204,7 @@ paths:
           description: Authentication credentials are missing or invalid.
     post:
       operationId: createService
-      summary: Create a service
+      summary: Adobe Experience Cloud Create a service
       description: >-
         Creates a new subscription service in Adobe Campaign with the specified
         name, label, and configuration.
@@ -228,7 +228,7 @@ paths:
   /campaign/profileAndServices/service/{servicePKey}:
     get:
       operationId: getService
-      summary: Get a service
+      summary: Adobe Experience Cloud Get a service
       description: >-
         Retrieves the details of a subscription service by its primary key.
       tags:
@@ -251,7 +251,7 @@ paths:
   /campaign/profileAndServices/service/{servicePKey}/subscriptions:
     post:
       operationId: subscribeProfile
-      summary: Subscribe a profile to a service
+      summary: Adobe Experience Cloud Subscribe a profile to a service
       description: >-
         Subscribes an existing profile to the specified subscription service
         by providing the profile primary key.
@@ -287,7 +287,7 @@ paths:
   /campaign/workflow:
     get:
       operationId: listWorkflows
-      summary: List workflows
+      summary: Adobe Experience Cloud List workflows
       description: >-
         Returns a paginated list of workflows configured in Adobe Campaign.
         Each workflow includes its ID, label, status, and schedule information.
@@ -311,7 +311,7 @@ paths:
   /campaign/workflow/{workflowPKey}:
     get:
       operationId: getWorkflow
-      summary: Get a workflow
+      summary: Adobe Experience Cloud Get a workflow
       description: >-
         Retrieves the details of a single workflow by its primary key, including
         its activities, transitions, and execution history.
@@ -335,7 +335,7 @@ paths:
   /campaign/workflow/{workflowPKey}/commands:
     post:
       operationId: executeWorkflowCommand
-      summary: Execute a workflow command
+      summary: Adobe Experience Cloud Execute a workflow command
       description: >-
         Executes a command on a workflow such as start, pause, resume, or stop.
         The command triggers the corresponding state transition in the workflow
@@ -374,7 +374,7 @@ paths:
   /campaign/mcAdobe/{transactionalMessageId}:
     post:
       operationId: sendTransactionalMessage
-      summary: Send a transactional message
+      summary: Adobe Experience Cloud Send a transactional message
       description: >-
         Triggers a real-time transactional message to a recipient. Transactional
         messages are used for event-driven communications such as order
@@ -408,7 +408,7 @@ paths:
   /campaign/mcAdobe/{transactionalMessageId}/{eventId}:
     get:
       operationId: getTransactionalMessageStatus
-      summary: Get transactional message status
+      summary: Adobe Experience Cloud Get transactional message status
       description: >-
         Retrieves the delivery status of a previously sent transactional
         message by its event ID.
@@ -438,7 +438,7 @@ paths:
   /campaign/profileAndServicesExt/resourceType:
     get:
       operationId: listMetadata
-      summary: List resource metadata
+      summary: Adobe Experience Cloud List resource metadata
       description: >-
         Returns metadata about the available custom resources and their fields
         in the Adobe Campaign data model. Useful for discovering extended
@@ -469,7 +469,7 @@ paths:
   /campaign/email:
     get:
       operationId: listEmails
-      summary: List email deliveries
+      summary: Adobe Experience Cloud List email deliveries
       description: >-
         Returns a paginated list of email deliveries including their subject,
         status, and scheduling metadata.
@@ -493,7 +493,7 @@ paths:
   /campaign/email/{emailPKey}:
     get:
       operationId: getEmail
-      summary: Get an email delivery
+      summary: Adobe Experience Cloud Get an email delivery
       description: >-
         Retrieves the full details of an email delivery by its primary key,
         including the subject, HTML content, sender, and delivery status.
