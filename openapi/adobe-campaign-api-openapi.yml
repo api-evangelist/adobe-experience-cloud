@@ -25,20 +25,16 @@ security:
   - bearerAuth: []
   - apiKey: []
 tags:
-  - name: Profiles
-    description: Operations for managing subscriber profiles
-  - name: Services
-    description: Operations for managing subscription services
-  - name: Campaigns
-    description: Operations for managing marketing campaigns
-  - name: Workflows
-    description: Operations for managing automated workflows
-  - name: Transactional Messages
-    description: Operations for sending real-time transactional messages
   - name: Content
     description: Operations for managing email and landing page content
   - name: Metadata
     description: Operations for retrieving resource metadata
+  - name: Profiles
+    description: Operations for managing subscriber profiles
+  - name: Transactional Messages
+    description: Operations for sending real-time transactional messages
+  - name: Workflows
+    description: Operations for managing automated workflows
 paths:
   /campaign/profileAndServices/profile:
     get:
@@ -185,8 +181,7 @@ paths:
         Returns a paginated list of subscription services configured in Adobe
         Campaign. Services represent mailing lists or subscription topics that
         profiles can subscribe to.
-      tags:
-        - Services
+      tags: []
       parameters:
         - name: _lineCount
           in: query
@@ -208,8 +203,7 @@ paths:
       description: >-
         Creates a new subscription service in Adobe Campaign with the specified
         name, label, and configuration.
-      tags:
-        - Services
+      tags: []
       requestBody:
         required: true
         content:
@@ -231,8 +225,7 @@ paths:
       summary: Adobe Experience Cloud Get a service
       description: >-
         Retrieves the details of a subscription service by its primary key.
-      tags:
-        - Services
+      tags: []
       parameters:
         - name: servicePKey
           in: path
@@ -255,8 +248,7 @@ paths:
       description: >-
         Subscribes an existing profile to the specified subscription service
         by providing the profile primary key.
-      tags:
-        - Services
+      tags: []
       parameters:
         - name: servicePKey
           in: path

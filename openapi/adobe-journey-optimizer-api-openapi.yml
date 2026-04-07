@@ -21,22 +21,22 @@ security:
   - bearerAuth: []
   - apiKey: []
 tags:
-  - name: Journeys
-    description: Operations for managing customer journeys
   - name: Campaigns
     description: Operations for managing marketing campaigns
+  - name: Collections
+    description: Operations for managing offer collections
+  - name: Content Templates
+    description: Operations for managing reusable content templates
+  - name: Decision Rules
+    description: Operations for managing offer eligibility rules
+  - name: Journeys
+    description: Operations for managing customer journeys
   - name: Messages
     description: Operations for managing channel messages
   - name: Offers
     description: Operations for offer decisioning
   - name: Placements
     description: Operations for managing offer placements
-  - name: Collections
-    description: Operations for managing offer collections
-  - name: Decision Rules
-    description: Operations for managing offer eligibility rules
-  - name: Content Templates
-    description: Operations for managing reusable content templates
 paths:
   /journey/journeys:
     get:

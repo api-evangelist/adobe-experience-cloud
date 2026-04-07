@@ -28,14 +28,14 @@ tags:
     description: Operations for managing Target activities (A/B, XT, MVT, AP)
   - name: Audiences
     description: Operations for managing Target audiences
+  - name: Delivery
+    description: Operations for real-time content delivery
+  - name: Environments
+    description: Operations for managing environments
   - name: Offers
     description: Operations for managing content offers
   - name: Properties
     description: Operations for managing enterprise properties
-  - name: Environments
-    description: Operations for managing environments
-  - name: Delivery
-    description: Operations for real-time content delivery
 security:
   - bearerAuth: []
   - apiKey: []

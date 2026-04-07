@@ -22,24 +22,24 @@ security:
   - bearerAuth: []
   - apiKey: []
 tags:
-  - name: Schemas
-    description: Operations for managing XDM schemas via the Schema Registry
-  - name: Datasets
-    description: Operations for managing datasets in the Data Lake
   - name: Batches
     description: Operations for batch data ingestion
-  - name: Profiles
-    description: Operations for accessing unified customer profiles
-  - name: Segments
-    description: Operations for managing audience segments
-  - name: Identities
-    description: Operations for identity namespace management
-  - name: Queries
-    description: Operations for the Query Service
   - name: Classes
     description: Operations for managing XDM classes
+  - name: Datasets
+    description: Operations for managing datasets in the Data Lake
+  - name: Identities
+    description: Operations for identity namespace management
+  - name: Profiles
+    description: Operations for accessing unified customer profiles
+  - name: Queries
+    description: Operations for the Query Service
   - name: Sandboxes
     description: Operations for managing platform sandboxes
+  - name: Schemas
+    description: Operations for managing XDM schemas via the Schema Registry
+  - name: Segments
+    description: Operations for managing audience segments
 paths:
   /data/foundation/schemaregistry/tenant/schemas:
     get:

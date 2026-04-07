@@ -22,24 +22,24 @@ security:
   - bearerAuth: []
   - apiKey: []
 tags:
-  - name: Reports
-    description: Operations for retrieving analytics report data
-  - name: Report Suites
-    description: Operations for managing report suites
-  - name: Segments
-    description: Operations for managing analytics segments
   - name: Calculated Metrics
     description: Operations for managing calculated metrics
+  - name: Date Ranges
+    description: Operations for managing saved date ranges
   - name: Dimensions
     description: Operations for retrieving dimension metadata
   - name: Metrics
     description: Operations for retrieving metric metadata
-  - name: Users
-    description: Operations for managing analytics users
-  - name: Date Ranges
-    description: Operations for managing saved date ranges
   - name: Projects
     description: Operations for managing Analysis Workspace projects
+  - name: Report Suites
+    description: Operations for managing report suites
+  - name: Reports
+    description: Operations for retrieving analytics report data
+  - name: Segments
+    description: Operations for managing analytics segments
+  - name: Users
+    description: Operations for managing analytics users
 paths:
   /api/{companyId}/reports:
     post:

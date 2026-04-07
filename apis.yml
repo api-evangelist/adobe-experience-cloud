@@ -6,8 +6,8 @@ apis:
     name: Adobe Analytics 2.0 API
     tags:
       - Analytics
-      - Reporting
       - Digital Marketing
+      - Reporting
     humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
     properties:
       - url: https://developer.adobe.com/analytics-apis/docs/2.0/
@@ -23,9 +23,9 @@ apis:
   - aid: adobe-experience-cloud:experience-platform-api
     name: Adobe Experience Platform API
     tags:
-      - Platform
-      - Data Management
       - Customer Profiles
+      - Data Management
+      - Platform
     humanURL: https://developer.adobe.com/experience-platform-apis/
     properties:
       - url: https://developer.adobe.com/experience-platform-apis/
@@ -41,9 +41,9 @@ apis:
   - aid: adobe-experience-cloud:target-api
     name: Adobe Target API
     tags:
+      - Optimization
       - Personalization
       - Testing
-      - Optimization
     humanURL: https://developer.adobe.com/target/
     properties:
       - url: https://developer.adobe.com/target/
@@ -93,8 +93,8 @@ apis:
     name: Adobe I/O Events
     tags:
       - Events
-      - Webhooks
       - Integration
+      - Webhooks
     humanURL: https://developer.adobe.com/events/docs/
     properties:
       - url: https://developer.adobe.com/events/docs/
@@ -108,10 +108,10 @@ apis:
       Cloud products for building reactive integrations and automated workflows.
 name: Adobe Experience Cloud
 tags:
-  - Digital Marketing
   - Analytics
-  - Personalization
   - Customer Experience
+  - Digital Marketing
+  - Personalization
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
