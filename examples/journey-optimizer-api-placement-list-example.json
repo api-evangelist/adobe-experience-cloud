@@ -1,0 +1,10 @@
+{
+  "placements": [
+    {
+      "id": "abc123",
+      "name": "Example Name",
+      "channel": "example",
+      "contentType": "standard"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/journey-optimizer-api-message-input-structure.json",
+  "name": "MessageInput",
+  "description": "MessageInput schema",
+  "type": "object",
+  "required": [
+    "name",
+    "channel"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "channel": {
+      "type": "string",
+      "enum": [
+        "email",
+        "push",
+        "sms",
+        "inApp"
+      ]
+    },
+    "content": {
+      "type": "object"
+    }
+  }
+}

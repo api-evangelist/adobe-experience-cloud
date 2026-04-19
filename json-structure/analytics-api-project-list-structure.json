@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/analytics-api-project-list-structure.json",
+  "name": "ProjectList",
+  "description": "ProjectList schema",
+  "type": "object",
+  "properties": {
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "int32"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "modified": {
+            "type": "datetime"
+          }
+        }
+      }
+    },
+    "totalElements": {
+      "type": "int32"
+    }
+  }
+}

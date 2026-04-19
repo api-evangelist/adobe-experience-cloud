@@ -1,0 +1,62 @@
+{
+  "eventId": "abc123",
+  "eventType": "web.webpagedetails.pageViews",
+  "timestamp": "2025-03-15T14:30:00Z",
+  "identityMap": {},
+  "web": {
+    "webPageDetails": {
+      "URL": "https://developer.adobe.com/example",
+      "name": "Example Name",
+      "siteSection": "example",
+      "isHomePage": true
+    },
+    "webInteraction": {
+      "URL": "https://developer.adobe.com/example",
+      "name": "Example Name",
+      "type": "download"
+    },
+    "webReferrer": {
+      "URL": "https://developer.adobe.com/example",
+      "type": "internal"
+    }
+  },
+  "commerce": {
+    "purchases": {
+      "value": 23.09
+    },
+    "order": {
+      "purchaseID": "abc123",
+      "currencyCode": "example",
+      "priceTotal": 55.76,
+      "payments": [
+        {}
+      ]
+    },
+    "productListItems": [
+      {
+        "SKU": {},
+        "name": {},
+        "quantity": {},
+        "priceTotal": {},
+        "currencyCode": {}
+      }
+    ]
+  },
+  "device": {
+    "type": "mobile",
+    "manufacturer": "example",
+    "model": "example",
+    "screenHeight": 62,
+    "screenWidth": 70
+  },
+  "environment": {
+    "browserDetails": {
+      "name": "Example Name",
+      "version": "example",
+      "userAgent": "example"
+    },
+    "operatingSystem": "example",
+    "operatingSystemVersion": "example",
+    "ipV4": "example"
+  }
+}

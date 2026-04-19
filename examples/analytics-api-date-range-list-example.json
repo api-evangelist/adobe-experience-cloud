@@ -1,0 +1,10 @@
+{
+  "content": [
+    {
+      "id": "abc123",
+      "name": "Example Name",
+      "definition": "example"
+    }
+  ],
+  "totalElements": 60
+}

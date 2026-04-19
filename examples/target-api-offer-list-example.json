@@ -1,0 +1,14 @@
+{
+  "total": 61,
+  "offset": 80,
+  "limit": 12,
+  "offers": [
+    {
+      "id": 43,
+      "name": "Example Name",
+      "type": "content",
+      "content": "example",
+      "modifiedAt": "2025-03-15T14:30:00Z"
+    }
+  ]
+}

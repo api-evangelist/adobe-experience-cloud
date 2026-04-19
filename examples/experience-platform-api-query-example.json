@@ -1,0 +1,10 @@
+{
+  "id": "abc123",
+  "dbName": "Example Name",
+  "sql": "example",
+  "name": "Example Name",
+  "state": "SUBMITTED",
+  "created": "2025-03-15T14:30:00Z",
+  "updated": "2025-03-15T14:30:00Z",
+  "rowCount": 19
+}

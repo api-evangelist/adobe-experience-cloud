@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/journey-optimizer-api-content-template-list-structure.json",
+  "name": "ContentTemplateList",
+  "description": "ContentTemplateList schema",
+  "type": "object",
+  "properties": {
+    "templates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "channel": {
+            "type": "string"
+          },
+          "content": {
+            "type": "object"
+          },
+          "createdAt": {
+            "type": "datetime"
+          }
+        }
+      }
+    },
+    "totalCount": {
+      "type": "int32"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/journey-optimizer-api-campaign-structure.json",
+  "name": "Campaign",
+  "description": "Campaign schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "channel": {
+      "type": "string",
+      "enum": [
+        "email",
+        "push",
+        "sms",
+        "inApp"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "scheduled",
+        "live",
+        "completed"
+      ]
+    },
+    "schedule": {
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "type": "datetime"
+        },
+        "endDate": {
+          "type": "datetime"
+        }
+      }
+    }
+  }
+}

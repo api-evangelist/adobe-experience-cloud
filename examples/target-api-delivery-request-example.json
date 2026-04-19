@@ -1,0 +1,19 @@
+{
+  "context": {
+    "channel": "web",
+    "userAgent": "example"
+  },
+  "execute": {
+    "mboxes": [
+      {
+        "name": {},
+        "index": {}
+      }
+    ]
+  },
+  "prefetch": {
+    "views": [
+      {}
+    ]
+  }
+}

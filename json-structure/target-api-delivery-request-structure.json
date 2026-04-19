@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/target-api-delivery-request-structure.json",
+  "name": "DeliveryRequest",
+  "description": "DeliveryRequest schema",
+  "type": "object",
+  "properties": {
+    "context": {
+      "type": "object",
+      "properties": {
+        "channel": {
+          "type": "string",
+          "enum": [
+            "web",
+            "mobile"
+          ]
+        },
+        "userAgent": {
+          "type": "string"
+        }
+      }
+    },
+    "execute": {
+      "type": "object",
+      "properties": {
+        "mboxes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "index": {
+                "type": "int32"
+              }
+            }
+          }
+        }
+      }
+    },
+    "prefetch": {
+      "type": "object",
+      "properties": {
+        "views": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "offerId": "abc123",
+  "name": "Example Name",
+  "description": "example",
+  "status": "draft",
+  "offerType": "personalized",
+  "representations": [
+    {
+      "channel": "example",
+      "placementId": "abc123",
+      "content": "example",
+      "contentType": "text/html"
+    }
+  ],
+  "eligibilityRule": {
+    "ruleId": "abc123",
+    "description": "example"
+  },
+  "priority": 27
+}

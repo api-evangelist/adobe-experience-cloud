@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/experience-platform-api-identity-namespace-input-structure.json",
+  "name": "IdentityNamespaceInput",
+  "description": "IdentityNamespaceInput schema",
+  "type": "object",
+  "required": [
+    "name",
+    "code",
+    "idType"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "idType": {
+      "type": "string",
+      "enum": [
+        "COOKIE",
+        "DEVICE",
+        "CROSS_DEVICE",
+        "EMAIL",
+        "PHONE"
+      ]
+    }
+  }
+}

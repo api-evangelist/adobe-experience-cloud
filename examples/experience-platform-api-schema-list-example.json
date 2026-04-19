@@ -1,0 +1,14 @@
+{
+  "results": [
+    {
+      "title": "example",
+      "description": "example",
+      "type": "standard",
+      "meta:altId": "abc123",
+      "version": "example"
+    }
+  ],
+  "_page": {
+    "count": 40
+  }
+}

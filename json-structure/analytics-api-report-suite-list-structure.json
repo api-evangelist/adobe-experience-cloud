@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/analytics-api-report-suite-list-structure.json",
+  "name": "ReportSuiteList",
+  "description": "ReportSuiteList schema",
+  "type": "object",
+  "properties": {
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rsid": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "int32"
+          },
+          "calendarType": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "totalElements": {
+      "type": "int32"
+    },
+    "totalPages": {
+      "type": "int32"
+    }
+  }
+}

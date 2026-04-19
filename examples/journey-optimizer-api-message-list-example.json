@@ -1,0 +1,12 @@
+{
+  "messages": [
+    {
+      "id": "abc123",
+      "name": "Example Name",
+      "channel": "example",
+      "status": "active",
+      "content": {}
+    }
+  ],
+  "totalCount": 17
+}

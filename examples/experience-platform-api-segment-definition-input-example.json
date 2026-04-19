@@ -1,0 +1,13 @@
+{
+  "name": "Example Name",
+  "description": "example",
+  "expression": {
+    "type": "PQL",
+    "value": "example",
+    "format": "pql/text"
+  },
+  "schema": {
+    "name": "Example Name"
+  },
+  "mergePolicyId": "abc123"
+}

@@ -1,0 +1,16 @@
+{
+  "totalPages": 42,
+  "firstPage": true,
+  "lastPage": true,
+  "numberOfElements": 91,
+  "totalElements": 79,
+  "rows": [
+    {
+      "itemId": "abc123",
+      "value": "example",
+      "data": [
+        {}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/adobe-experience-cloud-profile.json",
+  "name": "Adobe Experience Cloud Profile",
+  "description": "A unified customer profile representing an individual across Adobe Experience Cloud products, combining identity data, demographic attributes, behavioral signals, and segment memberships.",
+  "type": "object",
+  "properties": {
+    "profileId": {
+      "type": "string",
+      "description": "The unique identifier for the unified profile."
+    },
+    "identityMap": {
+      "type": "object",
+      "description": "A map of identity namespaces to identity values associated with this profile.",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The identity value."
+            },
+            "primary": {
+              "type": "boolean",
+              "description": "Whether this is the primary identity for the namespace."
+            },
+            "authenticatedState": {
+              "type": "string",
+              "enum": [
+                "ambiguous",
+                "authenticated",
+                "loggedOut"
+              ],
+              "description": "The authentication state of this identity."
+            }
+          },
+          "required": [
+            "id"
+          ]
+        }
+      }
+    },
+    "person": {
+      "type": "object",
+      "description": "Demographic information about the individual.",
+      "properties": {
+        "name": {
+          "type": "object",
+          "properties": {
+            "firstName": {
+              "type": "string",
+              "description": "The first name of the individual."
+            },
+            "lastName": {
+              "type": "string",
+              "description": "The last name of the individual."
+            },
+            "fullName": {
+              "type": "string",
+              "description": "The full name of the individual."
+            }
+          }
+        },
+        "birthDate": {
+          "type": "date",
+          "description": "The date of birth."
+        },
+        "gender": {
+          "type": "string",
+          "enum": [
+            "male",
+            "female",
+            "not_specified",
+            "non_specific"
+          ],
+          "description": "The gender of the individual."
+        }
+      }
+    },
+    "personalEmail": {
+      "type": "object",
+      "description": "The personal email address.",
+      "properties": {
+        "address": {
+          "type": "string",
+          "format": "email",
+          "description": "The email address."
+        },
+        "primary": {
+          "type": "boolean",
+          "description": "Whether this is the primary email."
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "incomplete",
+            "blacklisted",
+            "blocked"
+          ],
+          "description": "The email subscription status."
+        }
+      }
+    },
+    "mobilePhone": {
+      "type": "object",
+      "description": "The mobile phone number.",
+      "properties": {
+        "number": {
+          "type": "string",
+          "description": "The phone number."
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "The country dialing code."
+        }
+      }
+    },
+    "homeAddress": {
+      "type": "object",
+      "description": "The home postal address.",
+      "properties": {
+        "street1": {
+          "type": "string"
+        },
+        "street2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "stateProvince": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 country code."
+        }
+      }
+    },
+    "segmentMembership": {
+      "type": "object",
+      "description": "A map of segment namespace to segment membership details.",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string",
+              "enum": [
+                "realized",
+                "existing",
+                "exited"
+              ],
+              "description": "The segment membership status."
+            },
+            "lastQualificationTime": {
+              "type": "datetime",
+              "description": "When the profile last qualified for the segment."
+            }
+          }
+        }
+      }
+    },
+    "consents": {
+      "type": "object",
+      "description": "Privacy and marketing consent preferences.",
+      "properties": {
+        "marketing": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "object",
+              "properties": {
+                "val": {
+                  "type": "string",
+                  "enum": [
+                    "y",
+                    "n",
+                    "p",
+                    "u"
+                  ],
+                  "description": "Consent value: yes, no, pending, unknown."
+                }
+              }
+            },
+            "push": {
+              "type": "object",
+              "properties": {
+                "val": {
+                  "type": "string",
+                  "enum": [
+                    "y",
+                    "n",
+                    "p",
+                    "u"
+                  ]
+                }
+              }
+            },
+            "sms": {
+              "type": "object",
+              "properties": {
+                "val": {
+                  "type": "string",
+                  "enum": [
+                    "y",
+                    "n",
+                    "p",
+                    "u"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "created": {
+      "type": "datetime",
+      "description": "When the profile was first created."
+    },
+    "lastModified": {
+      "type": "datetime",
+      "description": "When the profile was last updated."
+    }
+  },
+  "required": [
+    "profileId"
+  ]
+}

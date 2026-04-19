@@ -1,0 +1,20 @@
+{
+  "content": [
+    {
+      "id": "abc123",
+      "name": "Example Name",
+      "description": "example",
+      "rsid": "abc123",
+      "owner": {
+        "id": {},
+        "name": {}
+      },
+      "definition": {},
+      "tags": [
+        {}
+      ]
+    }
+  ],
+  "totalElements": 86,
+  "totalPages": 13
+}

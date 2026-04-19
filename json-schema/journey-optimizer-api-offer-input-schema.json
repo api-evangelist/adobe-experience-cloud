@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-schema/journey-optimizer-api-offer-input-schema.json",
+  "title": "OfferInput",
+  "description": "OfferInput schema",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "representations": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "eligibilityRule": {
+      "type": "string"
+    },
+    "priority": {
+      "type": "integer"
+    },
+    "startDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "endDate": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

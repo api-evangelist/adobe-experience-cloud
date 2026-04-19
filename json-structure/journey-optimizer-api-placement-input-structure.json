@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/journey-optimizer-api-placement-input-structure.json",
+  "name": "PlacementInput",
+  "description": "PlacementInput schema",
+  "type": "object",
+  "required": [
+    "name",
+    "channel",
+    "contentType"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "channel": {
+      "type": "string"
+    },
+    "contentType": {
+      "type": "string"
+    }
+  }
+}

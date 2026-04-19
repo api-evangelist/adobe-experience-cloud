@@ -1,0 +1,10 @@
+{
+  "id": "abc123",
+  "name": "Example Name",
+  "description": "example",
+  "owner": {
+    "id": 36,
+    "name": "Example Name"
+  },
+  "modified": "2025-03-15T14:30:00Z"
+}

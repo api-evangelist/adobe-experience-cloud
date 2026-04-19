@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-schema/journey-optimizer-api-campaign-input-schema.json",
+  "title": "CampaignInput",
+  "description": "CampaignInput schema",
+  "type": "object",
+  "required": [
+    "name",
+    "channel"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "channel": {
+      "type": "string",
+      "enum": [
+        "email",
+        "push",
+        "sms",
+        "inApp"
+      ]
+    },
+    "audienceId": {
+      "type": "string"
+    },
+    "schedule": {
+      "type": "object"
+    }
+  }
+}

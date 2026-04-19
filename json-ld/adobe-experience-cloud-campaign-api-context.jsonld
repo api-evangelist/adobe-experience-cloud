@@ -1,0 +1,104 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "aec": "https://developer.adobe.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "EmailList": "aec:EmailList",
+    "Service": "aec:Service",
+    "Email": "aec:Email",
+    "TransactionalMessageRequest": "aec:TransactionalMessageRequest",
+    "TransactionalMessageResponse": "aec:TransactionalMessageResponse",
+    "ServiceList": "aec:ServiceList",
+    "ProfileList": "aec:ProfileList",
+    "Profile": "aec:Profile",
+    "WorkflowList": "aec:WorkflowList",
+    "ServiceInput": "aec:ServiceInput",
+    "ProfileInput": "aec:ProfileInput",
+    "Workflow": "aec:Workflow",
+    "content": {
+      "@id": "aec:content",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "PKey": {
+      "@id": "aec:PKey",
+      "@type": "xsd:string"
+    },
+    "subject": {
+      "@id": "aec:subject",
+      "@type": "xsd:string"
+    },
+    "htmlContent": {
+      "@id": "aec:htmlContent",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "aec:status",
+      "@type": "xsd:string"
+    },
+    "sender": {
+      "@id": "aec:sender",
+      "@type": "@id"
+    },
+    "name": "schema:name",
+    "email": "schema:email",
+    "created": {
+      "@id": "aec:created",
+      "@type": "xsd:dateTime"
+    },
+    "label": {
+      "@id": "aec:label",
+      "@type": "xsd:string"
+    },
+    "mode": {
+      "@id": "aec:mode",
+      "@type": "xsd:string"
+    },
+    "ctx": {
+      "@id": "aec:ctx",
+      "@type": "@id"
+    },
+    "eventId": {
+      "@id": "aec:eventId",
+      "@type": "xsd:string"
+    },
+    "firstName": {
+      "@id": "aec:firstName",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "aec:lastName",
+      "@type": "xsd:string"
+    },
+    "birthDate": {
+      "@id": "aec:birthDate",
+      "@type": "xsd:date"
+    },
+    "phone": {
+      "@id": "aec:phone",
+      "@type": "xsd:string"
+    },
+    "lastModified": {
+      "@id": "aec:lastModified",
+      "@type": "xsd:dateTime"
+    },
+    "count": {
+      "@id": "aec:count",
+      "@type": "@id"
+    },
+    "value": {
+      "@id": "aec:value",
+      "@type": "xsd:integer"
+    },
+    "startDate": {
+      "@id": "aec:startDate",
+      "@type": "xsd:dateTime"
+    },
+    "messageType": {
+      "@id": "aec:messageType",
+      "@type": "xsd:string"
+    }
+  }
+}

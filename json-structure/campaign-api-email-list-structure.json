@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/campaign-api-email-list-structure.json",
+  "name": "EmailList",
+  "description": "EmailList schema",
+  "type": "object",
+  "properties": {
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "PKey": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "htmlContent": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "sender": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              }
+            }
+          },
+          "created": {
+            "type": "datetime"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "abc123",
+  "name": "Example Name",
+  "description": "example",
+  "rsid": "abc123",
+  "owner": {
+    "id": 81,
+    "name": "Example Name"
+  },
+  "definition": {},
+  "tags": [
+    {
+      "id": 3,
+      "name": "Example Name"
+    }
+  ]
+}

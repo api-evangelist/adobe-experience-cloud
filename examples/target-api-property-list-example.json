@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "id": 10,
+      "name": "Example Name",
+      "token": "example"
+    }
+  ],
+  "type": "standard"
+}

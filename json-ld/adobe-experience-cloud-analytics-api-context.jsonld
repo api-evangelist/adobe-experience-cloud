@@ -1,0 +1,169 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "aec": "https://developer.adobe.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Project": "aec:Project",
+    "UserList": "aec:UserList",
+    "User": "aec:User",
+    "CalculatedMetricList": "aec:CalculatedMetricList",
+    "ReportSuite": "aec:ReportSuite",
+    "SegmentList": "aec:SegmentList",
+    "ProjectList": "aec:ProjectList",
+    "CalculatedMetric": "aec:CalculatedMetric",
+    "ReportResponse": "aec:ReportResponse",
+    "ReportRequest": "aec:ReportRequest",
+    "ReportSuiteList": "aec:ReportSuiteList",
+    "Metric": "aec:Metric",
+    "DateRangeList": "aec:DateRangeList",
+    "Dimension": "aec:Dimension",
+    "Segment": "aec:Segment",
+    "id": {
+      "@id": "aec:id",
+      "@type": "xsd:string"
+    },
+    "name": "schema:name",
+    "description": "schema:description",
+    "owner": {
+      "@id": "aec:owner",
+      "@type": "@id"
+    },
+    "modified": {
+      "@id": "aec:modified",
+      "@type": "xsd:dateTime"
+    },
+    "content": {
+      "@id": "aec:content",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "loginId": {
+      "@id": "aec:loginId",
+      "@type": "xsd:string"
+    },
+    "email": "schema:email",
+    "firstName": {
+      "@id": "aec:firstName",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "aec:lastName",
+      "@type": "xsd:string"
+    },
+    "admin": {
+      "@id": "aec:admin",
+      "@type": "xsd:boolean"
+    },
+    "totalElements": {
+      "@id": "aec:totalElements",
+      "@type": "xsd:integer"
+    },
+    "totalPages": {
+      "@id": "aec:totalPages",
+      "@type": "xsd:integer"
+    },
+    "rsid": {
+      "@id": "aec:rsid",
+      "@type": "xsd:string"
+    },
+    "polarity": {
+      "@id": "aec:polarity",
+      "@type": "xsd:string"
+    },
+    "definition": {
+      "@id": "aec:definition",
+      "@type": "@id"
+    },
+    "currency": {
+      "@id": "aec:currency",
+      "@type": "xsd:string"
+    },
+    "timezone": {
+      "@id": "aec:timezone",
+      "@type": "xsd:integer"
+    },
+    "calendarType": {
+      "@id": "aec:calendarType",
+      "@type": "xsd:string"
+    },
+    "tags": {
+      "@id": "aec:tags",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "firstPage": {
+      "@id": "aec:firstPage",
+      "@type": "xsd:boolean"
+    },
+    "lastPage": {
+      "@id": "aec:lastPage",
+      "@type": "xsd:boolean"
+    },
+    "numberOfElements": {
+      "@id": "aec:numberOfElements",
+      "@type": "xsd:integer"
+    },
+    "rows": {
+      "@id": "aec:rows",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "itemId": {
+      "@id": "aec:itemId",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "aec:value",
+      "@type": "xsd:string"
+    },
+    "data": {
+      "@id": "aec:data",
+      "@container": "@set",
+      "@type": "xsd:decimal"
+    },
+    "globalFilters": {
+      "@id": "aec:globalFilters",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "aec:type",
+      "@type": "xsd:string"
+    },
+    "dateRange": {
+      "@id": "aec:dateRange",
+      "@type": "xsd:string"
+    },
+    "metricContainer": {
+      "@id": "aec:metricContainer",
+      "@type": "@id"
+    },
+    "metrics": {
+      "@id": "aec:metrics",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "dimension": {
+      "@id": "aec:dimension",
+      "@type": "xsd:string"
+    },
+    "settings": {
+      "@id": "aec:settings",
+      "@type": "@id"
+    },
+    "limit": {
+      "@id": "aec:limit",
+      "@type": "xsd:integer"
+    },
+    "page": {
+      "@id": "aec:page",
+      "@type": "xsd:integer"
+    },
+    "segmentable": {
+      "@id": "aec:segmentable",
+      "@type": "xsd:boolean"
+    }
+  }
+}

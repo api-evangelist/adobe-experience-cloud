@@ -1,0 +1,7 @@
+{
+  "name": "Example Name",
+  "description": "example",
+  "channel": "email",
+  "audienceId": "abc123",
+  "schedule": {}
+}

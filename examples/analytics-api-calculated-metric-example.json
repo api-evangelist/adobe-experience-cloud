@@ -1,0 +1,12 @@
+{
+  "id": "abc123",
+  "name": "Example Name",
+  "description": "example",
+  "rsid": "abc123",
+  "owner": {
+    "id": 100,
+    "name": "Example Name"
+  },
+  "polarity": "positive",
+  "definition": {}
+}

@@ -1,0 +1,236 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Adobe Experience Cloud"
+  description: "Unified vocabulary for Adobe Experience Cloud covering Analytics, Experience Platform, Target, Journey Optimizer, Campaign, and I/O Events APIs."
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - namespace: analytics-api
+      name: Adobe Analytics 2.0 API
+      version: "2"
+      baseUrl: https://analytics.adobe.io/api/{companyId}
+      status: active
+    - namespace: experience-platform
+      name: Adobe Experience Platform API
+      version: "1"
+      baseUrl: https://platform.adobe.io
+      status: active
+    - namespace: target-api
+      name: Adobe Target API
+      version: "3"
+      baseUrl: https://mc.adobe.io/{tenant}/target
+      status: active
+    - namespace: journey-optimizer
+      name: Adobe Journey Optimizer API
+      version: "1"
+      baseUrl: https://platform.adobe.io
+      status: active
+    - namespace: campaign-api
+      name: Adobe Campaign API
+      version: "1"
+      baseUrl: https://mc.adobe.io/{ORGANIZATION}/campaign
+      status: active
+    - namespace: io-events
+      name: Adobe I/O Events
+      version: "1"
+      baseUrl: https://api.adobe.io
+      status: active
+
+  resources:
+    - name: analytics-reports
+      description: "Analytics report execution and retrieval."
+      apis: [analytics-api]
+      actions: [run, list]
+    - name: analytics-segments
+      description: "Audience segments for filtering analytics data."
+      apis: [analytics-api]
+      actions: [list, get, create, update, delete]
+    - name: analytics-metrics
+      description: "Analytics metrics available for reporting."
+      apis: [analytics-api]
+      actions: [list, get]
+    - name: customer-profiles
+      description: "Unified real-time customer profiles."
+      apis: [experience-platform]
+      actions: [get, list, update]
+    - name: datasets
+      description: "Data sets ingested into Experience Platform."
+      apis: [experience-platform]
+      actions: [list, get, create, delete]
+    - name: audience-segments
+      description: "Audience segment definitions for activation."
+      apis: [experience-platform]
+      actions: [list, get, create, update, delete]
+    - name: target-activities
+      description: "A/B tests, experience targeting, and personalization activities."
+      apis: [target-api]
+      actions: [list, get, create, update, delete]
+    - name: target-audiences
+      description: "Targeting audiences in Adobe Target."
+      apis: [target-api]
+      actions: [list, get, create, update, delete]
+    - name: offers
+      description: "Personalized content offers."
+      apis: [target-api, journey-optimizer]
+      actions: [list, get, create, update, delete]
+    - name: journeys
+      description: "Customer journey definitions and versions."
+      apis: [journey-optimizer]
+      actions: [list, get, create, publish]
+    - name: messages
+      description: "Campaign messages across email, SMS, push channels."
+      apis: [journey-optimizer, campaign-api]
+      actions: [list, get, create, send]
+    - name: webhook-subscriptions
+      description: "Adobe I/O Events webhook registrations."
+      apis: [io-events]
+      actions: [list, get, create, update, delete]
+
+  actions:
+    - name: run
+      description: "Execute an operation such as a report or job."
+      httpMethod: POST
+      pattern: query
+    - name: list
+      description: "Retrieve a paginated collection."
+      httpMethod: GET
+      pattern: read
+    - name: get
+      description: "Retrieve a single resource."
+      httpMethod: GET
+      pattern: read
+    - name: create
+      description: "Create a new resource."
+      httpMethod: POST
+      pattern: write
+    - name: update
+      description: "Update an existing resource."
+      httpMethod: PATCH
+      pattern: write
+    - name: delete
+      description: "Remove a resource."
+      httpMethod: DELETE
+      pattern: destructive
+    - name: send
+      description: "Trigger delivery of a message or communication."
+      httpMethod: POST
+      pattern: write
+    - name: publish
+      description: "Publish a journey or activity for live use."
+      httpMethod: POST
+      pattern: write
+
+  schemas:
+    analytics:
+      - name: Report
+        description: "Analytics report result with dimensions and metrics."
+      - name: Segment
+        description: "Audience segment for analytics filtering."
+    platform:
+      - name: Profile
+        description: "Unified customer profile with merged identity graph."
+      - name: Dataset
+        description: "Data set container for ingested data."
+      - name: SegmentDefinition
+        description: "Audience segment definition using PQL."
+    personalization:
+      - name: Activity
+        description: "A/B test or personalization activity in Adobe Target."
+      - name: Offer
+        description: "Personalized content offer for targeting."
+      - name: Audience
+        description: "Target audience definition."
+    journeys:
+      - name: Journey
+        description: "Customer journey definition with triggers and actions."
+      - name: Message
+        description: "Campaign message with content and delivery settings."
+
+  authentication:
+    schemes:
+      - name: OAuth 2.0 Server-to-Server
+        type: oauth2
+        apis: [analytics-api, experience-platform, target-api, journey-optimizer, campaign-api]
+        description: "Adobe IMS OAuth 2.0 server-to-server credentials via Developer Console."
+      - name: JWT Authentication
+        type: jwt
+        apis: [analytics-api, experience-platform]
+        description: "Legacy JWT authentication (being replaced by OAuth 2.0 S2S)."
+
+capability:
+  workflows:
+    - name: Digital Marketing
+      file: capabilities/digital-marketing.yaml
+      description: "Analytics, A/B testing, and journey orchestration for digital marketers."
+      apisComposed: [analytics-api, target-api, journey-optimizer]
+      toolCount: 10
+      personas:
+        - Digital Marketer
+        - Marketing Technologist
+      domains:
+        - Analytics
+        - Personalization
+        - Journey Orchestration
+    - name: Customer Data Platform
+      file: capabilities/customer-data-platform.yaml
+      description: "Profile management, audience segmentation, and data ingestion."
+      apisComposed: [experience-platform]
+      toolCount: 4
+      personas:
+        - Data Engineer
+        - CDP Administrator
+      domains:
+        - Customer Data
+        - Audience Management
+
+  personas:
+    - id: digital-marketer
+      name: Digital Marketer
+      description: "Marketing professional using analytics, personalization, and journey tools."
+      workflows: [Digital Marketing]
+    - id: marketing-technologist
+      name: Marketing Technologist
+      description: "Technical marketer integrating Experience Cloud APIs into marketing stack."
+      workflows: [Digital Marketing]
+    - id: data-engineer
+      name: Data Engineer
+      description: "Engineer managing data pipelines, schemas, and datasets in Experience Platform."
+      workflows: [Customer Data Platform]
+    - id: cdp-administrator
+      name: CDP Administrator
+      description: "Administrator managing customer profiles, segments, and identity resolution."
+      workflows: [Customer Data Platform]
+
+  domains:
+    - name: Analytics
+      description: "Digital analytics reporting and audience insights."
+      resources: [analytics-reports, analytics-segments, analytics-metrics]
+    - name: Personalization
+      description: "A/B testing and content personalization."
+      resources: [target-activities, target-audiences, offers]
+    - name: Journey Orchestration
+      description: "Multi-channel customer journey management."
+      resources: [journeys, messages, offers]
+    - name: Customer Data
+      description: "Unified customer profiles and data management."
+      resources: [customer-profiles, datasets, audience-segments]
+
+crossReference:
+  - resource: analytics-reports
+    workflows: [Digital Marketing]
+    personas: [Digital Marketer, Marketing Technologist]
+  - resource: customer-profiles
+    workflows: [Customer Data Platform]
+    personas: [Data Engineer, CDP Administrator]
+  - resource: audience-segments
+    workflows: [Customer Data Platform]
+    personas: [Data Engineer, CDP Administrator]
+  - resource: target-activities
+    workflows: [Digital Marketing]
+    personas: [Digital Marketer]
+  - resource: journeys
+    workflows: [Digital Marketing]
+    personas: [Digital Marketer, Marketing Technologist]

@@ -1,0 +1,12 @@
+{
+  "requestId": "abc123",
+  "execute": {
+    "mboxes": [
+      {
+        "name": {},
+        "options": {}
+      }
+    ]
+  },
+  "prefetch": {}
+}

@@ -1,0 +1,158 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "aec": "https://developer.adobe.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Campaign": "aec:Campaign",
+    "MessageInput": "aec:MessageInput",
+    "JourneyList": "aec:JourneyList",
+    "Offer": "aec:Offer",
+    "PlacementList": "aec:PlacementList",
+    "CollectionInput": "aec:CollectionInput",
+    "ContentTemplateList": "aec:ContentTemplateList",
+    "CollectionList": "aec:CollectionList",
+    "DecisionRuleList": "aec:DecisionRuleList",
+    "OfferInput": "aec:OfferInput",
+    "JourneyInput": "aec:JourneyInput",
+    "DecisionRuleInput": "aec:DecisionRuleInput",
+    "MessageList": "aec:MessageList",
+    "DecisionRule": "aec:DecisionRule",
+    "Journey": "aec:Journey",
+    "ContentTemplateInput": "aec:ContentTemplateInput",
+    "PlacementInput": "aec:PlacementInput",
+    "Message": "aec:Message",
+    "CampaignInput": "aec:CampaignInput",
+    "OfferList": "aec:OfferList",
+    "Collection": "aec:Collection",
+    "CampaignList": "aec:CampaignList",
+    "ContentTemplate": "aec:ContentTemplate",
+    "Placement": "aec:Placement",
+    "id": {
+      "@id": "aec:id",
+      "@type": "xsd:string"
+    },
+    "name": "schema:name",
+    "description": "schema:description",
+    "channel": {
+      "@id": "aec:channel",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "aec:status",
+      "@type": "xsd:string"
+    },
+    "schedule": {
+      "@id": "aec:schedule",
+      "@type": "@id"
+    },
+    "startDate": {
+      "@id": "aec:startDate",
+      "@type": "xsd:dateTime"
+    },
+    "endDate": {
+      "@id": "aec:endDate",
+      "@type": "xsd:dateTime"
+    },
+    "content": {
+      "@id": "aec:content",
+      "@type": "@id"
+    },
+    "journeys": {
+      "@id": "aec:journeys",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "version": "schema:version",
+    "createdAt": {
+      "@id": "aec:createdAt",
+      "@type": "xsd:dateTime"
+    },
+    "modifiedAt": {
+      "@id": "aec:modifiedAt",
+      "@type": "xsd:dateTime"
+    },
+    "totalCount": {
+      "@id": "aec:totalCount",
+      "@type": "xsd:integer"
+    },
+    "representations": {
+      "@id": "aec:representations",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "placement": {
+      "@id": "aec:placement",
+      "@type": "xsd:string"
+    },
+    "priority": {
+      "@id": "aec:priority",
+      "@type": "xsd:integer"
+    },
+    "placements": {
+      "@id": "aec:placements",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "contentType": {
+      "@id": "aec:contentType",
+      "@type": "xsd:string"
+    },
+    "filter": {
+      "@id": "aec:filter",
+      "@type": "@id"
+    },
+    "templates": {
+      "@id": "aec:templates",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "collections": {
+      "@id": "aec:collections",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "decisionRules": {
+      "@id": "aec:decisionRules",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "condition": {
+      "@id": "aec:condition",
+      "@type": "xsd:string"
+    },
+    "eligibilityRule": {
+      "@id": "aec:eligibilityRule",
+      "@type": "xsd:string"
+    },
+    "entryCondition": {
+      "@id": "aec:entryCondition",
+      "@type": "@id"
+    },
+    "activities": {
+      "@id": "aec:activities",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "messages": {
+      "@id": "aec:messages",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "audienceId": {
+      "@id": "aec:audienceId",
+      "@type": "xsd:string"
+    },
+    "offers": {
+      "@id": "aec:offers",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "campaigns": {
+      "@id": "aec:campaigns",
+      "@container": "@set",
+      "@type": "xsd:string"
+    }
+  }
+}

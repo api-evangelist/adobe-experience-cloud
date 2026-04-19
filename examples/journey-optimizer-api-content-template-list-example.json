@@ -1,0 +1,12 @@
+{
+  "templates": [
+    {
+      "id": "abc123",
+      "name": "Example Name",
+      "channel": "example",
+      "content": {},
+      "createdAt": "2025-03-15T14:30:00Z"
+    }
+  ],
+  "totalCount": 35
+}

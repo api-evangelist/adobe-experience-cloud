@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/experience-platform-api-query-list-structure.json",
+  "name": "QueryList",
+  "description": "QueryList schema",
+  "type": "object",
+  "properties": {
+    "queries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "dbName": {
+            "type": "string"
+          },
+          "sql": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "SUBMITTED",
+              "IN_PROGRESS",
+              "SUCCESS",
+              "FAILED"
+            ]
+          },
+          "created": {
+            "type": "datetime"
+          },
+          "updated": {
+            "type": "datetime"
+          },
+          "rowCount": {
+            "type": "int32"
+          }
+        }
+      }
+    },
+    "_page": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "int32"
+        }
+      }
+    }
+  }
+}

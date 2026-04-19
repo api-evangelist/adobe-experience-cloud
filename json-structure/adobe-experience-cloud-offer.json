@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/adobe-experience-cloud-offer.json",
+  "name": "Adobe Experience Cloud Offer",
+  "description": "A personalized offer used in Adobe Journey Optimizer and Target for delivering tailored content to customers based on eligibility rules, priority, and placement configuration.",
+  "type": "object",
+  "properties": {
+    "offerId": {
+      "type": "string",
+      "description": "The unique identifier for the offer."
+    },
+    "name": {
+      "type": "string",
+      "description": "The human-readable name of the offer."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the offer content and purpose."
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "approved",
+        "archived"
+      ],
+      "description": "The lifecycle status of the offer."
+    },
+    "offerType": {
+      "type": "string",
+      "enum": [
+        "personalized",
+        "fallback"
+      ],
+      "description": "Whether this is a personalized or fallback offer."
+    },
+    "representations": {
+      "type": "array",
+      "description": "The content representations for different channels and placements.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "channel": {
+            "type": "string",
+            "description": "The delivery channel (web, email, mobile, etc.)."
+          },
+          "placementId": {
+            "type": "string",
+            "description": "The placement where this representation can be displayed."
+          },
+          "content": {
+            "type": "string",
+            "description": "The content payload (HTML, JSON, text, or image URL)."
+          },
+          "contentType": {
+            "type": "string",
+            "enum": [
+              "text/html",
+              "application/json",
+              "text/plain",
+              "image/*"
+            ],
+            "description": "The MIME type of the content."
+          }
+        }
+      }
+    },
+    "eligibilityRule": {
+      "type": "object",
+      "description": "The eligibility rule defining which profiles can receive this offer.",
+      "properties": {
+        "ruleId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "priority": {
+      "type": "int32",
+      "description": "The priority ranking when multiple offers are eligible."
+    },
+    "cappingConstraint": {
+      "type": "object",
+      "description": "Frequency capping constraints.",
+      "properties": {
+        "maxImpressions": {
+          "type": "int32",
+          "description": "Maximum number of times the offer can be shown."
+        },
+        "scope": {
+          "type": "string",
+          "enum": [
+            "global",
+            "perProfile"
+          ],
+          "description": "Whether capping applies globally or per profile."
+        }
+      }
+    },
+    "startDate": {
+      "type": "datetime",
+      "description": "When the offer becomes eligible for delivery."
+    },
+    "endDate": {
+      "type": "datetime",
+      "description": "When the offer is no longer eligible for delivery."
+    },
+    "tags": {
+      "type": "array",
+      "description": "Tags for categorizing offers into collections.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "created": {
+      "type": "datetime",
+      "description": "When the offer was created."
+    },
+    "lastModified": {
+      "type": "datetime",
+      "description": "When the offer was last modified."
+    }
+  },
+  "required": [
+    "offerId",
+    "name",
+    "offerType"
+  ]
+}

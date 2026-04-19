@@ -1,0 +1,9 @@
+{
+  "id": "abc123",
+  "name": "Example Name",
+  "description": "example",
+  "status": "draft",
+  "version": "example",
+  "createdAt": "2025-03-15T14:30:00Z",
+  "modifiedAt": "2025-03-15T14:30:00Z"
+}

@@ -1,0 +1,8 @@
+{
+  "id": 42,
+  "loginId": "abc123",
+  "email": "example",
+  "firstName": "Example Name",
+  "lastName": "Example Name",
+  "admin": true
+}

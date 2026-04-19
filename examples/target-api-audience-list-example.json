@@ -1,0 +1,13 @@
+{
+  "total": 21,
+  "offset": 34,
+  "limit": 40,
+  "audiences": [
+    {
+      "id": 61,
+      "name": "Example Name",
+      "description": "example",
+      "targetRule": {}
+    }
+  ]
+}

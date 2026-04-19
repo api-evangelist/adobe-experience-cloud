@@ -1,0 +1,16 @@
+{
+  "segmentId": "abc123",
+  "name": "Example Name",
+  "description": "example",
+  "expression": {
+    "type": "PQL",
+    "format": "pql/text",
+    "value": "example"
+  },
+  "evaluationType": "batch",
+  "mergePolicyId": "abc123",
+  "schema": {
+    "name": "Example Name"
+  },
+  "status": "draft"
+}

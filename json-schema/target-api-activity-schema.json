@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-schema/target-api-activity-schema.json",
+  "title": "Activity",
+  "description": "Activity schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "ab",
+        "xt",
+        "mvt",
+        "ap"
+      ]
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "approved",
+        "deactivated",
+        "archived"
+      ]
+    },
+    "priority": {
+      "type": "integer"
+    },
+    "modifiedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "startsAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "endsAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "journeyId": "abc123",
+  "name": "Example Name",
+  "description": "example",
+  "status": "draft",
+  "version": "example",
+  "entryCondition": {
+    "type": "segment",
+    "segmentId": "abc123",
+    "eventId": "abc123",
+    "schedule": {
+      "frequency": "once",
+      "startDate": "2025-03-15T14:30:00Z",
+      "endDate": "2025-03-15T14:30:00Z"
+    }
+  },
+  "activities": [
+    {
+      "activityId": "abc123",
+      "type": "action",
+      "name": "Example Name",
+      "configuration": {},
+      "nextActivityId": "abc123"
+    }
+  ],
+  "metrics": {
+    "totalEntered": 72,
+    "currentlyInJourney": 95,
+    "totalExited": 19,
+    "totalErrored": 4
+  }
+}

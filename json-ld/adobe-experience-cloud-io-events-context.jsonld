@@ -1,0 +1,511 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "aec": "https://developer.adobe.com/schema/",
+    "schema": {
+      "@id": "aec:schema",
+      "@type": "@id"
+    },
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Adobe Experience Cloud Event": "aec:Adobe Experience Cloud Event",
+    "Adobe Experience Cloud Campaign": "aec:Adobe Experience Cloud Campaign",
+    "Adobe Experience Cloud Offer": "aec:Adobe Experience Cloud Offer",
+    "Adobe Experience Cloud Journey": "aec:Adobe Experience Cloud Journey",
+    "Adobe Experience Cloud Segment": "aec:Adobe Experience Cloud Segment",
+    "Adobe Experience Cloud Profile": "aec:Adobe Experience Cloud Profile",
+    "eventId": {
+      "@id": "aec:eventId",
+      "@type": "xsd:string"
+    },
+    "eventType": {
+      "@id": "aec:eventType",
+      "@type": "xsd:string"
+    },
+    "timestamp": {
+      "@id": "aec:timestamp",
+      "@type": "xsd:dateTime"
+    },
+    "identityMap": {
+      "@id": "aec:identityMap",
+      "@type": "@id"
+    },
+    "web": {
+      "@id": "aec:web",
+      "@type": "@id"
+    },
+    "webPageDetails": {
+      "@id": "aec:webPageDetails",
+      "@type": "@id"
+    },
+    "URL": {
+      "@id": "aec:URL",
+      "@type": "@id"
+    },
+    "name": "schema:name",
+    "siteSection": {
+      "@id": "aec:siteSection",
+      "@type": "xsd:string"
+    },
+    "isHomePage": {
+      "@id": "aec:isHomePage",
+      "@type": "xsd:boolean"
+    },
+    "webInteraction": {
+      "@id": "aec:webInteraction",
+      "@type": "@id"
+    },
+    "type": {
+      "@id": "aec:type",
+      "@type": "xsd:string"
+    },
+    "webReferrer": {
+      "@id": "aec:webReferrer",
+      "@type": "@id"
+    },
+    "commerce": {
+      "@id": "aec:commerce",
+      "@type": "@id"
+    },
+    "purchases": {
+      "@id": "aec:purchases",
+      "@type": "@id"
+    },
+    "value": {
+      "@id": "aec:value",
+      "@type": "xsd:decimal"
+    },
+    "order": {
+      "@id": "aec:order",
+      "@type": "@id"
+    },
+    "purchaseID": {
+      "@id": "aec:purchaseID",
+      "@type": "xsd:string"
+    },
+    "currencyCode": {
+      "@id": "aec:currencyCode",
+      "@type": "xsd:string"
+    },
+    "priceTotal": {
+      "@id": "aec:priceTotal",
+      "@type": "xsd:decimal"
+    },
+    "payments": {
+      "@id": "aec:payments",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "paymentType": {
+      "@id": "aec:paymentType",
+      "@type": "xsd:string"
+    },
+    "paymentAmount": {
+      "@id": "aec:paymentAmount",
+      "@type": "xsd:decimal"
+    },
+    "productListItems": {
+      "@id": "aec:productListItems",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "SKU": {
+      "@id": "aec:SKU",
+      "@type": "xsd:string"
+    },
+    "quantity": {
+      "@id": "aec:quantity",
+      "@type": "xsd:integer"
+    },
+    "device": {
+      "@id": "aec:device",
+      "@type": "@id"
+    },
+    "manufacturer": {
+      "@id": "aec:manufacturer",
+      "@type": "xsd:string"
+    },
+    "model": {
+      "@id": "aec:model",
+      "@type": "xsd:string"
+    },
+    "screenHeight": {
+      "@id": "aec:screenHeight",
+      "@type": "xsd:integer"
+    },
+    "screenWidth": {
+      "@id": "aec:screenWidth",
+      "@type": "xsd:integer"
+    },
+    "environment": {
+      "@id": "aec:environment",
+      "@type": "@id"
+    },
+    "browserDetails": {
+      "@id": "aec:browserDetails",
+      "@type": "@id"
+    },
+    "version": "schema:version",
+    "userAgent": {
+      "@id": "aec:userAgent",
+      "@type": "xsd:string"
+    },
+    "operatingSystem": {
+      "@id": "aec:operatingSystem",
+      "@type": "xsd:string"
+    },
+    "operatingSystemVersion": {
+      "@id": "aec:operatingSystemVersion",
+      "@type": "xsd:string"
+    },
+    "ipV4": {
+      "@id": "aec:ipV4",
+      "@type": "xsd:string"
+    },
+    "source": {
+      "@id": "aec:source",
+      "@type": "@id"
+    },
+    "datasetId": {
+      "@id": "aec:datasetId",
+      "@type": "xsd:string"
+    },
+    "campaignId": {
+      "@id": "aec:campaignId",
+      "@type": "xsd:string"
+    },
+    "description": "schema:description",
+    "channel": {
+      "@id": "aec:channel",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "aec:status",
+      "@type": "xsd:string"
+    },
+    "audience": {
+      "@id": "aec:audience",
+      "@type": "@id"
+    },
+    "segmentId": {
+      "@id": "aec:segmentId",
+      "@type": "xsd:string"
+    },
+    "estimatedSize": {
+      "@id": "aec:estimatedSize",
+      "@type": "xsd:integer"
+    },
+    "content": {
+      "@id": "aec:content",
+      "@type": "@id"
+    },
+    "subject": {
+      "@id": "aec:subject",
+      "@type": "xsd:string"
+    },
+    "body": {
+      "@id": "aec:body",
+      "@type": "xsd:string"
+    },
+    "templateId": {
+      "@id": "aec:templateId",
+      "@type": "xsd:string"
+    },
+    "sender": {
+      "@id": "aec:sender",
+      "@type": "@id"
+    },
+    "email": "schema:email",
+    "schedule": {
+      "@id": "aec:schedule",
+      "@type": "@id"
+    },
+    "startDate": {
+      "@id": "aec:startDate",
+      "@type": "xsd:dateTime"
+    },
+    "endDate": {
+      "@id": "aec:endDate",
+      "@type": "xsd:dateTime"
+    },
+    "timezone": {
+      "@id": "aec:timezone",
+      "@type": "xsd:string"
+    },
+    "recurring": {
+      "@id": "aec:recurring",
+      "@type": "xsd:boolean"
+    },
+    "metrics": {
+      "@id": "aec:metrics",
+      "@type": "@id"
+    },
+    "sent": {
+      "@id": "aec:sent",
+      "@type": "xsd:integer"
+    },
+    "delivered": {
+      "@id": "aec:delivered",
+      "@type": "xsd:integer"
+    },
+    "opened": {
+      "@id": "aec:opened",
+      "@type": "xsd:integer"
+    },
+    "clicked": {
+      "@id": "aec:clicked",
+      "@type": "xsd:integer"
+    },
+    "bounced": {
+      "@id": "aec:bounced",
+      "@type": "xsd:integer"
+    },
+    "unsubscribed": {
+      "@id": "aec:unsubscribed",
+      "@type": "xsd:integer"
+    },
+    "created": {
+      "@id": "aec:created",
+      "@type": "xsd:dateTime"
+    },
+    "lastModified": {
+      "@id": "aec:lastModified",
+      "@type": "xsd:dateTime"
+    },
+    "offerId": {
+      "@id": "aec:offerId",
+      "@type": "xsd:string"
+    },
+    "offerType": {
+      "@id": "aec:offerType",
+      "@type": "xsd:string"
+    },
+    "representations": {
+      "@id": "aec:representations",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "placementId": {
+      "@id": "aec:placementId",
+      "@type": "xsd:string"
+    },
+    "contentType": {
+      "@id": "aec:contentType",
+      "@type": "xsd:string"
+    },
+    "eligibilityRule": {
+      "@id": "aec:eligibilityRule",
+      "@type": "@id"
+    },
+    "ruleId": {
+      "@id": "aec:ruleId",
+      "@type": "xsd:string"
+    },
+    "priority": {
+      "@id": "aec:priority",
+      "@type": "xsd:integer"
+    },
+    "cappingConstraint": {
+      "@id": "aec:cappingConstraint",
+      "@type": "@id"
+    },
+    "maxImpressions": {
+      "@id": "aec:maxImpressions",
+      "@type": "xsd:integer"
+    },
+    "scope": {
+      "@id": "aec:scope",
+      "@type": "xsd:string"
+    },
+    "tags": {
+      "@id": "aec:tags",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "journeyId": {
+      "@id": "aec:journeyId",
+      "@type": "xsd:string"
+    },
+    "entryCondition": {
+      "@id": "aec:entryCondition",
+      "@type": "@id"
+    },
+    "frequency": {
+      "@id": "aec:frequency",
+      "@type": "xsd:string"
+    },
+    "activities": {
+      "@id": "aec:activities",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "activityId": {
+      "@id": "aec:activityId",
+      "@type": "xsd:string"
+    },
+    "configuration": {
+      "@id": "aec:configuration",
+      "@type": "@id"
+    },
+    "nextActivityId": {
+      "@id": "aec:nextActivityId",
+      "@type": "xsd:string"
+    },
+    "totalEntered": {
+      "@id": "aec:totalEntered",
+      "@type": "xsd:integer"
+    },
+    "currentlyInJourney": {
+      "@id": "aec:currentlyInJourney",
+      "@type": "xsd:integer"
+    },
+    "totalExited": {
+      "@id": "aec:totalExited",
+      "@type": "xsd:integer"
+    },
+    "totalErrored": {
+      "@id": "aec:totalErrored",
+      "@type": "xsd:integer"
+    },
+    "publishedAt": {
+      "@id": "aec:publishedAt",
+      "@type": "xsd:dateTime"
+    },
+    "expression": {
+      "@id": "aec:expression",
+      "@type": "@id"
+    },
+    "format": {
+      "@id": "aec:format",
+      "@type": "xsd:string"
+    },
+    "evaluationType": {
+      "@id": "aec:evaluationType",
+      "@type": "xsd:string"
+    },
+    "mergePolicyId": {
+      "@id": "aec:mergePolicyId",
+      "@type": "xsd:string"
+    },
+    "profileCount": {
+      "@id": "aec:profileCount",
+      "@type": "xsd:integer"
+    },
+    "owner": {
+      "@id": "aec:owner",
+      "@type": "@id"
+    },
+    "id": {
+      "@id": "aec:id",
+      "@type": "xsd:string"
+    },
+    "lastEvaluated": {
+      "@id": "aec:lastEvaluated",
+      "@type": "xsd:dateTime"
+    },
+    "profileId": {
+      "@id": "aec:profileId",
+      "@type": "xsd:string"
+    },
+    "person": {
+      "@id": "aec:person",
+      "@type": "@id"
+    },
+    "firstName": {
+      "@id": "aec:firstName",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "aec:lastName",
+      "@type": "xsd:string"
+    },
+    "fullName": {
+      "@id": "aec:fullName",
+      "@type": "xsd:string"
+    },
+    "birthDate": {
+      "@id": "aec:birthDate",
+      "@type": "xsd:date"
+    },
+    "gender": {
+      "@id": "aec:gender",
+      "@type": "xsd:string"
+    },
+    "personalEmail": {
+      "@id": "aec:personalEmail",
+      "@type": "@id"
+    },
+    "address": {
+      "@id": "aec:address",
+      "@type": "xsd:string"
+    },
+    "primary": {
+      "@id": "aec:primary",
+      "@type": "xsd:boolean"
+    },
+    "mobilePhone": {
+      "@id": "aec:mobilePhone",
+      "@type": "@id"
+    },
+    "number": {
+      "@id": "aec:number",
+      "@type": "xsd:string"
+    },
+    "countryCode": {
+      "@id": "aec:countryCode",
+      "@type": "xsd:string"
+    },
+    "homeAddress": {
+      "@id": "aec:homeAddress",
+      "@type": "@id"
+    },
+    "street1": {
+      "@id": "aec:street1",
+      "@type": "xsd:string"
+    },
+    "street2": {
+      "@id": "aec:street2",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "aec:city",
+      "@type": "xsd:string"
+    },
+    "stateProvince": {
+      "@id": "aec:stateProvince",
+      "@type": "xsd:string"
+    },
+    "postalCode": {
+      "@id": "aec:postalCode",
+      "@type": "xsd:string"
+    },
+    "country": {
+      "@id": "aec:country",
+      "@type": "xsd:string"
+    },
+    "segmentMembership": {
+      "@id": "aec:segmentMembership",
+      "@type": "@id"
+    },
+    "consents": {
+      "@id": "aec:consents",
+      "@type": "@id"
+    },
+    "marketing": {
+      "@id": "aec:marketing",
+      "@type": "@id"
+    },
+    "val": {
+      "@id": "aec:val",
+      "@type": "xsd:string"
+    },
+    "push": {
+      "@id": "aec:push",
+      "@type": "@id"
+    },
+    "sms": {
+      "@id": "aec:sms",
+      "@type": "@id"
+    }
+  }
+}

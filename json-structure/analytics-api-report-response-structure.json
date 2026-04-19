@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/analytics-api-report-response-structure.json",
+  "name": "ReportResponse",
+  "description": "ReportResponse schema",
+  "type": "object",
+  "properties": {
+    "totalPages": {
+      "type": "int32"
+    },
+    "firstPage": {
+      "type": "boolean"
+    },
+    "lastPage": {
+      "type": "boolean"
+    },
+    "numberOfElements": {
+      "type": "int32"
+    },
+    "totalElements": {
+      "type": "int32"
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "double"
+            }
+          }
+        }
+      }
+    }
+  }
+}

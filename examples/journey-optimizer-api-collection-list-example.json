@@ -1,0 +1,9 @@
+{
+  "collections": [
+    {
+      "id": "abc123",
+      "name": "Example Name",
+      "filter": {}
+    }
+  ]
+}

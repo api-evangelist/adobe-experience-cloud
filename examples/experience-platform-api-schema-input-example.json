@@ -1,0 +1,10 @@
+{
+  "title": "example",
+  "description": "example",
+  "type": "standard",
+  "allOf": [
+    {
+      "$ref": "example"
+    }
+  ]
+}

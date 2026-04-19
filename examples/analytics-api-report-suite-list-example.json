@@ -1,0 +1,13 @@
+{
+  "content": [
+    {
+      "rsid": "abc123",
+      "name": "Example Name",
+      "currency": "example",
+      "timezone": 30,
+      "calendarType": "standard"
+    }
+  ],
+  "totalElements": 7,
+  "totalPages": 26
+}

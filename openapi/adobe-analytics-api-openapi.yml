@@ -16,55 +16,71 @@ info:
     name: Proprietary
     url: https://www.adobe.com/legal/terms.html
 servers:
-  - url: https://analytics.adobe.io
-    description: Adobe Analytics Production API
+- url: https://analytics.adobe.io
+  description: Adobe Analytics Production API
 security:
-  - bearerAuth: []
-  - apiKey: []
+- bearerAuth: []
+- apiKey: []
 tags:
-  - name: Calculated Metrics
-    description: Operations for managing calculated metrics
-  - name: Date Ranges
-    description: Operations for managing saved date ranges
-  - name: Dimensions
-    description: Operations for retrieving dimension metadata
-  - name: Metrics
-    description: Operations for retrieving metric metadata
-  - name: Projects
-    description: Operations for managing Analysis Workspace projects
-  - name: Report Suites
-    description: Operations for managing report suites
-  - name: Reports
-    description: Operations for retrieving analytics report data
-  - name: Segments
-    description: Operations for managing analytics segments
-  - name: Users
-    description: Operations for managing analytics users
+- name: Calculated Metrics
+  description: Operations for managing calculated metrics
+- name: Date Ranges
+  description: Operations for managing saved date ranges
+- name: Dimensions
+  description: Operations for retrieving dimension metadata
+- name: Metrics
+  description: Operations for retrieving metric metadata
+- name: Projects
+  description: Operations for managing Analysis Workspace projects
+- name: Report Suites
+  description: Operations for managing report suites
+- name: Reports
+  description: Operations for retrieving analytics report data
+- name: Segments
+  description: Operations for managing analytics segments
+- name: Users
+  description: Operations for managing analytics users
 paths:
   /api/{companyId}/reports:
     post:
       operationId: getReport
-      summary: Adobe Experience Cloud Retrieve a report
+      summary: Adobe Analytics Adobe Experience Cloud Retrieve a Report
       description: >-
         Submits a report request to Adobe Analytics and returns the resulting
         data. The request body defines the report suite, dimensions, metrics,
         date range, and any segment or filter criteria. Results are returned
         as a ranked or trended data set in JSON format.
       tags:
-        - Reports
+      - Reports
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          description: The global company ID for the Analytics account.
-          schema:
-            type: string
+      - name: companyId
+        in: path
+        required: true
+        description: The global company ID for the Analytics account.
+        schema:
+          type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ReportRequest'
+            examples:
+              getReportRequestExample:
+                summary: Default getReport request
+                x-microcks-default: true
+                value:
+                  rsid: abc123
+                  globalFilters:
+                  - type: standard
+                    dateRange: example
+                  metricContainer:
+                    metrics:
+                    - id: {}
+                  dimension: example
+                  settings:
+                    limit: 1
+                    page: 1
       responses:
         '200':
           description: Report data returned successfully.
@@ -72,47 +88,73 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReportResponse'
+              examples:
+                getReport200Example:
+                  summary: Default getReport 200 response
+                  x-microcks-default: true
+                  value:
+                    totalPages: 1
+                    firstPage: true
+                    lastPage: true
+                    numberOfElements: 1
+                    totalElements: 1
+                    rows:
+                    - itemId: abc123
+                      value: example
+                      data:
+                      - {}
         '400':
           description: Invalid report request.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                getReport400Example:
+                  summary: Default getReport 400 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example
+                    errorDescription: example
+                    errorId: abc123
         '401':
           description: Authentication credentials are missing or invalid.
         '403':
           description: Insufficient permissions to access the requested report suite.
         '429':
           description: Rate limit exceeded.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/{companyId}/reportsuites:
     get:
       operationId: listReportSuites
-      summary: Adobe Experience Cloud List report suites
+      summary: Adobe Analytics Adobe Experience Cloud List Report Suites
       description: >-
         Returns a paginated list of report suites available to the authenticated
         user within the specified company. Each entry includes the report suite
         ID, name, and configuration metadata.
       tags:
-        - Report Suites
+      - Report Suites
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          description: The global company ID for the Analytics account.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          description: Maximum number of results to return per page.
-          schema:
-            type: integer
-            default: 10
-        - name: page
-          in: query
-          description: Page number for pagination.
-          schema:
-            type: integer
-            default: 0
+      - name: companyId
+        in: path
+        required: true
+        description: The global company ID for the Analytics account.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of results to return per page.
+        schema:
+          type: integer
+          default: 10
+      - name: page
+        in: query
+        description: Page number for pagination.
+        schema:
+          type: integer
+          default: 0
       responses:
         '200':
           description: A paginated list of report suites.
@@ -120,33 +162,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReportSuiteList'
+              examples:
+                listReportSuites200Example:
+                  summary: Default listReportSuites 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - example
+                    totalElements: 1
+                    totalPages: 1
         '401':
           description: Authentication credentials are missing or invalid.
         '403':
           description: Insufficient permissions.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/{companyId}/reportsuites/{rsid}:
     get:
       operationId: getReportSuite
-      summary: Adobe Experience Cloud Get a report suite
+      summary: Adobe Analytics Adobe Experience Cloud Get a Report Suite
       description: >-
         Retrieves the configuration details for a single report suite identified
         by its report suite ID (rsid). Returns metadata including the name,
         currency, timezone, and enabled features.
       tags:
-        - Report Suites
+      - Report Suites
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          description: The global company ID.
-          schema:
-            type: string
-        - name: rsid
-          in: path
-          required: true
-          description: The report suite ID.
-          schema:
-            type: string
+      - name: companyId
+        in: path
+        required: true
+        description: The global company ID.
+        schema:
+          type: string
+      - name: rsid
+        in: path
+        required: true
+        description: The report suite ID.
+        schema:
+          type: string
       responses:
         '200':
           description: Report suite details returned successfully.
@@ -154,44 +208,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReportSuite'
+              examples:
+                getReportSuite200Example:
+                  summary: Default getReportSuite 200 response
+                  x-microcks-default: true
+                  value:
+                    rsid: abc123
+                    name: Example Name
+                    currency: example
+                    timezone: 1
+                    calendarType: standard
         '401':
           description: Authentication credentials are missing or invalid.
         '404':
           description: Report suite not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/{companyId}/segments:
     get:
       operationId: listSegments
-      summary: Adobe Experience Cloud List segments
+      summary: Adobe Analytics Adobe Experience Cloud List Segments
       description: >-
         Returns a paginated list of segments available to the authenticated user.
         Segments can be filtered by report suite, owner, or tag. Each entry
         includes the segment ID, name, definition, and sharing status.
       tags:
-        - Segments
+      - Segments
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          description: The global company ID.
-          schema:
-            type: string
-        - name: rsids
-          in: query
-          description: Comma-separated list of report suite IDs to filter segments.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          description: Maximum number of results to return.
-          schema:
-            type: integer
-            default: 10
-        - name: page
-          in: query
-          description: Page number for pagination.
-          schema:
-            type: integer
-            default: 0
+      - name: companyId
+        in: path
+        required: true
+        description: The global company ID.
+        schema:
+          type: string
+      - name: rsids
+        in: query
+        description: Comma-separated list of report suite IDs to filter segments.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of results to return.
+        schema:
+          type: integer
+          default: 10
+      - name: page
+        in: query
+        description: Page number for pagination.
+        schema:
+          type: integer
+          default: 0
       responses:
         '200':
           description: A paginated list of segments.
@@ -199,30 +266,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SegmentList'
+              examples:
+                listSegments200Example:
+                  summary: Default listSegments 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - example
+                    totalElements: 1
+                    totalPages: 1
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createSegment
-      summary: Adobe Experience Cloud Create a segment
+      summary: Adobe Analytics Adobe Experience Cloud Create a Segment
       description: >-
         Creates a new segment in Adobe Analytics. The request body must include
         the segment name, report suite ID, and the segment definition with
         container and rule criteria.
       tags:
-        - Segments
+      - Segments
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          description: The global company ID.
-          schema:
-            type: string
+      - name: companyId
+        in: path
+        required: true
+        description: The global company ID.
+        schema:
+          type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Segment'
+            examples:
+              createSegmentRequestExample:
+                summary: Default createSegment request
+                x-microcks-default: true
+                value:
+                  id: abc123
+                  name: Example Name
+                  description: example
+                  rsid: abc123
+                  owner:
+                    id: 1
+                    name: Example Name
+                  definition: {}
+                  tags:
+                  - id: 1
+                    name: Example Name
       responses:
         '200':
           description: Segment created successfully.
@@ -230,31 +325,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Segment'
+              examples:
+                createSegment200Example:
+                  summary: Default createSegment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    rsid: abc123
+                    owner:
+                      id: 1
+                      name: Example Name
+                    definition: {}
+                    tags:
+                    - id: 1
+                      name: Example Name
         '400':
           description: Invalid segment definition.
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/{companyId}/segments/{segmentId}:
     get:
       operationId: getSegment
-      summary: Adobe Experience Cloud Get a segment
+      summary: Adobe Analytics Adobe Experience Cloud Get a Segment
       description: >-
         Retrieves the full definition and metadata for a single segment
         identified by its segment ID.
       tags:
-        - Segments
+      - Segments
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: segmentId
-          in: path
-          required: true
-          description: The segment ID.
-          schema:
-            type: string
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: segmentId
+        in: path
+        required: true
+        description: The segment ID.
+        schema:
+          type: string
       responses:
         '200':
           description: Segment details returned successfully.
@@ -262,35 +376,70 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Segment'
+              examples:
+                getSegment200Example:
+                  summary: Default getSegment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    rsid: abc123
+                    owner:
+                      id: 1
+                      name: Example Name
+                    definition: {}
+                    tags:
+                    - id: 1
+                      name: Example Name
         '401':
           description: Authentication credentials are missing or invalid.
         '404':
           description: Segment not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateSegment
-      summary: Adobe Experience Cloud Update a segment
+      summary: Adobe Analytics Adobe Experience Cloud Update a Segment
       description: >-
         Updates an existing segment with new definition or metadata. The full
         segment object must be provided in the request body.
       tags:
-        - Segments
+      - Segments
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: segmentId
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: segmentId
+        in: path
+        required: true
+        schema:
+          type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Segment'
+            examples:
+              updateSegmentRequestExample:
+                summary: Default updateSegment request
+                x-microcks-default: true
+                value:
+                  id: abc123
+                  name: Example Name
+                  description: example
+                  rsid: abc123
+                  owner:
+                    id: 1
+                    name: Example Name
+                  definition: {}
+                  tags:
+                  - id: 1
+                    name: Example Name
       responses:
         '200':
           description: Segment updated successfully.
@@ -298,31 +447,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Segment'
+              examples:
+                updateSegment200Example:
+                  summary: Default updateSegment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    rsid: abc123
+                    owner:
+                      id: 1
+                      name: Example Name
+                    definition: {}
+                    tags:
+                    - id: 1
+                      name: Example Name
         '400':
           description: Invalid segment definition.
         '401':
           description: Authentication credentials are missing or invalid.
         '404':
           description: Segment not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteSegment
-      summary: Adobe Experience Cloud Delete a segment
+      summary: Adobe Analytics Adobe Experience Cloud Delete a Segment
       description: >-
         Permanently deletes a segment identified by its segment ID. This action
         cannot be undone.
       tags:
-        - Segments
+      - Segments
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: segmentId
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: segmentId
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Segment deleted successfully.
@@ -330,37 +498,40 @@ paths:
           description: Authentication credentials are missing or invalid.
         '404':
           description: Segment not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/{companyId}/calculatedmetrics:
     get:
       operationId: listCalculatedMetrics
-      summary: Adobe Experience Cloud List calculated metrics
+      summary: Adobe Analytics Adobe Experience Cloud List Calculated Metrics
       description: >-
         Returns a paginated list of calculated metrics available to the
         authenticated user. Calculated metrics can be filtered by report suite,
         owner, or tag.
       tags:
-        - Calculated Metrics
+      - Calculated Metrics
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: rsids
-          in: query
-          description: Comma-separated report suite IDs to filter.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 10
-        - name: page
-          in: query
-          schema:
-            type: integer
-            default: 0
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: rsids
+        in: query
+        description: Comma-separated report suite IDs to filter.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 10
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 0
       responses:
         '200':
           description: A paginated list of calculated metrics.
@@ -368,28 +539,54 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CalculatedMetricList'
+              examples:
+                listCalculatedMetrics200Example:
+                  summary: Default listCalculatedMetrics 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - example
+                    totalElements: 1
+                    totalPages: 1
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createCalculatedMetric
-      summary: Adobe Experience Cloud Create a calculated metric
+      summary: Adobe Analytics Adobe Experience Cloud Create a Calculated Metric
       description: >-
         Creates a new calculated metric in Adobe Analytics with the provided
         name, definition formula, report suite, and polarity settings.
       tags:
-        - Calculated Metrics
+      - Calculated Metrics
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CalculatedMetric'
+            examples:
+              createCalculatedMetricRequestExample:
+                summary: Default createCalculatedMetric request
+                x-microcks-default: true
+                value:
+                  id: abc123
+                  name: Example Name
+                  description: example
+                  rsid: abc123
+                  owner:
+                    id: 1
+                    name: Example Name
+                  polarity: positive
+                  definition: {}
       responses:
         '200':
           description: Calculated metric created successfully.
@@ -397,30 +594,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CalculatedMetric'
+              examples:
+                createCalculatedMetric200Example:
+                  summary: Default createCalculatedMetric 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    rsid: abc123
+                    owner:
+                      id: 1
+                      name: Example Name
+                    polarity: positive
+                    definition: {}
         '400':
           description: Invalid calculated metric definition.
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/{companyId}/calculatedmetrics/{calculatedMetricId}:
     get:
       operationId: getCalculatedMetric
-      summary: Adobe Experience Cloud Get a calculated metric
+      summary: Adobe Analytics Adobe Experience Cloud Get a Calculated Metric
       description: >-
         Retrieves the full definition and metadata for a single calculated
         metric identified by its ID.
       tags:
-        - Calculated Metrics
+      - Calculated Metrics
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: calculatedMetricId
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: calculatedMetricId
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Calculated metric returned successfully.
@@ -428,32 +642,63 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CalculatedMetric'
+              examples:
+                getCalculatedMetric200Example:
+                  summary: Default getCalculatedMetric 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    rsid: abc123
+                    owner:
+                      id: 1
+                      name: Example Name
+                    polarity: positive
+                    definition: {}
         '404':
           description: Calculated metric not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateCalculatedMetric
-      summary: Adobe Experience Cloud Update a calculated metric
+      summary: Adobe Analytics Adobe Experience Cloud Update a Calculated Metric
       description: >-
         Updates an existing calculated metric with new definition or metadata.
       tags:
-        - Calculated Metrics
+      - Calculated Metrics
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: calculatedMetricId
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: calculatedMetricId
+        in: path
+        required: true
+        schema:
+          type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CalculatedMetric'
+            examples:
+              updateCalculatedMetricRequestExample:
+                summary: Default updateCalculatedMetric request
+                x-microcks-default: true
+                value:
+                  id: abc123
+                  name: Example Name
+                  description: example
+                  rsid: abc123
+                  owner:
+                    id: 1
+                    name: Example Name
+                  polarity: positive
+                  definition: {}
       responses:
         '200':
           description: Calculated metric updated successfully.
@@ -461,55 +706,75 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CalculatedMetric'
+              examples:
+                updateCalculatedMetric200Example:
+                  summary: Default updateCalculatedMetric 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    rsid: abc123
+                    owner:
+                      id: 1
+                      name: Example Name
+                    polarity: positive
+                    definition: {}
         '400':
           description: Invalid definition.
         '404':
           description: Calculated metric not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteCalculatedMetric
-      summary: Adobe Experience Cloud Delete a calculated metric
+      summary: Adobe Analytics Adobe Experience Cloud Delete a Calculated Metric
       description: >-
         Permanently deletes a calculated metric. This action cannot be undone.
       tags:
-        - Calculated Metrics
+      - Calculated Metrics
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: calculatedMetricId
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: calculatedMetricId
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Calculated metric deleted successfully.
         '404':
           description: Calculated metric not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/{companyId}/dimensions:
     get:
       operationId: listDimensions
-      summary: Adobe Experience Cloud List dimensions
+      summary: Adobe Analytics Adobe Experience Cloud List Dimensions
       description: >-
         Returns all available dimensions for a specified report suite. Each
         dimension includes its ID, name, description, data type, and
         segmentable status.
       tags:
-        - Dimensions
+      - Dimensions
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: rsid
-          in: query
-          required: true
-          description: Report suite ID.
-          schema:
-            type: string
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: rsid
+        in: query
+        required: true
+        description: Report suite ID.
+        schema:
+          type: string
       responses:
         '200':
           description: A list of dimensions.
@@ -519,29 +784,38 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Dimension'
+              examples:
+                listDimensions200Example:
+                  summary: Default listDimensions 200 response
+                  x-microcks-default: true
+                  value:
+                  - example
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/{companyId}/metrics:
     get:
       operationId: listMetrics
-      summary: Adobe Experience Cloud List metrics
+      summary: Adobe Analytics Adobe Experience Cloud List Metrics
       description: >-
         Returns all available metrics for a specified report suite. Each metric
         includes its ID, name, description, data type, and polarity.
       tags:
-        - Metrics
+      - Metrics
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: rsid
-          in: query
-          required: true
-          description: Report suite ID.
-          schema:
-            type: string
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: rsid
+        in: query
+        required: true
+        description: Report suite ID.
+        schema:
+          type: string
       responses:
         '200':
           description: A list of metrics.
@@ -551,34 +825,43 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Metric'
+              examples:
+                listMetrics200Example:
+                  summary: Default listMetrics 200 response
+                  x-microcks-default: true
+                  value:
+                  - example
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/{companyId}/users:
     get:
       operationId: listUsers
-      summary: Adobe Experience Cloud List users
+      summary: Adobe Analytics Adobe Experience Cloud List Users
       description: >-
         Returns a paginated list of users in the Analytics company. Each user
         entry includes the user ID, login name, email, and assigned permission
         groups.
       tags:
-        - Users
+      - Users
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 10
-        - name: page
-          in: query
-          schema:
-            type: integer
-            default: 0
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 10
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 0
       responses:
         '200':
           description: A paginated list of users.
@@ -586,28 +869,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UserList'
+              examples:
+                listUsers200Example:
+                  summary: Default listUsers 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - example
+                    totalElements: 1
+                    totalPages: 1
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/{companyId}/users/{userId}:
     get:
       operationId: getUser
-      summary: Adobe Experience Cloud Get a user
+      summary: Adobe Analytics Adobe Experience Cloud Get a User
       description: >-
         Retrieves details for a single user identified by user ID, including
         their login name, email, admin status, and permission group assignments.
       tags:
-        - Users
+      - Users
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: userId
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: User details returned successfully.
@@ -615,34 +910,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+              examples:
+                getUser200Example:
+                  summary: Default getUser 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    loginId: abc123
+                    email: user@example.com
+                    firstName: Example Name
+                    lastName: Example Name
+                    admin: true
         '404':
           description: User not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/{companyId}/dateranges:
     get:
       operationId: listDateRanges
-      summary: Adobe Experience Cloud List date ranges
+      summary: Adobe Analytics Adobe Experience Cloud List Date Ranges
       description: >-
         Returns a paginated list of saved date ranges available to the
         authenticated user. Each entry includes the date range ID, name,
         and definition.
       tags:
-        - Date Ranges
+      - Date Ranges
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 10
-        - name: page
-          in: query
-          schema:
-            type: integer
-            default: 0
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 10
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 0
       responses:
         '200':
           description: A paginated list of date ranges.
@@ -650,34 +959,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DateRangeList'
+              examples:
+                listDateRanges200Example:
+                  summary: Default listDateRanges 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - id: abc123
+                      name: Example Name
+                      definition: example
+                    totalElements: 1
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/{companyId}/projects:
     get:
       operationId: listProjects
-      summary: Adobe Experience Cloud List projects
+      summary: Adobe Analytics Adobe Experience Cloud List Projects
       description: >-
         Returns a paginated list of Analysis Workspace projects accessible to
         the authenticated user. Each entry includes the project ID, name,
         owner, and modification date.
       tags:
-        - Projects
+      - Projects
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 10
-        - name: page
-          in: query
-          schema:
-            type: integer
-            default: 0
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 10
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 0
       responses:
         '200':
           description: A paginated list of projects.
@@ -685,28 +1007,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProjectList'
+              examples:
+                listProjects200Example:
+                  summary: Default listProjects 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - example
+                    totalElements: 1
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /api/{companyId}/projects/{projectId}:
     get:
       operationId: getProject
-      summary: Adobe Experience Cloud Get a project
+      summary: Adobe Analytics Adobe Experience Cloud Get a Project
       description: >-
         Retrieves the full definition and metadata for a single Analysis
         Workspace project identified by its project ID.
       tags:
-        - Projects
+      - Projects
       parameters:
-        - name: companyId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: projectId
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Project details returned successfully.
@@ -714,8 +1047,23 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Project'
+              examples:
+                getProject200Example:
+                  summary: Default getProject 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    owner:
+                      id: 1
+                      name: Example Name
+                    modified: '2025-03-15T14:30:00Z'
         '404':
           description: Project not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -885,8 +1233,8 @@ components:
         polarity:
           type: string
           enum:
-            - positive
-            - negative
+          - positive
+          - negative
         definition:
           type: object
     Dimension:

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/campaign-api-transactional-message-request-structure.json",
+  "name": "TransactionalMessageRequest",
+  "description": "TransactionalMessageRequest schema",
+  "type": "object",
+  "required": [
+    "email",
+    "ctx"
+  ],
+  "properties": {
+    "email": {
+      "type": "string",
+      "description": "Recipient email address."
+    },
+    "ctx": {
+      "type": "object",
+      "description": "Context data for personalizing the transactional message."
+    }
+  }
+}

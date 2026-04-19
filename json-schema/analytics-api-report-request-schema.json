@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-schema/analytics-api-report-request-schema.json",
+  "title": "ReportRequest",
+  "description": "ReportRequest schema",
+  "type": "object",
+  "properties": {
+    "rsid": {
+      "type": "string",
+      "description": "Report suite ID."
+    },
+    "globalFilters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "dateRange": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "metricContainer": {
+      "type": "object",
+      "properties": {
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "dimension": {
+      "type": "string"
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer"
+        },
+        "page": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

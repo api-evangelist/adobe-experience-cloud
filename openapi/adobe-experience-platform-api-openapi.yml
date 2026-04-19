@@ -16,54 +16,54 @@ info:
     name: Proprietary
     url: https://www.adobe.com/legal/terms.html
 servers:
-  - url: https://platform.adobe.io
-    description: Adobe Experience Platform Production API
+- url: https://platform.adobe.io
+  description: Adobe Experience Platform Production API
 security:
-  - bearerAuth: []
-  - apiKey: []
+- bearerAuth: []
+- apiKey: []
 tags:
-  - name: Batches
-    description: Operations for batch data ingestion
-  - name: Classes
-    description: Operations for managing XDM classes
-  - name: Datasets
-    description: Operations for managing datasets in the Data Lake
-  - name: Identities
-    description: Operations for identity namespace management
-  - name: Profiles
-    description: Operations for accessing unified customer profiles
-  - name: Queries
-    description: Operations for the Query Service
-  - name: Sandboxes
-    description: Operations for managing platform sandboxes
-  - name: Schemas
-    description: Operations for managing XDM schemas via the Schema Registry
-  - name: Segments
-    description: Operations for managing audience segments
+- name: Batches
+  description: Operations for batch data ingestion
+- name: Classes
+  description: Operations for managing XDM classes
+- name: Datasets
+  description: Operations for managing datasets in the Data Lake
+- name: Identities
+  description: Operations for identity namespace management
+- name: Profiles
+  description: Operations for accessing unified customer profiles
+- name: Queries
+  description: Operations for the Query Service
+- name: Sandboxes
+  description: Operations for managing platform sandboxes
+- name: Schemas
+  description: Operations for managing XDM schemas via the Schema Registry
+- name: Segments
+  description: Operations for managing audience segments
 paths:
   /data/foundation/schemaregistry/tenant/schemas:
     get:
       operationId: listSchemas
-      summary: Adobe Experience Cloud List schemas
+      summary: Adobe Experience Platform Adobe Experience Cloud List Schemas
       description: >-
         Returns a paginated list of XDM schemas defined in the tenant container.
         Each schema entry includes its title, description, and meta information
         such as the schema ID and version.
       tags:
-        - Schemas
+      - Schemas
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
-        - name: limit
-          in: query
-          description: Maximum number of results per page.
-          schema:
-            type: integer
-            default: 20
-        - name: start
-          in: query
-          description: Pagination cursor for the next page of results.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: limit
+        in: query
+        description: Maximum number of results per page.
+        schema:
+          type: integer
+          default: 20
+      - name: start
+        in: query
+        description: Pagination cursor for the next page of results.
+        schema:
+          type: string
       responses:
         '200':
           description: A paginated list of schemas.
@@ -71,27 +71,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SchemaList'
+              examples:
+                listSchemas200Example:
+                  summary: Default listSchemas 200 response
+                  x-microcks-default: true
+                  value:
+                    results:
+                    - example
+                    _page:
+                      count: 1
         '401':
           description: Authentication credentials are missing or invalid.
         '403':
           description: Insufficient permissions.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createSchema
-      summary: Adobe Experience Cloud Create a schema
+      summary: Adobe Experience Platform Adobe Experience Cloud Create a Schema
       description: >-
         Creates a new XDM schema in the tenant container. The request body must
         include the schema title, allOf references to a base class, and any
         mixin or field group references.
       tags:
-        - Schemas
+      - Schemas
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
+      - $ref: '#/components/parameters/sandboxHeader'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/SchemaInput'
+            examples:
+              createSchemaRequestExample:
+                summary: Default createSchema request
+                x-microcks-default: true
+                value:
+                  title: example
+                  description: example
+                  type: standard
+                  allOf:
+                  - $ref: example
       responses:
         '201':
           description: Schema created successfully.
@@ -99,27 +121,41 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Schema'
+              examples:
+                createSchema201Example:
+                  summary: Default createSchema 201 response
+                  x-microcks-default: true
+                  value:
+                    $id: abc123
+                    title: example
+                    description: example
+                    type: standard
+                    meta:altId: abc123
+                    version: example
         '400':
           description: Invalid schema definition.
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /data/foundation/schemaregistry/tenant/schemas/{schemaId}:
     get:
       operationId: getSchema
-      summary: Adobe Experience Cloud Get a schema
+      summary: Adobe Experience Platform Adobe Experience Cloud Get a Schema
       description: >-
         Retrieves the full definition of an XDM schema by its URL-encoded schema
         ID, including all field definitions, mixins, and class references.
       tags:
-        - Schemas
+      - Schemas
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
-        - name: schemaId
-          in: path
-          required: true
-          description: URL-encoded schema meta:altId or $id.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: schemaId
+        in: path
+        required: true
+        description: URL-encoded schema meta:altId or $id.
+        schema:
+          type: string
       responses:
         '200':
           description: Schema definition returned successfully.
@@ -127,29 +163,53 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Schema'
+              examples:
+                getSchema200Example:
+                  summary: Default getSchema 200 response
+                  x-microcks-default: true
+                  value:
+                    $id: abc123
+                    title: example
+                    description: example
+                    type: standard
+                    meta:altId: abc123
+                    version: example
         '404':
           description: Schema not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateSchema
-      summary: Adobe Experience Cloud Update a schema
+      summary: Adobe Experience Platform Adobe Experience Cloud Update a Schema
       description: >-
         Replaces the entire definition of an existing XDM schema with the
         provided request body.
       tags:
-        - Schemas
+      - Schemas
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
-        - name: schemaId
-          in: path
-          required: true
-          schema:
-            type: string
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: schemaId
+        in: path
+        required: true
+        schema:
+          type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/SchemaInput'
+            examples:
+              updateSchemaRequestExample:
+                summary: Default updateSchema request
+                x-microcks-default: true
+                value:
+                  title: example
+                  description: example
+                  type: standard
+                  allOf:
+                  - $ref: example
       responses:
         '200':
           description: Schema updated successfully.
@@ -157,25 +217,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Schema'
+              examples:
+                updateSchema200Example:
+                  summary: Default updateSchema 200 response
+                  x-microcks-default: true
+                  value:
+                    $id: abc123
+                    title: example
+                    description: example
+                    type: standard
+                    meta:altId: abc123
+                    version: example
         '400':
           description: Invalid schema definition.
         '404':
           description: Schema not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteSchema
-      summary: Adobe Experience Cloud Delete a schema
+      summary: Adobe Experience Platform Adobe Experience Cloud Delete a Schema
       description: >-
         Deletes a tenant-defined XDM schema. Only schemas that are not
         referenced by datasets or other resources can be deleted.
       tags:
-        - Schemas
+      - Schemas
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
-        - name: schemaId
-          in: path
-          required: true
-          schema:
-            type: string
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: schemaId
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '204':
           description: Schema deleted successfully.
@@ -183,27 +257,30 @@ paths:
           description: Schema not found.
         '409':
           description: Schema is in use and cannot be deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /data/foundation/catalog/dataSets:
     get:
       operationId: listDatasets
-      summary: Adobe Experience Cloud List datasets
+      summary: Adobe Experience Platform Adobe Experience Cloud List Datasets
       description: >-
         Returns a list of datasets registered in the Data Catalog for the
         current sandbox. Each dataset includes its name, schema reference,
         creation date, and status.
       tags:
-        - Datasets
+      - Datasets
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 20
-        - name: start
-          in: query
-          schema:
-            type: string
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 20
+      - name: start
+        in: query
+        schema:
+          type: string
       responses:
         '200':
           description: A list of datasets.
@@ -213,25 +290,43 @@ paths:
                 type: object
                 additionalProperties:
                   $ref: '#/components/schemas/Dataset'
+              examples:
+                listDatasets200Example:
+                  summary: Default listDatasets 200 response
+                  x-microcks-default: true
+                  value: {}
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createDataset
-      summary: Adobe Experience Cloud Create a dataset
+      summary: Adobe Experience Platform Adobe Experience Cloud Create a Dataset
       description: >-
         Creates a new dataset in the Data Catalog. The request body must include
         a name and a reference to an existing XDM schema. Optionally configure
         tags, file format, and ingestion settings.
       tags:
-        - Datasets
+      - Datasets
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
+      - $ref: '#/components/parameters/sandboxHeader'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/DatasetInput'
+            examples:
+              createDatasetRequestExample:
+                summary: Default createDataset request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  description: example
+                  schemaRef:
+                    id: abc123
+                    contentType: standard
       responses:
         '201':
           description: Dataset created successfully.
@@ -242,22 +337,25 @@ paths:
                 type: string
         '400':
           description: Invalid dataset definition.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /data/foundation/catalog/dataSets/{datasetId}:
     get:
       operationId: getDataset
-      summary: Adobe Experience Cloud Get a dataset
+      summary: Adobe Experience Platform Adobe Experience Cloud Get a Dataset
       description: >-
         Retrieves the metadata and configuration for a single dataset by its
         dataset ID.
       tags:
-        - Datasets
+      - Datasets
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
-        - name: datasetId
-          in: path
-          required: true
-          schema:
-            type: string
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: datasetId
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Dataset details returned successfully.
@@ -265,39 +363,59 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Dataset'
+              examples:
+                getDataset200Example:
+                  summary: Default getDataset 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Name
+                    schemaRef:
+                      id: abc123
+                      contentType: standard
+                    fileDescription:
+                      format: example
+                    created: '2025-03-15T14:30:00Z'
+                    updated: '2025-03-15T14:30:00Z'
+                    status: active
         '404':
           description: Dataset not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteDataset
-      summary: Adobe Experience Cloud Delete a dataset
+      summary: Adobe Experience Platform Adobe Experience Cloud Delete a Dataset
       description: >-
         Deletes a dataset and all associated batches from the Data Catalog.
         This action cannot be undone.
       tags:
-        - Datasets
+      - Datasets
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
-        - name: datasetId
-          in: path
-          required: true
-          schema:
-            type: string
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: datasetId
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '204':
           description: Dataset deleted successfully.
         '404':
           description: Dataset not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /data/foundation/import/batches:
     post:
       operationId: createBatch
-      summary: Adobe Experience Cloud Create a batch
+      summary: Adobe Experience Platform Adobe Experience Cloud Create a Batch
       description: >-
         Creates a new batch for data ingestion into a specified dataset. Returns
         a batch ID that can be used to upload files and signal batch completion.
       tags:
-        - Batches
+      - Batches
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
+      - $ref: '#/components/parameters/sandboxHeader'
       requestBody:
         required: true
         content:
@@ -305,8 +423,8 @@ paths:
             schema:
               type: object
               required:
-                - datasetId
-                - inputFormat
+              - datasetId
+              - inputFormat
               properties:
                 datasetId:
                   type: string
@@ -316,9 +434,17 @@ paths:
                     format:
                       type: string
                       enum:
-                        - parquet
-                        - json
-                        - csv
+                      - parquet
+                      - json
+                      - csv
+            examples:
+              createBatchRequestExample:
+                summary: Default createBatch request
+                x-microcks-default: true
+                value:
+                  datasetId: abc123
+                  inputFormat:
+                    format: parquet
       responses:
         '201':
           description: Batch created successfully.
@@ -326,24 +452,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Batch'
+              examples:
+                createBatch201Example:
+                  summary: Default createBatch 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    status: loading
+                    created: '2025-03-15T14:30:00Z'
+                    completed: '2025-03-15T14:30:00Z'
         '400':
           description: Invalid batch configuration.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /data/foundation/import/batches/{batchId}:
     get:
       operationId: getBatch
-      summary: Adobe Experience Cloud Get batch status
+      summary: Adobe Experience Platform Adobe Experience Cloud Get Batch Status
       description: >-
         Retrieves the current status and metadata for a batch ingestion
         operation identified by its batch ID.
       tags:
-        - Batches
+      - Batches
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
-        - name: batchId
-          in: path
-          required: true
-          schema:
-            type: string
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: batchId
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Batch status returned successfully.
@@ -351,38 +489,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Batch'
+              examples:
+                getBatch200Example:
+                  summary: Default getBatch 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    status: loading
+                    created: '2025-03-15T14:30:00Z'
+                    completed: '2025-03-15T14:30:00Z'
         '404':
           description: Batch not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /data/core/ups/access/entities:
     get:
       operationId: getProfileEntities
-      summary: Adobe Experience Cloud Get profile entities
+      summary: Adobe Experience Platform Adobe Experience Cloud Get Profile Entities
       description: >-
         Retrieves unified profile entities by identity. Provide an identity
         namespace and value to look up profile records, experience events,
         or other entity types associated with a specific individual.
       tags:
-        - Profiles
+      - Profiles
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
-        - name: schema.name
-          in: query
-          required: true
-          description: XDM schema name for the entity type.
-          schema:
-            type: string
-        - name: entityId
-          in: query
-          required: true
-          description: The identity value to look up.
-          schema:
-            type: string
-        - name: entityIdNS
-          in: query
-          required: true
-          description: Identity namespace code.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: schema.name
+        in: query
+        required: true
+        description: XDM schema name for the entity type.
+        schema:
+          type: string
+      - name: entityId
+        in: query
+        required: true
+        description: The identity value to look up.
+        schema:
+          type: string
+      - name: entityIdNS
+        in: query
+        required: true
+        description: Identity namespace code.
+        schema:
+          type: string
       responses:
         '200':
           description: Profile entity data returned successfully.
@@ -390,25 +540,35 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProfileEntity'
+              examples:
+                getProfileEntities200Example:
+                  summary: Default getProfileEntities 200 response
+                  x-microcks-default: true
+                  value:
+                    entity: {}
+                    lastModifiedAt: '2025-03-15T14:30:00Z'
         '404':
           description: No profile found for the given identity.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /data/core/ups/segment/definitions:
     get:
       operationId: listSegmentDefinitions
-      summary: Adobe Experience Cloud List segment definitions
+      summary: Adobe Experience Platform Adobe Experience Cloud List Segment Definitions
       description: >-
         Returns a paginated list of audience segment definitions configured in
         the platform. Each segment includes its name, PQL expression, and
         evaluation status.
       tags:
-        - Segments
+      - Segments
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 20
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 20
       responses:
         '200':
           description: A list of segment definitions.
@@ -416,25 +576,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SegmentDefinitionList'
+              examples:
+                listSegmentDefinitions200Example:
+                  summary: Default listSegmentDefinitions 200 response
+                  x-microcks-default: true
+                  value:
+                    segments:
+                    - example
+                    page:
+                      totalCount: 1
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createSegmentDefinition
-      summary: Adobe Experience Cloud Create a segment definition
+      summary: Adobe Experience Platform Adobe Experience Cloud Create a Segment Definition
       description: >-
         Creates a new audience segment definition using a Profile Query Language
         (PQL) expression. The segment will be evaluated against the unified
         profile store.
       tags:
-        - Segments
+      - Segments
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
+      - $ref: '#/components/parameters/sandboxHeader'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/SegmentDefinitionInput'
+            examples:
+              createSegmentDefinitionRequestExample:
+                summary: Default createSegmentDefinition request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  description: example
+                  expression:
+                    type: PQL
+                    value: example
+                    format: pql/text
+                  schema:
+                    name: Example Name
+                  mergePolicyId: abc123
       responses:
         '201':
           description: Segment definition created successfully.
@@ -442,24 +628,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SegmentDefinition'
+              examples:
+                createSegmentDefinition201Example:
+                  summary: Default createSegmentDefinition 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    expression:
+                      type: standard
+                      value: example
+                    mergePolicyId: abc123
+                    evaluationInfo: {}
         '400':
           description: Invalid segment definition.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /data/core/ups/segment/definitions/{segmentId}:
     get:
       operationId: getSegmentDefinition
-      summary: Adobe Experience Cloud Get a segment definition
+      summary: Adobe Experience Platform Adobe Experience Cloud Get a Segment Definition
       description: >-
         Retrieves a single segment definition by its ID, including the PQL
         expression, merge policy, and evaluation schedule.
       tags:
-        - Segments
+      - Segments
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
-        - name: segmentId
-          in: path
-          required: true
-          schema:
-            type: string
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: segmentId
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Segment definition returned successfully.
@@ -467,40 +669,59 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SegmentDefinition'
+              examples:
+                getSegmentDefinition200Example:
+                  summary: Default getSegmentDefinition 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    expression:
+                      type: standard
+                      value: example
+                    mergePolicyId: abc123
+                    evaluationInfo: {}
         '404':
           description: Segment definition not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteSegmentDefinition
-      summary: Adobe Experience Cloud Delete a segment definition
+      summary: Adobe Experience Platform Adobe Experience Cloud Delete a Segment Definition
       description: >-
         Deletes a segment definition by its ID. Segment jobs already running
         will complete but no new evaluations will occur.
       tags:
-        - Segments
+      - Segments
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
-        - name: segmentId
-          in: path
-          required: true
-          schema:
-            type: string
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: segmentId
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '204':
           description: Segment definition deleted successfully.
         '404':
           description: Segment definition not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /data/foundation/identity/namespaces:
     get:
       operationId: listIdentityNamespaces
-      summary: Adobe Experience Cloud List identity namespaces
+      summary: Adobe Experience Platform Adobe Experience Cloud List Identity Namespaces
       description: >-
         Returns a list of all identity namespaces available in the current IMS
         organization, including standard namespaces (ECID, Email, Phone) and
         custom namespaces.
       tags:
-        - Identities
+      - Identities
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
+      - $ref: '#/components/parameters/sandboxHeader'
       responses:
         '200':
           description: A list of identity namespaces.
@@ -510,24 +731,42 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/IdentityNamespace'
+              examples:
+                listIdentityNamespaces200Example:
+                  summary: Default listIdentityNamespaces 200 response
+                  x-microcks-default: true
+                  value:
+                  - example
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createIdentityNamespace
-      summary: Adobe Experience Cloud Create an identity namespace
+      summary: Adobe Experience Platform Adobe Experience Cloud Create an Identity Namespace
       description: >-
         Creates a custom identity namespace for use in identity resolution and
         profile unification. The namespace must have a unique code and name.
       tags:
-        - Identities
+      - Identities
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
+      - $ref: '#/components/parameters/sandboxHeader'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/IdentityNamespaceInput'
+            examples:
+              createIdentityNamespaceRequestExample:
+                summary: Default createIdentityNamespace request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  code: example
+                  description: example
+                  idType: COOKIE
       responses:
         '201':
           description: Identity namespace created successfully.
@@ -535,25 +774,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/IdentityNamespace'
+              examples:
+                createIdentityNamespace201Example:
+                  summary: Default createIdentityNamespace 201 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    code: example
+                    name: Example Name
+                    description: example
+                    idType: abc123
+                    standard: true
         '400':
           description: Invalid namespace definition.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /data/foundation/query/queries:
     get:
       operationId: listQueries
-      summary: Adobe Experience Cloud List queries
+      summary: Adobe Experience Platform Adobe Experience Cloud List Queries
       description: >-
         Returns a paginated list of queries that have been submitted to the
         Query Service, including their SQL statements, status, and execution
         metadata.
       tags:
-        - Queries
+      - Queries
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 20
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 20
       responses:
         '200':
           description: A list of queries.
@@ -561,19 +814,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/QueryList'
+              examples:
+                listQueries200Example:
+                  summary: Default listQueries 200 response
+                  x-microcks-default: true
+                  value:
+                    queries:
+                    - example
+                    _page:
+                      totalCount: 1
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createQuery
-      summary: Adobe Experience Cloud Submit a query
+      summary: Adobe Experience Platform Adobe Experience Cloud Submit a Query
       description: >-
         Submits a new SQL query to the Query Service for execution against
         datasets in the Data Lake. Returns a query ID that can be used to
         poll for results.
       tags:
-        - Queries
+      - Queries
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
+      - $ref: '#/components/parameters/sandboxHeader'
       requestBody:
         required: true
         content:
@@ -581,8 +846,8 @@ paths:
             schema:
               type: object
               required:
-                - dbName
-                - sql
+              - dbName
+              - sql
               properties:
                 dbName:
                   type: string
@@ -593,6 +858,14 @@ paths:
                 name:
                   type: string
                   description: Optional name for the query.
+            examples:
+              createQueryRequestExample:
+                summary: Default createQuery request
+                x-microcks-default: true
+                value:
+                  dbName: Example Name
+                  sql: example
+                  name: Example Name
       responses:
         '202':
           description: Query submitted for execution.
@@ -600,24 +873,40 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Query'
+              examples:
+                createQuery202Example:
+                  summary: Default createQuery 202 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    dbName: Example Name
+                    sql: example
+                    name: Example Name
+                    state: SUBMITTED
+                    created: '2025-03-15T14:30:00Z'
+                    updated: '2025-03-15T14:30:00Z'
+                    rowCount: 1
         '400':
           description: Invalid SQL syntax.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /data/foundation/query/queries/{queryId}:
     get:
       operationId: getQuery
-      summary: Adobe Experience Cloud Get query status
+      summary: Adobe Experience Platform Adobe Experience Cloud Get Query Status
       description: >-
         Retrieves the status, execution metadata, and results reference for a
         previously submitted query.
       tags:
-        - Queries
+      - Queries
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
-        - name: queryId
-          in: path
-          required: true
-          schema:
-            type: string
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: queryId
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Query status returned successfully.
@@ -625,19 +914,35 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Query'
+              examples:
+                getQuery200Example:
+                  summary: Default getQuery 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    dbName: Example Name
+                    sql: example
+                    name: Example Name
+                    state: SUBMITTED
+                    created: '2025-03-15T14:30:00Z'
+                    updated: '2025-03-15T14:30:00Z'
+                    rowCount: 1
         '404':
           description: Query not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /data/foundation/schemaregistry/tenant/classes:
     get:
       operationId: listClasses
-      summary: Adobe Experience Cloud List classes
+      summary: Adobe Experience Platform Adobe Experience Cloud List Classes
       description: >-
         Returns a paginated list of XDM classes in the tenant container. Classes
         define the base structure and behavior type for schemas.
       tags:
-        - Classes
+      - Classes
       parameters:
-        - $ref: '#/components/parameters/sandboxHeader'
+      - $ref: '#/components/parameters/sandboxHeader'
       responses:
         '200':
           description: A list of XDM classes.
@@ -645,17 +950,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ClassList'
+              examples:
+                listClasses200Example:
+                  summary: Default listClasses 200 response
+                  x-microcks-default: true
+                  value:
+                    results:
+                    - $id: abc123
+                      title: example
+                      description: example
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /data/foundation/sandbox-management/sandboxes:
     get:
       operationId: listSandboxes
-      summary: Adobe Experience Cloud List sandboxes
+      summary: Adobe Experience Platform Adobe Experience Cloud List Sandboxes
       description: >-
         Returns a list of all sandboxes available in the current IMS
         organization, including development and production sandboxes.
       tags:
-        - Sandboxes
+      - Sandboxes
       parameters: []
       responses:
         '200':
@@ -664,16 +981,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SandboxList'
+              examples:
+                listSandboxes200Example:
+                  summary: Default listSandboxes 200 response
+                  x-microcks-default: true
+                  value:
+                    sandboxes:
+                    - example
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createSandbox
-      summary: Adobe Experience Cloud Create a sandbox
+      summary: Adobe Experience Platform Adobe Experience Cloud Create a Sandbox
       description: >-
         Creates a new development sandbox within the IMS organization. Production
         sandboxes can only be created by system administrators.
       tags:
-        - Sandboxes
+      - Sandboxes
       requestBody:
         required: true
         content:
@@ -681,9 +1008,9 @@ paths:
             schema:
               type: object
               required:
-                - name
-                - title
-                - type
+              - name
+              - title
+              - type
               properties:
                 name:
                   type: string
@@ -692,8 +1019,16 @@ paths:
                 type:
                   type: string
                   enum:
-                    - development
-                    - production
+                  - development
+                  - production
+            examples:
+              createSandboxRequestExample:
+                summary: Default createSandbox request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  title: example
+                  type: development
       responses:
         '201':
           description: Sandbox created successfully.
@@ -701,23 +1036,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Sandbox'
+              examples:
+                createSandbox201Example:
+                  summary: Default createSandbox 201 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Name
+                    title: example
+                    type: standard
+                    state: example
+                    region: example
         '400':
           description: Invalid sandbox configuration.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /data/foundation/sandbox-management/sandboxes/{sandboxName}:
     get:
       operationId: getSandbox
-      summary: Adobe Experience Cloud Get a sandbox
+      summary: Adobe Experience Platform Adobe Experience Cloud Get a Sandbox
       description: >-
         Retrieves details for a single sandbox including its name, title, type,
         state, and region.
       tags:
-        - Sandboxes
+      - Sandboxes
       parameters:
-        - name: sandboxName
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: sandboxName
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Sandbox details returned successfully.
@@ -725,27 +1073,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Sandbox'
+              examples:
+                getSandbox200Example:
+                  summary: Default getSandbox 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Name
+                    title: example
+                    type: standard
+                    state: example
+                    region: example
         '404':
           description: Sandbox not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteSandbox
-      summary: Adobe Experience Cloud Delete a sandbox
+      summary: Adobe Experience Platform Adobe Experience Cloud Delete a Sandbox
       description: >-
         Deletes a development sandbox and all its contained resources. Production
         sandboxes cannot be deleted, only reset.
       tags:
-        - Sandboxes
+      - Sandboxes
       parameters:
-        - name: sandboxName
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: sandboxName
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '204':
           description: Sandbox deleted successfully.
         '404':
           description: Sandbox not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   parameters:
     sandboxHeader:
@@ -796,9 +1160,9 @@ components:
     SchemaInput:
       type: object
       required:
-        - title
-        - type
-        - allOf
+      - title
+      - type
+      - allOf
       properties:
         title:
           type: string
@@ -841,8 +1205,8 @@ components:
     DatasetInput:
       type: object
       required:
-        - name
-        - schemaRef
+      - name
+      - schemaRef
       properties:
         name:
           type: string
@@ -851,8 +1215,8 @@ components:
         schemaRef:
           type: object
           required:
-            - id
-            - contentType
+          - id
+          - contentType
           properties:
             id:
               type: string
@@ -866,11 +1230,11 @@ components:
         status:
           type: string
           enum:
-            - loading
-            - staging
-            - success
-            - failed
-            - abandoned
+          - loading
+          - staging
+          - success
+          - failed
+          - abandoned
         created:
           type: string
           format: date-time
@@ -920,10 +1284,10 @@ components:
     SegmentDefinitionInput:
       type: object
       required:
-        - name
-        - expression
-        - schema
-        - mergePolicyId
+      - name
+      - expression
+      - schema
+      - mergePolicyId
       properties:
         name:
           type: string
@@ -935,14 +1299,14 @@ components:
             type:
               type: string
               enum:
-                - PQL
+              - PQL
             value:
               type: string
             format:
               type: string
               enum:
-                - pql/text
-                - pql/json
+              - pql/text
+              - pql/json
         schema:
           type: object
           properties:
@@ -968,9 +1332,9 @@ components:
     IdentityNamespaceInput:
       type: object
       required:
-        - name
-        - code
-        - idType
+      - name
+      - code
+      - idType
       properties:
         name:
           type: string
@@ -981,11 +1345,11 @@ components:
         idType:
           type: string
           enum:
-            - COOKIE
-            - DEVICE
-            - CROSS_DEVICE
-            - EMAIL
-            - PHONE
+          - COOKIE
+          - DEVICE
+          - CROSS_DEVICE
+          - EMAIL
+          - PHONE
     QueryList:
       type: object
       properties:
@@ -1012,10 +1376,10 @@ components:
         state:
           type: string
           enum:
-            - SUBMITTED
-            - IN_PROGRESS
-            - SUCCESS
-            - FAILED
+          - SUBMITTED
+          - IN_PROGRESS
+          - SUCCESS
+          - FAILED
         created:
           type: string
           format: date-time

@@ -15,64 +15,64 @@ info:
     name: Proprietary
     url: https://www.adobe.com/legal/terms.html
 servers:
-  - url: https://mc.adobe.io/{tenant}
-    description: Adobe Target Admin API
-    variables:
-      tenant:
-        default: mytenant
-        description: Your Adobe Target tenant name.
-  - url: https://delivery.adobetarget.com
-    description: Adobe Target Delivery API
+- url: https://mc.adobe.io/{tenant}
+  description: Adobe Target Admin API
+  variables:
+    tenant:
+      default: mytenant
+      description: Your Adobe Target tenant name.
+- url: https://delivery.adobetarget.com
+  description: Adobe Target Delivery API
 tags:
-  - name: Activities
-    description: Operations for managing Target activities (A/B, XT, MVT, AP)
-  - name: Audiences
-    description: Operations for managing Target audiences
-  - name: Delivery
-    description: Operations for real-time content delivery
-  - name: Environments
-    description: Operations for managing environments
-  - name: Offers
-    description: Operations for managing content offers
-  - name: Properties
-    description: Operations for managing enterprise properties
+- name: Activities
+  description: Operations for managing Target activities (A/B, XT, MVT, AP)
+- name: Audiences
+  description: Operations for managing Target audiences
+- name: Delivery
+  description: Operations for real-time content delivery
+- name: Environments
+  description: Operations for managing environments
+- name: Offers
+  description: Operations for managing content offers
+- name: Properties
+  description: Operations for managing enterprise properties
 security:
-  - bearerAuth: []
-  - apiKey: []
+- bearerAuth: []
+- apiKey: []
 paths:
   /target/activities:
     get:
       operationId: listActivities
-      summary: Adobe Experience Cloud List activities
+      summary: Adobe Target Adobe Experience Cloud List Activities
       description: >-
         Returns a paginated list of all Target activities (A/B tests, experience
         targeting, multivariate tests, and automated personalization) in the
         tenant. Each entry includes the activity ID, name, type, state, and
         modification date.
       tags:
-        - Activities
+      - Activities
       parameters:
-        - name: limit
-          in: query
-          description: Maximum number of activities to return.
-          schema:
-            type: integer
-            default: 10
-        - name: offset
-          in: query
-          description: Number of activities to skip for pagination.
-          schema:
-            type: integer
-            default: 0
-        - name: sortBy
-          in: query
-          description: Field to sort results by.
-          schema:
-            type: string
-            enum:
-              - name
-              - id
-              - modifiedAt
+      - name: limit
+        in: query
+        description: Maximum number of activities to return.
+        schema:
+          type: integer
+          default: 10
+      - name: offset
+        in: query
+        description: Number of activities to skip for pagination.
+        schema:
+          type: integer
+          default: 0
+      - name: sortBy
+        in: query
+        description: Field to sort results by.
+        schema:
+          type: string
+          enum:
+          - name
+          - id
+          - modifiedAt
       responses:
         '200':
           description: A paginated list of activities.
@@ -80,25 +80,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ActivityList'
+              examples:
+                listActivities200Example:
+                  summary: Default listActivities 200 response
+                  x-microcks-default: true
+                  value:
+                    total: 1
+                    offset: 1
+                    limit: 1
+                    activities:
+                    - example
         '401':
           description: Authentication credentials are missing or invalid.
         '403':
           description: Insufficient permissions.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createActivity
-      summary: Adobe Experience Cloud Create an activity
+      summary: Adobe Target Adobe Experience Cloud Create an Activity
       description: >-
         Creates a new Target activity of the specified type (AB, XT, MVT, or
         Automated Personalization). The request body must include the activity
         name, type, and at least one experience with associated offers.
       tags:
-        - Activities
+      - Activities
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ActivityInput'
+            examples:
+              createActivityRequestExample:
+                summary: Default createActivity request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  type: ab
+                  priority: 1
+                  startsAt: '2025-03-15T14:30:00Z'
+                  endsAt: '2025-03-15T14:30:00Z'
       responses:
         '200':
           description: Activity created successfully.
@@ -106,27 +129,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Activity'
+              examples:
+                createActivity200Example:
+                  summary: Default createActivity 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    type: ab
+                    state: approved
+                    priority: 1
+                    modifiedAt: '2025-03-15T14:30:00Z'
+                    startsAt: '2025-03-15T14:30:00Z'
+                    endsAt: '2025-03-15T14:30:00Z'
         '400':
           description: Invalid activity definition.
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /target/activities/{activityId}:
     get:
       operationId: getActivity
-      summary: Adobe Experience Cloud Get an activity
+      summary: Adobe Target Adobe Experience Cloud Get an Activity
       description: >-
         Retrieves the full configuration and metadata of a single Target
         activity by its activity ID, including experiences, audiences,
         metrics, and scheduling.
       tags:
-        - Activities
+      - Activities
       parameters:
-        - name: activityId
-          in: path
-          required: true
-          description: The Target activity ID.
-          schema:
-            type: integer
+      - name: activityId
+        in: path
+        required: true
+        description: The Target activity ID.
+        schema:
+          type: integer
       responses:
         '200':
           description: Activity details returned successfully.
@@ -134,28 +173,54 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Activity'
+              examples:
+                getActivity200Example:
+                  summary: Default getActivity 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    type: ab
+                    state: approved
+                    priority: 1
+                    modifiedAt: '2025-03-15T14:30:00Z'
+                    startsAt: '2025-03-15T14:30:00Z'
+                    endsAt: '2025-03-15T14:30:00Z'
         '404':
           description: Activity not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateActivity
-      summary: Adobe Experience Cloud Update an activity
+      summary: Adobe Target Adobe Experience Cloud Update an Activity
       description: >-
         Updates an existing Target activity with new configuration. The full
         activity object must be provided in the request body.
       tags:
-        - Activities
+      - Activities
       parameters:
-        - name: activityId
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: activityId
+        in: path
+        required: true
+        schema:
+          type: integer
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ActivityInput'
+            examples:
+              updateActivityRequestExample:
+                summary: Default updateActivity request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  type: ab
+                  priority: 1
+                  startsAt: '2025-03-15T14:30:00Z'
+                  endsAt: '2025-03-15T14:30:00Z'
       responses:
         '200':
           description: Activity updated successfully.
@@ -163,44 +228,63 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Activity'
+              examples:
+                updateActivity200Example:
+                  summary: Default updateActivity 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    type: ab
+                    state: approved
+                    priority: 1
+                    modifiedAt: '2025-03-15T14:30:00Z'
+                    startsAt: '2025-03-15T14:30:00Z'
+                    endsAt: '2025-03-15T14:30:00Z'
         '400':
           description: Invalid activity definition.
         '404':
           description: Activity not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteActivity
-      summary: Adobe Experience Cloud Delete an activity
+      summary: Adobe Target Adobe Experience Cloud Delete an Activity
       description: >-
         Permanently deletes a Target activity. Active activities should be
         deactivated before deletion.
       tags:
-        - Activities
+      - Activities
       parameters:
-        - name: activityId
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: activityId
+        in: path
+        required: true
+        schema:
+          type: integer
       responses:
         '200':
           description: Activity deleted successfully.
         '404':
           description: Activity not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /target/activities/{activityId}/state:
     put:
       operationId: updateActivityState
-      summary: Adobe Experience Cloud Update activity state
+      summary: Adobe Target Adobe Experience Cloud Update Activity State
       description: >-
         Activates, deactivates, or archives a Target activity by updating its
         state. Valid state transitions depend on the current state.
       tags:
-        - Activities
+      - Activities
       parameters:
-        - name: activityId
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: activityId
+        in: path
+        required: true
+        schema:
+          type: integer
       requestBody:
         required: true
         content:
@@ -208,14 +292,20 @@ paths:
             schema:
               type: object
               required:
-                - state
+              - state
               properties:
                 state:
                   type: string
                   enum:
-                    - activated
-                    - deactivated
-                    - archived
+                  - activated
+                  - deactivated
+                  - archived
+            examples:
+              updateActivityStateRequestExample:
+                summary: Default updateActivityState request
+                x-microcks-default: true
+                value:
+                  state: activated
       responses:
         '200':
           description: Activity state updated successfully.
@@ -223,30 +313,46 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Activity'
+              examples:
+                updateActivityState200Example:
+                  summary: Default updateActivityState 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    type: ab
+                    state: approved
+                    priority: 1
+                    modifiedAt: '2025-03-15T14:30:00Z'
+                    startsAt: '2025-03-15T14:30:00Z'
+                    endsAt: '2025-03-15T14:30:00Z'
         '400':
           description: Invalid state transition.
         '404':
           description: Activity not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /target/audiences:
     get:
       operationId: listAudiences
-      summary: Adobe Experience Cloud List audiences
+      summary: Adobe Target Adobe Experience Cloud List Audiences
       description: >-
         Returns a paginated list of all audiences configured in Adobe Target.
         Each audience includes its ID, name, description, and targeting rules.
       tags:
-        - Audiences
+      - Audiences
       parameters:
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 10
-        - name: offset
-          in: query
-          schema:
-            type: integer
-            default: 0
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 10
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
       responses:
         '200':
           description: A paginated list of audiences.
@@ -254,22 +360,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AudienceList'
+              examples:
+                listAudiences200Example:
+                  summary: Default listAudiences 200 response
+                  x-microcks-default: true
+                  value:
+                    total: 1
+                    offset: 1
+                    limit: 1
+                    audiences:
+                    - example
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createAudience
-      summary: Adobe Experience Cloud Create an audience
+      summary: Adobe Target Adobe Experience Cloud Create an Audience
       description: >-
         Creates a new audience in Adobe Target with the specified name and
         targeting rules.
       tags:
-        - Audiences
+      - Audiences
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AudienceInput'
+            examples:
+              createAudienceRequestExample:
+                summary: Default createAudience request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  description: example
+                  targetRule: {}
       responses:
         '200':
           description: Audience created successfully.
@@ -277,23 +404,35 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Audience'
+              examples:
+                createAudience200Example:
+                  summary: Default createAudience 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    description: example
+                    targetRule: {}
         '400':
           description: Invalid audience definition.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /target/audiences/{audienceId}:
     get:
       operationId: getAudience
-      summary: Adobe Experience Cloud Get an audience
+      summary: Adobe Target Adobe Experience Cloud Get an Audience
       description: >-
         Retrieves the full definition of a single audience by its audience ID,
         including all targeting rules and conditions.
       tags:
-        - Audiences
+      - Audiences
       parameters:
-        - name: audienceId
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
       responses:
         '200':
           description: Audience details returned successfully.
@@ -301,27 +440,47 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Audience'
+              examples:
+                getAudience200Example:
+                  summary: Default getAudience 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    description: example
+                    targetRule: {}
         '404':
           description: Audience not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateAudience
-      summary: Adobe Experience Cloud Update an audience
+      summary: Adobe Target Adobe Experience Cloud Update an Audience
       description: >-
         Updates an existing audience with new targeting rules or metadata.
       tags:
-        - Audiences
+      - Audiences
       parameters:
-        - name: audienceId
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AudienceInput'
+            examples:
+              updateAudienceRequestExample:
+                summary: Default updateAudience request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  description: example
+                  targetRule: {}
       responses:
         '200':
           description: Audience updated successfully.
@@ -329,47 +488,62 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Audience'
+              examples:
+                updateAudience200Example:
+                  summary: Default updateAudience 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    description: example
+                    targetRule: {}
         '404':
           description: Audience not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteAudience
-      summary: Adobe Experience Cloud Delete an audience
+      summary: Adobe Target Adobe Experience Cloud Delete an Audience
       description: >-
         Permanently deletes an audience. Audiences in use by active activities
         cannot be deleted.
       tags:
-        - Audiences
+      - Audiences
       parameters:
-        - name: audienceId
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
       responses:
         '200':
           description: Audience deleted successfully.
         '404':
           description: Audience not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /target/offers:
     get:
       operationId: listOffers
-      summary: Adobe Experience Cloud List offers
+      summary: Adobe Target Adobe Experience Cloud List Offers
       description: >-
         Returns a paginated list of content offers configured in Adobe Target.
         Offers include HTML, JSON, and redirect offer types.
       tags:
-        - Offers
+      - Offers
       parameters:
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 10
-        - name: offset
-          in: query
-          schema:
-            type: integer
-            default: 0
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 10
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
       responses:
         '200':
           description: A paginated list of offers.
@@ -377,22 +551,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OfferList'
+              examples:
+                listOffers200Example:
+                  summary: Default listOffers 200 response
+                  x-microcks-default: true
+                  value:
+                    total: 1
+                    offset: 1
+                    limit: 1
+                    offers:
+                    - example
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createOffer
-      summary: Adobe Experience Cloud Create an offer
+      summary: Adobe Target Adobe Experience Cloud Create an Offer
       description: >-
         Creates a new content offer in Adobe Target. The offer can be HTML
         content, a JSON payload, or a redirect URL.
       tags:
-        - Offers
+      - Offers
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/OfferInput'
+            examples:
+              createOfferRequestExample:
+                summary: Default createOffer request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  type: content
+                  content: example
       responses:
         '200':
           description: Offer created successfully.
@@ -400,23 +595,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Offer'
+              examples:
+                createOffer200Example:
+                  summary: Default createOffer 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    type: content
+                    content: example
+                    modifiedAt: '2025-03-15T14:30:00Z'
         '400':
           description: Invalid offer definition.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /target/offers/{offerId}:
     get:
       operationId: getOffer
-      summary: Adobe Experience Cloud Get an offer
+      summary: Adobe Target Adobe Experience Cloud Get an Offer
       description: >-
         Retrieves a single offer by its offer ID, including the content payload
         and metadata.
       tags:
-        - Offers
+      - Offers
       parameters:
-        - name: offerId
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: offerId
+        in: path
+        required: true
+        schema:
+          type: integer
       responses:
         '200':
           description: Offer details returned successfully.
@@ -424,27 +632,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Offer'
+              examples:
+                getOffer200Example:
+                  summary: Default getOffer 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    type: content
+                    content: example
+                    modifiedAt: '2025-03-15T14:30:00Z'
         '404':
           description: Offer not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateOffer
-      summary: Adobe Experience Cloud Update an offer
+      summary: Adobe Target Adobe Experience Cloud Update an Offer
       description: >-
         Updates an existing offer with new content or metadata.
       tags:
-        - Offers
+      - Offers
       parameters:
-        - name: offerId
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: offerId
+        in: path
+        required: true
+        schema:
+          type: integer
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/OfferInput'
+            examples:
+              updateOfferRequestExample:
+                summary: Default updateOffer request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  type: content
+                  content: example
       responses:
         '200':
           description: Offer updated successfully.
@@ -452,37 +681,53 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Offer'
+              examples:
+                updateOffer200Example:
+                  summary: Default updateOffer 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    type: content
+                    content: example
+                    modifiedAt: '2025-03-15T14:30:00Z'
         '404':
           description: Offer not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteOffer
-      summary: Adobe Experience Cloud Delete an offer
+      summary: Adobe Target Adobe Experience Cloud Delete an Offer
       description: >-
         Permanently deletes an offer. Offers in use by active activities cannot
         be deleted.
       tags:
-        - Offers
+      - Offers
       parameters:
-        - name: offerId
-          in: path
-          required: true
-          schema:
-            type: integer
+      - name: offerId
+        in: path
+        required: true
+        schema:
+          type: integer
       responses:
         '200':
           description: Offer deleted successfully.
         '404':
           description: Offer not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /target/properties:
     get:
       operationId: listProperties
-      summary: Adobe Experience Cloud List properties
+      summary: Adobe Target Adobe Experience Cloud List Properties
       description: >-
         Returns a list of enterprise properties configured for the Adobe Target
         tenant. Properties are used with enterprise permissions to control
         access to activities and offers.
       tags:
-        - Properties
+      - Properties
       responses:
         '200':
           description: A list of properties.
@@ -490,17 +735,29 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PropertyList'
+              examples:
+                listProperties200Example:
+                  summary: Default listProperties 200 response
+                  x-microcks-default: true
+                  value:
+                    properties:
+                    - id: 1
+                      name: Example Name
+                      token: example
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /target/environments:
     get:
       operationId: listEnvironments
-      summary: Adobe Experience Cloud List environments
+      summary: Adobe Target Adobe Experience Cloud List Environments
       description: >-
         Returns a list of environments (development, staging, production)
         configured for the Adobe Target tenant.
       tags:
-        - Environments
+      - Environments
       responses:
         '200':
           description: A list of environments.
@@ -508,38 +765,64 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EnvironmentList'
+              examples:
+                listEnvironments200Example:
+                  summary: Default listEnvironments 200 response
+                  x-microcks-default: true
+                  value:
+                    environments:
+                    - id: 1
+                      name: Example Name
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /rest/v1/delivery:
     post:
       operationId: deliverExperiences
-      summary: Adobe Experience Cloud Deliver personalized experiences
+      summary: Adobe Target Adobe Experience Cloud Deliver Personalized Experiences
       description: >-
         The Target Delivery API endpoint for fetching personalized content for
         one or more mboxes. Used by client-side and server-side implementations
         to retrieve offers, execute page load decisions, and prefetch content
         for subsequent views.
       tags:
-        - Delivery
+      - Delivery
       parameters:
-        - name: client
-          in: query
-          required: true
-          description: Adobe Target client code.
-          schema:
-            type: string
-        - name: sessionId
-          in: query
-          required: true
-          description: Visitor session ID.
-          schema:
-            type: string
+      - name: client
+        in: query
+        required: true
+        description: Adobe Target client code.
+        schema:
+          type: string
+      - name: sessionId
+        in: query
+        required: true
+        description: Visitor session ID.
+        schema:
+          type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/DeliveryRequest'
+            examples:
+              deliverExperiencesRequestExample:
+                summary: Default deliverExperiences request
+                x-microcks-default: true
+                value:
+                  context:
+                    channel: web
+                    userAgent: example
+                  execute:
+                    mboxes:
+                    - name: {}
+                      index: {}
+                  prefetch:
+                    views:
+                    - {}
       responses:
         '200':
           description: Personalized content delivered successfully.
@@ -547,8 +830,22 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeliveryResponse'
+              examples:
+                deliverExperiences200Example:
+                  summary: Default deliverExperiences 200 response
+                  x-microcks-default: true
+                  value:
+                    requestId: abc123
+                    execute:
+                      mboxes:
+                      - name: {}
+                        options: {}
+                    prefetch: {}
         '400':
           description: Invalid delivery request.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -583,16 +880,16 @@ components:
         type:
           type: string
           enum:
-            - ab
-            - xt
-            - mvt
-            - ap
+          - ab
+          - xt
+          - mvt
+          - ap
         state:
           type: string
           enum:
-            - approved
-            - deactivated
-            - archived
+          - approved
+          - deactivated
+          - archived
         priority:
           type: integer
         modifiedAt:
@@ -607,18 +904,18 @@ components:
     ActivityInput:
       type: object
       required:
-        - name
-        - type
+      - name
+      - type
       properties:
         name:
           type: string
         type:
           type: string
           enum:
-            - ab
-            - xt
-            - mvt
-            - ap
+          - ab
+          - xt
+          - mvt
+          - ap
         priority:
           type: integer
         startsAt:
@@ -654,7 +951,7 @@ components:
     AudienceInput:
       type: object
       required:
-        - name
+      - name
       properties:
         name:
           type: string
@@ -685,9 +982,9 @@ components:
         type:
           type: string
           enum:
-            - content
-            - redirect
-            - dynamic
+          - content
+          - redirect
+          - dynamic
         content:
           type: string
         modifiedAt:
@@ -696,17 +993,17 @@ components:
     OfferInput:
       type: object
       required:
-        - name
-        - type
-        - content
+      - name
+      - type
+      - content
       properties:
         name:
           type: string
         type:
           type: string
           enum:
-            - content
-            - redirect
+          - content
+          - redirect
         content:
           type: string
     PropertyList:
@@ -744,8 +1041,8 @@ components:
             channel:
               type: string
               enum:
-                - web
-                - mobile
+              - web
+              - mobile
             userAgent:
               type: string
         execute:

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-schema/experience-platform-api-segment-definition-input-schema.json",
+  "title": "SegmentDefinitionInput",
+  "description": "SegmentDefinitionInput schema",
+  "type": "object",
+  "required": [
+    "name",
+    "expression",
+    "schema",
+    "mergePolicyId"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "expression": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "PQL"
+          ]
+        },
+        "value": {
+          "type": "string"
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "pql/text",
+            "pql/json"
+          ]
+        }
+      }
+    },
+    "schema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "mergePolicyId": {
+      "type": "string"
+    }
+  }
+}

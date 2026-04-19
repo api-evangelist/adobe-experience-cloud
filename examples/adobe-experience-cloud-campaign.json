@@ -1,0 +1,26 @@
+{
+  "campaignId": "abc123",
+  "name": "Example Name",
+  "description": "example",
+  "channel": "email",
+  "status": "draft",
+  "audience": {
+    "segmentId": "abc123",
+    "estimatedSize": 39
+  },
+  "content": {
+    "subject": "example",
+    "body": "example",
+    "templateId": "abc123",
+    "sender": {
+      "name": "Example Name",
+      "email": "example"
+    }
+  },
+  "schedule": {
+    "startDate": "2025-03-15T14:30:00Z",
+    "endDate": "2025-03-15T14:30:00Z",
+    "timezone": "example",
+    "recurring": true
+  }
+}

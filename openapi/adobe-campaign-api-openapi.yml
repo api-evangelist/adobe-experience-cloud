@@ -15,55 +15,55 @@ info:
     name: Proprietary
     url: https://www.adobe.com/legal/terms.html
 servers:
-  - url: https://mc.adobe.io/{organization}
-    description: Adobe Campaign Production API
-    variables:
-      organization:
-        default: myorg
-        description: Your Adobe Campaign organization identifier.
+- url: https://mc.adobe.io/{organization}
+  description: Adobe Campaign Production API
+  variables:
+    organization:
+      default: myorg
+      description: Your Adobe Campaign organization identifier.
 security:
-  - bearerAuth: []
-  - apiKey: []
+- bearerAuth: []
+- apiKey: []
 tags:
-  - name: Content
-    description: Operations for managing email and landing page content
-  - name: Metadata
-    description: Operations for retrieving resource metadata
-  - name: Profiles
-    description: Operations for managing subscriber profiles
-  - name: Transactional Messages
-    description: Operations for sending real-time transactional messages
-  - name: Workflows
-    description: Operations for managing automated workflows
+- name: Content
+  description: Operations for managing email and landing page content
+- name: Metadata
+  description: Operations for retrieving resource metadata
+- name: Profiles
+  description: Operations for managing subscriber profiles
+- name: Transactional Messages
+  description: Operations for sending real-time transactional messages
+- name: Workflows
+  description: Operations for managing automated workflows
 paths:
   /campaign/profileAndServices/profile:
     get:
       operationId: listProfiles
-      summary: Adobe Experience Cloud List profiles
+      summary: Adobe Campaign Adobe Experience Cloud List Profiles
       description: >-
         Returns a paginated list of subscriber profiles in the Adobe Campaign
         database. Profiles can be filtered by email, first name, last name,
         and custom attributes using query parameters.
       tags:
-        - Profiles
+      - Profiles
       parameters:
-        - name: _lineCount
-          in: query
-          description: Maximum number of profiles to return per page.
-          schema:
-            type: integer
-            default: 25
-        - name: _lineStart
-          in: query
-          description: Starting line number for pagination.
-          schema:
-            type: integer
-            default: 0
-        - name: email
-          in: query
-          description: Filter profiles by email address.
-          schema:
-            type: string
+      - name: _lineCount
+        in: query
+        description: Maximum number of profiles to return per page.
+        schema:
+          type: integer
+          default: 25
+      - name: _lineStart
+        in: query
+        description: Starting line number for pagination.
+        schema:
+          type: integer
+          default: 0
+      - name: email
+        in: query
+        description: Filter profiles by email address.
+        schema:
+          type: string
       responses:
         '200':
           description: A paginated list of profiles.
@@ -71,23 +71,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProfileList'
+              examples:
+                listProfiles200Example:
+                  summary: Default listProfiles 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - example
+                    count:
+                      value: 1
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createProfile
-      summary: Adobe Experience Cloud Create a profile
+      summary: Adobe Campaign Adobe Experience Cloud Create a Profile
       description: >-
         Creates a new subscriber profile in the Adobe Campaign database with
         the provided attributes including email, first name, last name, and
         any custom fields.
       tags:
-        - Profiles
+      - Profiles
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ProfileInput'
+            examples:
+              createProfileRequestExample:
+                summary: Default createProfile request
+                x-microcks-default: true
+                value:
+                  email: user@example.com
+                  firstName: Example Name
+                  lastName: Example Name
+                  birthDate: '2025-03-15'
+                  phone: example
       responses:
         '201':
           description: Profile created successfully.
@@ -95,26 +117,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Profile'
+              examples:
+                createProfile201Example:
+                  summary: Default createProfile 201 response
+                  x-microcks-default: true
+                  value:
+                    PKey: example
+                    email: user@example.com
+                    firstName: Example Name
+                    lastName: Example Name
+                    birthDate: '2025-03-15'
+                    phone: example
+                    created: '2025-03-15T14:30:00Z'
+                    lastModified: '2025-03-15T14:30:00Z'
         '400':
           description: Invalid profile data.
         '409':
           description: Profile with this email already exists.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /campaign/profileAndServices/profile/{profilePKey}:
     get:
       operationId: getProfile
-      summary: Adobe Experience Cloud Get a profile
+      summary: Adobe Campaign Adobe Experience Cloud Get a Profile
       description: >-
         Retrieves a single subscriber profile by its primary key (PKey),
         including all standard and custom attributes.
       tags:
-        - Profiles
+      - Profiles
       parameters:
-        - name: profilePKey
-          in: path
-          required: true
-          description: The primary key of the profile.
-          schema:
-            type: string
+      - name: profilePKey
+        in: path
+        required: true
+        description: The primary key of the profile.
+        schema:
+          type: string
       responses:
         '200':
           description: Profile details returned successfully.
@@ -122,29 +160,55 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Profile'
+              examples:
+                getProfile200Example:
+                  summary: Default getProfile 200 response
+                  x-microcks-default: true
+                  value:
+                    PKey: example
+                    email: user@example.com
+                    firstName: Example Name
+                    lastName: Example Name
+                    birthDate: '2025-03-15'
+                    phone: example
+                    created: '2025-03-15T14:30:00Z'
+                    lastModified: '2025-03-15T14:30:00Z'
         '404':
           description: Profile not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     patch:
       operationId: updateProfile
-      summary: Adobe Experience Cloud Update a profile
+      summary: Adobe Campaign Adobe Experience Cloud Update a Profile
       description: >-
         Updates specific attributes of an existing subscriber profile using
         a partial update. Only the fields provided in the request body will
         be modified.
       tags:
-        - Profiles
+      - Profiles
       parameters:
-        - name: profilePKey
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: profilePKey
+        in: path
+        required: true
+        schema:
+          type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ProfileInput'
+            examples:
+              updateProfileRequestExample:
+                summary: Default updateProfile request
+                x-microcks-default: true
+                value:
+                  email: user@example.com
+                  firstName: Example Name
+                  lastName: Example Name
+                  birthDate: '2025-03-15'
+                  phone: example
       responses:
         '200':
           description: Profile updated successfully.
@@ -152,42 +216,61 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Profile'
+              examples:
+                updateProfile200Example:
+                  summary: Default updateProfile 200 response
+                  x-microcks-default: true
+                  value:
+                    PKey: example
+                    email: user@example.com
+                    firstName: Example Name
+                    lastName: Example Name
+                    birthDate: '2025-03-15'
+                    phone: example
+                    created: '2025-03-15T14:30:00Z'
+                    lastModified: '2025-03-15T14:30:00Z'
         '404':
           description: Profile not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteProfile
-      summary: Adobe Experience Cloud Delete a profile
+      summary: Adobe Campaign Adobe Experience Cloud Delete a Profile
       description: >-
         Permanently deletes a subscriber profile from the Adobe Campaign
         database. This action cannot be undone.
       tags:
-        - Profiles
+      - Profiles
       parameters:
-        - name: profilePKey
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: profilePKey
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '204':
           description: Profile deleted successfully.
         '404':
           description: Profile not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /campaign/profileAndServices/service:
     get:
       operationId: listServices
-      summary: Adobe Experience Cloud List services
+      summary: Adobe Campaign Adobe Experience Cloud List Services
       description: >-
         Returns a paginated list of subscription services configured in Adobe
         Campaign. Services represent mailing lists or subscription topics that
         profiles can subscribe to.
       tags: []
       parameters:
-        - name: _lineCount
-          in: query
-          schema:
-            type: integer
-            default: 25
+      - name: _lineCount
+        in: query
+        schema:
+          type: integer
+          default: 25
       responses:
         '200':
           description: A paginated list of services.
@@ -195,11 +278,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceList'
+              examples:
+                listServices200Example:
+                  summary: Default listServices 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - example
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createService
-      summary: Adobe Experience Cloud Create a service
+      summary: Adobe Campaign Adobe Experience Cloud Create a Service
       description: >-
         Creates a new subscription service in Adobe Campaign with the specified
         name, label, and configuration.
@@ -210,6 +303,14 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ServiceInput'
+            examples:
+              createServiceRequestExample:
+                summary: Default createService request
+                x-microcks-default: true
+                value:
+                  label: example
+                  name: Example Name
+                  messageType: email
       responses:
         '201':
           description: Service created successfully.
@@ -217,21 +318,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Service'
+              examples:
+                createService201Example:
+                  summary: Default createService 201 response
+                  x-microcks-default: true
+                  value:
+                    PKey: example
+                    name: Example Name
+                    label: example
+                    mode: example
+                    created: '2025-03-15T14:30:00Z'
         '400':
           description: Invalid service definition.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /campaign/profileAndServices/service/{servicePKey}:
     get:
       operationId: getService
-      summary: Adobe Experience Cloud Get a service
+      summary: Adobe Campaign Adobe Experience Cloud Get a Service
       description: >-
         Retrieves the details of a subscription service by its primary key.
       tags: []
       parameters:
-        - name: servicePKey
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: servicePKey
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Service details returned successfully.
@@ -239,22 +353,35 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Service'
+              examples:
+                getService200Example:
+                  summary: Default getService 200 response
+                  x-microcks-default: true
+                  value:
+                    PKey: example
+                    name: Example Name
+                    label: example
+                    mode: example
+                    created: '2025-03-15T14:30:00Z'
         '404':
           description: Service not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /campaign/profileAndServices/service/{servicePKey}/subscriptions:
     post:
       operationId: subscribeProfile
-      summary: Adobe Experience Cloud Subscribe a profile to a service
+      summary: Adobe Campaign Adobe Experience Cloud Subscribe a Profile to a Service
       description: >-
         Subscribes an existing profile to the specified subscription service
         by providing the profile primary key.
       tags: []
       parameters:
-        - name: servicePKey
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: servicePKey
+        in: path
+        required: true
+        schema:
+          type: string
       requestBody:
         required: true
         content:
@@ -262,13 +389,20 @@ paths:
             schema:
               type: object
               required:
-                - subscriber
+              - subscriber
               properties:
                 subscriber:
                   type: object
                   properties:
                     PKey:
                       type: string
+            examples:
+              subscribeProfileRequestExample:
+                summary: Default subscribeProfile request
+                x-microcks-default: true
+                value:
+                  subscriber:
+                    PKey: example
       responses:
         '201':
           description: Subscription created successfully.
@@ -276,21 +410,24 @@ paths:
           description: Invalid subscription request.
         '404':
           description: Service or profile not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /campaign/workflow:
     get:
       operationId: listWorkflows
-      summary: Adobe Experience Cloud List workflows
+      summary: Adobe Campaign Adobe Experience Cloud List Workflows
       description: >-
         Returns a paginated list of workflows configured in Adobe Campaign.
         Each workflow includes its ID, label, status, and schedule information.
       tags:
-        - Workflows
+      - Workflows
       parameters:
-        - name: _lineCount
-          in: query
-          schema:
-            type: integer
-            default: 25
+      - name: _lineCount
+        in: query
+        schema:
+          type: integer
+          default: 25
       responses:
         '200':
           description: A paginated list of workflows.
@@ -298,23 +435,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WorkflowList'
+              examples:
+                listWorkflows200Example:
+                  summary: Default listWorkflows 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - example
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /campaign/workflow/{workflowPKey}:
     get:
       operationId: getWorkflow
-      summary: Adobe Experience Cloud Get a workflow
+      summary: Adobe Campaign Adobe Experience Cloud Get a Workflow
       description: >-
         Retrieves the details of a single workflow by its primary key, including
         its activities, transitions, and execution history.
       tags:
-        - Workflows
+      - Workflows
       parameters:
-        - name: workflowPKey
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: workflowPKey
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Workflow details returned successfully.
@@ -322,24 +469,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Workflow'
+              examples:
+                getWorkflow200Example:
+                  summary: Default getWorkflow 200 response
+                  x-microcks-default: true
+                  value:
+                    PKey: example
+                    label: example
+                    status: started
+                    startDate: '2025-03-15T14:30:00Z'
+                    created: '2025-03-15T14:30:00Z'
         '404':
           description: Workflow not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /campaign/workflow/{workflowPKey}/commands:
     post:
       operationId: executeWorkflowCommand
-      summary: Adobe Experience Cloud Execute a workflow command
+      summary: Adobe Campaign Adobe Experience Cloud Execute a Workflow Command
       description: >-
         Executes a command on a workflow such as start, pause, resume, or stop.
         The command triggers the corresponding state transition in the workflow
         execution engine.
       tags:
-        - Workflows
+      - Workflows
       parameters:
-        - name: workflowPKey
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: workflowPKey
+        in: path
+        required: true
+        schema:
+          type: string
       requestBody:
         required: true
         content:
@@ -347,15 +507,21 @@ paths:
             schema:
               type: object
               required:
-                - method
+              - method
               properties:
                 method:
                   type: string
                   enum:
-                    - start
-                    - pause
-                    - resume
-                    - stop
+                  - start
+                  - pause
+                  - resume
+                  - stop
+            examples:
+              executeWorkflowCommandRequestExample:
+                summary: Default executeWorkflowCommand request
+                x-microcks-default: true
+                value:
+                  method: start
       responses:
         '200':
           description: Workflow command executed successfully.
@@ -363,29 +529,39 @@ paths:
           description: Invalid command for the current workflow state.
         '404':
           description: Workflow not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /campaign/mcAdobe/{transactionalMessageId}:
     post:
       operationId: sendTransactionalMessage
-      summary: Adobe Experience Cloud Send a transactional message
+      summary: Adobe Campaign Adobe Experience Cloud Send a Transactional Message
       description: >-
         Triggers a real-time transactional message to a recipient. Transactional
         messages are used for event-driven communications such as order
         confirmations, password resets, and shipping notifications.
       tags:
-        - Transactional Messages
+      - Transactional Messages
       parameters:
-        - name: transactionalMessageId
-          in: path
-          required: true
-          description: The transactional message template identifier.
-          schema:
-            type: string
+      - name: transactionalMessageId
+        in: path
+        required: true
+        description: The transactional message template identifier.
+        schema:
+          type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/TransactionalMessageRequest'
+            examples:
+              sendTransactionalMessageRequestExample:
+                summary: Default sendTransactionalMessage request
+                x-microcks-default: true
+                value:
+                  email: user@example.com
+                  ctx: {}
       responses:
         '200':
           description: Transactional message queued for delivery.
@@ -393,31 +569,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TransactionalMessageResponse'
+              examples:
+                sendTransactionalMessage200Example:
+                  summary: Default sendTransactionalMessage 200 response
+                  x-microcks-default: true
+                  value:
+                    PKey: example
+                    eventId: abc123
+                    status: pending
+                    email: user@example.com
         '400':
           description: Invalid message request.
         '404':
           description: Transactional message template not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /campaign/mcAdobe/{transactionalMessageId}/{eventId}:
     get:
       operationId: getTransactionalMessageStatus
-      summary: Adobe Experience Cloud Get transactional message status
+      summary: Adobe Campaign Adobe Experience Cloud Get Transactional Message Status
       description: >-
         Retrieves the delivery status of a previously sent transactional
         message by its event ID.
       tags:
-        - Transactional Messages
+      - Transactional Messages
       parameters:
-        - name: transactionalMessageId
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: eventId
-          in: path
-          required: true
-          description: The event ID returned when the message was triggered.
-          schema:
-            type: string
+      - name: transactionalMessageId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: eventId
+        in: path
+        required: true
+        description: The event ID returned when the message was triggered.
+        schema:
+          type: string
       responses:
         '200':
           description: Message status returned successfully.
@@ -425,18 +613,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TransactionalMessageResponse'
+              examples:
+                getTransactionalMessageStatus200Example:
+                  summary: Default getTransactionalMessageStatus 200 response
+                  x-microcks-default: true
+                  value:
+                    PKey: example
+                    eventId: abc123
+                    status: pending
+                    email: user@example.com
         '404':
           description: Message event not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /campaign/profileAndServicesExt/resourceType:
     get:
       operationId: listMetadata
-      summary: Adobe Experience Cloud List resource metadata
+      summary: Adobe Campaign Adobe Experience Cloud List Resource Metadata
       description: >-
         Returns metadata about the available custom resources and their fields
         in the Adobe Campaign data model. Useful for discovering extended
         profile attributes and custom resource schemas.
       tags:
-        - Metadata
+      - Metadata
       responses:
         '200':
           description: Resource metadata returned successfully.
@@ -456,23 +656,35 @@ paths:
                           type: string
                         label:
                           type: string
+              examples:
+                listMetadata200Example:
+                  summary: Default listMetadata 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - PKey: example
+                      name: Example Name
+                      label: example
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /campaign/email:
     get:
       operationId: listEmails
-      summary: Adobe Experience Cloud List email deliveries
+      summary: Adobe Campaign Adobe Experience Cloud List Email Deliveries
       description: >-
         Returns a paginated list of email deliveries including their subject,
         status, and scheduling metadata.
       tags:
-        - Content
+      - Content
       parameters:
-        - name: _lineCount
-          in: query
-          schema:
-            type: integer
-            default: 25
+      - name: _lineCount
+        in: query
+        schema:
+          type: integer
+          default: 25
       responses:
         '200':
           description: A paginated list of email deliveries.
@@ -480,23 +692,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EmailList'
+              examples:
+                listEmails200Example:
+                  summary: Default listEmails 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - example
         '401':
           description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /campaign/email/{emailPKey}:
     get:
       operationId: getEmail
-      summary: Adobe Experience Cloud Get an email delivery
+      summary: Adobe Campaign Adobe Experience Cloud Get an Email Delivery
       description: >-
         Retrieves the full details of an email delivery by its primary key,
         including the subject, HTML content, sender, and delivery status.
       tags:
-        - Content
+      - Content
       parameters:
-        - name: emailPKey
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: emailPKey
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Email delivery details returned successfully.
@@ -504,8 +726,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Email'
+              examples:
+                getEmail200Example:
+                  summary: Default getEmail 200 response
+                  x-microcks-default: true
+                  value:
+                    PKey: example
+                    subject: example
+                    htmlContent: example
+                    status: active
+                    sender:
+                      name: Example Name
+                      email: user@example.com
+                    created: '2025-03-15T14:30:00Z'
         '404':
           description: Email delivery not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -589,7 +827,7 @@ components:
     ServiceInput:
       type: object
       required:
-        - label
+      - label
       properties:
         label:
           type: string
@@ -598,8 +836,8 @@ components:
         messageType:
           type: string
           enum:
-            - email
-            - sms
+          - email
+          - sms
     WorkflowList:
       type: object
       properties:
@@ -617,11 +855,11 @@ components:
         status:
           type: string
           enum:
-            - started
-            - paused
-            - stopped
-            - finished
-            - error
+          - started
+          - paused
+          - stopped
+          - finished
+          - error
         startDate:
           type: string
           format: date-time
@@ -631,8 +869,8 @@ components:
     TransactionalMessageRequest:
       type: object
       required:
-        - email
-        - ctx
+      - email
+      - ctx
       properties:
         email:
           type: string
@@ -650,10 +888,10 @@ components:
         status:
           type: string
           enum:
-            - pending
-            - processing
-            - delivered
-            - failed
+          - pending
+          - processing
+          - delivered
+          - failed
         email:
           type: string
     EmailList:

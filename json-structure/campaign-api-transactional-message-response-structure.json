@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/campaign-api-transactional-message-response-structure.json",
+  "name": "TransactionalMessageResponse",
+  "description": "TransactionalMessageResponse schema",
+  "type": "object",
+  "properties": {
+    "PKey": {
+      "type": "string"
+    },
+    "eventId": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "processing",
+        "delivered",
+        "failed"
+      ]
+    },
+    "email": {
+      "type": "string"
+    }
+  }
+}

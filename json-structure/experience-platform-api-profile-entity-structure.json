@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/experience-platform-api-profile-entity-structure.json",
+  "name": "ProfileEntity",
+  "description": "ProfileEntity schema",
+  "type": "object",
+  "properties": {
+    "entity": {
+      "type": "object"
+    },
+    "lastModifiedAt": {
+      "type": "datetime"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "content": [
+    {
+      "PKey": "example",
+      "subject": "example",
+      "htmlContent": "example",
+      "status": "active",
+      "sender": {
+        "name": {},
+        "email": {}
+      },
+      "created": "2025-03-15T14:30:00Z"
+    }
+  ]
+}

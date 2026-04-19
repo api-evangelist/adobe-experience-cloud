@@ -1,0 +1,11 @@
+{
+  "id": "abc123",
+  "name": "Example Name",
+  "description": "example",
+  "expression": {
+    "type": "standard",
+    "value": "example"
+  },
+  "mergePolicyId": "abc123",
+  "evaluationInfo": {}
+}

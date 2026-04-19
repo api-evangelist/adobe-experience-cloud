@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-schema/target-api-offer-input-schema.json",
+  "title": "OfferInput",
+  "description": "OfferInput schema",
+  "type": "object",
+  "required": [
+    "name",
+    "type",
+    "content"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "content",
+        "redirect"
+      ]
+    },
+    "content": {
+      "type": "string"
+    }
+  }
+}

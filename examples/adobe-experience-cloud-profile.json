@@ -1,0 +1,45 @@
+{
+  "profileId": "abc123",
+  "identityMap": {},
+  "person": {
+    "name": {
+      "firstName": "Example Name",
+      "lastName": "Example Name",
+      "fullName": "Example Name"
+    },
+    "birthDate": "2025-03-15",
+    "gender": "male"
+  },
+  "personalEmail": {
+    "address": "example",
+    "primary": true,
+    "status": "active"
+  },
+  "mobilePhone": {
+    "number": "example",
+    "countryCode": "example"
+  },
+  "homeAddress": {
+    "street1": "example",
+    "street2": "example",
+    "city": "example",
+    "stateProvince": "example",
+    "postalCode": "example",
+    "country": "example",
+    "countryCode": "example"
+  },
+  "segmentMembership": {},
+  "consents": {
+    "marketing": {
+      "email": {
+        "val": {}
+      },
+      "push": {
+        "val": {}
+      },
+      "sms": {
+        "val": {}
+      }
+    }
+  }
+}

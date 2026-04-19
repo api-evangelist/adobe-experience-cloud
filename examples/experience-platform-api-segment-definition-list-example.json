@@ -1,0 +1,18 @@
+{
+  "segments": [
+    {
+      "id": "abc123",
+      "name": "Example Name",
+      "description": "example",
+      "expression": {
+        "type": {},
+        "value": {}
+      },
+      "mergePolicyId": "abc123",
+      "evaluationInfo": {}
+    }
+  ],
+  "page": {
+    "totalCount": 85
+  }
+}

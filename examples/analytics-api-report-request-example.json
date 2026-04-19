@@ -1,0 +1,21 @@
+{
+  "rsid": "abc123",
+  "globalFilters": [
+    {
+      "type": "standard",
+      "dateRange": "example"
+    }
+  ],
+  "metricContainer": {
+    "metrics": [
+      {
+        "id": {}
+      }
+    ]
+  },
+  "dimension": "example",
+  "settings": {
+    "limit": 23,
+    "page": 85
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "id": "abc123",
+  "name": "Example Name",
+  "description": "example",
+  "type": "standard",
+  "segmentable": true
+}

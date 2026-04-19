@@ -1,0 +1,144 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "aec": "https://developer.adobe.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Activity": "aec:Activity",
+    "ActivityList": "aec:ActivityList",
+    "OfferList": "aec:OfferList",
+    "DeliveryRequest": "aec:DeliveryRequest",
+    "Offer": "aec:Offer",
+    "OfferInput": "aec:OfferInput",
+    "PropertyList": "aec:PropertyList",
+    "AudienceList": "aec:AudienceList",
+    "Audience": "aec:Audience",
+    "AudienceInput": "aec:AudienceInput",
+    "EnvironmentList": "aec:EnvironmentList",
+    "DeliveryResponse": "aec:DeliveryResponse",
+    "ActivityInput": "aec:ActivityInput",
+    "id": {
+      "@id": "aec:id",
+      "@type": "xsd:integer"
+    },
+    "name": "schema:name",
+    "type": {
+      "@id": "aec:type",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "aec:state",
+      "@type": "xsd:string"
+    },
+    "priority": {
+      "@id": "aec:priority",
+      "@type": "xsd:integer"
+    },
+    "modifiedAt": {
+      "@id": "aec:modifiedAt",
+      "@type": "xsd:dateTime"
+    },
+    "startsAt": {
+      "@id": "aec:startsAt",
+      "@type": "xsd:dateTime"
+    },
+    "endsAt": {
+      "@id": "aec:endsAt",
+      "@type": "xsd:dateTime"
+    },
+    "total": {
+      "@id": "aec:total",
+      "@type": "xsd:integer"
+    },
+    "offset": {
+      "@id": "aec:offset",
+      "@type": "xsd:integer"
+    },
+    "limit": {
+      "@id": "aec:limit",
+      "@type": "xsd:integer"
+    },
+    "activities": {
+      "@id": "aec:activities",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "offers": {
+      "@id": "aec:offers",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "content": {
+      "@id": "aec:content",
+      "@type": "xsd:string"
+    },
+    "context": {
+      "@id": "aec:context",
+      "@type": "@id"
+    },
+    "channel": {
+      "@id": "aec:channel",
+      "@type": "xsd:string"
+    },
+    "userAgent": {
+      "@id": "aec:userAgent",
+      "@type": "xsd:string"
+    },
+    "execute": {
+      "@id": "aec:execute",
+      "@type": "@id"
+    },
+    "mboxes": {
+      "@id": "aec:mboxes",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "index": {
+      "@id": "aec:index",
+      "@type": "xsd:integer"
+    },
+    "prefetch": {
+      "@id": "aec:prefetch",
+      "@type": "@id"
+    },
+    "views": {
+      "@id": "aec:views",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "properties": {
+      "@id": "aec:properties",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "token": {
+      "@id": "aec:token",
+      "@type": "xsd:string"
+    },
+    "audiences": {
+      "@id": "aec:audiences",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "description": "schema:description",
+    "targetRule": {
+      "@id": "aec:targetRule",
+      "@type": "@id"
+    },
+    "environments": {
+      "@id": "aec:environments",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "requestId": {
+      "@id": "aec:requestId",
+      "@type": "xsd:string"
+    },
+    "options": {
+      "@id": "aec:options",
+      "@container": "@set",
+      "@type": "xsd:string"
+    }
+  }
+}

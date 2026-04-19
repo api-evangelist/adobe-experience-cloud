@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/experience-platform-api-batch-structure.json",
+  "name": "Batch",
+  "description": "Batch schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "loading",
+        "staging",
+        "success",
+        "failed",
+        "abandoned"
+      ]
+    },
+    "created": {
+      "type": "datetime"
+    },
+    "completed": {
+      "type": "datetime"
+    }
+  }
+}

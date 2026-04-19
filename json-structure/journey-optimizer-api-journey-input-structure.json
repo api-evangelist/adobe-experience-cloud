@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/journey-optimizer-api-journey-input-structure.json",
+  "name": "JourneyInput",
+  "description": "JourneyInput schema",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "entryCondition": {
+      "type": "object"
+    },
+    "activities": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}

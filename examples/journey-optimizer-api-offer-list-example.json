@@ -1,0 +1,16 @@
+{
+  "offers": [
+    {
+      "id": "abc123",
+      "name": "Example Name",
+      "status": "draft",
+      "representations": [
+        {}
+      ],
+      "startDate": "2025-03-15T14:30:00Z",
+      "endDate": "2025-03-15T14:30:00Z",
+      "priority": 84
+    }
+  ],
+  "totalCount": 13
+}

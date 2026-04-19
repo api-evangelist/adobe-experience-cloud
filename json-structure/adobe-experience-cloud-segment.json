@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/adobe-experience-cloud-segment.json",
+  "name": "Adobe Experience Cloud Segment",
+  "description": "An audience segment definition used across Adobe Experience Cloud products to target groups of profiles based on shared attributes, behaviors, or engagement patterns.",
+  "type": "object",
+  "properties": {
+    "segmentId": {
+      "type": "string",
+      "description": "The unique identifier for the segment."
+    },
+    "name": {
+      "type": "string",
+      "description": "The human-readable name of the segment."
+    },
+    "description": {
+      "type": "string",
+      "description": "A detailed description of what the segment represents."
+    },
+    "expression": {
+      "type": "object",
+      "description": "The segment definition expression.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "PQL"
+          ],
+          "description": "The expression language type."
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "pql/text",
+            "pql/json"
+          ],
+          "description": "The format of the expression value."
+        },
+        "value": {
+          "type": "string",
+          "description": "The PQL expression defining the segment criteria."
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "evaluationType": {
+      "type": "string",
+      "enum": [
+        "batch",
+        "streaming",
+        "edge"
+      ],
+      "description": "How the segment is evaluated against profiles."
+    },
+    "mergePolicyId": {
+      "type": "string",
+      "description": "The merge policy used when evaluating this segment."
+    },
+    "schema": {
+      "type": "object",
+      "description": "The XDM schema this segment is based on.",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "realized",
+        "failed"
+      ],
+      "description": "The current status of the segment."
+    },
+    "profileCount": {
+      "type": "int32",
+      "description": "The estimated number of profiles in this segment."
+    },
+    "owner": {
+      "type": "object",
+      "description": "The user who created the segment.",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "description": "Tags for organizing and categorizing segments.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "created": {
+      "type": "datetime",
+      "description": "When the segment was created."
+    },
+    "lastModified": {
+      "type": "datetime",
+      "description": "When the segment was last modified."
+    },
+    "lastEvaluated": {
+      "type": "datetime",
+      "description": "When the segment was last evaluated."
+    }
+  },
+  "required": [
+    "segmentId",
+    "name",
+    "expression"
+  ]
+}

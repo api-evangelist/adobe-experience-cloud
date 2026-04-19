@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/journey-optimizer-api-offer-list-structure.json",
+  "name": "OfferList",
+  "description": "OfferList schema",
+  "type": "object",
+  "properties": {
+    "offers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "approved",
+              "archived"
+            ]
+          },
+          "representations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "channel": {
+                  "type": "string"
+                },
+                "placement": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "startDate": {
+            "type": "datetime"
+          },
+          "endDate": {
+            "type": "datetime"
+          },
+          "priority": {
+            "type": "int32"
+          }
+        }
+      }
+    },
+    "totalCount": {
+      "type": "int32"
+    }
+  }
+}

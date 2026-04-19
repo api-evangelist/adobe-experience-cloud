@@ -1,0 +1,8 @@
+{
+  "name": "Example Name",
+  "description": "example",
+  "schemaRef": {
+    "id": "abc123",
+    "contentType": "standard"
+  }
+}

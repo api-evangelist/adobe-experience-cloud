@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/campaign-api-workflow-list-structure.json",
+  "name": "WorkflowList",
+  "description": "WorkflowList schema",
+  "type": "object",
+  "properties": {
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "PKey": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "started",
+              "paused",
+              "stopped",
+              "finished",
+              "error"
+            ]
+          },
+          "startDate": {
+            "type": "datetime"
+          },
+          "created": {
+            "type": "datetime"
+          }
+        }
+      }
+    }
+  }
+}

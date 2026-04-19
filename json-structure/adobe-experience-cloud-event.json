@@ -1,0 +1,263 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/adobe-experience-cloud-event.json",
+  "name": "Adobe Experience Cloud Event",
+  "description": "An experience event representing a time-series observation of an action or state change associated with a profile, such as a page view, product interaction, purchase, or campaign engagement.",
+  "type": "object",
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "description": "A unique identifier for this event instance."
+    },
+    "eventType": {
+      "type": "string",
+      "description": "The type of experience event.",
+      "enum": [
+        "web.webpagedetails.pageViews",
+        "web.webinteraction.linkClicks",
+        "commerce.productViews",
+        "commerce.productListAdds",
+        "commerce.purchases",
+        "commerce.checkouts",
+        "campaign.sent",
+        "campaign.opened",
+        "campaign.clicked",
+        "campaign.bounced",
+        "pushTracking.applicationOpened",
+        "pushTracking.customAction",
+        "decisioning.propositionDisplay",
+        "decisioning.propositionInteract"
+      ]
+    },
+    "timestamp": {
+      "type": "datetime",
+      "description": "The ISO 8601 timestamp when the event occurred."
+    },
+    "identityMap": {
+      "type": "object",
+      "description": "Identity namespaces and values associated with this event.",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "primary": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "id"
+          ]
+        }
+      }
+    },
+    "web": {
+      "type": "object",
+      "description": "Web-specific event details.",
+      "properties": {
+        "webPageDetails": {
+          "type": "object",
+          "properties": {
+            "URL": {
+              "type": "uri"
+            },
+            "name": {
+              "type": "string"
+            },
+            "siteSection": {
+              "type": "string"
+            },
+            "isHomePage": {
+              "type": "boolean"
+            }
+          }
+        },
+        "webInteraction": {
+          "type": "object",
+          "properties": {
+            "URL": {
+              "type": "uri"
+            },
+            "name": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "download",
+                "exit",
+                "other"
+              ]
+            }
+          }
+        },
+        "webReferrer": {
+          "type": "object",
+          "properties": {
+            "URL": {
+              "type": "uri"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "internal",
+                "external",
+                "search_engine",
+                "social",
+                "typed_bookmarked"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "commerce": {
+      "type": "object",
+      "description": "Commerce-specific event details.",
+      "properties": {
+        "purchases": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "double"
+            }
+          }
+        },
+        "order": {
+          "type": "object",
+          "properties": {
+            "purchaseID": {
+              "type": "string"
+            },
+            "currencyCode": {
+              "type": "string"
+            },
+            "priceTotal": {
+              "type": "double"
+            },
+            "payments": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "paymentType": {
+                    "type": "string"
+                  },
+                  "paymentAmount": {
+                    "type": "double"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "productListItems": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "SKU": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "quantity": {
+                "type": "int32"
+              },
+              "priceTotal": {
+                "type": "double"
+              },
+              "currencyCode": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "device": {
+      "type": "object",
+      "description": "The device used during the event.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "mobile",
+            "tablet",
+            "desktop",
+            "ereader",
+            "gaming",
+            "television",
+            "settop",
+            "mediaplayer"
+          ]
+        },
+        "manufacturer": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "screenHeight": {
+          "type": "int32"
+        },
+        "screenWidth": {
+          "type": "int32"
+        }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "description": "Environment details at the time of the event.",
+      "properties": {
+        "browserDetails": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            },
+            "userAgent": {
+              "type": "string"
+            }
+          }
+        },
+        "operatingSystem": {
+          "type": "string"
+        },
+        "operatingSystemVersion": {
+          "type": "string"
+        },
+        "ipV4": {
+          "type": "string",
+          "format": "ipv4"
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "description": "The source system that generated the event.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the source product or system."
+        },
+        "datasetId": {
+          "type": "string",
+          "description": "The Experience Platform dataset ID where this event is stored."
+        }
+      }
+    }
+  },
+  "required": [
+    "eventId",
+    "eventType",
+    "timestamp"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/journey-optimizer-api-decision-rule-input-structure.json",
+  "name": "DecisionRuleInput",
+  "description": "DecisionRuleInput schema",
+  "type": "object",
+  "required": [
+    "name",
+    "condition"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "condition": {
+      "type": "string"
+    }
+  }
+}

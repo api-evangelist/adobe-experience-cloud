@@ -45,8 +45,8 @@ channels:
         dataset completes successfully or fails. Includes the batch ID,
         dataset ID, and ingestion status.
       tags:
-        - name: Experience Platform
-        - name: Data Ingestion
+      - name: Experience Platform
+      - name: Data Ingestion
       message:
         $ref: '#/components/messages/DatasetIngestionEvent'
   experience-platform/profile-update:
@@ -61,8 +61,8 @@ channels:
         Experience Platform. Includes the profile identity and the nature of
         the change.
       tags:
-        - name: Experience Platform
-        - name: Profiles
+      - name: Experience Platform
+      - name: Profiles
       message:
         $ref: '#/components/messages/ProfileUpdateEvent'
   experience-platform/segment-evaluation:
@@ -77,8 +77,8 @@ channels:
         segment membership has been recalculated. Includes the segment ID,
         job ID, and resulting profile count.
       tags:
-        - name: Experience Platform
-        - name: Segmentation
+      - name: Experience Platform
+      - name: Segmentation
       message:
         $ref: '#/components/messages/SegmentEvaluationEvent'
   analytics/report-suite-change:
@@ -93,8 +93,8 @@ channels:
         changes to processing rules, classification uploads, and data source
         configurations.
       tags:
-        - name: Analytics
-        - name: Configuration
+      - name: Analytics
+      - name: Configuration
       message:
         $ref: '#/components/messages/ReportSuiteChangeEvent'
   campaign/delivery-status:
@@ -109,8 +109,8 @@ channels:
         Includes the delivery ID, recipient, and new status such as sent,
         delivered, bounced, or opened.
       tags:
-        - name: Campaign
-        - name: Delivery
+      - name: Campaign
+      - name: Delivery
       message:
         $ref: '#/components/messages/DeliveryStatusEvent'
   campaign/workflow-execution:
@@ -124,8 +124,8 @@ channels:
         Triggered when a Campaign workflow starts, finishes, or fails. Includes
         the workflow ID, execution status, and any error details.
       tags:
-        - name: Campaign
-        - name: Workflows
+      - name: Campaign
+      - name: Workflows
       message:
         $ref: '#/components/messages/WorkflowExecutionEvent'
   target/activity-state-change:
@@ -139,8 +139,8 @@ channels:
         Triggered when a Target activity transitions between states. Includes
         the activity ID, name, previous state, and new state.
       tags:
-        - name: Target
-        - name: Activities
+      - name: Target
+      - name: Activities
       message:
         $ref: '#/components/messages/ActivityStateChangeEvent'
   journey-optimizer/journey-step:
@@ -155,8 +155,8 @@ channels:
         a Journey Optimizer journey. Includes the journey ID, step ID,
         profile identity, and step outcome.
       tags:
-        - name: Journey Optimizer
-        - name: Journeys
+      - name: Journey Optimizer
+      - name: Journeys
       message:
         $ref: '#/components/messages/JourneyStepEvent'
 components:
@@ -168,6 +168,23 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/DatasetIngestionPayload'
+      examples:
+      - name: DatasetIngestionEventDefaultExample
+        summary: Default DatasetIngestionEvent example
+        x-microcks-default: true
+        payload:
+          event_id: abc123
+          event:
+            body:
+              datasetId: abc123
+              batchId: abc123
+              status: success
+              recordCount: 1
+              completedAt: '2025-03-15T14:30:00Z'
+            header:
+              eventType: standard
+              imsOrgId: abc123
+              source: example
     ProfileUpdateEvent:
       name: ProfileUpdateEvent
       title: Profile Update Event
@@ -175,6 +192,20 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/ProfileUpdatePayload'
+      examples:
+      - name: ProfileUpdateEventDefaultExample
+        summary: Default ProfileUpdateEvent example
+        x-microcks-default: true
+        payload:
+          event_id: abc123
+          event:
+            body:
+              identityMap: {}
+              changeType: created
+              modifiedAt: '2025-03-15T14:30:00Z'
+            header:
+              eventType: standard
+              imsOrgId: abc123
     SegmentEvaluationEvent:
       name: SegmentEvaluationEvent
       title: Segment Evaluation Event
@@ -182,6 +213,21 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/SegmentEvaluationPayload'
+      examples:
+      - name: SegmentEvaluationEventDefaultExample
+        summary: Default SegmentEvaluationEvent example
+        x-microcks-default: true
+        payload:
+          event_id: abc123
+          event:
+            body:
+              segmentId: abc123
+              jobId: abc123
+              status: succeeded
+              profileCount: 1
+              completedAt: '2025-03-15T14:30:00Z'
+            header:
+              eventType: standard
     ReportSuiteChangeEvent:
       name: ReportSuiteChangeEvent
       title: Report Suite Change Event
@@ -189,6 +235,20 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/ReportSuiteChangePayload'
+      examples:
+      - name: ReportSuiteChangeEventDefaultExample
+        summary: Default ReportSuiteChangeEvent example
+        x-microcks-default: true
+        payload:
+          event_id: abc123
+          event:
+            body:
+              rsid: abc123
+              changeType: standard
+              changedBy: example
+              changedAt: '2025-03-15T14:30:00Z'
+            header:
+              eventType: standard
     DeliveryStatusEvent:
       name: DeliveryStatusEvent
       title: Delivery Status Event
@@ -196,6 +256,20 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/DeliveryStatusPayload'
+      examples:
+      - name: DeliveryStatusEventDefaultExample
+        summary: Default DeliveryStatusEvent example
+        x-microcks-default: true
+        payload:
+          event_id: abc123
+          event:
+            body:
+              deliveryId: abc123
+              recipientEmail: user@example.com
+              status: sent
+              timestamp: '2025-03-15T14:30:00Z'
+            header:
+              eventType: standard
     WorkflowExecutionEvent:
       name: WorkflowExecutionEvent
       title: Workflow Execution Event
@@ -203,6 +277,20 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/WorkflowExecutionPayload'
+      examples:
+      - name: WorkflowExecutionEventDefaultExample
+        summary: Default WorkflowExecutionEvent example
+        x-microcks-default: true
+        payload:
+          event_id: abc123
+          event:
+            body:
+              workflowId: abc123
+              executionStatus: started
+              errorMessage: example
+              timestamp: '2025-03-15T14:30:00Z'
+            header:
+              eventType: standard
     ActivityStateChangeEvent:
       name: ActivityStateChangeEvent
       title: Activity State Change Event
@@ -210,6 +298,21 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/ActivityStateChangePayload'
+      examples:
+      - name: ActivityStateChangeEventDefaultExample
+        summary: Default ActivityStateChangeEvent example
+        x-microcks-default: true
+        payload:
+          event_id: abc123
+          event:
+            body:
+              activityId: 1
+              activityName: Example Name
+              previousState: example
+              newState: example
+              changedAt: '2025-03-15T14:30:00Z'
+            header:
+              eventType: standard
     JourneyStepEvent:
       name: JourneyStepEvent
       title: Journey Step Event
@@ -217,6 +320,22 @@ components:
       contentType: application/json
       payload:
         $ref: '#/components/schemas/JourneyStepPayload'
+      examples:
+      - name: JourneyStepEventDefaultExample
+        summary: Default JourneyStepEvent example
+        x-microcks-default: true
+        payload:
+          event_id: abc123
+          event:
+            body:
+              journeyId: abc123
+              journeyVersionId: abc123
+              stepId: abc123
+              profileId: abc123
+              stepStatus: entered
+              timestamp: '2025-03-15T14:30:00Z'
+            header:
+              eventType: standard
   schemas:
     EventEnvelope:
       type: object
@@ -249,8 +368,8 @@ components:
                 status:
                   type: string
                   enum:
-                    - success
-                    - failed
+                  - success
+                  - failed
                 recordCount:
                   type: integer
                 completedAt:
@@ -281,8 +400,8 @@ components:
                 changeType:
                   type: string
                   enum:
-                    - created
-                    - updated
+                  - created
+                  - updated
                 modifiedAt:
                   type: string
                   format: date-time
@@ -311,8 +430,8 @@ components:
                 status:
                   type: string
                   enum:
-                    - succeeded
-                    - failed
+                  - succeeded
+                  - failed
                 profileCount:
                   type: integer
                 completedAt:
@@ -366,11 +485,11 @@ components:
                 status:
                   type: string
                   enum:
-                    - sent
-                    - delivered
-                    - bounced
-                    - opened
-                    - clicked
+                  - sent
+                  - delivered
+                  - bounced
+                  - opened
+                  - clicked
                 timestamp:
                   type: string
                   format: date-time
@@ -395,10 +514,10 @@ components:
                 executionStatus:
                   type: string
                   enum:
-                    - started
-                    - completed
-                    - failed
-                    - paused
+                  - started
+                  - completed
+                  - failed
+                  - paused
                 errorMessage:
                   type: string
                 timestamp:
@@ -458,10 +577,10 @@ components:
                 stepStatus:
                   type: string
                   enum:
-                    - entered
-                    - completed
-                    - timedOut
-                    - error
+                  - entered
+                  - completed
+                  - timedOut
+                  - error
                 timestamp:
                   type: string
                   format: date-time

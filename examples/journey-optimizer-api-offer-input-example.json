@@ -1,0 +1,10 @@
+{
+  "name": "Example Name",
+  "representations": [
+    {}
+  ],
+  "eligibilityRule": "example",
+  "priority": 61,
+  "startDate": "2025-03-15T14:30:00Z",
+  "endDate": "2025-03-15T14:30:00Z"
+}

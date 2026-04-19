@@ -1,0 +1,16 @@
+{
+  "campaigns": [
+    {
+      "id": "abc123",
+      "name": "Example Name",
+      "description": "example",
+      "channel": "email",
+      "status": "draft",
+      "schedule": {
+        "startDate": {},
+        "endDate": {}
+      }
+    }
+  ],
+  "totalCount": 72
+}

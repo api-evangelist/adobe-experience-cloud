@@ -1,0 +1,181 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "aec": "https://developer.adobe.com/schema/",
+    "schema": {
+      "@id": "aec:schema",
+      "@type": "@id"
+    },
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "DatasetInput": "aec:DatasetInput",
+    "SandboxList": "aec:SandboxList",
+    "Batch": "aec:Batch",
+    "QueryList": "aec:QueryList",
+    "SchemaInput": "aec:SchemaInput",
+    "Sandbox": "aec:Sandbox",
+    "IdentityNamespace": "aec:IdentityNamespace",
+    "ClassList": "aec:ClassList",
+    "Schema": "aec:Schema",
+    "SegmentDefinitionList": "aec:SegmentDefinitionList",
+    "IdentityNamespaceInput": "aec:IdentityNamespaceInput",
+    "Dataset": "aec:Dataset",
+    "SchemaList": "aec:SchemaList",
+    "SegmentDefinition": "aec:SegmentDefinition",
+    "SegmentDefinitionInput": "aec:SegmentDefinitionInput",
+    "Query": "aec:Query",
+    "ProfileEntity": "aec:ProfileEntity",
+    "name": "schema:name",
+    "description": "schema:description",
+    "schemaRef": {
+      "@id": "aec:schemaRef",
+      "@type": "@id"
+    },
+    "id": {
+      "@id": "aec:id",
+      "@type": "xsd:string"
+    },
+    "contentType": {
+      "@id": "aec:contentType",
+      "@type": "xsd:string"
+    },
+    "sandboxes": {
+      "@id": "aec:sandboxes",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "aec:title",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "aec:type",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "aec:state",
+      "@type": "xsd:string"
+    },
+    "region": {
+      "@id": "aec:region",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "aec:status",
+      "@type": "xsd:string"
+    },
+    "created": {
+      "@id": "aec:created",
+      "@type": "xsd:dateTime"
+    },
+    "completed": {
+      "@id": "aec:completed",
+      "@type": "xsd:dateTime"
+    },
+    "queries": {
+      "@id": "aec:queries",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "dbName": {
+      "@id": "aec:dbName",
+      "@type": "xsd:string"
+    },
+    "sql": {
+      "@id": "aec:sql",
+      "@type": "xsd:string"
+    },
+    "updated": {
+      "@id": "aec:updated",
+      "@type": "xsd:dateTime"
+    },
+    "rowCount": {
+      "@id": "aec:rowCount",
+      "@type": "xsd:integer"
+    },
+    "Page": {
+      "@id": "aec:_page",
+      "@type": "@id"
+    },
+    "totalCount": {
+      "@id": "aec:totalCount",
+      "@type": "xsd:integer"
+    },
+    "allOf": {
+      "@id": "aec:allOf",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "$ref": {
+      "@id": "aec:$ref",
+      "@type": "xsd:string"
+    },
+    "code": {
+      "@id": "aec:code",
+      "@type": "xsd:string"
+    },
+    "idType": {
+      "@id": "aec:idType",
+      "@type": "xsd:string"
+    },
+    "standard": {
+      "@id": "aec:standard",
+      "@type": "xsd:boolean"
+    },
+    "results": {
+      "@id": "aec:results",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "meta:altId": {
+      "@id": "aec:meta:altId",
+      "@type": "xsd:string"
+    },
+    "version": "schema:version",
+    "segments": {
+      "@id": "aec:segments",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "expression": {
+      "@id": "aec:expression",
+      "@type": "@id"
+    },
+    "value": {
+      "@id": "aec:value",
+      "@type": "xsd:string"
+    },
+    "mergePolicyId": {
+      "@id": "aec:mergePolicyId",
+      "@type": "xsd:string"
+    },
+    "evaluationInfo": {
+      "@id": "aec:evaluationInfo",
+      "@type": "@id"
+    },
+    "page": {
+      "@id": "aec:page",
+      "@type": "@id"
+    },
+    "fileDescription": {
+      "@id": "aec:fileDescription",
+      "@type": "@id"
+    },
+    "format": {
+      "@id": "aec:format",
+      "@type": "xsd:string"
+    },
+    "count": {
+      "@id": "aec:count",
+      "@type": "xsd:integer"
+    },
+    "entity": {
+      "@id": "aec:entity",
+      "@type": "@id"
+    },
+    "lastModifiedAt": {
+      "@id": "aec:lastModifiedAt",
+      "@type": "xsd:dateTime"
+    }
+  }
+}

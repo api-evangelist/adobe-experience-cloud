@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-schema/target-api-delivery-request-schema.json",
+  "title": "DeliveryRequest",
+  "description": "DeliveryRequest schema",
+  "type": "object",
+  "properties": {
+    "context": {
+      "type": "object",
+      "properties": {
+        "channel": {
+          "type": "string",
+          "enum": [
+            "web",
+            "mobile"
+          ]
+        },
+        "userAgent": {
+          "type": "string"
+        }
+      }
+    },
+    "execute": {
+      "type": "object",
+      "properties": {
+        "mboxes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "index": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "prefetch": {
+      "type": "object",
+      "properties": {
+        "views": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

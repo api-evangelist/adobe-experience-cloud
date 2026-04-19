@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/json-structure/journey-optimizer-api-placement-structure.json",
+  "name": "Placement",
+  "description": "Placement schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "channel": {
+      "type": "string"
+    },
+    "contentType": {
+      "type": "string"
+    }
+  }
+}

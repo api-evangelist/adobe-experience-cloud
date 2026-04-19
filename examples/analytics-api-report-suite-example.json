@@ -1,0 +1,7 @@
+{
+  "rsid": "abc123",
+  "name": "Example Name",
+  "currency": "example",
+  "timezone": 38,
+  "calendarType": "standard"
+}

@@ -1,0 +1,14 @@
+{
+  "content": [
+    {
+      "id": 95,
+      "loginId": "abc123",
+      "email": "example",
+      "firstName": "Example Name",
+      "lastName": "Example Name",
+      "admin": true
+    }
+  ],
+  "totalElements": 95,
+  "totalPages": 66
+}
