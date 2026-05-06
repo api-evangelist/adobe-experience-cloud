@@ -1,204 +1,398 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Adobe Experience Cloud Digital Marketing"
-  description: "Unified workflow capability combining Adobe Analytics, Adobe Target, and Adobe Journey Optimizer for data-driven marketing campaigns, A/B testing, and personalized journey orchestration. Designed for digital marketers and marketing technologists."
+  label: Adobe Experience Cloud Digital Marketing
+  description: Unified workflow capability combining Adobe Analytics, Adobe Target, and Adobe Journey Optimizer for data-driven
+    marketing campaigns, A/B testing, and personalized journey orchestration. Designed for digital marketers and marketing
+    technologists.
   tags:
-    - Adobe Experience Cloud
-    - Digital Marketing
-    - Analytics
-    - Personalization
-    - Journey Orchestration
-  created: "2026-04-19"
-  modified: "2026-04-19"
-
+  - Adobe Experience Cloud
+  - Digital Marketing
+  - Analytics
+  - Personalization
+  - Journey Orchestration
+  created: '2026-04-19'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      ADOBE_ANALYTICS_ACCESS_TOKEN: ADOBE_ANALYTICS_ACCESS_TOKEN
-      ADOBE_TARGET_ACCESS_TOKEN: ADOBE_TARGET_ACCESS_TOKEN
-      ADOBE_AJO_ACCESS_TOKEN: ADOBE_AJO_ACCESS_TOKEN
-
+- namespace: env
+  keys:
+    ADOBE_ANALYTICS_ACCESS_TOKEN: ADOBE_ANALYTICS_ACCESS_TOKEN
+    ADOBE_TARGET_ACCESS_TOKEN: ADOBE_TARGET_ACCESS_TOKEN
+    ADOBE_AJO_ACCESS_TOKEN: ADOBE_AJO_ACCESS_TOKEN
 capability:
   consumes:
-    - import: analytics-api
-      location: ./shared/analytics-api.yaml
-    - import: target-api
-      location: ./shared/target-api.yaml
-    - import: journey-optimizer
-      location: ./shared/journey-optimizer-api.yaml
-
+  - type: http
+    namespace: analytics-api
+    baseUri: https://analytics.adobe.io/api/{companyId}
+    description: Adobe Analytics 2.0 REST API for reports and management.
+    authentication:
+      type: bearer
+      token: '{{ADOBE_ANALYTICS_ACCESS_TOKEN}}'
+    resources:
+    - name: reports
+      path: /reports
+      description: Run and retrieve analytics reports.
+      operations:
+      - name: run-report
+        method: POST
+        description: Run an analytics report with dimensions, metrics, and date ranges.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            rsid: '{{tools.rsid}}'
+            globalFilters: []
+            metricContainer: {}
+    - name: segments
+      path: /segments
+      description: Manage audience segments.
+      operations:
+      - name: list-segments
+        method: GET
+        description: List all segments in the account.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-segment
+        method: POST
+        description: Create a new segment.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            rsid: '{{tools.rsid}}'
+    - name: metrics
+      path: /metrics
+      description: Retrieve available metrics for a report suite.
+      operations:
+      - name: list-metrics
+        method: GET
+        description: List all metrics for a report suite.
+        inputParameters:
+        - name: rsid
+          in: query
+          type: string
+          required: true
+          description: Report Suite ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: dimensions
+      path: /dimensions
+      description: Retrieve available dimensions for a report suite.
+      operations:
+      - name: list-dimensions
+        method: GET
+        description: List all dimensions for a report suite.
+        inputParameters:
+        - name: rsid
+          in: query
+          type: string
+          required: true
+          description: Report Suite ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  - type: http
+    namespace: target-api
+    baseUri: https://mc.adobe.io/{tenant}/target
+    description: Adobe Target REST API for personalization and testing.
+    authentication:
+      type: bearer
+      token: '{{ADOBE_TARGET_ACCESS_TOKEN}}'
+    resources:
+    - name: activities
+      path: /activities
+      description: Manage A/B tests and personalization activities.
+      operations:
+      - name: list-activities
+        method: GET
+        description: List all activities.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-ab-activity
+        method: POST
+        description: Create a new A/B test activity.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            type: ab
+    - name: audiences
+      path: /audiences
+      description: Manage target audiences.
+      operations:
+      - name: list-audiences
+        method: GET
+        description: List all audiences.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: offers
+      path: /offers/content
+      description: Manage content offers.
+      operations:
+      - name: list-offers
+        method: GET
+        description: List all content offers.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  - type: http
+    namespace: journey-optimizer
+    baseUri: https://platform.adobe.io
+    description: Adobe Journey Optimizer API for journey and campaign management.
+    authentication:
+      type: bearer
+      token: '{{ADOBE_AJO_ACCESS_TOKEN}}'
+    resources:
+    - name: journeys
+      path: /journey/journeyVersions
+      description: Manage customer journeys.
+      operations:
+      - name: list-journeys
+        method: GET
+        description: List all journey versions.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: messages
+      path: /ajo/message
+      description: Manage campaign messages.
+      operations:
+      - name: list-messages
+        method: GET
+        description: List all messages.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: offers
+      path: /offer_library/offers
+      description: Manage personalized offers.
+      operations:
+      - name: list-offers
+        method: GET
+        description: List all offers.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-offer
+        method: POST
+        description: Create a personalized offer.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            status: draft
   exposes:
-    - type: rest
-      port: 8080
-      namespace: digital-marketing-api
-      description: "Unified REST API for Adobe Experience Cloud digital marketing — analytics, personalization, journeys, and offers."
-      resources:
-        - path: /v1/reports
-          name: reports
-          description: "Analytics report execution."
-          operations:
-            - method: POST
-              name: run-report
-              description: "Run an Adobe Analytics report."
-              call: "analytics-api.run-report"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/segments
-          name: segments
-          description: "Audience segment management."
-          operations:
-            - method: GET
-              name: list-segments
-              description: "List analytics segments."
-              call: "analytics-api.list-segments"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/activities
-          name: activities
-          description: "A/B test and personalization activities."
-          operations:
-            - method: GET
-              name: list-activities
-              description: "List Target activities."
-              call: "target-api.list-activities"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/audiences
-          name: audiences
-          description: "Target audiences."
-          operations:
-            - method: GET
-              name: list-audiences
-              description: "List Target audiences."
-              call: "target-api.list-audiences"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/journeys
-          name: journeys
-          description: "Customer journeys."
-          operations:
-            - method: GET
-              name: list-journeys
-              description: "List Journey Optimizer journeys."
-              call: "journey-optimizer.list-journeys"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/offers
-          name: offers
-          description: "Personalized offers."
-          operations:
-            - method: GET
-              name: list-offers
-              description: "List Journey Optimizer offers."
-              call: "journey-optimizer.list-offers"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9090
-      namespace: digital-marketing-mcp
-      transport: http
-      description: "MCP server for AI-assisted digital marketing — analyze campaigns, test personalization, orchestrate journeys, and manage offers."
-      tools:
-        - name: run-analytics-report
-          description: "Run an Adobe Analytics report with dimensions, metrics, and segments."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "analytics-api.run-report"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: analytics-list-segments
-          description: "List audience segments in Adobe Analytics."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "analytics-api.list-segments"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: analytics-list-metrics
-          description: "List available metrics for an Adobe Analytics report suite."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "analytics-api.list-metrics"
-          with:
-            rsid: "tools.rsid"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: target-list-activities
-          description: "List A/B test and personalization activities in Adobe Target."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "target-api.list-activities"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: target-list-audiences
-          description: "List targeting audiences in Adobe Target."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "target-api.list-audiences"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: target-list-offers
-          description: "List content offers in Adobe Target."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "target-api.list-offers"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: ajo-list-journeys
-          description: "List customer journeys in Adobe Journey Optimizer."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "journey-optimizer.list-journeys"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: ajo-list-offers
-          description: "List personalized offers in Adobe Journey Optimizer."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "journey-optimizer.list-offers"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: ajo-create-offer
-          description: "Create a new personalized offer in Adobe Journey Optimizer."
-          hints:
-            readOnly: false
-            destructive: false
-            idempotent: false
-          call: "journey-optimizer.create-offer"
-          with:
-            name: "tools.name"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: ajo-list-messages
-          description: "List campaign messages in Adobe Journey Optimizer."
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "journey-optimizer.list-messages"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: digital-marketing-api
+    description: Unified REST API for Adobe Experience Cloud digital marketing — analytics, personalization, journeys, and
+      offers.
+    resources:
+    - path: /v1/reports
+      name: reports
+      description: Analytics report execution.
+      operations:
+      - method: POST
+        name: run-report
+        description: Run an Adobe Analytics report.
+        call: analytics-api.run-report
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/segments
+      name: segments
+      description: Audience segment management.
+      operations:
+      - method: GET
+        name: list-segments
+        description: List analytics segments.
+        call: analytics-api.list-segments
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/activities
+      name: activities
+      description: A/B test and personalization activities.
+      operations:
+      - method: GET
+        name: list-activities
+        description: List Target activities.
+        call: target-api.list-activities
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/audiences
+      name: audiences
+      description: Target audiences.
+      operations:
+      - method: GET
+        name: list-audiences
+        description: List Target audiences.
+        call: target-api.list-audiences
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/journeys
+      name: journeys
+      description: Customer journeys.
+      operations:
+      - method: GET
+        name: list-journeys
+        description: List Journey Optimizer journeys.
+        call: journey-optimizer.list-journeys
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/offers
+      name: offers
+      description: Personalized offers.
+      operations:
+      - method: GET
+        name: list-offers
+        description: List Journey Optimizer offers.
+        call: journey-optimizer.list-offers
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: digital-marketing-mcp
+    transport: http
+    description: MCP server for AI-assisted digital marketing — analyze campaigns, test personalization, orchestrate journeys,
+      and manage offers.
+    tools:
+    - name: run-analytics-report
+      description: Run an Adobe Analytics report with dimensions, metrics, and segments.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: analytics-api.run-report
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: analytics-list-segments
+      description: List audience segments in Adobe Analytics.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: analytics-api.list-segments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: analytics-list-metrics
+      description: List available metrics for an Adobe Analytics report suite.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: analytics-api.list-metrics
+      with:
+        rsid: tools.rsid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: target-list-activities
+      description: List A/B test and personalization activities in Adobe Target.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: target-api.list-activities
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: target-list-audiences
+      description: List targeting audiences in Adobe Target.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: target-api.list-audiences
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: target-list-offers
+      description: List content offers in Adobe Target.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: target-api.list-offers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: ajo-list-journeys
+      description: List customer journeys in Adobe Journey Optimizer.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: journey-optimizer.list-journeys
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: ajo-list-offers
+      description: List personalized offers in Adobe Journey Optimizer.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: journey-optimizer.list-offers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: ajo-create-offer
+      description: Create a new personalized offer in Adobe Journey Optimizer.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: journey-optimizer.create-offer
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: ajo-list-messages
+      description: List campaign messages in Adobe Journey Optimizer.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: journey-optimizer.list-messages
+      outputParameters:
+      - type: object
+        mapping: $.
