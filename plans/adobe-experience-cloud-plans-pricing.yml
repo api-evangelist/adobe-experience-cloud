@@ -4,155 +4,137 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Adobe Experience Cloud
 providerId: adobe-experience-cloud
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - Analytics
-  - Customer Experience
-  - Digital Marketing
+  - Experience Cloud
+  - Customer Data Platform
   - Personalization
-  - Campaign Management
-  - Journey Orchestration
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+  - Marketing
+  - Analytics
+notes: >-
+  Adobe Experience Cloud is the umbrella brand for Adobe's enterprise
+  marketing / analytics / commerce / data products. Every constituent
+  product is sold via contact-sales contract; there is no published list
+  pricing. Pricing lines vary per product (server calls, profiles, MAUs,
+  GMV, seats). API access is included with each product license.
+description: >-
+  Adobe Experience Cloud bundles Adobe Analytics, Customer Journey
+  Analytics, Real-Time CDP, Target, Campaign, Journey Optimizer, Marketo
+  Engage, Workfront, Commerce, and Experience Manager. Each product is
+  contracted independently with usage commit specific to its meter
+  (server calls, marketable profiles, sent messages, GMV, etc.). API access
+  is included with each license.
+sources:
+  - https://business.adobe.com/products/experience-cloud-products.html
+  - https://developer.adobe.com/experience-platform-apis/
 plans:
-  - id: adobe-experience-cloud-free
-    name: Free
-    type: freemium
-    description: Free entry tier for the Adobe Experience Cloud API surface. Intended for evaluation,
-      prototyping, and low-volume integrations. Real limits and pricing must be reconciled with the provider's
-      published plan documentation.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
-        geo: global
-        domains: []
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains: []
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Adobe Analytics 2.0 API
-      - name: Adobe Experience Platform API
-      - name: Adobe Target API
-      - name: Adobe Journey Optimizer API
-      - name: Adobe Campaign API
-      - name: Adobe I/O Events
-  - id: adobe-experience-cloud-pro
-    name: Professional
-    type: paid
-    description: Production tier for Adobe Experience Cloud. Provides higher quotas, priority support,
-      and access to the broader API portfolio. Pricing placeholder; align with the provider's pricing
-      page.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
-        geo: global
-        domains: []
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains: []
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: global
-        domains: []
-        unit: 1000
-        price: TBD
-        userMultiplied: false
-    elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Adobe Analytics 2.0 API
-      - name: Adobe Experience Platform API
-      - name: Adobe Target API
-      - name: Adobe Journey Optimizer API
-      - name: Adobe Campaign API
-      - name: Adobe I/O Events
-  - id: adobe-experience-cloud-enterprise
-    name: Enterprise
+  - id: adobe-experience-cloud-platform
+    name: Adobe Experience Platform (Real-Time CDP base)
     type: enterprise
-    description: Custom-negotiated tier for Adobe Experience Cloud. Includes dedicated capacity, contractual
-      SLAs, security review, data residency options, and named technical account management.
+    description: >-
+      Foundation customer-data platform that powers Real-Time CDP, Customer
+      Journey Analytics, and Journey Optimizer. Priced by addressable
+      profile count and data ingestion / activation throughput.
     entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
+      - label: Profiles + activation commit
+        name: aep_subscription
+        type: subscription
+        metric: profile
         limit: -1
-        timeFrame: month
-        geo: configurable
-        domains: []
+        timeFrame: year
+        geo: global
         unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains: []
-        unit: 1
-        price: custom
+        price: contact sales
         userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Adobe Analytics 2.0 API
-      - name: Adobe Experience Platform API
-      - name: Adobe Target API
-      - name: Adobe Journey Optimizer API
-      - name: Adobe Campaign API
-      - name: Adobe I/O Events
+      - name: Real-Time CDP
+      - name: Experience Platform APIs
+      - name: Identity Service
+      - name: Edge Network
+  - id: adobe-experience-cloud-cja
+    name: Customer Journey Analytics
+    type: enterprise
+    description: >-
+      Cross-channel analytics built on Experience Platform; priced by
+      analyzable rows and connected datasets.
+    entries:
+      - label: CJA subscription
+        name: cja_subscription
+        type: subscription
+        metric: row
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: Cross-channel Workspace
+      - name: BI extension
+      - name: Reporting API
+  - id: adobe-experience-cloud-target
+    name: Adobe Target
+    type: enterprise
+    description: >-
+      A/B testing and personalization product priced by qualified visitors
+      and activations.
+    entries:
+      - label: Target subscription
+        name: target_subscription
+        type: subscription
+        metric: visitor
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: A/B and multivariate testing
+      - name: Server-side decisioning
+      - name: Recommendations
+  - id: adobe-experience-cloud-journey-optimizer
+    name: Adobe Journey Optimizer
+    type: enterprise
+    description: >-
+      Real-time orchestration product for triggered cross-channel customer
+      journeys; priced by addressable profiles and message volume.
+    entries:
+      - label: AJO subscription
+        name: ajo_subscription
+        type: subscription
+        metric: profile
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: Real-time journey orchestration
+      - name: Message delivery (email, SMS, push, in-app)
+      - name: Decisioning
+  - id: adobe-experience-cloud-aem
+    name: Adobe Experience Manager (AEM)
+    type: enterprise
+    description: >-
+      Enterprise CMS / DAM. Priced by managed-service tier and asset volume.
+    entries:
+      - label: AEM subscription
+        name: aem_subscription
+        type: subscription
+        metric: tenant
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: AEM Sites (CMS)
+      - name: AEM Assets (DAM)
+      - name: Headless content APIs
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
