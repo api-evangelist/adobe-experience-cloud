@@ -206,19 +206,19 @@ common:
   url: capabilities/digital-marketing.yaml
 - type: Vocabulary
   url: vocabulary/adobe-experience-cloud-vocabulary.yaml
-- type: JSON-LD
+- type: JSONLD
   url: json-ld/adobe-experience-cloud-analytics-api-context.jsonld
-- type: JSON-LD
+- type: JSONLD
   url: json-ld/adobe-experience-cloud-campaign-api-context.jsonld
-- type: JSON-LD
+- type: JSONLD
   url: json-ld/adobe-experience-cloud-context.jsonld
-- type: JSON-LD
+- type: JSONLD
   url: json-ld/adobe-experience-cloud-experience-platform-api-context.jsonld
-- type: JSON-LD
+- type: JSONLD
   url: json-ld/adobe-experience-cloud-io-events-context.jsonld
-- type: JSON-LD
+- type: JSONLD
   url: json-ld/adobe-experience-cloud-journey-optimizer-api-context.jsonld
-- type: JSON-LD
+- type: JSONLD
   url: json-ld/adobe-experience-cloud-target-api-context.jsonld
 created: '2025-01-01'
 modified: '2026-04-19'
