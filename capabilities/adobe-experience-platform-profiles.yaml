@@ -1,0 +1,96 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Cloud Adobe Experience Platform API — Profiles
+  description: 'Adobe Experience Cloud Adobe Experience Platform API — Profiles. 1 operations. Lead operation: Adobe Experience
+    Platform Adobe Experience Cloud Get Profile Entities. Self-contained Naftiko capability covering one Adobe Experience
+    Cloud business surface.'
+  tags:
+  - Adobe Experience Cloud
+  - Profiles
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_EXPERIENCE_CLOUD_API_KEY: ADOBE_EXPERIENCE_CLOUD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: adobe-experience-platform-profiles
+    baseUri: https://platform.adobe.io
+    description: Adobe Experience Cloud Adobe Experience Platform API — Profiles business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: data-core-ups-access-entities
+      path: /data/core/ups/access/entities
+      operations:
+      - name: getprofileentities
+        method: GET
+        description: Adobe Experience Platform Adobe Experience Cloud Get Profile Entities
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: schema.name
+          in: query
+          type: string
+          description: XDM schema name for the entity type.
+          required: true
+        - name: entityId
+          in: query
+          type: string
+          description: The identity value to look up.
+          required: true
+        - name: entityIdNS
+          in: query
+          type: string
+          description: Identity namespace code.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_EXPERIENCE_CLOUD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: adobe-experience-platform-profiles-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Cloud Adobe Experience Platform API — Profiles. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/data/core/ups/access/entities
+      name: data-core-ups-access-entities
+      description: REST surface for data-core-ups-access-entities.
+      operations:
+      - method: GET
+        name: getprofileentities
+        description: Adobe Experience Platform Adobe Experience Cloud Get Profile Entities
+        call: adobe-experience-platform-profiles.getprofileentities
+        with:
+          schema.name: rest.schema.name
+          entityId: rest.entityId
+          entityIdNS: rest.entityIdNS
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: adobe-experience-platform-profiles-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Cloud Adobe Experience Platform API — Profiles. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: adobe-experience-platform-adobe-experience
+      description: Adobe Experience Platform Adobe Experience Cloud Get Profile Entities
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-experience-platform-profiles.getprofileentities
+      with:
+        schema.name: tools.schema.name
+        entityId: tools.entityId
+        entityIdNS: tools.entityIdNS
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,86 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Cloud Adobe Analytics 2.0 API — Metrics
+  description: 'Adobe Experience Cloud Adobe Analytics 2.0 API — Metrics. 1 operations. Lead operation: Adobe Analytics Adobe
+    Experience Cloud List Metrics. Self-contained Naftiko capability covering one Adobe Experience Cloud business surface.'
+  tags:
+  - Adobe Experience Cloud
+  - Metrics
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_EXPERIENCE_CLOUD_API_KEY: ADOBE_EXPERIENCE_CLOUD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: adobe-analytics-metrics
+    baseUri: https://analytics.adobe.io
+    description: Adobe Experience Cloud Adobe Analytics 2.0 API — Metrics business capability. Self-contained, no shared references.
+    resources:
+    - name: api-companyId-metrics
+      path: /api/{companyId}/metrics
+      operations:
+      - name: listmetrics
+        method: GET
+        description: Adobe Analytics Adobe Experience Cloud List Metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: companyId
+          in: path
+          type: string
+          required: true
+        - name: rsid
+          in: query
+          type: string
+          description: Report suite ID.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_EXPERIENCE_CLOUD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: adobe-analytics-metrics-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Cloud Adobe Analytics 2.0 API — Metrics. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/{companyid}/metrics
+      name: api-companyid-metrics
+      description: REST surface for api-companyId-metrics.
+      operations:
+      - method: GET
+        name: listmetrics
+        description: Adobe Analytics Adobe Experience Cloud List Metrics
+        call: adobe-analytics-metrics.listmetrics
+        with:
+          companyId: rest.companyId
+          rsid: rest.rsid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: adobe-analytics-metrics-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Cloud Adobe Analytics 2.0 API — Metrics. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: adobe-analytics-adobe-experience-cloud
+      description: Adobe Analytics Adobe Experience Cloud List Metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-analytics-metrics.listmetrics
+      with:
+        companyId: tools.companyId
+        rsid: tools.rsid
+      outputParameters:
+      - type: object
+        mapping: $.

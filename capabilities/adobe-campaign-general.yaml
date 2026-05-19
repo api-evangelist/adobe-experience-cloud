@@ -1,0 +1,201 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Cloud Adobe Campaign API
+  description: 'Adobe Experience Cloud Adobe Campaign API. 4 operations. Lead operation: Adobe Campaign Adobe Experience Cloud
+    List Services. Self-contained Naftiko capability covering one Adobe Experience Cloud business surface.'
+  tags:
+  - Adobe Experience Cloud
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_EXPERIENCE_CLOUD_API_KEY: ADOBE_EXPERIENCE_CLOUD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: adobe-campaign-general
+    baseUri: https://mc.adobe.io/{organization}
+    description: Adobe Experience Cloud Adobe Campaign API business capability. Self-contained, no shared references.
+    resources:
+    - name: campaign-profileAndServices-service
+      path: /campaign/profileAndServices/service
+      operations:
+      - name: listservices
+        method: GET
+        description: Adobe Campaign Adobe Experience Cloud List Services
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: _lineCount
+          in: query
+          type: integer
+      - name: createservice
+        method: POST
+        description: Adobe Campaign Adobe Experience Cloud Create a Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: campaign-profileAndServices-service-servicePKey
+      path: /campaign/profileAndServices/service/{servicePKey}
+      operations:
+      - name: getservice
+        method: GET
+        description: Adobe Campaign Adobe Experience Cloud Get a Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: servicePKey
+          in: path
+          type: string
+          required: true
+    - name: campaign-profileAndServices-service-servicePKey-subscriptions
+      path: /campaign/profileAndServices/service/{servicePKey}/subscriptions
+      operations:
+      - name: subscribeprofile
+        method: POST
+        description: Adobe Campaign Adobe Experience Cloud Subscribe a Profile to a Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: servicePKey
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_EXPERIENCE_CLOUD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: adobe-campaign-general-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Cloud Adobe Campaign API. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/campaign/profileandservices/service
+      name: campaign-profileandservices-service
+      description: REST surface for campaign-profileAndServices-service.
+      operations:
+      - method: GET
+        name: listservices
+        description: Adobe Campaign Adobe Experience Cloud List Services
+        call: adobe-campaign-general.listservices
+        with:
+          _lineCount: rest._lineCount
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createservice
+        description: Adobe Campaign Adobe Experience Cloud Create a Service
+        call: adobe-campaign-general.createservice
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/campaign/profileandservices/service/{servicepkey}
+      name: campaign-profileandservices-service-servicepkey
+      description: REST surface for campaign-profileAndServices-service-servicePKey.
+      operations:
+      - method: GET
+        name: getservice
+        description: Adobe Campaign Adobe Experience Cloud Get a Service
+        call: adobe-campaign-general.getservice
+        with:
+          servicePKey: rest.servicePKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/campaign/profileandservices/service/{servicepkey}/subscriptions
+      name: campaign-profileandservices-service-servicepkey-subscriptions
+      description: REST surface for campaign-profileAndServices-service-servicePKey-subscriptions.
+      operations:
+      - method: POST
+        name: subscribeprofile
+        description: Adobe Campaign Adobe Experience Cloud Subscribe a Profile to a Service
+        call: adobe-campaign-general.subscribeprofile
+        with:
+          servicePKey: rest.servicePKey
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: adobe-campaign-general-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Cloud Adobe Campaign API. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: adobe-campaign-adobe-experience-cloud
+      description: Adobe Campaign Adobe Experience Cloud List Services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-campaign-general.listservices
+      with:
+        _lineCount: tools._lineCount
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-adobe-experience-cloud-2
+      description: Adobe Campaign Adobe Experience Cloud Create a Service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: adobe-campaign-general.createservice
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-adobe-experience-cloud-3
+      description: Adobe Campaign Adobe Experience Cloud Get a Service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-campaign-general.getservice
+      with:
+        servicePKey: tools.servicePKey
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-adobe-experience-cloud-4
+      description: Adobe Campaign Adobe Experience Cloud Subscribe a Profile to a Service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: adobe-campaign-general.subscribeprofile
+      with:
+        servicePKey: tools.servicePKey
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,239 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Cloud Adobe Experience Platform API — Schemas
+  description: 'Adobe Experience Cloud Adobe Experience Platform API — Schemas. 5 operations. Lead operation: Adobe Experience
+    Platform Adobe Experience Cloud List Schemas. Self-contained Naftiko capability covering one Adobe Experience Cloud business
+    surface.'
+  tags:
+  - Adobe Experience Cloud
+  - Schemas
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_EXPERIENCE_CLOUD_API_KEY: ADOBE_EXPERIENCE_CLOUD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: adobe-experience-platform-schemas
+    baseUri: https://platform.adobe.io
+    description: Adobe Experience Cloud Adobe Experience Platform API — Schemas business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: data-foundation-schemaregistry-tenant-schemas
+      path: /data/foundation/schemaregistry/tenant/schemas
+      operations:
+      - name: listschemas
+        method: GET
+        description: Adobe Experience Platform Adobe Experience Cloud List Schemas
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of results per page.
+        - name: start
+          in: query
+          type: string
+          description: Pagination cursor for the next page of results.
+      - name: createschema
+        method: POST
+        description: Adobe Experience Platform Adobe Experience Cloud Create a Schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: data-foundation-schemaregistry-tenant-schemas-schemaId
+      path: /data/foundation/schemaregistry/tenant/schemas/{schemaId}
+      operations:
+      - name: getschema
+        method: GET
+        description: Adobe Experience Platform Adobe Experience Cloud Get a Schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: schemaId
+          in: path
+          type: string
+          description: URL-encoded schema meta:altId or $id.
+          required: true
+      - name: updateschema
+        method: PUT
+        description: Adobe Experience Platform Adobe Experience Cloud Update a Schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: schemaId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteschema
+        method: DELETE
+        description: Adobe Experience Platform Adobe Experience Cloud Delete a Schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: schemaId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_EXPERIENCE_CLOUD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: adobe-experience-platform-schemas-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Cloud Adobe Experience Platform API — Schemas. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/data/foundation/schemaregistry/tenant/schemas
+      name: data-foundation-schemaregistry-tenant-schemas
+      description: REST surface for data-foundation-schemaregistry-tenant-schemas.
+      operations:
+      - method: GET
+        name: listschemas
+        description: Adobe Experience Platform Adobe Experience Cloud List Schemas
+        call: adobe-experience-platform-schemas.listschemas
+        with:
+          limit: rest.limit
+          start: rest.start
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createschema
+        description: Adobe Experience Platform Adobe Experience Cloud Create a Schema
+        call: adobe-experience-platform-schemas.createschema
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/data/foundation/schemaregistry/tenant/schemas/{schemaid}
+      name: data-foundation-schemaregistry-tenant-schemas-schemaid
+      description: REST surface for data-foundation-schemaregistry-tenant-schemas-schemaId.
+      operations:
+      - method: GET
+        name: getschema
+        description: Adobe Experience Platform Adobe Experience Cloud Get a Schema
+        call: adobe-experience-platform-schemas.getschema
+        with:
+          schemaId: rest.schemaId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateschema
+        description: Adobe Experience Platform Adobe Experience Cloud Update a Schema
+        call: adobe-experience-platform-schemas.updateschema
+        with:
+          schemaId: rest.schemaId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteschema
+        description: Adobe Experience Platform Adobe Experience Cloud Delete a Schema
+        call: adobe-experience-platform-schemas.deleteschema
+        with:
+          schemaId: rest.schemaId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: adobe-experience-platform-schemas-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Cloud Adobe Experience Platform API — Schemas. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: adobe-experience-platform-adobe-experience
+      description: Adobe Experience Platform Adobe Experience Cloud List Schemas
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-experience-platform-schemas.listschemas
+      with:
+        limit: tools.limit
+        start: tools.start
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-experience-platform-adobe-experience-2
+      description: Adobe Experience Platform Adobe Experience Cloud Create a Schema
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: adobe-experience-platform-schemas.createschema
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-experience-platform-adobe-experience-3
+      description: Adobe Experience Platform Adobe Experience Cloud Get a Schema
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-experience-platform-schemas.getschema
+      with:
+        schemaId: tools.schemaId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-experience-platform-adobe-experience-4
+      description: Adobe Experience Platform Adobe Experience Cloud Update a Schema
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: adobe-experience-platform-schemas.updateschema
+      with:
+        schemaId: tools.schemaId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-experience-platform-adobe-experience-5
+      description: Adobe Experience Platform Adobe Experience Cloud Delete a Schema
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: adobe-experience-platform-schemas.deleteschema
+      with:
+        schemaId: tools.schemaId
+      outputParameters:
+      - type: object
+        mapping: $.

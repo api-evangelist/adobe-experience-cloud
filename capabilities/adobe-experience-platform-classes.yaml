@@ -1,0 +1,72 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Cloud Adobe Experience Platform API — Classes
+  description: 'Adobe Experience Cloud Adobe Experience Platform API — Classes. 1 operations. Lead operation: Adobe Experience
+    Platform Adobe Experience Cloud List Classes. Self-contained Naftiko capability covering one Adobe Experience Cloud business
+    surface.'
+  tags:
+  - Adobe Experience Cloud
+  - Classes
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_EXPERIENCE_CLOUD_API_KEY: ADOBE_EXPERIENCE_CLOUD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: adobe-experience-platform-classes
+    baseUri: https://platform.adobe.io
+    description: Adobe Experience Cloud Adobe Experience Platform API — Classes business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: data-foundation-schemaregistry-tenant-classes
+      path: /data/foundation/schemaregistry/tenant/classes
+      operations:
+      - name: listclasses
+        method: GET
+        description: Adobe Experience Platform Adobe Experience Cloud List Classes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_EXPERIENCE_CLOUD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: adobe-experience-platform-classes-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Cloud Adobe Experience Platform API — Classes. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/data/foundation/schemaregistry/tenant/classes
+      name: data-foundation-schemaregistry-tenant-classes
+      description: REST surface for data-foundation-schemaregistry-tenant-classes.
+      operations:
+      - method: GET
+        name: listclasses
+        description: Adobe Experience Platform Adobe Experience Cloud List Classes
+        call: adobe-experience-platform-classes.listclasses
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: adobe-experience-platform-classes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Cloud Adobe Experience Platform API — Classes. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: adobe-experience-platform-adobe-experience
+      description: Adobe Experience Platform Adobe Experience Cloud List Classes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-experience-platform-classes.listclasses
+      outputParameters:
+      - type: object
+        mapping: $.

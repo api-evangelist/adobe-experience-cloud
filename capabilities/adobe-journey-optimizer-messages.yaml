@@ -1,0 +1,190 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Cloud Adobe Journey Optimizer API — Messages
+  description: 'Adobe Experience Cloud Adobe Journey Optimizer API — Messages. 4 operations. Lead operation: Adobe Journey
+    Optimizer Adobe Experience Cloud List Messages. Self-contained Naftiko capability covering one Adobe Experience Cloud
+    business surface.'
+  tags:
+  - Adobe Experience Cloud
+  - Messages
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_EXPERIENCE_CLOUD_API_KEY: ADOBE_EXPERIENCE_CLOUD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: adobe-journey-optimizer-messages
+    baseUri: https://platform.adobe.io
+    description: Adobe Experience Cloud Adobe Journey Optimizer API — Messages business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: messaging-messages
+      path: /messaging/messages
+      operations:
+      - name: listmessages
+        method: GET
+        description: Adobe Journey Optimizer Adobe Experience Cloud List Messages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+      - name: createmessage
+        method: POST
+        description: Adobe Journey Optimizer Adobe Experience Cloud Create a Message
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: messaging-messages-messageId
+      path: /messaging/messages/{messageId}
+      operations:
+      - name: getmessage
+        method: GET
+        description: Adobe Journey Optimizer Adobe Experience Cloud Get a Message
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: messageId
+          in: path
+          type: string
+          required: true
+      - name: deletemessage
+        method: DELETE
+        description: Adobe Journey Optimizer Adobe Experience Cloud Delete a Message
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: messageId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_EXPERIENCE_CLOUD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: adobe-journey-optimizer-messages-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Cloud Adobe Journey Optimizer API — Messages. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/messaging/messages
+      name: messaging-messages
+      description: REST surface for messaging-messages.
+      operations:
+      - method: GET
+        name: listmessages
+        description: Adobe Journey Optimizer Adobe Experience Cloud List Messages
+        call: adobe-journey-optimizer-messages.listmessages
+        with:
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createmessage
+        description: Adobe Journey Optimizer Adobe Experience Cloud Create a Message
+        call: adobe-journey-optimizer-messages.createmessage
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/messaging/messages/{messageid}
+      name: messaging-messages-messageid
+      description: REST surface for messaging-messages-messageId.
+      operations:
+      - method: GET
+        name: getmessage
+        description: Adobe Journey Optimizer Adobe Experience Cloud Get a Message
+        call: adobe-journey-optimizer-messages.getmessage
+        with:
+          messageId: rest.messageId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletemessage
+        description: Adobe Journey Optimizer Adobe Experience Cloud Delete a Message
+        call: adobe-journey-optimizer-messages.deletemessage
+        with:
+          messageId: rest.messageId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: adobe-journey-optimizer-messages-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Cloud Adobe Journey Optimizer API — Messages. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: adobe-journey-optimizer-adobe-experience
+      description: Adobe Journey Optimizer Adobe Experience Cloud List Messages
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-journey-optimizer-messages.listmessages
+      with:
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-journey-optimizer-adobe-experience-2
+      description: Adobe Journey Optimizer Adobe Experience Cloud Create a Message
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: adobe-journey-optimizer-messages.createmessage
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-journey-optimizer-adobe-experience-3
+      description: Adobe Journey Optimizer Adobe Experience Cloud Get a Message
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-journey-optimizer-messages.getmessage
+      with:
+        messageId: tools.messageId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-journey-optimizer-adobe-experience-4
+      description: Adobe Journey Optimizer Adobe Experience Cloud Delete a Message
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: adobe-journey-optimizer-messages.deletemessage
+      with:
+        messageId: tools.messageId
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,167 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Cloud Adobe Campaign API — Workflows
+  description: 'Adobe Experience Cloud Adobe Campaign API — Workflows. 3 operations. Lead operation: Adobe Campaign Adobe
+    Experience Cloud List Workflows. Self-contained Naftiko capability covering one Adobe Experience Cloud business surface.'
+  tags:
+  - Adobe Experience Cloud
+  - Workflows
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_EXPERIENCE_CLOUD_API_KEY: ADOBE_EXPERIENCE_CLOUD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: adobe-campaign-workflows
+    baseUri: https://mc.adobe.io/{organization}
+    description: Adobe Experience Cloud Adobe Campaign API — Workflows business capability. Self-contained, no shared references.
+    resources:
+    - name: campaign-workflow
+      path: /campaign/workflow
+      operations:
+      - name: listworkflows
+        method: GET
+        description: Adobe Campaign Adobe Experience Cloud List Workflows
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: _lineCount
+          in: query
+          type: integer
+    - name: campaign-workflow-workflowPKey
+      path: /campaign/workflow/{workflowPKey}
+      operations:
+      - name: getworkflow
+        method: GET
+        description: Adobe Campaign Adobe Experience Cloud Get a Workflow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: workflowPKey
+          in: path
+          type: string
+          required: true
+    - name: campaign-workflow-workflowPKey-commands
+      path: /campaign/workflow/{workflowPKey}/commands
+      operations:
+      - name: executeworkflowcommand
+        method: POST
+        description: Adobe Campaign Adobe Experience Cloud Execute a Workflow Command
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: workflowPKey
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_EXPERIENCE_CLOUD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: adobe-campaign-workflows-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Cloud Adobe Campaign API — Workflows. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/campaign/workflow
+      name: campaign-workflow
+      description: REST surface for campaign-workflow.
+      operations:
+      - method: GET
+        name: listworkflows
+        description: Adobe Campaign Adobe Experience Cloud List Workflows
+        call: adobe-campaign-workflows.listworkflows
+        with:
+          _lineCount: rest._lineCount
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/campaign/workflow/{workflowpkey}
+      name: campaign-workflow-workflowpkey
+      description: REST surface for campaign-workflow-workflowPKey.
+      operations:
+      - method: GET
+        name: getworkflow
+        description: Adobe Campaign Adobe Experience Cloud Get a Workflow
+        call: adobe-campaign-workflows.getworkflow
+        with:
+          workflowPKey: rest.workflowPKey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/campaign/workflow/{workflowpkey}/commands
+      name: campaign-workflow-workflowpkey-commands
+      description: REST surface for campaign-workflow-workflowPKey-commands.
+      operations:
+      - method: POST
+        name: executeworkflowcommand
+        description: Adobe Campaign Adobe Experience Cloud Execute a Workflow Command
+        call: adobe-campaign-workflows.executeworkflowcommand
+        with:
+          workflowPKey: rest.workflowPKey
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: adobe-campaign-workflows-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Cloud Adobe Campaign API — Workflows. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: adobe-campaign-adobe-experience-cloud
+      description: Adobe Campaign Adobe Experience Cloud List Workflows
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-campaign-workflows.listworkflows
+      with:
+        _lineCount: tools._lineCount
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-adobe-experience-cloud-2
+      description: Adobe Campaign Adobe Experience Cloud Get a Workflow
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-campaign-workflows.getworkflow
+      with:
+        workflowPKey: tools.workflowPKey
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-adobe-experience-cloud-3
+      description: Adobe Campaign Adobe Experience Cloud Execute a Workflow Command
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: adobe-campaign-workflows.executeworkflowcommand
+      with:
+        workflowPKey: tools.workflowPKey
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

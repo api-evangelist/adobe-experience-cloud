@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Cloud Adobe Campaign API — Metadata
+  description: 'Adobe Experience Cloud Adobe Campaign API — Metadata. 1 operations. Lead operation: Adobe Campaign Adobe Experience
+    Cloud List Resource Metadata. Self-contained Naftiko capability covering one Adobe Experience Cloud business surface.'
+  tags:
+  - Adobe Experience Cloud
+  - Metadata
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_EXPERIENCE_CLOUD_API_KEY: ADOBE_EXPERIENCE_CLOUD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: adobe-campaign-metadata
+    baseUri: https://mc.adobe.io/{organization}
+    description: Adobe Experience Cloud Adobe Campaign API — Metadata business capability. Self-contained, no shared references.
+    resources:
+    - name: campaign-profileAndServicesExt-resourceType
+      path: /campaign/profileAndServicesExt/resourceType
+      operations:
+      - name: listmetadata
+        method: GET
+        description: Adobe Campaign Adobe Experience Cloud List Resource Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_EXPERIENCE_CLOUD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: adobe-campaign-metadata-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Cloud Adobe Campaign API — Metadata. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/campaign/profileandservicesext/resourcetype
+      name: campaign-profileandservicesext-resourcetype
+      description: REST surface for campaign-profileAndServicesExt-resourceType.
+      operations:
+      - method: GET
+        name: listmetadata
+        description: Adobe Campaign Adobe Experience Cloud List Resource Metadata
+        call: adobe-campaign-metadata.listmetadata
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: adobe-campaign-metadata-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Cloud Adobe Campaign API — Metadata. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: adobe-campaign-adobe-experience-cloud
+      description: Adobe Campaign Adobe Experience Cloud List Resource Metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-campaign-metadata.listmetadata
+      outputParameters:
+      - type: object
+        mapping: $.

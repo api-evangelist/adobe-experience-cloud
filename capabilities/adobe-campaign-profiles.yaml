@@ -1,0 +1,243 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Cloud Adobe Campaign API — Profiles
+  description: 'Adobe Experience Cloud Adobe Campaign API — Profiles. 5 operations. Lead operation: Adobe Campaign Adobe Experience
+    Cloud List Profiles. Self-contained Naftiko capability covering one Adobe Experience Cloud business surface.'
+  tags:
+  - Adobe Experience Cloud
+  - Profiles
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_EXPERIENCE_CLOUD_API_KEY: ADOBE_EXPERIENCE_CLOUD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: adobe-campaign-profiles
+    baseUri: https://mc.adobe.io/{organization}
+    description: Adobe Experience Cloud Adobe Campaign API — Profiles business capability. Self-contained, no shared references.
+    resources:
+    - name: campaign-profileAndServices-profile
+      path: /campaign/profileAndServices/profile
+      operations:
+      - name: listprofiles
+        method: GET
+        description: Adobe Campaign Adobe Experience Cloud List Profiles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: _lineCount
+          in: query
+          type: integer
+          description: Maximum number of profiles to return per page.
+        - name: _lineStart
+          in: query
+          type: integer
+          description: Starting line number for pagination.
+        - name: email
+          in: query
+          type: string
+          description: Filter profiles by email address.
+      - name: createprofile
+        method: POST
+        description: Adobe Campaign Adobe Experience Cloud Create a Profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: campaign-profileAndServices-profile-profilePKey
+      path: /campaign/profileAndServices/profile/{profilePKey}
+      operations:
+      - name: getprofile
+        method: GET
+        description: Adobe Campaign Adobe Experience Cloud Get a Profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: profilePKey
+          in: path
+          type: string
+          description: The primary key of the profile.
+          required: true
+      - name: updateprofile
+        method: PATCH
+        description: Adobe Campaign Adobe Experience Cloud Update a Profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: profilePKey
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteprofile
+        method: DELETE
+        description: Adobe Campaign Adobe Experience Cloud Delete a Profile
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: profilePKey
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_EXPERIENCE_CLOUD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: adobe-campaign-profiles-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Cloud Adobe Campaign API — Profiles. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/campaign/profileandservices/profile
+      name: campaign-profileandservices-profile
+      description: REST surface for campaign-profileAndServices-profile.
+      operations:
+      - method: GET
+        name: listprofiles
+        description: Adobe Campaign Adobe Experience Cloud List Profiles
+        call: adobe-campaign-profiles.listprofiles
+        with:
+          _lineCount: rest._lineCount
+          _lineStart: rest._lineStart
+          email: rest.email
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createprofile
+        description: Adobe Campaign Adobe Experience Cloud Create a Profile
+        call: adobe-campaign-profiles.createprofile
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/campaign/profileandservices/profile/{profilepkey}
+      name: campaign-profileandservices-profile-profilepkey
+      description: REST surface for campaign-profileAndServices-profile-profilePKey.
+      operations:
+      - method: GET
+        name: getprofile
+        description: Adobe Campaign Adobe Experience Cloud Get a Profile
+        call: adobe-campaign-profiles.getprofile
+        with:
+          profilePKey: rest.profilePKey
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateprofile
+        description: Adobe Campaign Adobe Experience Cloud Update a Profile
+        call: adobe-campaign-profiles.updateprofile
+        with:
+          profilePKey: rest.profilePKey
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteprofile
+        description: Adobe Campaign Adobe Experience Cloud Delete a Profile
+        call: adobe-campaign-profiles.deleteprofile
+        with:
+          profilePKey: rest.profilePKey
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: adobe-campaign-profiles-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Cloud Adobe Campaign API — Profiles. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: adobe-campaign-adobe-experience-cloud
+      description: Adobe Campaign Adobe Experience Cloud List Profiles
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-campaign-profiles.listprofiles
+      with:
+        _lineCount: tools._lineCount
+        _lineStart: tools._lineStart
+        email: tools.email
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-adobe-experience-cloud-2
+      description: Adobe Campaign Adobe Experience Cloud Create a Profile
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: adobe-campaign-profiles.createprofile
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-adobe-experience-cloud-3
+      description: Adobe Campaign Adobe Experience Cloud Get a Profile
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-campaign-profiles.getprofile
+      with:
+        profilePKey: tools.profilePKey
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-adobe-experience-cloud-4
+      description: Adobe Campaign Adobe Experience Cloud Update a Profile
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: adobe-campaign-profiles.updateprofile
+      with:
+        profilePKey: tools.profilePKey
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-adobe-experience-cloud-5
+      description: Adobe Campaign Adobe Experience Cloud Delete a Profile
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: adobe-campaign-profiles.deleteprofile
+      with:
+        profilePKey: tools.profilePKey
+      outputParameters:
+      - type: object
+        mapping: $.

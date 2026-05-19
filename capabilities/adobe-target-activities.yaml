@@ -1,0 +1,291 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Cloud Adobe Target API — Activities
+  description: 'Adobe Experience Cloud Adobe Target API — Activities. 6 operations. Lead operation: Adobe Target Adobe Experience
+    Cloud List Activities. Self-contained Naftiko capability covering one Adobe Experience Cloud business surface.'
+  tags:
+  - Adobe Experience Cloud
+  - Activities
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_EXPERIENCE_CLOUD_API_KEY: ADOBE_EXPERIENCE_CLOUD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: adobe-target-activities
+    baseUri: https://mc.adobe.io/{tenant}
+    description: Adobe Experience Cloud Adobe Target API — Activities business capability. Self-contained, no shared references.
+    resources:
+    - name: target-activities
+      path: /target/activities
+      operations:
+      - name: listactivities
+        method: GET
+        description: Adobe Target Adobe Experience Cloud List Activities
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of activities to return.
+        - name: offset
+          in: query
+          type: integer
+          description: Number of activities to skip for pagination.
+        - name: sortBy
+          in: query
+          type: string
+          description: Field to sort results by.
+      - name: createactivity
+        method: POST
+        description: Adobe Target Adobe Experience Cloud Create an Activity
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: target-activities-activityId
+      path: /target/activities/{activityId}
+      operations:
+      - name: getactivity
+        method: GET
+        description: Adobe Target Adobe Experience Cloud Get an Activity
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: activityId
+          in: path
+          type: integer
+          description: The Target activity ID.
+          required: true
+      - name: updateactivity
+        method: PUT
+        description: Adobe Target Adobe Experience Cloud Update an Activity
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: activityId
+          in: path
+          type: integer
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteactivity
+        method: DELETE
+        description: Adobe Target Adobe Experience Cloud Delete an Activity
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: activityId
+          in: path
+          type: integer
+          required: true
+    - name: target-activities-activityId-state
+      path: /target/activities/{activityId}/state
+      operations:
+      - name: updateactivitystate
+        method: PUT
+        description: Adobe Target Adobe Experience Cloud Update Activity State
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: activityId
+          in: path
+          type: integer
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_EXPERIENCE_CLOUD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: adobe-target-activities-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Cloud Adobe Target API — Activities. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/target/activities
+      name: target-activities
+      description: REST surface for target-activities.
+      operations:
+      - method: GET
+        name: listactivities
+        description: Adobe Target Adobe Experience Cloud List Activities
+        call: adobe-target-activities.listactivities
+        with:
+          limit: rest.limit
+          offset: rest.offset
+          sortBy: rest.sortBy
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createactivity
+        description: Adobe Target Adobe Experience Cloud Create an Activity
+        call: adobe-target-activities.createactivity
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/target/activities/{activityid}
+      name: target-activities-activityid
+      description: REST surface for target-activities-activityId.
+      operations:
+      - method: GET
+        name: getactivity
+        description: Adobe Target Adobe Experience Cloud Get an Activity
+        call: adobe-target-activities.getactivity
+        with:
+          activityId: rest.activityId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateactivity
+        description: Adobe Target Adobe Experience Cloud Update an Activity
+        call: adobe-target-activities.updateactivity
+        with:
+          activityId: rest.activityId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteactivity
+        description: Adobe Target Adobe Experience Cloud Delete an Activity
+        call: adobe-target-activities.deleteactivity
+        with:
+          activityId: rest.activityId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/target/activities/{activityid}/state
+      name: target-activities-activityid-state
+      description: REST surface for target-activities-activityId-state.
+      operations:
+      - method: PUT
+        name: updateactivitystate
+        description: Adobe Target Adobe Experience Cloud Update Activity State
+        call: adobe-target-activities.updateactivitystate
+        with:
+          activityId: rest.activityId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: adobe-target-activities-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Cloud Adobe Target API — Activities. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: adobe-target-adobe-experience-cloud
+      description: Adobe Target Adobe Experience Cloud List Activities
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-target-activities.listactivities
+      with:
+        limit: tools.limit
+        offset: tools.offset
+        sortBy: tools.sortBy
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-target-adobe-experience-cloud-2
+      description: Adobe Target Adobe Experience Cloud Create an Activity
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: adobe-target-activities.createactivity
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-target-adobe-experience-cloud-3
+      description: Adobe Target Adobe Experience Cloud Get an Activity
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-target-activities.getactivity
+      with:
+        activityId: tools.activityId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-target-adobe-experience-cloud-4
+      description: Adobe Target Adobe Experience Cloud Update an Activity
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: adobe-target-activities.updateactivity
+      with:
+        activityId: tools.activityId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-target-adobe-experience-cloud-5
+      description: Adobe Target Adobe Experience Cloud Delete an Activity
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: adobe-target-activities.deleteactivity
+      with:
+        activityId: tools.activityId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-target-adobe-experience-cloud-6
+      description: Adobe Target Adobe Experience Cloud Update Activity State
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: adobe-target-activities.updateactivitystate
+      with:
+        activityId: tools.activityId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

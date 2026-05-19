@@ -1,0 +1,182 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Cloud Adobe Experience Platform API — Sandboxes
+  description: 'Adobe Experience Cloud Adobe Experience Platform API — Sandboxes. 4 operations. Lead operation: Adobe Experience
+    Platform Adobe Experience Cloud List Sandboxes. Self-contained Naftiko capability covering one Adobe Experience Cloud
+    business surface.'
+  tags:
+  - Adobe Experience Cloud
+  - Sandboxes
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_EXPERIENCE_CLOUD_API_KEY: ADOBE_EXPERIENCE_CLOUD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: adobe-experience-platform-sandboxes
+    baseUri: https://platform.adobe.io
+    description: Adobe Experience Cloud Adobe Experience Platform API — Sandboxes business capability. Self-contained, no
+      shared references.
+    resources:
+    - name: data-foundation-sandbox-management-sandboxes
+      path: /data/foundation/sandbox-management/sandboxes
+      operations:
+      - name: listsandboxes
+        method: GET
+        description: Adobe Experience Platform Adobe Experience Cloud List Sandboxes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createsandbox
+        method: POST
+        description: Adobe Experience Platform Adobe Experience Cloud Create a Sandbox
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: data-foundation-sandbox-management-sandboxes-sandboxName
+      path: /data/foundation/sandbox-management/sandboxes/{sandboxName}
+      operations:
+      - name: getsandbox
+        method: GET
+        description: Adobe Experience Platform Adobe Experience Cloud Get a Sandbox
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sandboxName
+          in: path
+          type: string
+          required: true
+      - name: deletesandbox
+        method: DELETE
+        description: Adobe Experience Platform Adobe Experience Cloud Delete a Sandbox
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: sandboxName
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_EXPERIENCE_CLOUD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: adobe-experience-platform-sandboxes-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Cloud Adobe Experience Platform API — Sandboxes. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/data/foundation/sandbox-management/sandboxes
+      name: data-foundation-sandbox-management-sandboxes
+      description: REST surface for data-foundation-sandbox-management-sandboxes.
+      operations:
+      - method: GET
+        name: listsandboxes
+        description: Adobe Experience Platform Adobe Experience Cloud List Sandboxes
+        call: adobe-experience-platform-sandboxes.listsandboxes
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createsandbox
+        description: Adobe Experience Platform Adobe Experience Cloud Create a Sandbox
+        call: adobe-experience-platform-sandboxes.createsandbox
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/data/foundation/sandbox-management/sandboxes/{sandboxname}
+      name: data-foundation-sandbox-management-sandboxes-sandboxname
+      description: REST surface for data-foundation-sandbox-management-sandboxes-sandboxName.
+      operations:
+      - method: GET
+        name: getsandbox
+        description: Adobe Experience Platform Adobe Experience Cloud Get a Sandbox
+        call: adobe-experience-platform-sandboxes.getsandbox
+        with:
+          sandboxName: rest.sandboxName
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletesandbox
+        description: Adobe Experience Platform Adobe Experience Cloud Delete a Sandbox
+        call: adobe-experience-platform-sandboxes.deletesandbox
+        with:
+          sandboxName: rest.sandboxName
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: adobe-experience-platform-sandboxes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Cloud Adobe Experience Platform API — Sandboxes. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: adobe-experience-platform-adobe-experience
+      description: Adobe Experience Platform Adobe Experience Cloud List Sandboxes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-experience-platform-sandboxes.listsandboxes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-experience-platform-adobe-experience-2
+      description: Adobe Experience Platform Adobe Experience Cloud Create a Sandbox
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: adobe-experience-platform-sandboxes.createsandbox
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-experience-platform-adobe-experience-3
+      description: Adobe Experience Platform Adobe Experience Cloud Get a Sandbox
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-experience-platform-sandboxes.getsandbox
+      with:
+        sandboxName: tools.sandboxName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-experience-platform-adobe-experience-4
+      description: Adobe Experience Platform Adobe Experience Cloud Delete a Sandbox
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: adobe-experience-platform-sandboxes.deletesandbox
+      with:
+        sandboxName: tools.sandboxName
+      outputParameters:
+      - type: object
+        mapping: $.

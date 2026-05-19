@@ -1,0 +1,195 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Cloud Adobe Experience Platform API — Datasets
+  description: 'Adobe Experience Cloud Adobe Experience Platform API — Datasets. 4 operations. Lead operation: Adobe Experience
+    Platform Adobe Experience Cloud List Datasets. Self-contained Naftiko capability covering one Adobe Experience Cloud business
+    surface.'
+  tags:
+  - Adobe Experience Cloud
+  - Datasets
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_EXPERIENCE_CLOUD_API_KEY: ADOBE_EXPERIENCE_CLOUD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: adobe-experience-platform-datasets
+    baseUri: https://platform.adobe.io
+    description: Adobe Experience Cloud Adobe Experience Platform API — Datasets business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: data-foundation-catalog-dataSets
+      path: /data/foundation/catalog/dataSets
+      operations:
+      - name: listdatasets
+        method: GET
+        description: Adobe Experience Platform Adobe Experience Cloud List Datasets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+        - name: start
+          in: query
+          type: string
+      - name: createdataset
+        method: POST
+        description: Adobe Experience Platform Adobe Experience Cloud Create a Dataset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: data-foundation-catalog-dataSets-datasetId
+      path: /data/foundation/catalog/dataSets/{datasetId}
+      operations:
+      - name: getdataset
+        method: GET
+        description: Adobe Experience Platform Adobe Experience Cloud Get a Dataset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: datasetId
+          in: path
+          type: string
+          required: true
+      - name: deletedataset
+        method: DELETE
+        description: Adobe Experience Platform Adobe Experience Cloud Delete a Dataset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: datasetId
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_EXPERIENCE_CLOUD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: adobe-experience-platform-datasets-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Cloud Adobe Experience Platform API — Datasets. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/data/foundation/catalog/datasets
+      name: data-foundation-catalog-datasets
+      description: REST surface for data-foundation-catalog-dataSets.
+      operations:
+      - method: GET
+        name: listdatasets
+        description: Adobe Experience Platform Adobe Experience Cloud List Datasets
+        call: adobe-experience-platform-datasets.listdatasets
+        with:
+          limit: rest.limit
+          start: rest.start
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createdataset
+        description: Adobe Experience Platform Adobe Experience Cloud Create a Dataset
+        call: adobe-experience-platform-datasets.createdataset
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/data/foundation/catalog/datasets/{datasetid}
+      name: data-foundation-catalog-datasets-datasetid
+      description: REST surface for data-foundation-catalog-dataSets-datasetId.
+      operations:
+      - method: GET
+        name: getdataset
+        description: Adobe Experience Platform Adobe Experience Cloud Get a Dataset
+        call: adobe-experience-platform-datasets.getdataset
+        with:
+          datasetId: rest.datasetId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletedataset
+        description: Adobe Experience Platform Adobe Experience Cloud Delete a Dataset
+        call: adobe-experience-platform-datasets.deletedataset
+        with:
+          datasetId: rest.datasetId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: adobe-experience-platform-datasets-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Cloud Adobe Experience Platform API — Datasets. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: adobe-experience-platform-adobe-experience
+      description: Adobe Experience Platform Adobe Experience Cloud List Datasets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-experience-platform-datasets.listdatasets
+      with:
+        limit: tools.limit
+        start: tools.start
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-experience-platform-adobe-experience-2
+      description: Adobe Experience Platform Adobe Experience Cloud Create a Dataset
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: adobe-experience-platform-datasets.createdataset
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-experience-platform-adobe-experience-3
+      description: Adobe Experience Platform Adobe Experience Cloud Get a Dataset
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-experience-platform-datasets.getdataset
+      with:
+        datasetId: tools.datasetId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-experience-platform-adobe-experience-4
+      description: Adobe Experience Platform Adobe Experience Cloud Delete a Dataset
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: adobe-experience-platform-datasets.deletedataset
+      with:
+        datasetId: tools.datasetId
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Cloud Adobe Target API — Properties
+  description: 'Adobe Experience Cloud Adobe Target API — Properties. 1 operations. Lead operation: Adobe Target Adobe Experience
+    Cloud List Properties. Self-contained Naftiko capability covering one Adobe Experience Cloud business surface.'
+  tags:
+  - Adobe Experience Cloud
+  - Properties
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_EXPERIENCE_CLOUD_API_KEY: ADOBE_EXPERIENCE_CLOUD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: adobe-target-properties
+    baseUri: https://mc.adobe.io/{tenant}
+    description: Adobe Experience Cloud Adobe Target API — Properties business capability. Self-contained, no shared references.
+    resources:
+    - name: target-properties
+      path: /target/properties
+      operations:
+      - name: listproperties
+        method: GET
+        description: Adobe Target Adobe Experience Cloud List Properties
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_EXPERIENCE_CLOUD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: adobe-target-properties-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Cloud Adobe Target API — Properties. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/target/properties
+      name: target-properties
+      description: REST surface for target-properties.
+      operations:
+      - method: GET
+        name: listproperties
+        description: Adobe Target Adobe Experience Cloud List Properties
+        call: adobe-target-properties.listproperties
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: adobe-target-properties-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Cloud Adobe Target API — Properties. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: adobe-target-adobe-experience-cloud
+      description: Adobe Target Adobe Experience Cloud List Properties
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-target-properties.listproperties
+      outputParameters:
+      - type: object
+        mapping: $.

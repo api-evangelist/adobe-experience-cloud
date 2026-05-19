@@ -118,6 +118,8 @@ type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/showcase/adobe-experience-cloud
 - url: https://developer.adobe.com/
   type: Portal
 - url: https://developer.adobe.com/developer-console/docs/guides/

@@ -1,0 +1,137 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Cloud Adobe Campaign API — Transactional Messages
+  description: 'Adobe Experience Cloud Adobe Campaign API — Transactional Messages. 2 operations. Lead operation: Adobe Campaign
+    Adobe Experience Cloud Send a Transactional Message. Self-contained Naftiko capability covering one Adobe Experience Cloud
+    business surface.'
+  tags:
+  - Adobe Experience Cloud
+  - Transactional Messages
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_EXPERIENCE_CLOUD_API_KEY: ADOBE_EXPERIENCE_CLOUD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: adobe-campaign-transactional-messages
+    baseUri: https://mc.adobe.io/{organization}
+    description: Adobe Experience Cloud Adobe Campaign API — Transactional Messages business capability. Self-contained, no
+      shared references.
+    resources:
+    - name: campaign-mcAdobe-transactionalMessageId
+      path: /campaign/mcAdobe/{transactionalMessageId}
+      operations:
+      - name: sendtransactionalmessage
+        method: POST
+        description: Adobe Campaign Adobe Experience Cloud Send a Transactional Message
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: transactionalMessageId
+          in: path
+          type: string
+          description: The transactional message template identifier.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: campaign-mcAdobe-transactionalMessageId-eventId
+      path: /campaign/mcAdobe/{transactionalMessageId}/{eventId}
+      operations:
+      - name: gettransactionalmessagestatus
+        method: GET
+        description: Adobe Campaign Adobe Experience Cloud Get Transactional Message Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: transactionalMessageId
+          in: path
+          type: string
+          required: true
+        - name: eventId
+          in: path
+          type: string
+          description: The event ID returned when the message was triggered.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_EXPERIENCE_CLOUD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: adobe-campaign-transactional-messages-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Cloud Adobe Campaign API — Transactional Messages. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/campaign/mcadobe/{transactionalmessageid}
+      name: campaign-mcadobe-transactionalmessageid
+      description: REST surface for campaign-mcAdobe-transactionalMessageId.
+      operations:
+      - method: POST
+        name: sendtransactionalmessage
+        description: Adobe Campaign Adobe Experience Cloud Send a Transactional Message
+        call: adobe-campaign-transactional-messages.sendtransactionalmessage
+        with:
+          transactionalMessageId: rest.transactionalMessageId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/campaign/mcadobe/{transactionalmessageid}/{eventid}
+      name: campaign-mcadobe-transactionalmessageid-eventid
+      description: REST surface for campaign-mcAdobe-transactionalMessageId-eventId.
+      operations:
+      - method: GET
+        name: gettransactionalmessagestatus
+        description: Adobe Campaign Adobe Experience Cloud Get Transactional Message Status
+        call: adobe-campaign-transactional-messages.gettransactionalmessagestatus
+        with:
+          transactionalMessageId: rest.transactionalMessageId
+          eventId: rest.eventId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: adobe-campaign-transactional-messages-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Cloud Adobe Campaign API — Transactional Messages. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: adobe-campaign-adobe-experience-cloud
+      description: Adobe Campaign Adobe Experience Cloud Send a Transactional Message
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: adobe-campaign-transactional-messages.sendtransactionalmessage
+      with:
+        transactionalMessageId: tools.transactionalMessageId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: adobe-campaign-adobe-experience-cloud-2
+      description: Adobe Campaign Adobe Experience Cloud Get Transactional Message Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-campaign-transactional-messages.gettransactionalmessagestatus
+      with:
+        transactionalMessageId: tools.transactionalMessageId
+        eventId: tools.eventId
+      outputParameters:
+      - type: object
+        mapping: $.

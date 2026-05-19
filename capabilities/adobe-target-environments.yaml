@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Cloud Adobe Target API — Environments
+  description: 'Adobe Experience Cloud Adobe Target API — Environments. 1 operations. Lead operation: Adobe Target Adobe Experience
+    Cloud List Environments. Self-contained Naftiko capability covering one Adobe Experience Cloud business surface.'
+  tags:
+  - Adobe Experience Cloud
+  - Environments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_EXPERIENCE_CLOUD_API_KEY: ADOBE_EXPERIENCE_CLOUD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: adobe-target-environments
+    baseUri: https://mc.adobe.io/{tenant}
+    description: Adobe Experience Cloud Adobe Target API — Environments business capability. Self-contained, no shared references.
+    resources:
+    - name: target-environments
+      path: /target/environments
+      operations:
+      - name: listenvironments
+        method: GET
+        description: Adobe Target Adobe Experience Cloud List Environments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_EXPERIENCE_CLOUD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: adobe-target-environments-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Cloud Adobe Target API — Environments. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/target/environments
+      name: target-environments
+      description: REST surface for target-environments.
+      operations:
+      - method: GET
+        name: listenvironments
+        description: Adobe Target Adobe Experience Cloud List Environments
+        call: adobe-target-environments.listenvironments
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: adobe-target-environments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Cloud Adobe Target API — Environments. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: adobe-target-adobe-experience-cloud
+      description: Adobe Target Adobe Experience Cloud List Environments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-target-environments.listenvironments
+      outputParameters:
+      - type: object
+        mapping: $.

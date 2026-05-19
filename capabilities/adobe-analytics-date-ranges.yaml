@@ -1,0 +1,91 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Experience Cloud Adobe Analytics 2.0 API — Date Ranges
+  description: 'Adobe Experience Cloud Adobe Analytics 2.0 API — Date Ranges. 1 operations. Lead operation: Adobe Analytics
+    Adobe Experience Cloud List Date Ranges. Self-contained Naftiko capability covering one Adobe Experience Cloud business
+    surface.'
+  tags:
+  - Adobe Experience Cloud
+  - Date Ranges
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_EXPERIENCE_CLOUD_API_KEY: ADOBE_EXPERIENCE_CLOUD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: adobe-analytics-date-ranges
+    baseUri: https://analytics.adobe.io
+    description: Adobe Experience Cloud Adobe Analytics 2.0 API — Date Ranges business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: api-companyId-dateranges
+      path: /api/{companyId}/dateranges
+      operations:
+      - name: listdateranges
+        method: GET
+        description: Adobe Analytics Adobe Experience Cloud List Date Ranges
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: companyId
+          in: path
+          type: string
+          required: true
+        - name: limit
+          in: query
+          type: integer
+        - name: page
+          in: query
+          type: integer
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_EXPERIENCE_CLOUD_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: adobe-analytics-date-ranges-rest
+    port: 8080
+    description: REST adapter for Adobe Experience Cloud Adobe Analytics 2.0 API — Date Ranges. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/api/{companyid}/dateranges
+      name: api-companyid-dateranges
+      description: REST surface for api-companyId-dateranges.
+      operations:
+      - method: GET
+        name: listdateranges
+        description: Adobe Analytics Adobe Experience Cloud List Date Ranges
+        call: adobe-analytics-date-ranges.listdateranges
+        with:
+          companyId: rest.companyId
+          limit: rest.limit
+          page: rest.page
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: adobe-analytics-date-ranges-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Experience Cloud Adobe Analytics 2.0 API — Date Ranges. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: adobe-analytics-adobe-experience-cloud
+      description: Adobe Analytics Adobe Experience Cloud List Date Ranges
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-analytics-date-ranges.listdateranges
+      with:
+        companyId: tools.companyId
+        limit: tools.limit
+        page: tools.page
+      outputParameters:
+      - type: object
+        mapping: $.
