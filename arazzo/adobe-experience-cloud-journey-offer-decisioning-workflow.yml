@@ -1,0 +1,145 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Journey Optimizer Offer Decisioning
+  summary: Create a personalized offer, read it back, then update its priority and content.
+  description: >-
+    Authors a decisioning offer in the Adobe Journey Optimizer Offer Decisioning
+    library. The workflow creates a personalized offer with eligibility rules
+    and representations, reads it back by id to confirm it landed, then updates
+    its priority and content. Because the offer operationIds also exist in the
+    Adobe Target description, every step references its operation through the
+    journeyOptimizerApi source. Each step inlines the sandbox header, bearer
+    token, and API key so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: journeyOptimizerApi
+  url: ../openapi/adobe-journey-optimizer-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: offer-decisioning
+  summary: Create a personalized offer, confirm it, and update it.
+  description: >-
+    Creates a personalized offer, fetches it by id to confirm creation, then
+    updates the offer with a new priority and content.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - apiKey
+    - sandboxName
+    - offerName
+    - eligibilityRule
+    - priority
+    properties:
+      authorization:
+        type: string
+        description: Bearer access token.
+      apiKey:
+        type: string
+        description: Adobe API key for the x-api-key header.
+      sandboxName:
+        type: string
+        description: The sandbox to operate in.
+      offerName:
+        type: string
+        description: Name for the new offer.
+      eligibilityRule:
+        type: string
+        description: The eligibility rule expression for the offer.
+      priority:
+        type: integer
+        description: Initial offer priority.
+      updatedPriority:
+        type: integer
+        description: New priority applied on update.
+        default: 5
+      startDate:
+        type: string
+        description: Offer start date-time.
+      endDate:
+        type: string
+        description: Offer end date-time.
+  steps:
+  - stepId: createOffer
+    description: Create a new personalized offer with eligibility and representations.
+    operationId: $sourceDescriptions.journeyOptimizerApi.createOffer
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.offerName
+        representations:
+        - {}
+        eligibilityRule: $inputs.eligibilityRule
+        priority: $inputs.priority
+        startDate: $inputs.startDate
+        endDate: $inputs.endDate
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      offerId: $response.body#/id
+      status: $response.body#/status
+  - stepId: confirmOffer
+    description: Read the offer back by id to confirm it was created.
+    operationId: $sourceDescriptions.journeyOptimizerApi.getOffer
+    parameters:
+    - name: offerId
+      in: path
+      value: $steps.createOffer.outputs.offerId
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedOfferId: $response.body#/id
+      name: $response.body#/name
+  - stepId: updateOffer
+    description: Update the offer with a new priority and content.
+    operationId: $sourceDescriptions.journeyOptimizerApi.updateOffer
+    parameters:
+    - name: offerId
+      in: path
+      value: $steps.createOffer.outputs.offerId
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.offerName
+        representations:
+        - {}
+        eligibilityRule: $inputs.eligibilityRule
+        priority: $inputs.updatedPriority
+        startDate: $inputs.startDate
+        endDate: $inputs.endDate
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      updatedPriority: $response.body#/priority
+  outputs:
+    offerId: $steps.createOffer.outputs.offerId
+    updatedPriority: $steps.updateOffer.outputs.updatedPriority

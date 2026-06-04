@@ -1,0 +1,114 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Journey Optimizer Message Authoring
+  summary: Create a channel message, read it back, then list messages to confirm it.
+  description: >-
+    Authors a channel message configuration in Adobe Journey Optimizer. The
+    workflow creates a message bound to a channel with content and surface
+    settings, reads it back by id to confirm the channel and status, then lists
+    messages to verify the new message is registered. Each step inlines the
+    sandbox header, bearer token, and API key so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: journeyOptimizerApi
+  url: ../openapi/adobe-journey-optimizer-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: message-authoring
+  summary: Create a channel message, confirm it, and list messages.
+  description: >-
+    Creates a channel message, fetches it by id to confirm the channel, then
+    lists messages to verify the new message is present.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - apiKey
+    - sandboxName
+    - messageName
+    - channel
+    properties:
+      authorization:
+        type: string
+        description: Bearer access token.
+      apiKey:
+        type: string
+        description: Adobe API key for the x-api-key header.
+      sandboxName:
+        type: string
+        description: The sandbox to operate in.
+      messageName:
+        type: string
+        description: Name for the new message.
+      channel:
+        type: string
+        description: The message channel, e.g. email, push, sms, inApp.
+  steps:
+  - stepId: createMessage
+    description: Create a new channel message configuration.
+    operationId: createMessage
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.messageName
+        channel: $inputs.channel
+        content: {}
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      messageId: $response.body#/id
+      status: $response.body#/status
+  - stepId: confirmMessage
+    description: Read the message back by id to confirm the channel and status.
+    operationId: getMessage
+    parameters:
+    - name: messageId
+      in: path
+      value: $steps.createMessage.outputs.messageId
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedChannel: $response.body#/channel
+  - stepId: listMessages
+    description: List messages to verify the new message is registered.
+    operationId: listMessages
+    parameters:
+    - name: limit
+      in: query
+      value: 20
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      messages: $response.body#/messages
+  outputs:
+    messageId: $steps.createMessage.outputs.messageId
+    messages: $steps.listMessages.outputs.messages

@@ -1,0 +1,136 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Analytics Segment-Filtered Report
+  summary: Create an Analytics segment, confirm it, then run a report filtered by that segment.
+  description: >-
+    Builds a reusable Adobe Analytics segment and immediately uses it in a
+    report. The workflow creates a segment scoped to a report suite, reads it
+    back by id to confirm the definition, then submits a ranked report request
+    against the same report suite. Each step inlines the bearer token and API key
+    so the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: analyticsApi
+  url: ../openapi/adobe-analytics-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: segment-report
+  summary: Create a segment, confirm it, and run a report on the report suite.
+  description: >-
+    Creates an Analytics segment for a report suite, confirms it by id, then
+    submits a report request against that report suite.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - apiKey
+    - companyId
+    - rsid
+    - segmentName
+    properties:
+      authorization:
+        type: string
+        description: Bearer access token.
+      apiKey:
+        type: string
+        description: Adobe API key for the x-api-key header.
+      companyId:
+        type: string
+        description: The global company id for the Analytics account.
+      rsid:
+        type: string
+        description: The report suite id the segment and report target.
+      segmentName:
+        type: string
+        description: Name for the new segment.
+      segmentDescription:
+        type: string
+        description: Optional description for the segment.
+      dimension:
+        type: string
+        description: The dimension to break the report down by.
+        default: variables/page
+  steps:
+  - stepId: createSegment
+    description: Create a new Analytics segment scoped to the report suite.
+    operationId: createSegment
+    parameters:
+    - name: companyId
+      in: path
+      value: $inputs.companyId
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.segmentName
+        description: $inputs.segmentDescription
+        rsid: $inputs.rsid
+        definition: {}
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      segmentId: $response.body#/id
+  - stepId: confirmSegment
+    description: Read the segment back by id to confirm its definition.
+    operationId: getSegment
+    parameters:
+    - name: companyId
+      in: path
+      value: $inputs.companyId
+    - name: segmentId
+      in: path
+      value: $steps.createSegment.outputs.segmentId
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedSegmentId: $response.body#/id
+      rsid: $response.body#/rsid
+  - stepId: runReport
+    description: >-
+      Submit a ranked report request against the report suite the segment was
+      built for.
+    operationId: getReport
+    parameters:
+    - name: companyId
+      in: path
+      value: $inputs.companyId
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        rsid: $inputs.rsid
+        globalFilters:
+        - type: standard
+          dateRange: example
+        metricContainer:
+          metrics:
+          - id: {}
+        dimension: $inputs.dimension
+        settings:
+          limit: 10
+          page: 0
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      totalElements: $response.body#/totalElements
+      rows: $response.body#/rows
+  outputs:
+    segmentId: $steps.createSegment.outputs.segmentId
+    rows: $steps.runReport.outputs.rows

@@ -1,0 +1,137 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Experience Platform Identity and Profile Lookup
+  summary: List identity namespaces, create a custom namespace, then look up a profile entity by identity.
+  description: >-
+    Sets up identity resolution in Adobe Experience Platform and verifies it
+    against the unified profile store. The workflow lists the identity
+    namespaces available in the organization, creates a custom namespace for a
+    new identifier type, and then looks up profile entities by identity using
+    the namespace code. Each step inlines the sandbox header, bearer token, and
+    API key so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: experiencePlatformApi
+  url: ../openapi/adobe-experience-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: identity-profile-lookup
+  summary: Create a custom identity namespace and look up a profile by identity.
+  description: >-
+    Lists identity namespaces, creates a custom namespace, then retrieves a
+    profile entity using an identity value scoped to the namespace code.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - apiKey
+    - sandboxName
+    - namespaceName
+    - namespaceCode
+    - entityId
+    properties:
+      authorization:
+        type: string
+        description: Bearer access token.
+      apiKey:
+        type: string
+        description: Adobe API key for the x-api-key header.
+      sandboxName:
+        type: string
+        description: The sandbox to operate in.
+      namespaceName:
+        type: string
+        description: Display name for the new identity namespace.
+      namespaceCode:
+        type: string
+        description: Unique code for the new identity namespace.
+      namespaceDescription:
+        type: string
+        description: Optional description for the namespace.
+      idType:
+        type: string
+        description: The identity type, e.g. COOKIE, CROSS_DEVICE, EMAIL.
+        default: COOKIE
+      schemaName:
+        type: string
+        description: XDM schema name for the entity lookup.
+        default: _xdm.context.profile
+      entityId:
+        type: string
+        description: The identity value to look up a profile entity for.
+  steps:
+  - stepId: listIdentityNamespaces
+    description: List the identity namespaces available in the organization.
+    operationId: listIdentityNamespaces
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      namespaces: $response.body
+  - stepId: createIdentityNamespace
+    description: Create a custom identity namespace for the new identifier type.
+    operationId: createIdentityNamespace
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.namespaceName
+        code: $inputs.namespaceCode
+        description: $inputs.namespaceDescription
+        idType: $inputs.idType
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      namespaceId: $response.body#/id
+      namespaceCode: $response.body#/code
+  - stepId: lookupProfile
+    description: >-
+      Look up profile entities by identity using the new namespace code and the
+      supplied identity value.
+    operationId: getProfileEntities
+    parameters:
+    - name: schema.name
+      in: query
+      value: $inputs.schemaName
+    - name: entityId
+      in: query
+      value: $inputs.entityId
+    - name: entityIdNS
+      in: query
+      value: $steps.createIdentityNamespace.outputs.namespaceCode
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      entity: $response.body#/entity
+      lastModifiedAt: $response.body#/lastModifiedAt
+  outputs:
+    namespaceId: $steps.createIdentityNamespace.outputs.namespaceId
+    entity: $steps.lookupProfile.outputs.entity

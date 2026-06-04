@@ -1,0 +1,98 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Campaign Workflow Execution
+  summary: List Campaign workflows, fetch one by key, then start it with a workflow command.
+  description: >-
+    Starts an Adobe Campaign marketing workflow from the workflow library. The
+    flow lists configured workflows, fetches a chosen workflow by its primary
+    key to confirm its current status, then issues a start command to trigger the
+    corresponding state transition in the execution engine. Each step inlines the
+    bearer token and API key so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: campaignApi
+  url: ../openapi/adobe-campaign-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: workflow-execution
+  summary: List workflows, fetch one, and start it with a command.
+  description: >-
+    Lists Campaign workflows, fetches the chosen workflow by primary key, then
+    issues a start command.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - apiKey
+    - workflowPKey
+    properties:
+      authorization:
+        type: string
+        description: Bearer access token.
+      apiKey:
+        type: string
+        description: Adobe API key for the x-api-key header.
+      workflowPKey:
+        type: string
+        description: Primary key of the workflow to fetch and start.
+      method:
+        type: string
+        description: The workflow command to execute (start, pause, resume, stop).
+        default: start
+  steps:
+  - stepId: listWorkflows
+    description: List the workflows configured in Adobe Campaign.
+    operationId: listWorkflows
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      workflows: $response.body#/content
+  - stepId: getWorkflow
+    description: Fetch the chosen workflow by primary key to confirm its status.
+    operationId: getWorkflow
+    parameters:
+    - name: workflowPKey
+      in: path
+      value: $inputs.workflowPKey
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+  - stepId: startWorkflow
+    description: Issue a start command to trigger the workflow state transition.
+    operationId: executeWorkflowCommand
+    parameters:
+    - name: workflowPKey
+      in: path
+      value: $inputs.workflowPKey
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        method: $inputs.method
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      commandStatus: $statusCode
+  outputs:
+    workflows: $steps.listWorkflows.outputs.workflows
+    commandStatus: $steps.startWorkflow.outputs.commandStatus

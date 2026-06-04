@@ -1,0 +1,123 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Journey Optimizer Campaign Launch
+  summary: Create a marketing campaign, confirm its configuration, then list campaigns to verify it.
+  description: >-
+    Launches a marketing campaign in Adobe Journey Optimizer. The workflow
+    creates a campaign bound to a channel and audience, reads it back by id to
+    confirm the channel and schedule, then lists campaigns to verify the new
+    campaign is registered. Each step inlines the sandbox header, bearer token,
+    and API key so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: journeyOptimizerApi
+  url: ../openapi/adobe-journey-optimizer-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: campaign-launch
+  summary: Create a campaign, confirm it, and list campaigns.
+  description: >-
+    Creates a marketing campaign, fetches it by id to confirm the channel and
+    schedule, then lists campaigns to verify the new campaign is present.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - apiKey
+    - sandboxName
+    - campaignName
+    - channel
+    - audienceId
+    properties:
+      authorization:
+        type: string
+        description: Bearer access token.
+      apiKey:
+        type: string
+        description: Adobe API key for the x-api-key header.
+      sandboxName:
+        type: string
+        description: The sandbox to operate in.
+      campaignName:
+        type: string
+        description: Name for the new campaign.
+      campaignDescription:
+        type: string
+        description: Optional description for the campaign.
+      channel:
+        type: string
+        description: The campaign channel, e.g. email, push, sms.
+      audienceId:
+        type: string
+        description: The audience id the campaign targets.
+  steps:
+  - stepId: createCampaign
+    description: Create a new marketing campaign bound to a channel and audience.
+    operationId: createCampaign
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.campaignName
+        description: $inputs.campaignDescription
+        channel: $inputs.channel
+        audienceId: $inputs.audienceId
+        schedule: {}
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      campaignId: $response.body#/id
+      status: $response.body#/status
+  - stepId: confirmCampaign
+    description: Read the campaign back to confirm its channel and schedule.
+    operationId: getCampaign
+    parameters:
+    - name: campaignId
+      in: path
+      value: $steps.createCampaign.outputs.campaignId
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedChannel: $response.body#/channel
+  - stepId: listCampaigns
+    description: List campaigns to verify the new campaign is registered.
+    operationId: listCampaigns
+    parameters:
+    - name: limit
+      in: query
+      value: 20
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      campaigns: $response.body#/campaigns
+  outputs:
+    campaignId: $steps.createCampaign.outputs.campaignId
+    campaigns: $steps.listCampaigns.outputs.campaigns

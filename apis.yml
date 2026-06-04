@@ -118,6 +118,60 @@ type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
+  - type: ArazzoWorkflows
+    url: arazzo/
+    workflows:
+    - url: arazzo/adobe-experience-cloud-analytics-report-suite-discovery-workflow.yml
+      name: Adobe Analytics Report Suite Discovery
+      summary: List report suites, fetch one's configuration, then run a report against it.
+    - url: arazzo/adobe-experience-cloud-analytics-segment-report-workflow.yml
+      name: Adobe Analytics Segment-Filtered Report
+      summary: Create an Analytics segment, confirm it, then run a report filtered by that segment.
+    - url: arazzo/adobe-experience-cloud-campaign-profile-subscription-workflow.yml
+      name: Adobe Campaign Profile Subscription
+      summary: Create a subscriber profile, create a subscription service, then subscribe the profile to it.
+    - url: arazzo/adobe-experience-cloud-campaign-transactional-message-workflow.yml
+      name: Adobe Campaign Transactional Message
+      summary: Trigger a transactional message, then poll its delivery status until it leaves the pending state.
+    - url: arazzo/adobe-experience-cloud-campaign-workflow-execution-workflow.yml
+      name: Adobe Campaign Workflow Execution
+      summary: List Campaign workflows, fetch one by key, then start it with a workflow command.
+    - url: arazzo/adobe-experience-cloud-experience-platform-audience-segment-workflow.yml
+      name: Adobe Experience Platform Audience Segment Definition
+      summary: Create a PQL segment definition, read it back, then confirm it appears in the segment list.
+    - url: arazzo/adobe-experience-cloud-experience-platform-batch-ingestion-workflow.yml
+      name: Adobe Experience Platform Batch Ingestion
+      summary: Create a dataset, open a batch against it, then poll the batch until it finishes loading.
+    - url: arazzo/adobe-experience-cloud-experience-platform-identity-profile-lookup-workflow.yml
+      name: Adobe Experience Platform Identity and Profile Lookup
+      summary: List identity namespaces, create a custom namespace, then look up a profile entity by identity.
+    - url: arazzo/adobe-experience-cloud-experience-platform-query-service-workflow.yml
+      name: Adobe Experience Platform Query Service Execution
+      summary: Submit a SQL query to Query Service, poll until it finishes, then list recent queries.
+    - url: arazzo/adobe-experience-cloud-experience-platform-schema-dataset-setup-workflow.yml
+      name: Adobe Experience Platform Schema and Dataset Setup
+      summary: Create an XDM schema, confirm it, then create and verify a dataset bound to it.
+    - url: arazzo/adobe-experience-cloud-journey-campaign-launch-workflow.yml
+      name: Adobe Journey Optimizer Campaign Launch
+      summary: Create a marketing campaign, confirm its configuration, then list campaigns to verify it.
+    - url: arazzo/adobe-experience-cloud-journey-create-publish-workflow.yml
+      name: Adobe Journey Optimizer Journey Create and Publish
+      summary: Create a draft journey, confirm it, publish it live, and optionally stop it again.
+    - url: arazzo/adobe-experience-cloud-journey-message-authoring-workflow.yml
+      name: Adobe Journey Optimizer Message Authoring
+      summary: Create a channel message, read it back, then list messages to confirm it.
+    - url: arazzo/adobe-experience-cloud-journey-offer-decisioning-workflow.yml
+      name: Adobe Journey Optimizer Offer Decisioning
+      summary: Create a personalized offer, read it back, then update its priority and content.
+    - url: arazzo/adobe-experience-cloud-target-ab-activity-lifecycle-workflow.yml
+      name: Adobe Target AB Activity Lifecycle
+      summary: Create an A/B activity, confirm its configuration, then activate it.
+    - url: arazzo/adobe-experience-cloud-target-audience-offer-activity-workflow.yml
+      name: Adobe Target Audience, Offer, and Activity Assembly
+      summary: Create a Target audience, create an offer, then assemble an A/B activity from them.
+    - url: arazzo/adobe-experience-cloud-target-deliver-personalization-workflow.yml
+      name: Adobe Target Deliver Personalization
+      summary: List available offers, then fetch personalized content for a visitor session.
   - type: LinkedIn
     url: https://www.linkedin.com/showcase/adobe-experience-cloud
   - url: https://developer.adobe.com/

@@ -1,0 +1,151 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Journey Optimizer Journey Create and Publish
+  summary: Create a draft journey, confirm it, publish it live, and optionally stop it again.
+  description: >-
+    Drives the Adobe Journey Optimizer journey lifecycle from draft to live. The
+    workflow creates a draft journey with entry conditions and activities, reads
+    it back to confirm it is in draft status, publishes it so it begins
+    processing entry events, and branches to stop the journey when the caller
+    requests it. Each step inlines the sandbox header, bearer token, and API key
+    so the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: journeyOptimizerApi
+  url: ../openapi/adobe-journey-optimizer-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: journey-create-publish
+  summary: Create a draft journey, publish it, and optionally stop it.
+  description: >-
+    Creates a draft journey, confirms its draft status, publishes it live, then
+    branches to stop the journey when requested.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - apiKey
+    - sandboxName
+    - journeyName
+    properties:
+      authorization:
+        type: string
+        description: Bearer access token.
+      apiKey:
+        type: string
+        description: Adobe API key for the x-api-key header.
+      sandboxName:
+        type: string
+        description: The sandbox to operate in.
+      journeyName:
+        type: string
+        description: Name for the new journey.
+      journeyDescription:
+        type: string
+        description: Optional description for the journey.
+      stopAfterPublish:
+        type: boolean
+        description: When true, the journey is stopped immediately after publishing.
+        default: false
+  steps:
+  - stepId: createJourney
+    description: Create a new draft journey with entry conditions and activities.
+    operationId: createJourney
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.journeyName
+        description: $inputs.journeyDescription
+        entryCondition: {}
+        activities:
+        - {}
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      journeyId: $response.body#/id
+      status: $response.body#/status
+  - stepId: confirmDraft
+    description: Read the journey back to confirm it was created in draft status.
+    operationId: getJourney
+    parameters:
+    - name: journeyId
+      in: path
+      value: $steps.createJourney.outputs.journeyId
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedStatus: $response.body#/status
+  - stepId: publishJourney
+    description: Publish the draft journey so it begins processing entry events.
+    operationId: publishJourney
+    parameters:
+    - name: journeyId
+      in: path
+      value: $steps.createJourney.outputs.journeyId
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      publishedId: $response.body#/id
+    onSuccess:
+    - name: stopRequested
+      type: goto
+      stepId: stopJourney
+      criteria:
+      - condition: $inputs.stopAfterPublish == true
+    - name: leaveLive
+      type: end
+      criteria:
+      - condition: $inputs.stopAfterPublish == false
+  - stepId: stopJourney
+    description: Stop the published journey so no new profiles enter it.
+    operationId: stopJourney
+    parameters:
+    - name: journeyId
+      in: path
+      value: $steps.createJourney.outputs.journeyId
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      stoppedStatus: $response.body#/status
+  outputs:
+    journeyId: $steps.createJourney.outputs.journeyId
+    publishedId: $steps.publishJourney.outputs.publishedId
+    stoppedStatus: $steps.stopJourney.outputs.stoppedStatus

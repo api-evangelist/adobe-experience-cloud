@@ -1,0 +1,150 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Experience Platform Schema and Dataset Setup
+  summary: Create an XDM schema, confirm it, then create and verify a dataset bound to it.
+  description: >-
+    A foundational Adobe Experience Platform onboarding flow. The workflow
+    registers a new XDM schema in the Schema Registry tenant container, reads it
+    back to confirm the schema id, then creates a Data Catalog dataset that
+    references the new schema and finally fetches the dataset to confirm it
+    landed in the sandbox. Every step inlines its sandbox header, bearer token,
+    and API key so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: experiencePlatformApi
+  url: ../openapi/adobe-experience-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: schema-dataset-setup
+  summary: Register an XDM schema and create a dataset that references it.
+  description: >-
+    Creates an XDM schema, reads it back, then creates a dataset referencing the
+    schema id and confirms the dataset exists in the Data Catalog.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - apiKey
+    - sandboxName
+    - schemaTitle
+    - baseClassRef
+    - datasetName
+    properties:
+      authorization:
+        type: string
+        description: Bearer access token, e.g. "Bearer eyJ...".
+      apiKey:
+        type: string
+        description: Adobe API key (client id) for the x-api-key header.
+      sandboxName:
+        type: string
+        description: The sandbox to operate in (x-sandbox-name header).
+      schemaTitle:
+        type: string
+        description: Title for the new XDM schema.
+      schemaDescription:
+        type: string
+        description: Optional description for the new schema.
+      baseClassRef:
+        type: string
+        description: The $ref of the base class the schema extends.
+      datasetName:
+        type: string
+        description: Name for the dataset that will reference the schema.
+  steps:
+  - stepId: createSchema
+    description: Register a new XDM schema in the tenant container.
+    operationId: createSchema
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    requestBody:
+      contentType: application/json
+      payload:
+        title: $inputs.schemaTitle
+        description: $inputs.schemaDescription
+        type: standard
+        allOf:
+        - $ref: $inputs.baseClassRef
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      schemaId: $response.body#/$id
+      schemaVersion: $response.body#/version
+  - stepId: confirmSchema
+    description: Read the schema back by its id to confirm it was registered.
+    operationId: getSchema
+    parameters:
+    - name: schemaId
+      in: path
+      value: $steps.createSchema.outputs.schemaId
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedSchemaId: $response.body#/$id
+      title: $response.body#/title
+  - stepId: createDataset
+    description: Create a dataset in the Data Catalog referencing the new schema.
+    operationId: createDataset
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.datasetName
+        description: $inputs.schemaDescription
+        schemaRef:
+          id: $steps.confirmSchema.outputs.confirmedSchemaId
+          contentType: standard
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      datasetLocation: $response.headers.Location
+  - stepId: listDatasets
+    description: >-
+      List datasets in the sandbox to confirm the new dataset is registered in
+      the Data Catalog.
+    operationId: listDatasets
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      datasets: $response.body
+  outputs:
+    schemaId: $steps.createSchema.outputs.schemaId
+    datasetLocation: $steps.createDataset.outputs.datasetLocation
+    datasets: $steps.listDatasets.outputs.datasets

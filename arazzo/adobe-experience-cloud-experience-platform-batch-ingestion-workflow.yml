@@ -1,0 +1,147 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Experience Platform Batch Ingestion
+  summary: Create a dataset, open a batch against it, then poll the batch until it finishes loading.
+  description: >-
+    Drives the Adobe Experience Platform batch ingestion lifecycle. The workflow
+    creates a dataset in the Data Catalog, opens an import batch that targets the
+    dataset id, and then polls the batch status until it leaves the loading
+    state. Each step inlines the sandbox header, bearer token, and API key so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: experiencePlatformApi
+  url: ../openapi/adobe-experience-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: batch-ingestion
+  summary: Create a dataset, open an ingestion batch, and poll it to completion.
+  description: >-
+    Creates a dataset bound to an existing schema, creates a parquet import
+    batch for that dataset, and polls the batch status until ingestion finishes.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - apiKey
+    - sandboxName
+    - datasetName
+    - schemaId
+    - datasetId
+    properties:
+      authorization:
+        type: string
+        description: Bearer access token.
+      apiKey:
+        type: string
+        description: Adobe API key for the x-api-key header.
+      sandboxName:
+        type: string
+        description: The sandbox to operate in.
+      datasetName:
+        type: string
+        description: Name for the new dataset.
+      schemaId:
+        type: string
+        description: Existing XDM schema id the dataset references.
+      datasetId:
+        type: string
+        description: >-
+          The dataset id to ingest the batch into. The createDataset call returns
+          only a Location header, so the resolved dataset id is supplied as an
+          input for the batch step.
+      inputFormat:
+        type: string
+        description: Batch input file format (parquet, json, or csv).
+        default: parquet
+  steps:
+  - stepId: createDataset
+    description: Create the dataset that the batch will ingest data into.
+    operationId: createDataset
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.datasetName
+        schemaRef:
+          id: $inputs.schemaId
+          contentType: standard
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      datasetLocation: $response.headers.Location
+  - stepId: createBatch
+    description: Open an import batch targeting the dataset for data upload.
+    operationId: createBatch
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    requestBody:
+      contentType: application/json
+      payload:
+        datasetId: $inputs.datasetId
+        inputFormat:
+          format: $inputs.inputFormat
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      batchId: $response.body#/id
+      batchStatus: $response.body#/status
+  - stepId: pollBatch
+    description: >-
+      Poll the batch status. While the batch is still loading the step retries;
+      once it reports a terminal status the workflow ends.
+    operationId: getBatch
+    parameters:
+    - name: batchId
+      in: path
+      value: $steps.createBatch.outputs.batchId
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      finalStatus: $response.body#/status
+      completed: $response.body#/completed
+    onSuccess:
+    - name: stillLoading
+      type: retry
+      retryAfter: 5
+      retryLimit: 10
+      criteria:
+      - context: $response.body
+        condition: $.status == "loading"
+        type: jsonpath
+    - name: ingestionDone
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.status != "loading"
+        type: jsonpath
+  outputs:
+    batchId: $steps.createBatch.outputs.batchId
+    finalStatus: $steps.pollBatch.outputs.finalStatus

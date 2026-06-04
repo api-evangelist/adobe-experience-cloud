@@ -1,0 +1,118 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Target Audience, Offer, and Activity Assembly
+  summary: Create a Target audience, create an offer, then assemble an A/B activity from them.
+  description: >-
+    Assembles the building blocks of an Adobe Target personalization in one
+    flow. The workflow creates an audience with targeting rules, creates a
+    content offer, and then creates an A/B activity that the audience and offer
+    can be wired into. Because the offer operationId also exists in the Adobe
+    Journey Optimizer description, the offer step references its operation
+    through the targetApi source. Each step inlines the bearer token and API key
+    required by the Target Admin API so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: targetApi
+  url: ../openapi/adobe-target-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: audience-offer-activity
+  summary: Create an audience and offer, then create an activity.
+  description: >-
+    Creates a Target audience, creates a content offer, then creates an A/B
+    activity that the audience and offer feed into.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - apiKey
+    - audienceName
+    - offerName
+    - activityName
+    properties:
+      authorization:
+        type: string
+        description: Bearer access token.
+      apiKey:
+        type: string
+        description: Adobe API key for the x-api-key header.
+      audienceName:
+        type: string
+        description: Name for the new audience.
+      audienceDescription:
+        type: string
+        description: Optional description for the audience.
+      offerName:
+        type: string
+        description: Name for the new offer.
+      activityName:
+        type: string
+        description: Name for the new activity.
+  steps:
+  - stepId: createAudience
+    description: Create a new Target audience with targeting rules.
+    operationId: createAudience
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.audienceName
+        description: $inputs.audienceDescription
+        targetRule: {}
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      audienceId: $response.body#/id
+  - stepId: createOffer
+    description: Create a content offer for use in the activity.
+    operationId: $sourceDescriptions.targetApi.createOffer
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.offerName
+        type: content
+        content: example
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      offerId: $response.body#/id
+  - stepId: createActivity
+    description: >-
+      Create an A/B activity that the new audience and offer can be wired into.
+    operationId: createActivity
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.activityName
+        type: ab
+        priority: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      activityId: $response.body#/id
+      state: $response.body#/state
+  outputs:
+    audienceId: $steps.createAudience.outputs.audienceId
+    offerId: $steps.createOffer.outputs.offerId
+    activityId: $steps.createActivity.outputs.activityId

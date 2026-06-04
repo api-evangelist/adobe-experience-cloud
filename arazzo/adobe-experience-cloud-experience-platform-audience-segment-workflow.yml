@@ -1,0 +1,132 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Experience Platform Audience Segment Definition
+  summary: Create a PQL segment definition, read it back, then confirm it appears in the segment list.
+  description: >-
+    Builds an Adobe Experience Platform audience using a Profile Query Language
+    (PQL) expression. The workflow creates a segment definition against the
+    unified profile store, retrieves it by id to confirm the expression and
+    merge policy, then lists segment definitions to verify the new segment is
+    registered. Each step inlines the sandbox header, bearer token, and API key
+    so the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: experiencePlatformApi
+  url: ../openapi/adobe-experience-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: audience-segment
+  summary: Create a PQL segment definition and confirm it is registered.
+  description: >-
+    Creates a segment definition from a PQL expression, fetches it by id, and
+    lists definitions to confirm the new segment is present.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - apiKey
+    - sandboxName
+    - segmentName
+    - pqlExpression
+    - mergePolicyId
+    properties:
+      authorization:
+        type: string
+        description: Bearer access token.
+      apiKey:
+        type: string
+        description: Adobe API key for the x-api-key header.
+      sandboxName:
+        type: string
+        description: The sandbox to operate in.
+      segmentName:
+        type: string
+        description: Name for the new segment definition.
+      segmentDescription:
+        type: string
+        description: Optional description for the segment.
+      pqlExpression:
+        type: string
+        description: The PQL expression that defines the audience.
+      schemaName:
+        type: string
+        description: The XDM schema name the segment evaluates against.
+        default: _xdm.context.profile
+      mergePolicyId:
+        type: string
+        description: The merge policy id used to evaluate the segment.
+  steps:
+  - stepId: createSegmentDefinition
+    description: Create a new segment definition from the supplied PQL expression.
+    operationId: createSegmentDefinition
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.segmentName
+        description: $inputs.segmentDescription
+        expression:
+          type: PQL
+          value: $inputs.pqlExpression
+          format: pql/text
+        schema:
+          name: $inputs.schemaName
+        mergePolicyId: $inputs.mergePolicyId
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      segmentId: $response.body#/id
+  - stepId: getSegmentDefinition
+    description: Read the segment definition back by id to confirm its expression.
+    operationId: getSegmentDefinition
+    parameters:
+    - name: segmentId
+      in: path
+      value: $steps.createSegmentDefinition.outputs.segmentId
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedSegmentId: $response.body#/id
+      name: $response.body#/name
+  - stepId: listSegmentDefinitions
+    description: List segment definitions to confirm the new segment is registered.
+    operationId: listSegmentDefinitions
+    parameters:
+    - name: limit
+      in: query
+      value: 20
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      segments: $response.body#/segments
+  outputs:
+    segmentId: $steps.createSegmentDefinition.outputs.segmentId
+    segments: $steps.listSegmentDefinitions.outputs.segments

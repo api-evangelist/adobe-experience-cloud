@@ -1,0 +1,137 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Experience Platform Query Service Execution
+  summary: Submit a SQL query to Query Service, poll until it finishes, then list recent queries.
+  description: >-
+    Runs an ad hoc analysis against the Adobe Experience Platform Data Lake using
+    Query Service. The workflow submits a SQL statement, polls the query id until
+    it leaves the SUBMITTED state, and then lists recent queries to confirm the
+    submission is recorded. Each step inlines the sandbox header, bearer token,
+    and API key so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: experiencePlatformApi
+  url: ../openapi/adobe-experience-platform-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: query-service-execution
+  summary: Submit a SQL query, poll for completion, and list queries.
+  description: >-
+    Submits a SQL query to Query Service, polls the query status until it is no
+    longer SUBMITTED, and lists queries to confirm the run.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - apiKey
+    - sandboxName
+    - dbName
+    - sql
+    properties:
+      authorization:
+        type: string
+        description: Bearer access token.
+      apiKey:
+        type: string
+        description: Adobe API key for the x-api-key header.
+      sandboxName:
+        type: string
+        description: The sandbox to operate in.
+      dbName:
+        type: string
+        description: The database name (typically the sandbox name).
+      sql:
+        type: string
+        description: The SQL statement to execute.
+      queryName:
+        type: string
+        description: Optional name for the query.
+  steps:
+  - stepId: submitQuery
+    description: Submit the SQL query to Query Service for execution.
+    operationId: createQuery
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    requestBody:
+      contentType: application/json
+      payload:
+        dbName: $inputs.dbName
+        sql: $inputs.sql
+        name: $inputs.queryName
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      queryId: $response.body#/id
+      state: $response.body#/state
+  - stepId: pollQuery
+    description: >-
+      Poll the query status. While the query is still SUBMITTED the step retries;
+      once it reaches a terminal state the workflow continues.
+    operationId: getQuery
+    parameters:
+    - name: queryId
+      in: path
+      value: $steps.submitQuery.outputs.queryId
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      finalState: $response.body#/state
+      rowCount: $response.body#/rowCount
+    onSuccess:
+    - name: stillRunning
+      type: retry
+      retryAfter: 5
+      retryLimit: 12
+      criteria:
+      - context: $response.body
+        condition: $.state == "SUBMITTED"
+        type: jsonpath
+    - name: queryDone
+      type: goto
+      stepId: listQueries
+      criteria:
+      - context: $response.body
+        condition: $.state != "SUBMITTED"
+        type: jsonpath
+  - stepId: listQueries
+    description: List recent queries to confirm the submitted query is recorded.
+    operationId: listQueries
+    parameters:
+    - name: limit
+      in: query
+      value: 20
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-sandbox-name
+      in: header
+      value: $inputs.sandboxName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      queries: $response.body#/queries
+  outputs:
+    queryId: $steps.submitQuery.outputs.queryId
+    finalState: $steps.pollQuery.outputs.finalState
+    queries: $steps.listQueries.outputs.queries

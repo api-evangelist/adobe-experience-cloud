@@ -1,0 +1,114 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Target AB Activity Lifecycle
+  summary: Create an A/B activity, confirm its configuration, then activate it.
+  description: >-
+    Drives the Adobe Target A/B test activity lifecycle. The workflow creates an
+    AB activity with a priority and schedule, reads it back by id to confirm the
+    type and state, then transitions the activity state to activated so it begins
+    serving experiences. Each step inlines the bearer token and API key required
+    by the Target Admin API so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: targetApi
+  url: ../openapi/adobe-target-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: ab-activity-lifecycle
+  summary: Create an A/B activity, confirm it, and activate it.
+  description: >-
+    Creates an AB Target activity, fetches it by id to confirm the type, then
+    updates its state to activated.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - apiKey
+    - activityName
+    properties:
+      authorization:
+        type: string
+        description: Bearer access token.
+      apiKey:
+        type: string
+        description: Adobe API key for the x-api-key header.
+      activityName:
+        type: string
+        description: Name for the new activity.
+      priority:
+        type: integer
+        description: Activity priority.
+        default: 1
+      startsAt:
+        type: string
+        description: Activity start date-time.
+      endsAt:
+        type: string
+        description: Activity end date-time.
+  steps:
+  - stepId: createActivity
+    description: Create a new AB Target activity.
+    operationId: createActivity
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.activityName
+        type: ab
+        priority: $inputs.priority
+        startsAt: $inputs.startsAt
+        endsAt: $inputs.endsAt
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      activityId: $response.body#/id
+      state: $response.body#/state
+  - stepId: confirmActivity
+    description: Read the activity back by id to confirm its type and state.
+    operationId: getActivity
+    parameters:
+    - name: activityId
+      in: path
+      value: $steps.createActivity.outputs.activityId
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedType: $response.body#/type
+      confirmedState: $response.body#/state
+  - stepId: activateActivity
+    description: Transition the activity state to activated so it begins serving.
+    operationId: updateActivityState
+    parameters:
+    - name: activityId
+      in: path
+      value: $steps.createActivity.outputs.activityId
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        state: activated
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      finalState: $response.body#/state
+  outputs:
+    activityId: $steps.createActivity.outputs.activityId
+    finalState: $steps.activateActivity.outputs.finalState

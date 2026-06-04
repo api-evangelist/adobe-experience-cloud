@@ -1,0 +1,118 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Campaign Profile Subscription
+  summary: Create a subscriber profile, create a subscription service, then subscribe the profile to it.
+  description: >-
+    Onboards a subscriber into an Adobe Campaign mailing list. The workflow
+    creates a subscriber profile with contact attributes, creates a subscription
+    service that represents a mailing list, and then subscribes the new profile
+    to that service using the profile and service primary keys. Each step inlines
+    the bearer token and API key so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: campaignApi
+  url: ../openapi/adobe-campaign-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: profile-subscription
+  summary: Create a profile and service, then subscribe the profile to the service.
+  description: >-
+    Creates a subscriber profile, creates a subscription service, then
+    subscribes the profile to the service by primary key.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - apiKey
+    - email
+    - serviceName
+    - serviceLabel
+    properties:
+      authorization:
+        type: string
+        description: Bearer access token.
+      apiKey:
+        type: string
+        description: Adobe API key for the x-api-key header.
+      email:
+        type: string
+        description: Email address for the new profile.
+      firstName:
+        type: string
+        description: First name for the new profile.
+      lastName:
+        type: string
+        description: Last name for the new profile.
+      serviceName:
+        type: string
+        description: Internal name for the subscription service.
+      serviceLabel:
+        type: string
+        description: Display label for the subscription service.
+  steps:
+  - stepId: createProfile
+    description: Create a new subscriber profile with contact attributes.
+    operationId: createProfile
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        email: $inputs.email
+        firstName: $inputs.firstName
+        lastName: $inputs.lastName
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      profilePKey: $response.body#/PKey
+  - stepId: createService
+    description: Create a subscription service representing a mailing list.
+    operationId: createService
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        label: $inputs.serviceLabel
+        name: $inputs.serviceName
+        messageType: email
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      servicePKey: $response.body#/PKey
+  - stepId: subscribeProfile
+    description: Subscribe the new profile to the subscription service.
+    operationId: subscribeProfile
+    parameters:
+    - name: servicePKey
+      in: path
+      value: $steps.createService.outputs.servicePKey
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        subscriber:
+          PKey: $steps.createProfile.outputs.profilePKey
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      subscriptionStatus: $statusCode
+  outputs:
+    profilePKey: $steps.createProfile.outputs.profilePKey
+    servicePKey: $steps.createService.outputs.servicePKey

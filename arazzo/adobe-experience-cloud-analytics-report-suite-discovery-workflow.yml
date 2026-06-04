@@ -1,0 +1,126 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Analytics Report Suite Discovery
+  summary: List report suites, fetch one's configuration, then run a report against it.
+  description: >-
+    Discovers an Adobe Analytics report suite and reports on it in a single
+    pass. The workflow lists the report suites available to the account, fetches
+    the configuration of a chosen report suite to confirm its currency and
+    timezone, then submits a ranked report request against that report suite.
+    Each step inlines the bearer token and API key so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: analyticsApi
+  url: ../openapi/adobe-analytics-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: report-suite-discovery
+  summary: List report suites, fetch one, and run a report on it.
+  description: >-
+    Lists report suites, fetches the chosen report suite configuration, then
+    submits a report request against it.
+  inputs:
+    type: object
+    required:
+    - authorization
+    - apiKey
+    - companyId
+    - rsid
+    properties:
+      authorization:
+        type: string
+        description: Bearer access token.
+      apiKey:
+        type: string
+        description: Adobe API key for the x-api-key header.
+      companyId:
+        type: string
+        description: The global company id for the Analytics account.
+      rsid:
+        type: string
+        description: The report suite id to fetch and report on.
+      dimension:
+        type: string
+        description: The dimension to break the report down by.
+        default: variables/page
+  steps:
+  - stepId: listReportSuites
+    description: List the report suites available to the account.
+    operationId: listReportSuites
+    parameters:
+    - name: companyId
+      in: path
+      value: $inputs.companyId
+    - name: limit
+      in: query
+      value: 10
+    - name: page
+      in: query
+      value: 0
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      reportSuites: $response.body#/content
+  - stepId: getReportSuite
+    description: Fetch the chosen report suite to confirm its configuration.
+    operationId: getReportSuite
+    parameters:
+    - name: companyId
+      in: path
+      value: $inputs.companyId
+    - name: rsid
+      in: path
+      value: $inputs.rsid
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedRsid: $response.body#/rsid
+      currency: $response.body#/currency
+  - stepId: runReport
+    description: Submit a ranked report request against the chosen report suite.
+    operationId: getReport
+    parameters:
+    - name: companyId
+      in: path
+      value: $inputs.companyId
+    - name: Authorization
+      in: header
+      value: $inputs.authorization
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        rsid: $steps.getReportSuite.outputs.confirmedRsid
+        globalFilters:
+        - type: standard
+          dateRange: example
+        metricContainer:
+          metrics:
+          - id: {}
+        dimension: $inputs.dimension
+        settings:
+          limit: 10
+          page: 0
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      totalElements: $response.body#/totalElements
+      rows: $response.body#/rows
+  outputs:
+    reportSuites: $steps.listReportSuites.outputs.reportSuites
+    rows: $steps.runReport.outputs.rows
