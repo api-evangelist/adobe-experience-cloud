@@ -1,0 +1,2832 @@
+{
+  "info": {
+    "_postman_id": "e2908fd9-4d61-4bee-841f-65e7249aa79f",
+    "name": "Adobe Experience Cloud Adobe Campaign API",
+    "description": "The Adobe Campaign API provides RESTful access to Adobe Campaign Standard and Classic capabilities for managing marketing campaigns, profiles, services, workflows, transactional messages, and content. It enables programmatic creation and execution of email, SMS, and push notification campaigns, subscriber management, and real-time transactional messaging.\n\nContact Support:\n Name: Adobe Developer",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:52.000Z",
+    "updatedAt": "2026-06-05T15:02:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e2908fd9-4d61-4bee-841f-65e7249aa79f"
+  },
+  "item": [
+    {
+      "name": "campaign",
+      "item": [
+        {
+          "name": "profileAndServices",
+          "item": [
+            {
+              "name": "profile",
+              "item": [
+                {
+                  "name": "{profilePKey}",
+                  "item": [
+                    {
+                      "name": "Adobe Campaign Adobe Experience Cloud Get a Profile",
+                      "id": "260a5369-218a-409c-b5ed-86f67a18421a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/profileAndServices/profile/:profilePKey",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "profileAndServices",
+                            "profile",
+                            ":profilePKey"
+                          ],
+                          "variable": [
+                            {
+                              "id": "6f48d3c5-9b42-46d0-8ff3-e3e975c67a30",
+                              "key": "profilePKey",
+                              "value": "<string>",
+                              "description": "(Required) The primary key of the profile."
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a single subscriber profile by its primary key (PKey), including all standard and custom attributes."
+                      },
+                      "response": [
+                        {
+                          "id": "1bd0b773-f6d3-4c3a-85f1-8436bac93e61",
+                          "name": "Profile details returned successfully.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/campaign/profileAndServices/profile/:profilePKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "campaign",
+                                "profileAndServices",
+                                "profile",
+                                ":profilePKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "profilePKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"PKey\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"birthDate\": \"<date>\",\n  \"phone\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"lastModified\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:02:53.000Z",
+                          "updatedAt": "2026-06-05T15:02:53.000Z",
+                          "uid": "35240-1bd0b773-f6d3-4c3a-85f1-8436bac93e61"
+                        },
+                        {
+                          "id": "2e3972e6-491e-4090-9a9c-7f5121baba30",
+                          "name": "Profile not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/campaign/profileAndServices/profile/:profilePKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "campaign",
+                                "profileAndServices",
+                                "profile",
+                                ":profilePKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "profilePKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:02:53.000Z",
+                          "updatedAt": "2026-06-05T15:02:53.000Z",
+                          "uid": "35240-2e3972e6-491e-4090-9a9c-7f5121baba30"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-260a5369-218a-409c-b5ed-86f67a18421a"
+                    },
+                    {
+                      "name": "Adobe Campaign Adobe Experience Cloud Update a Profile",
+                      "id": "030338ba-1d10-4932-9c10-9b0078e2136f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PATCH",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"birthDate\": \"<date>\",\n  \"phone\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/profileAndServices/profile/:profilePKey",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "profileAndServices",
+                            "profile",
+                            ":profilePKey"
+                          ],
+                          "variable": [
+                            {
+                              "id": "10b971b4-265a-4478-96bd-449820d01604",
+                              "key": "profilePKey",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Updates specific attributes of an existing subscriber profile using a partial update. Only the fields provided in the request body will be modified."
+                      },
+                      "response": [
+                        {
+                          "id": "160f7746-a31a-45d7-b5b1-59a77d5fd60c",
+                          "name": "Profile updated successfully.",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"birthDate\": \"<date>\",\n  \"phone\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/campaign/profileAndServices/profile/:profilePKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "campaign",
+                                "profileAndServices",
+                                "profile",
+                                ":profilePKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "profilePKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"PKey\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"birthDate\": \"<date>\",\n  \"phone\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"lastModified\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:02:53.000Z",
+                          "updatedAt": "2026-06-05T15:02:53.000Z",
+                          "uid": "35240-160f7746-a31a-45d7-b5b1-59a77d5fd60c"
+                        },
+                        {
+                          "id": "21c08f4a-40d8-40f6-9d04-dc4bb3abbefc",
+                          "name": "Profile not found.",
+                          "originalRequest": {
+                            "method": "PATCH",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"birthDate\": \"<date>\",\n  \"phone\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/campaign/profileAndServices/profile/:profilePKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "campaign",
+                                "profileAndServices",
+                                "profile",
+                                ":profilePKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "profilePKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:02:53.000Z",
+                          "updatedAt": "2026-06-05T15:02:53.000Z",
+                          "uid": "35240-21c08f4a-40d8-40f6-9d04-dc4bb3abbefc"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-030338ba-1d10-4932-9c10-9b0078e2136f"
+                    },
+                    {
+                      "name": "Adobe Campaign Adobe Experience Cloud Delete a Profile",
+                      "id": "1e9bc897-63b8-4920-8ee4-3262c6041ff8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/profileAndServices/profile/:profilePKey",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "profileAndServices",
+                            "profile",
+                            ":profilePKey"
+                          ],
+                          "variable": [
+                            {
+                              "id": "94c702dc-78ae-4877-9c0b-6b9768945fda",
+                              "key": "profilePKey",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Permanently deletes a subscriber profile from the Adobe Campaign database. This action cannot be undone."
+                      },
+                      "response": [
+                        {
+                          "id": "9f8ebb3d-7cae-4861-9cca-fa46bcad6c0e",
+                          "name": "Profile deleted successfully.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/campaign/profileAndServices/profile/:profilePKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "campaign",
+                                "profileAndServices",
+                                "profile",
+                                ":profilePKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "profilePKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:02:53.000Z",
+                          "updatedAt": "2026-06-05T15:02:53.000Z",
+                          "uid": "35240-9f8ebb3d-7cae-4861-9cca-fa46bcad6c0e"
+                        },
+                        {
+                          "id": "08616749-8602-4fc4-94e8-237a7dbd1ff5",
+                          "name": "Profile not found.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/campaign/profileAndServices/profile/:profilePKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "campaign",
+                                "profileAndServices",
+                                "profile",
+                                ":profilePKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "profilePKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:02:53.000Z",
+                          "updatedAt": "2026-06-05T15:02:53.000Z",
+                          "uid": "35240-08616749-8602-4fc4-94e8-237a7dbd1ff5"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-1e9bc897-63b8-4920-8ee4-3262c6041ff8"
+                    }
+                  ],
+                  "id": "e2941539-3d13-43ca-ab51-3e8110bf835f",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-e2941539-3d13-43ca-ab51-3e8110bf835f"
+                },
+                {
+                  "name": "Adobe Campaign Adobe Experience Cloud List Profiles",
+                  "id": "ba276ccb-f7da-443a-8faf-09f7f3e9b3be",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/profileAndServices/profile?_lineCount=25&_lineStart=0&email=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "profileAndServices",
+                        "profile"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of profiles to return per page.",
+                          "key": "_lineCount",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Starting line number for pagination.",
+                          "key": "_lineStart",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Filter profiles by email address.",
+                          "key": "email",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Returns a paginated list of subscriber profiles in the Adobe Campaign database. Profiles can be filtered by email, first name, last name, and custom attributes using query parameters."
+                  },
+                  "response": [
+                    {
+                      "id": "23718163-a4aa-4b1f-b61c-9613a4c61fb9",
+                      "name": "A paginated list of profiles.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/profileAndServices/profile?_lineCount=25&_lineStart=0&email=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "profileAndServices",
+                            "profile"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of profiles to return per page.",
+                              "key": "_lineCount",
+                              "value": "25"
+                            },
+                            {
+                              "description": "Starting line number for pagination.",
+                              "key": "_lineStart",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Filter profiles by email address.",
+                              "key": "email",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"content\": [\n    {\n      \"PKey\": \"<string>\",\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"birthDate\": \"<date>\",\n      \"phone\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"lastModified\": \"<dateTime>\"\n    },\n    {\n      \"PKey\": \"<string>\",\n      \"email\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"birthDate\": \"<date>\",\n      \"phone\": \"<string>\",\n      \"created\": \"<dateTime>\",\n      \"lastModified\": \"<dateTime>\"\n    }\n  ],\n  \"count\": {\n    \"value\": \"<integer>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-23718163-a4aa-4b1f-b61c-9613a4c61fb9"
+                    },
+                    {
+                      "id": "8508575f-3ffd-4e2c-a82a-828f7df58e37",
+                      "name": "Authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/profileAndServices/profile?_lineCount=25&_lineStart=0&email=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "profileAndServices",
+                            "profile"
+                          ],
+                          "query": [
+                            {
+                              "description": "Maximum number of profiles to return per page.",
+                              "key": "_lineCount",
+                              "value": "25"
+                            },
+                            {
+                              "description": "Starting line number for pagination.",
+                              "key": "_lineStart",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Filter profiles by email address.",
+                              "key": "email",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-8508575f-3ffd-4e2c-a82a-828f7df58e37"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-ba276ccb-f7da-443a-8faf-09f7f3e9b3be"
+                },
+                {
+                  "name": "Adobe Campaign Adobe Experience Cloud Create a Profile",
+                  "id": "e74c1972-93f2-4a14-8c9d-82870a72b23a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"birthDate\": \"<date>\",\n  \"phone\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/profileAndServices/profile",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "profileAndServices",
+                        "profile"
+                      ]
+                    },
+                    "description": "Creates a new subscriber profile in the Adobe Campaign database with the provided attributes including email, first name, last name, and any custom fields."
+                  },
+                  "response": [
+                    {
+                      "id": "39e2802d-b301-4d53-93ac-66c0b7d528b6",
+                      "name": "Profile created successfully.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"birthDate\": \"<date>\",\n  \"phone\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/profileAndServices/profile",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "profileAndServices",
+                            "profile"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"PKey\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"birthDate\": \"<date>\",\n  \"phone\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"lastModified\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-39e2802d-b301-4d53-93ac-66c0b7d528b6"
+                    },
+                    {
+                      "id": "ef405b70-b4af-4f50-b7df-98f995871296",
+                      "name": "Invalid profile data.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"birthDate\": \"<date>\",\n  \"phone\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/profileAndServices/profile",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "profileAndServices",
+                            "profile"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-ef405b70-b4af-4f50-b7df-98f995871296"
+                    },
+                    {
+                      "id": "e69df8ad-6760-46c7-97a6-1f6bd8003757",
+                      "name": "Profile with this email already exists.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"birthDate\": \"<date>\",\n  \"phone\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/profileAndServices/profile",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "profileAndServices",
+                            "profile"
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-e69df8ad-6760-46c7-97a6-1f6bd8003757"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-e74c1972-93f2-4a14-8c9d-82870a72b23a"
+                }
+              ],
+              "id": "204c0167-2680-47f9-b56a-ecd2c5cd4509",
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-204c0167-2680-47f9-b56a-ecd2c5cd4509"
+            },
+            {
+              "name": "service",
+              "item": [
+                {
+                  "name": "{servicePKey}",
+                  "item": [
+                    {
+                      "name": "subscriptions",
+                      "item": [
+                        {
+                          "name": "Adobe Campaign Adobe Experience Cloud Subscribe a Profile to a Service",
+                          "id": "69473d67-973e-4377-8ff3-1b66d5ff6643",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"subscriber\": {\n    \"PKey\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/campaign/profileAndServices/service/:servicePKey/subscriptions",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "campaign",
+                                "profileAndServices",
+                                "service",
+                                ":servicePKey",
+                                "subscriptions"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "40efcf2e-d5b6-47bc-b5c0-d3e331acd6a3",
+                                  "key": "servicePKey",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Subscribes an existing profile to the specified subscription service by providing the profile primary key."
+                          },
+                          "response": [
+                            {
+                              "id": "e59d55e7-b529-4a2e-be6b-b2f755d489d6",
+                              "name": "Subscription created successfully.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"subscriber\": {\n    \"PKey\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/campaign/profileAndServices/service/:servicePKey/subscriptions",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "campaign",
+                                    "profileAndServices",
+                                    "service",
+                                    ":servicePKey",
+                                    "subscriptions"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "servicePKey"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Created",
+                              "code": 201,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:02:53.000Z",
+                              "updatedAt": "2026-06-05T15:02:53.000Z",
+                              "uid": "35240-e59d55e7-b529-4a2e-be6b-b2f755d489d6"
+                            },
+                            {
+                              "id": "96de0443-f8e5-45a5-a7c1-43d5b7bade2d",
+                              "name": "Invalid subscription request.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"subscriber\": {\n    \"PKey\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/campaign/profileAndServices/service/:servicePKey/subscriptions",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "campaign",
+                                    "profileAndServices",
+                                    "service",
+                                    ":servicePKey",
+                                    "subscriptions"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "servicePKey"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:02:53.000Z",
+                              "updatedAt": "2026-06-05T15:02:53.000Z",
+                              "uid": "35240-96de0443-f8e5-45a5-a7c1-43d5b7bade2d"
+                            },
+                            {
+                              "id": "2c8c46e7-0275-41f7-a1ed-91d8ffcb4155",
+                              "name": "Service or profile not found.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"subscriber\": {\n    \"PKey\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/campaign/profileAndServices/service/:servicePKey/subscriptions",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "campaign",
+                                    "profileAndServices",
+                                    "service",
+                                    ":servicePKey",
+                                    "subscriptions"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "servicePKey"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-06-05T15:02:53.000Z",
+                              "updatedAt": "2026-06-05T15:02:53.000Z",
+                              "uid": "35240-2c8c46e7-0275-41f7-a1ed-91d8ffcb4155"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:02:53.000Z",
+                          "updatedAt": "2026-06-05T15:02:53.000Z",
+                          "uid": "35240-69473d67-973e-4377-8ff3-1b66d5ff6643"
+                        }
+                      ],
+                      "id": "7c36dbbd-fe0e-4758-be3e-38760d10a9ef",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-7c36dbbd-fe0e-4758-be3e-38760d10a9ef"
+                    },
+                    {
+                      "name": "Adobe Campaign Adobe Experience Cloud Get a Service",
+                      "id": "150e07d5-0875-4b9b-9750-3e1484dff083",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/profileAndServices/service/:servicePKey",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "profileAndServices",
+                            "service",
+                            ":servicePKey"
+                          ],
+                          "variable": [
+                            {
+                              "id": "c925f197-8c4e-457c-96fd-425ab2533d4f",
+                              "key": "servicePKey",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Retrieves the details of a subscription service by its primary key."
+                      },
+                      "response": [
+                        {
+                          "id": "93b919af-cbfd-4867-8d4f-f5619f335935",
+                          "name": "Service details returned successfully.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/campaign/profileAndServices/service/:servicePKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "campaign",
+                                "profileAndServices",
+                                "service",
+                                ":servicePKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "servicePKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"PKey\": \"<string>\",\n  \"name\": \"<string>\",\n  \"label\": \"<string>\",\n  \"mode\": \"<string>\",\n  \"created\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:02:53.000Z",
+                          "updatedAt": "2026-06-05T15:02:53.000Z",
+                          "uid": "35240-93b919af-cbfd-4867-8d4f-f5619f335935"
+                        },
+                        {
+                          "id": "aec8ae8f-1fad-47a7-95a0-4d60470752d9",
+                          "name": "Service not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/campaign/profileAndServices/service/:servicePKey",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "campaign",
+                                "profileAndServices",
+                                "service",
+                                ":servicePKey"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "servicePKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:02:53.000Z",
+                          "updatedAt": "2026-06-05T15:02:53.000Z",
+                          "uid": "35240-aec8ae8f-1fad-47a7-95a0-4d60470752d9"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-150e07d5-0875-4b9b-9750-3e1484dff083"
+                    }
+                  ],
+                  "id": "f38ad6d5-46e2-4830-8188-9e9c42a51ce6",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-f38ad6d5-46e2-4830-8188-9e9c42a51ce6"
+                },
+                {
+                  "name": "Adobe Campaign Adobe Experience Cloud List Services",
+                  "id": "cafb2734-8ecd-4a0f-9867-97eec8d96af6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/profileAndServices/service?_lineCount=25",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "profileAndServices",
+                        "service"
+                      ],
+                      "query": [
+                        {
+                          "key": "_lineCount",
+                          "value": "25"
+                        }
+                      ]
+                    },
+                    "description": "Returns a paginated list of subscription services configured in Adobe Campaign. Services represent mailing lists or subscription topics that profiles can subscribe to."
+                  },
+                  "response": [
+                    {
+                      "id": "46a5514b-cf3d-43fb-b80d-5d0ed21d3307",
+                      "name": "A paginated list of services.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/profileAndServices/service?_lineCount=25",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "profileAndServices",
+                            "service"
+                          ],
+                          "query": [
+                            {
+                              "key": "_lineCount",
+                              "value": "25"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"content\": [\n    {\n      \"PKey\": \"<string>\",\n      \"name\": \"<string>\",\n      \"label\": \"<string>\",\n      \"mode\": \"<string>\",\n      \"created\": \"<dateTime>\"\n    },\n    {\n      \"PKey\": \"<string>\",\n      \"name\": \"<string>\",\n      \"label\": \"<string>\",\n      \"mode\": \"<string>\",\n      \"created\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-46a5514b-cf3d-43fb-b80d-5d0ed21d3307"
+                    },
+                    {
+                      "id": "08812cf0-35ea-4782-ab81-2e7a339744bd",
+                      "name": "Authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/profileAndServices/service?_lineCount=25",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "profileAndServices",
+                            "service"
+                          ],
+                          "query": [
+                            {
+                              "key": "_lineCount",
+                              "value": "25"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-08812cf0-35ea-4782-ab81-2e7a339744bd"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-cafb2734-8ecd-4a0f-9867-97eec8d96af6"
+                },
+                {
+                  "name": "Adobe Campaign Adobe Experience Cloud Create a Service",
+                  "id": "03dad12f-1314-4c02-83b4-1f2e2b5ec437",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"label\": \"<string>\",\n  \"name\": \"<string>\",\n  \"messageType\": \"sms\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/profileAndServices/service",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "profileAndServices",
+                        "service"
+                      ]
+                    },
+                    "description": "Creates a new subscription service in Adobe Campaign with the specified name, label, and configuration."
+                  },
+                  "response": [
+                    {
+                      "id": "7d6f9296-8b25-44f3-a6ee-4835a8bc35c6",
+                      "name": "Service created successfully.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"label\": \"<string>\",\n  \"name\": \"<string>\",\n  \"messageType\": \"sms\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/profileAndServices/service",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "profileAndServices",
+                            "service"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"PKey\": \"<string>\",\n  \"name\": \"<string>\",\n  \"label\": \"<string>\",\n  \"mode\": \"<string>\",\n  \"created\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-7d6f9296-8b25-44f3-a6ee-4835a8bc35c6"
+                    },
+                    {
+                      "id": "ae160261-2d3d-4106-84ab-0cd4fe6d609d",
+                      "name": "Invalid service definition.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"label\": \"<string>\",\n  \"name\": \"<string>\",\n  \"messageType\": \"sms\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/profileAndServices/service",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "profileAndServices",
+                            "service"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-ae160261-2d3d-4106-84ab-0cd4fe6d609d"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-03dad12f-1314-4c02-83b4-1f2e2b5ec437"
+                }
+              ],
+              "id": "2a065065-d838-4036-a5fe-54147966d22f",
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-2a065065-d838-4036-a5fe-54147966d22f"
+            }
+          ],
+          "id": "c39e61b9-d756-441b-82fe-ebce2285c9a8",
+          "createdAt": "2026-06-05T15:02:53.000Z",
+          "updatedAt": "2026-06-05T15:02:53.000Z",
+          "uid": "35240-c39e61b9-d756-441b-82fe-ebce2285c9a8"
+        },
+        {
+          "name": "workflow",
+          "item": [
+            {
+              "name": "{workflowPKey}",
+              "item": [
+                {
+                  "name": "commands",
+                  "item": [
+                    {
+                      "name": "Adobe Campaign Adobe Experience Cloud Execute a Workflow Command",
+                      "id": "4d2f0ce4-2e3c-4eae-a5ea-596efa0a12cc",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"method\": \"resume\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/workflow/:workflowPKey/commands",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "workflow",
+                            ":workflowPKey",
+                            "commands"
+                          ],
+                          "variable": [
+                            {
+                              "id": "eeb50855-e0ba-4854-8c46-3b83e863fecf",
+                              "key": "workflowPKey",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Executes a command on a workflow such as start, pause, resume, or stop. The command triggers the corresponding state transition in the workflow execution engine."
+                      },
+                      "response": [
+                        {
+                          "id": "adcc79af-d993-4e10-abba-82615befb09e",
+                          "name": "Workflow command executed successfully.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"method\": \"resume\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/campaign/workflow/:workflowPKey/commands",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "campaign",
+                                "workflow",
+                                ":workflowPKey",
+                                "commands"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workflowPKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:02:53.000Z",
+                          "updatedAt": "2026-06-05T15:02:53.000Z",
+                          "uid": "35240-adcc79af-d993-4e10-abba-82615befb09e"
+                        },
+                        {
+                          "id": "89e241fe-e54d-42de-99cc-502d721a2381",
+                          "name": "Invalid command for the current workflow state.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"method\": \"resume\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/campaign/workflow/:workflowPKey/commands",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "campaign",
+                                "workflow",
+                                ":workflowPKey",
+                                "commands"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workflowPKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:02:53.000Z",
+                          "updatedAt": "2026-06-05T15:02:53.000Z",
+                          "uid": "35240-89e241fe-e54d-42de-99cc-502d721a2381"
+                        },
+                        {
+                          "id": "b274417c-ee27-4e6f-82bb-4b5eabbd597a",
+                          "name": "Workflow not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"method\": \"resume\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/campaign/workflow/:workflowPKey/commands",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "campaign",
+                                "workflow",
+                                ":workflowPKey",
+                                "commands"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workflowPKey"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:02:53.000Z",
+                          "updatedAt": "2026-06-05T15:02:53.000Z",
+                          "uid": "35240-b274417c-ee27-4e6f-82bb-4b5eabbd597a"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-4d2f0ce4-2e3c-4eae-a5ea-596efa0a12cc"
+                    }
+                  ],
+                  "id": "4849e3d8-099e-49cb-a14b-bb71a1a949ee",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-4849e3d8-099e-49cb-a14b-bb71a1a949ee"
+                },
+                {
+                  "name": "Adobe Campaign Adobe Experience Cloud Get a Workflow",
+                  "id": "0e3ef854-e0f6-469c-9183-105f1956a84c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/workflow/:workflowPKey",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "workflow",
+                        ":workflowPKey"
+                      ],
+                      "variable": [
+                        {
+                          "id": "7598fa19-7a47-4661-aea1-4ab962d798ef",
+                          "key": "workflowPKey",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the details of a single workflow by its primary key, including its activities, transitions, and execution history."
+                  },
+                  "response": [
+                    {
+                      "id": "39385e73-92ae-4eba-b40d-5443988b657b",
+                      "name": "Workflow details returned successfully.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/workflow/:workflowPKey",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "workflow",
+                            ":workflowPKey"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workflowPKey"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"PKey\": \"<string>\",\n  \"label\": \"<string>\",\n  \"status\": \"finished\",\n  \"startDate\": \"<dateTime>\",\n  \"created\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-39385e73-92ae-4eba-b40d-5443988b657b"
+                    },
+                    {
+                      "id": "5515e839-c12b-43b3-98b9-251a59adcc2e",
+                      "name": "Workflow not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/workflow/:workflowPKey",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "workflow",
+                            ":workflowPKey"
+                          ],
+                          "variable": [
+                            {
+                              "key": "workflowPKey"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-5515e839-c12b-43b3-98b9-251a59adcc2e"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-0e3ef854-e0f6-469c-9183-105f1956a84c"
+                }
+              ],
+              "id": "bd6fc2ba-9c7f-451b-aedd-fbae4d65025b",
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-bd6fc2ba-9c7f-451b-aedd-fbae4d65025b"
+            },
+            {
+              "name": "Adobe Campaign Adobe Experience Cloud List Workflows",
+              "id": "653458fc-be3c-4b9a-be30-ad100794fb00",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/campaign/workflow?_lineCount=25",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "campaign",
+                    "workflow"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    }
+                  ]
+                },
+                "description": "Returns a paginated list of workflows configured in Adobe Campaign. Each workflow includes its ID, label, status, and schedule information."
+              },
+              "response": [
+                {
+                  "id": "7fabf28a-9326-4da8-80d1-a69d24d04983",
+                  "name": "A paginated list of workflows.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/workflow?_lineCount=25",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "workflow"
+                      ],
+                      "query": [
+                        {
+                          "key": "_lineCount",
+                          "value": "25"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"content\": [\n    {\n      \"PKey\": \"<string>\",\n      \"label\": \"<string>\",\n      \"status\": \"error\",\n      \"startDate\": \"<dateTime>\",\n      \"created\": \"<dateTime>\"\n    },\n    {\n      \"PKey\": \"<string>\",\n      \"label\": \"<string>\",\n      \"status\": \"error\",\n      \"startDate\": \"<dateTime>\",\n      \"created\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-7fabf28a-9326-4da8-80d1-a69d24d04983"
+                },
+                {
+                  "id": "8ef84662-070e-44f4-afe5-7a4227ce00d2",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/workflow?_lineCount=25",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "workflow"
+                      ],
+                      "query": [
+                        {
+                          "key": "_lineCount",
+                          "value": "25"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-8ef84662-070e-44f4-afe5-7a4227ce00d2"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-653458fc-be3c-4b9a-be30-ad100794fb00"
+            }
+          ],
+          "id": "2d4d0c4f-a1ef-4fbe-bb04-436e9dbf9447",
+          "createdAt": "2026-06-05T15:02:53.000Z",
+          "updatedAt": "2026-06-05T15:02:53.000Z",
+          "uid": "35240-2d4d0c4f-a1ef-4fbe-bb04-436e9dbf9447"
+        },
+        {
+          "name": "mcAdobe",
+          "item": [
+            {
+              "name": "{transactionalMessageId}",
+              "item": [
+                {
+                  "name": "{eventId}",
+                  "item": [
+                    {
+                      "name": "Adobe Campaign Adobe Experience Cloud Get Transactional Message Status",
+                      "id": "76282ded-cf5d-401f-a4a7-2b1ddce1766c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/mcAdobe/:transactionalMessageId/:eventId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "mcAdobe",
+                            ":transactionalMessageId",
+                            ":eventId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "5ec66d49-c9f6-471d-8eb2-00661c0faa17",
+                              "key": "transactionalMessageId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "4b3cc5ee-3a97-4965-ae22-9b360b46dbed",
+                              "key": "eventId",
+                              "value": "<string>",
+                              "description": "(Required) The event ID returned when the message was triggered."
+                            }
+                          ]
+                        },
+                        "description": "Retrieves the delivery status of a previously sent transactional message by its event ID."
+                      },
+                      "response": [
+                        {
+                          "id": "4cd391aa-9297-434f-ada0-ce844506a274",
+                          "name": "Message status returned successfully.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/campaign/mcAdobe/:transactionalMessageId/:eventId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "campaign",
+                                "mcAdobe",
+                                ":transactionalMessageId",
+                                ":eventId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "transactionalMessageId"
+                                },
+                                {
+                                  "key": "eventId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"PKey\": \"<string>\",\n  \"eventId\": \"<string>\",\n  \"status\": \"delivered\",\n  \"email\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:02:53.000Z",
+                          "updatedAt": "2026-06-05T15:02:53.000Z",
+                          "uid": "35240-4cd391aa-9297-434f-ada0-ce844506a274"
+                        },
+                        {
+                          "id": "5224d3f6-811f-4ae1-a03b-7b3ae2cb60c1",
+                          "name": "Message event not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/campaign/mcAdobe/:transactionalMessageId/:eventId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "campaign",
+                                "mcAdobe",
+                                ":transactionalMessageId",
+                                ":eventId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "transactionalMessageId"
+                                },
+                                {
+                                  "key": "eventId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:02:53.000Z",
+                          "updatedAt": "2026-06-05T15:02:53.000Z",
+                          "uid": "35240-5224d3f6-811f-4ae1-a03b-7b3ae2cb60c1"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-76282ded-cf5d-401f-a4a7-2b1ddce1766c"
+                    }
+                  ],
+                  "id": "13c504ab-fea0-41dc-ad7d-20d7bbf54b33",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-13c504ab-fea0-41dc-ad7d-20d7bbf54b33"
+                },
+                {
+                  "name": "Adobe Campaign Adobe Experience Cloud Send a Transactional Message",
+                  "id": "7d578926-79a5-48b0-b191-f88151858dc2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<string>\",\n  \"ctx\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/mcAdobe/:transactionalMessageId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "mcAdobe",
+                        ":transactionalMessageId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "920225cb-58d0-4f6b-a5b4-5411226210cd",
+                          "key": "transactionalMessageId",
+                          "value": "<string>",
+                          "description": "(Required) The transactional message template identifier."
+                        }
+                      ]
+                    },
+                    "description": "Triggers a real-time transactional message to a recipient. Transactional messages are used for event-driven communications such as order confirmations, password resets, and shipping notifications."
+                  },
+                  "response": [
+                    {
+                      "id": "11e13144-89e0-4d50-b604-466e8770e7ae",
+                      "name": "Transactional message queued for delivery.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<string>\",\n  \"ctx\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/mcAdobe/:transactionalMessageId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "mcAdobe",
+                            ":transactionalMessageId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "transactionalMessageId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"PKey\": \"<string>\",\n  \"eventId\": \"<string>\",\n  \"status\": \"delivered\",\n  \"email\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-11e13144-89e0-4d50-b604-466e8770e7ae"
+                    },
+                    {
+                      "id": "58aea981-ccbd-46a3-bd94-241c890d9256",
+                      "name": "Invalid message request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<string>\",\n  \"ctx\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/mcAdobe/:transactionalMessageId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "mcAdobe",
+                            ":transactionalMessageId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "transactionalMessageId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-58aea981-ccbd-46a3-bd94-241c890d9256"
+                    },
+                    {
+                      "id": "2877891d-4fb9-4474-a048-d283832dc084",
+                      "name": "Transactional message template not found.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<string>\",\n  \"ctx\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/mcAdobe/:transactionalMessageId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "mcAdobe",
+                            ":transactionalMessageId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "transactionalMessageId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-2877891d-4fb9-4474-a048-d283832dc084"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-7d578926-79a5-48b0-b191-f88151858dc2"
+                }
+              ],
+              "id": "78fe6191-7026-422b-971e-01c0e0edfa79",
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-78fe6191-7026-422b-971e-01c0e0edfa79"
+            }
+          ],
+          "id": "cdd543e4-3975-4d59-8720-d6deef5e0710",
+          "createdAt": "2026-06-05T15:02:53.000Z",
+          "updatedAt": "2026-06-05T15:02:53.000Z",
+          "uid": "35240-cdd543e4-3975-4d59-8720-d6deef5e0710"
+        },
+        {
+          "name": "profileAndServicesExt",
+          "item": [
+            {
+              "name": "resourceType",
+              "item": [
+                {
+                  "name": "Adobe Campaign Adobe Experience Cloud List Resource Metadata",
+                  "id": "02d744ec-a201-474a-b6b5-06982c6b9823",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/profileAndServicesExt/resourceType",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "profileAndServicesExt",
+                        "resourceType"
+                      ]
+                    },
+                    "description": "Returns metadata about the available custom resources and their fields in the Adobe Campaign data model. Useful for discovering extended profile attributes and custom resource schemas."
+                  },
+                  "response": [
+                    {
+                      "id": "5c49bcdf-df9d-41a2-863a-be906b740fcb",
+                      "name": "Resource metadata returned successfully.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/profileAndServicesExt/resourceType",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "profileAndServicesExt",
+                            "resourceType"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"content\": [\n    {\n      \"PKey\": \"<string>\",\n      \"name\": \"<string>\",\n      \"label\": \"<string>\"\n    },\n    {\n      \"PKey\": \"<string>\",\n      \"name\": \"<string>\",\n      \"label\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-5c49bcdf-df9d-41a2-863a-be906b740fcb"
+                    },
+                    {
+                      "id": "a9e3e1ce-850c-4041-a083-072c2b78160a",
+                      "name": "Authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/profileAndServicesExt/resourceType",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "profileAndServicesExt",
+                            "resourceType"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-a9e3e1ce-850c-4041-a083-072c2b78160a"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-02d744ec-a201-474a-b6b5-06982c6b9823"
+                }
+              ],
+              "id": "2bd94a65-22cf-4adb-87ae-ddd63e41b45e",
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-2bd94a65-22cf-4adb-87ae-ddd63e41b45e"
+            }
+          ],
+          "id": "3996da60-e29c-41e3-9740-64e2b492dfb6",
+          "createdAt": "2026-06-05T15:02:53.000Z",
+          "updatedAt": "2026-06-05T15:02:53.000Z",
+          "uid": "35240-3996da60-e29c-41e3-9740-64e2b492dfb6"
+        },
+        {
+          "name": "email",
+          "item": [
+            {
+              "name": "{emailPKey}",
+              "item": [
+                {
+                  "name": "Adobe Campaign Adobe Experience Cloud Get an Email Delivery",
+                  "id": "abfe2dd6-0ca4-4e9e-8b13-dae5d8ec90ac",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/email/:emailPKey",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "email",
+                        ":emailPKey"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f1c5b944-07ac-423e-a674-2a2e62a40296",
+                          "key": "emailPKey",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the full details of an email delivery by its primary key, including the subject, HTML content, sender, and delivery status."
+                  },
+                  "response": [
+                    {
+                      "id": "b376801c-63ed-49df-88e6-e0ff28dbe14a",
+                      "name": "Email delivery details returned successfully.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/email/:emailPKey",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "email",
+                            ":emailPKey"
+                          ],
+                          "variable": [
+                            {
+                              "key": "emailPKey"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"PKey\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"htmlContent\": \"<string>\",\n  \"status\": \"<string>\",\n  \"sender\": {\n    \"name\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  \"created\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-b376801c-63ed-49df-88e6-e0ff28dbe14a"
+                    },
+                    {
+                      "id": "f67dee4a-13de-471a-a178-0a56b96dd6f9",
+                      "name": "Email delivery not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/email/:emailPKey",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "email",
+                            ":emailPKey"
+                          ],
+                          "variable": [
+                            {
+                              "key": "emailPKey"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:53.000Z",
+                      "updatedAt": "2026-06-05T15:02:53.000Z",
+                      "uid": "35240-f67dee4a-13de-471a-a178-0a56b96dd6f9"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-abfe2dd6-0ca4-4e9e-8b13-dae5d8ec90ac"
+                }
+              ],
+              "id": "b23a5446-6005-4fa5-841f-80478c08690d",
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-b23a5446-6005-4fa5-841f-80478c08690d"
+            },
+            {
+              "name": "Adobe Campaign Adobe Experience Cloud List Email Deliveries",
+              "id": "78912b8f-c6bb-452a-ac83-ac5c91cddcd8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/campaign/email?_lineCount=25",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "campaign",
+                    "email"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    }
+                  ]
+                },
+                "description": "Returns a paginated list of email deliveries including their subject, status, and scheduling metadata."
+              },
+              "response": [
+                {
+                  "id": "0acf10c9-d519-41e3-b5e8-3ae89b6a11e2",
+                  "name": "A paginated list of email deliveries.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/email?_lineCount=25",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "email"
+                      ],
+                      "query": [
+                        {
+                          "key": "_lineCount",
+                          "value": "25"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"content\": [\n    {\n      \"PKey\": \"<string>\",\n      \"subject\": \"<string>\",\n      \"htmlContent\": \"<string>\",\n      \"status\": \"<string>\",\n      \"sender\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\"\n      },\n      \"created\": \"<dateTime>\"\n    },\n    {\n      \"PKey\": \"<string>\",\n      \"subject\": \"<string>\",\n      \"htmlContent\": \"<string>\",\n      \"status\": \"<string>\",\n      \"sender\": {\n        \"name\": \"<string>\",\n        \"email\": \"<string>\"\n      },\n      \"created\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-0acf10c9-d519-41e3-b5e8-3ae89b6a11e2"
+                },
+                {
+                  "id": "7e80d9d9-5466-485c-aadf-9df0f3c08b04",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/email?_lineCount=25",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "email"
+                      ],
+                      "query": [
+                        {
+                          "key": "_lineCount",
+                          "value": "25"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:53.000Z",
+                  "updatedAt": "2026-06-05T15:02:53.000Z",
+                  "uid": "35240-7e80d9d9-5466-485c-aadf-9df0f3c08b04"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:53.000Z",
+              "updatedAt": "2026-06-05T15:02:53.000Z",
+              "uid": "35240-78912b8f-c6bb-452a-ac83-ac5c91cddcd8"
+            }
+          ],
+          "id": "301d6669-f72a-4ec9-a236-0808c5d7c41e",
+          "createdAt": "2026-06-05T15:02:53.000Z",
+          "updatedAt": "2026-06-05T15:02:53.000Z",
+          "uid": "35240-301d6669-f72a-4ec9-a236-0808c5d7c41e"
+        }
+      ],
+      "id": "f9434798-9897-42c6-b403-f922d86dddb3",
+      "createdAt": "2026-06-05T15:02:53.000Z",
+      "updatedAt": "2026-06-05T15:02:53.000Z",
+      "uid": "35240-f9434798-9897-42c6-b403-f922d86dddb3"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "organization",
+      "value": "myorg"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://mc.adobe.io/{{organization}}"
+    }
+  ]
+}

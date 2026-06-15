@@ -1,0 +1,3280 @@
+{
+  "item": [
+    {
+      "id": "04070ef3-43f0-4827-a548-2a72f2c2c35e",
+      "name": "Content",
+      "description": {
+        "content": "Operations for managing email and landing page content",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f46e6023-f880-4133-8fbe-e4c72a5b5e9f",
+          "name": "Adobe Campaign Adobe Experience Cloud List Email Deliveries",
+          "request": {
+            "name": "Adobe Campaign Adobe Experience Cloud List Email Deliveries",
+            "description": {
+              "content": "Returns a paginated list of email deliveries including their subject, status, and scheduling metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "campaign",
+                "email"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "_lineCount",
+                  "value": "25"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f2f853f6-1428-4040-a67b-8b398837aea8",
+              "name": "A paginated list of email deliveries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "email"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    \"example\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64a185b7-b52a-4d65-b821-29203d5e7a5e",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "email"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df156d61-8b75-4b2f-b1db-97051b7c5e35",
+          "name": "Adobe Campaign Adobe Experience Cloud Get an Email Delivery",
+          "request": {
+            "name": "Adobe Campaign Adobe Experience Cloud Get an Email Delivery",
+            "description": {
+              "content": "Retrieves the full details of an email delivery by its primary key, including the subject, HTML content, sender, and delivery status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "campaign",
+                "email",
+                ":emailPKey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "emailPKey",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c31c0170-94e8-403e-8714-7b6bd579255a",
+              "name": "Email delivery details returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "email",
+                    ":emailPKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "emailPKey",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"PKey\": \"example\",\n  \"subject\": \"example\",\n  \"htmlContent\": \"example\",\n  \"status\": \"active\",\n  \"sender\": {\n    \"name\": \"Example Name\",\n    \"email\": \"user@example.com\"\n  },\n  \"created\": \"2025-03-15T14:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "416dc165-3214-4218-b720-57cabad8e7d9",
+              "name": "Email delivery not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "email",
+                    ":emailPKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "emailPKey",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b55caca2-0603-41a3-9344-7cad1dcd9a21",
+      "name": "Metadata",
+      "description": {
+        "content": "Operations for retrieving resource metadata",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "95cbe4e1-c065-47fd-a255-e2e1cc1ccc3f",
+          "name": "Adobe Campaign Adobe Experience Cloud List Resource Metadata",
+          "request": {
+            "name": "Adobe Campaign Adobe Experience Cloud List Resource Metadata",
+            "description": {
+              "content": "Returns metadata about the available custom resources and their fields in the Adobe Campaign data model. Useful for discovering extended profile attributes and custom resource schemas.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "campaign",
+                "profileAndServicesExt",
+                "resourceType"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3b8d610f-da5d-4ea2-a087-2c5f83f568b9",
+              "name": "Resource metadata returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "profileAndServicesExt",
+                    "resourceType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"PKey\": \"example\",\n      \"name\": \"Example Name\",\n      \"label\": \"example\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40314b52-8044-40f3-9f64-c66cafc12797",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "profileAndServicesExt",
+                    "resourceType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "4fdc8f25-feca-4661-a726-f8d5c39654a9",
+      "name": "Profiles",
+      "description": {
+        "content": "Operations for managing subscriber profiles",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bd5c55b5-1052-4832-8fea-eaf18126b6f6",
+          "name": "Adobe Campaign Adobe Experience Cloud List Profiles",
+          "request": {
+            "name": "Adobe Campaign Adobe Experience Cloud List Profiles",
+            "description": {
+              "content": "Returns a paginated list of subscriber profiles in the Adobe Campaign database. Profiles can be filtered by email, first name, last name, and custom attributes using query parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "campaign",
+                "profileAndServices",
+                "profile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "_lineCount",
+                  "value": "25",
+                  "description": "Maximum number of profiles to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "_lineStart",
+                  "value": "0",
+                  "description": "Starting line number for pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<string>",
+                  "description": "Filter profiles by email address."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9883fb7f-6c7d-4658-958c-1d17540dcc52",
+              "name": "A paginated list of profiles.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "profileAndServices",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    },
+                    {
+                      "key": "_lineStart",
+                      "value": "0"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    \"example\"\n  ],\n  \"count\": {\n    \"value\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92af27f0-a616-487a-adfd-fddc13c05356",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "profileAndServices",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    },
+                    {
+                      "key": "_lineStart",
+                      "value": "0"
+                    },
+                    {
+                      "key": "email",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d62c1f13-6d6e-409c-80e8-64af048c0be8",
+          "name": "Adobe Campaign Adobe Experience Cloud Create a Profile",
+          "request": {
+            "name": "Adobe Campaign Adobe Experience Cloud Create a Profile",
+            "description": {
+              "content": "Creates a new subscriber profile in the Adobe Campaign database with the provided attributes including email, first name, last name, and any custom fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "campaign",
+                "profileAndServices",
+                "profile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"birthDate\": \"<date>\",\n  \"phone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b89b3d18-0ac2-496d-8a85-7d071081ff71",
+              "name": "Profile created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "profileAndServices",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Name\",\n  \"lastName\": \"Example Name\",\n  \"birthDate\": \"2025-03-15\",\n  \"phone\": \"example\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"PKey\": \"example\",\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Name\",\n  \"lastName\": \"Example Name\",\n  \"birthDate\": \"2025-03-15\",\n  \"phone\": \"example\",\n  \"created\": \"2025-03-15T14:30:00Z\",\n  \"lastModified\": \"2025-03-15T14:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07705bdb-ba4c-467c-a8a0-d0b4c51dc9ae",
+              "name": "Invalid profile data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "profileAndServices",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Name\",\n  \"lastName\": \"Example Name\",\n  \"birthDate\": \"2025-03-15\",\n  \"phone\": \"example\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6d2d6627-a9de-4604-b036-718d741445ea",
+              "name": "Profile with this email already exists.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "profileAndServices",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Name\",\n  \"lastName\": \"Example Name\",\n  \"birthDate\": \"2025-03-15\",\n  \"phone\": \"example\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78db9069-3380-4c13-b72a-e51f8deae820",
+          "name": "Adobe Campaign Adobe Experience Cloud Get a Profile",
+          "request": {
+            "name": "Adobe Campaign Adobe Experience Cloud Get a Profile",
+            "description": {
+              "content": "Retrieves a single subscriber profile by its primary key (PKey), including all standard and custom attributes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "campaign",
+                "profileAndServices",
+                "profile",
+                ":profilePKey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profilePKey",
+                  "description": "(Required) The primary key of the profile."
+                },
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e0fd7bab-0d86-4a40-961b-e9df163ea83e",
+              "name": "Profile details returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "profileAndServices",
+                    "profile",
+                    ":profilePKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profilePKey",
+                      "description": "(Required) The primary key of the profile."
+                    },
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"PKey\": \"example\",\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Name\",\n  \"lastName\": \"Example Name\",\n  \"birthDate\": \"2025-03-15\",\n  \"phone\": \"example\",\n  \"created\": \"2025-03-15T14:30:00Z\",\n  \"lastModified\": \"2025-03-15T14:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c451d97b-bf78-4c64-ab9c-bb8a2bf3c86f",
+              "name": "Profile not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "profileAndServices",
+                    "profile",
+                    ":profilePKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profilePKey",
+                      "description": "(Required) The primary key of the profile."
+                    },
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "764f9654-e1b4-4e9c-9c2c-ac220862e34b",
+          "name": "Adobe Campaign Adobe Experience Cloud Update a Profile",
+          "request": {
+            "name": "Adobe Campaign Adobe Experience Cloud Update a Profile",
+            "description": {
+              "content": "Updates specific attributes of an existing subscriber profile using a partial update. Only the fields provided in the request body will be modified.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "campaign",
+                "profileAndServices",
+                "profile",
+                ":profilePKey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profilePKey",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"birthDate\": \"<date>\",\n  \"phone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f17a9c8e-82cc-488b-8abf-5f022a3d4a6d",
+              "name": "Profile updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "profileAndServices",
+                    "profile",
+                    ":profilePKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profilePKey",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Name\",\n  \"lastName\": \"Example Name\",\n  \"birthDate\": \"2025-03-15\",\n  \"phone\": \"example\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"PKey\": \"example\",\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Name\",\n  \"lastName\": \"Example Name\",\n  \"birthDate\": \"2025-03-15\",\n  \"phone\": \"example\",\n  \"created\": \"2025-03-15T14:30:00Z\",\n  \"lastModified\": \"2025-03-15T14:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43f7e4e7-070c-48a0-b9bb-42210c1da364",
+              "name": "Profile not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "profileAndServices",
+                    "profile",
+                    ":profilePKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profilePKey",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"firstName\": \"Example Name\",\n  \"lastName\": \"Example Name\",\n  \"birthDate\": \"2025-03-15\",\n  \"phone\": \"example\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e5ad7bb9-1929-496c-8267-f7d5f6847a80",
+          "name": "Adobe Campaign Adobe Experience Cloud Delete a Profile",
+          "request": {
+            "name": "Adobe Campaign Adobe Experience Cloud Delete a Profile",
+            "description": {
+              "content": "Permanently deletes a subscriber profile from the Adobe Campaign database. This action cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "campaign",
+                "profileAndServices",
+                "profile",
+                ":profilePKey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profilePKey",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "495a990e-0a54-4f8b-9b9c-2264a4901fe3",
+              "name": "Profile deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "profileAndServices",
+                    "profile",
+                    ":profilePKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profilePKey",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "376a403a-9d81-4ec0-bcb2-d8acbfa8dc3e",
+              "name": "Profile not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "profileAndServices",
+                    "profile",
+                    ":profilePKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profilePKey",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "9090f96e-4cfc-4cc7-ae40-7bcda231bf8c",
+      "name": "Transactional Messages",
+      "description": {
+        "content": "Operations for sending real-time transactional messages",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7d962179-619f-4567-8a59-7574f91311a9",
+          "name": "Adobe Campaign Adobe Experience Cloud Send a Transactional Message",
+          "request": {
+            "name": "Adobe Campaign Adobe Experience Cloud Send a Transactional Message",
+            "description": {
+              "content": "Triggers a real-time transactional message to a recipient. Transactional messages are used for event-driven communications such as order confirmations, password resets, and shipping notifications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "campaign",
+                "mcAdobe",
+                ":transactionalMessageId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionalMessageId",
+                  "description": "(Required) The transactional message template identifier."
+                },
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<string>\",\n  \"ctx\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6674eadb-0610-4cd1-85be-d1844707c032",
+              "name": "Transactional message queued for delivery.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "mcAdobe",
+                    ":transactionalMessageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionalMessageId",
+                      "description": "(Required) The transactional message template identifier."
+                    },
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"ctx\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"PKey\": \"example\",\n  \"eventId\": \"abc123\",\n  \"status\": \"pending\",\n  \"email\": \"user@example.com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9678bde7-2236-43c6-8c02-36f900bd4943",
+              "name": "Invalid message request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "mcAdobe",
+                    ":transactionalMessageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionalMessageId",
+                      "description": "(Required) The transactional message template identifier."
+                    },
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"ctx\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8e780d5a-d0c4-4243-9b05-e2479ccfbb7f",
+              "name": "Transactional message template not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "mcAdobe",
+                    ":transactionalMessageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionalMessageId",
+                      "description": "(Required) The transactional message template identifier."
+                    },
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"ctx\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f2e49f9-18a5-4506-8f74-c5b6fa20a112",
+          "name": "Adobe Campaign Adobe Experience Cloud Get Transactional Message Status",
+          "request": {
+            "name": "Adobe Campaign Adobe Experience Cloud Get Transactional Message Status",
+            "description": {
+              "content": "Retrieves the delivery status of a previously sent transactional message by its event ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "campaign",
+                "mcAdobe",
+                ":transactionalMessageId",
+                ":eventId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionalMessageId",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventId",
+                  "description": "(Required) The event ID returned when the message was triggered."
+                },
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "23c88846-8fe5-4d94-95d5-ec085a49410e",
+              "name": "Message status returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "mcAdobe",
+                    ":transactionalMessageId",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionalMessageId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) The event ID returned when the message was triggered."
+                    },
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"PKey\": \"example\",\n  \"eventId\": \"abc123\",\n  \"status\": \"pending\",\n  \"email\": \"user@example.com\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b2f39d3-d19e-4ef2-af39-ae156aa700fb",
+              "name": "Message event not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "mcAdobe",
+                    ":transactionalMessageId",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionalMessageId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventId",
+                      "description": "(Required) The event ID returned when the message was triggered."
+                    },
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "87336ed9-1559-48ba-a626-dc0276aa12bd",
+      "name": "Workflows",
+      "description": {
+        "content": "Operations for managing automated workflows",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e7c19ce0-9e35-411f-a687-788968cd6d48",
+          "name": "Adobe Campaign Adobe Experience Cloud List Workflows",
+          "request": {
+            "name": "Adobe Campaign Adobe Experience Cloud List Workflows",
+            "description": {
+              "content": "Returns a paginated list of workflows configured in Adobe Campaign. Each workflow includes its ID, label, status, and schedule information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "campaign",
+                "workflow"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "_lineCount",
+                  "value": "25"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b0adfbe4-6108-442d-90c0-07f8c406a8b0",
+              "name": "A paginated list of workflows.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "workflow"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    \"example\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "681af998-da56-4602-8169-677f54bf8f51",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "workflow"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_lineCount",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff900d4c-30f0-45af-b4e0-566fc3b6b92d",
+          "name": "Adobe Campaign Adobe Experience Cloud Get a Workflow",
+          "request": {
+            "name": "Adobe Campaign Adobe Experience Cloud Get a Workflow",
+            "description": {
+              "content": "Retrieves the details of a single workflow by its primary key, including its activities, transitions, and execution history.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "campaign",
+                "workflow",
+                ":workflowPKey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workflowPKey",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0dadf703-a52b-4c48-8c2a-b723443dd476",
+              "name": "Workflow details returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "workflow",
+                    ":workflowPKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflowPKey",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"PKey\": \"example\",\n  \"label\": \"example\",\n  \"status\": \"started\",\n  \"startDate\": \"2025-03-15T14:30:00Z\",\n  \"created\": \"2025-03-15T14:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9868e6ca-0c9d-426f-9be4-19a78bcfe586",
+              "name": "Workflow not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "workflow",
+                    ":workflowPKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflowPKey",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "276cc6b4-04b2-44b8-8c40-ba7ccbc4df07",
+          "name": "Adobe Campaign Adobe Experience Cloud Execute a Workflow Command",
+          "request": {
+            "name": "Adobe Campaign Adobe Experience Cloud Execute a Workflow Command",
+            "description": {
+              "content": "Executes a command on a workflow such as start, pause, resume, or stop. The command triggers the corresponding state transition in the workflow execution engine.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "campaign",
+                "workflow",
+                ":workflowPKey",
+                "commands"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workflowPKey",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"method\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c19e9bbc-cc74-4b96-a373-c7b913482657",
+              "name": "Workflow command executed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "workflow",
+                    ":workflowPKey",
+                    "commands"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflowPKey",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"start\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "41adff0d-590a-4be5-8b39-8b7ae8912684",
+              "name": "Invalid command for the current workflow state.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "workflow",
+                    ":workflowPKey",
+                    "commands"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflowPKey",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"start\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3aa70b09-5531-459d-947e-03b3381c58b8",
+              "name": "Workflow not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "workflow",
+                    ":workflowPKey",
+                    "commands"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflowPKey",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Your Adobe Campaign organization identifier.",
+                      "type": "any",
+                      "value": "{{organization}}",
+                      "key": "organization"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"start\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "cfc52d08-c7a3-4a64-8872-4faaad50dc4d",
+      "name": "Adobe Campaign Adobe Experience Cloud List Services",
+      "request": {
+        "name": "Adobe Campaign Adobe Experience Cloud List Services",
+        "description": {
+          "content": "Returns a paginated list of subscription services configured in Adobe Campaign. Services represent mailing lists or subscription topics that profiles can subscribe to.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "campaign",
+            "profileAndServices",
+            "service"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "_lineCount",
+              "value": "25"
+            }
+          ],
+          "variable": [
+            {
+              "description": "Your Adobe Campaign organization identifier.",
+              "type": "any",
+              "value": "{{organization}}",
+              "key": "organization"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "50a1be2a-e1d0-41bf-af67-a022e964bbf7",
+          "name": "A paginated list of services.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "campaign",
+                "profileAndServices",
+                "service"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "_lineCount",
+                  "value": "25"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"content\": [\n    \"example\"\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "691821bb-eb7f-414e-b32e-0acf355ca319",
+          "name": "Authentication credentials are missing or invalid.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "campaign",
+                "profileAndServices",
+                "service"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "_lineCount",
+                  "value": "25"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "e3628279-7c0f-48ff-a13a-3e44a95032e7",
+      "name": "Adobe Campaign Adobe Experience Cloud Create a Service",
+      "request": {
+        "name": "Adobe Campaign Adobe Experience Cloud Create a Service",
+        "description": {
+          "content": "Creates a new subscription service in Adobe Campaign with the specified name, label, and configuration.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "campaign",
+            "profileAndServices",
+            "service"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "description": "Your Adobe Campaign organization identifier.",
+              "type": "any",
+              "value": "{{organization}}",
+              "key": "organization"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"label\": \"<string>\",\n  \"name\": \"<string>\",\n  \"messageType\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "cf5785a0-cdd0-4384-9edc-802494c4f0a6",
+          "name": "Service created successfully.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "campaign",
+                "profileAndServices",
+                "service"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"label\": \"example\",\n  \"name\": \"Example Name\",\n  \"messageType\": \"email\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"PKey\": \"example\",\n  \"name\": \"Example Name\",\n  \"label\": \"example\",\n  \"mode\": \"example\",\n  \"created\": \"2025-03-15T14:30:00Z\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "159eccfc-3153-4680-adc8-250074adaaab",
+          "name": "Invalid service definition.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "campaign",
+                "profileAndServices",
+                "service"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"label\": \"example\",\n  \"name\": \"Example Name\",\n  \"messageType\": \"email\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "2e5e7b65-ce10-43fe-9038-94194129ce70",
+      "name": "Adobe Campaign Adobe Experience Cloud Get a Service",
+      "request": {
+        "name": "Adobe Campaign Adobe Experience Cloud Get a Service",
+        "description": {
+          "content": "Retrieves the details of a subscription service by its primary key.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "campaign",
+            "profileAndServices",
+            "service",
+            ":servicePKey"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "servicePKey",
+              "description": "(Required) "
+            },
+            {
+              "description": "Your Adobe Campaign organization identifier.",
+              "type": "any",
+              "value": "{{organization}}",
+              "key": "organization"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "6aeeb8c0-8417-4fd1-961e-5f4be5ab3579",
+          "name": "Service details returned successfully.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "campaign",
+                "profileAndServices",
+                "service",
+                ":servicePKey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "servicePKey",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"PKey\": \"example\",\n  \"name\": \"Example Name\",\n  \"label\": \"example\",\n  \"mode\": \"example\",\n  \"created\": \"2025-03-15T14:30:00Z\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "ef837ec4-31f5-41e0-bdd1-29d072bd140f",
+          "name": "Service not found.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "campaign",
+                "profileAndServices",
+                "service",
+                ":servicePKey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "servicePKey",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "d4baa9b5-c47a-4c1c-829d-e4efb01e9182",
+      "name": "Adobe Campaign Adobe Experience Cloud Subscribe a Profile to a Service",
+      "request": {
+        "name": "Adobe Campaign Adobe Experience Cloud Subscribe a Profile to a Service",
+        "description": {
+          "content": "Subscribes an existing profile to the specified subscription service by providing the profile primary key.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "campaign",
+            "profileAndServices",
+            "service",
+            ":servicePKey",
+            "subscriptions"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "servicePKey",
+              "description": "(Required) "
+            },
+            {
+              "description": "Your Adobe Campaign organization identifier.",
+              "type": "any",
+              "value": "{{organization}}",
+              "key": "organization"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"subscriber\": {\n    \"PKey\": \"<string>\"\n  }\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "c1349a43-2fdb-4c89-9f3e-424edec639ac",
+          "name": "Subscription created successfully.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "campaign",
+                "profileAndServices",
+                "service",
+                ":servicePKey",
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "servicePKey",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subscriber\": {\n    \"PKey\": \"example\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "780214c0-df92-4449-a8a7-553e218d8e61",
+          "name": "Invalid subscription request.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "campaign",
+                "profileAndServices",
+                "service",
+                ":servicePKey",
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "servicePKey",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subscriber\": {\n    \"PKey\": \"example\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        },
+        {
+          "id": "a6da7028-0d8d-4329-8885-bc2a2dbae291",
+          "name": "Service or profile not found.",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "campaign",
+                "profileAndServices",
+                "service",
+                ":servicePKey",
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "servicePKey",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Your Adobe Campaign organization identifier.",
+                  "type": "any",
+                  "value": "{{organization}}",
+                  "key": "organization"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subscriber\": {\n    \"PKey\": \"example\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Adobe Campaign organization identifier.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "myorg",
+      "key": "organization"
+    },
+    {
+      "type": "string",
+      "value": "https://mc.adobe.io/{{organization}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "74a99c6e-5347-4554-ba4d-2231eebc5325",
+    "name": "Adobe Experience Cloud Adobe Campaign API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Campaign API provides RESTful access to Adobe Campaign Standard and Classic capabilities for managing marketing campaigns, profiles, services, workflows, transactional messages, and content. It enables programmatic creation and execution of email, SMS, and push notification campaigns, subscriber management, and real-time transactional messaging.\n\nContact Support:\n Name: Adobe Developer",
+      "type": "text/plain"
+    }
+  }
+}

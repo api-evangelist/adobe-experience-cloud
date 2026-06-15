@@ -1,0 +1,3087 @@
+{
+  "info": {
+    "_postman_id": "182d0546-e98b-4a6e-b3bd-f1f839750813",
+    "name": "Adobe Experience Cloud Adobe Target API",
+    "description": "The Adobe Target API provides programmatic access to Adobe Target for managing activities, audiences, offers, properties, and environments. It enables developers to create and manage A/B tests, experience targeting, multivariate tests, and automated personalization activities, as well as deliver personalized content via the delivery API.\n\nContact Support:\n Name: Adobe Developer",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:49.000Z",
+    "updatedAt": "2026-06-05T15:02:49.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-182d0546-e98b-4a6e-b3bd-f1f839750813"
+  },
+  "item": [
+    {
+      "name": "target",
+      "item": [
+        {
+          "name": "activities",
+          "item": [
+            {
+              "name": "{activityId}",
+              "item": [
+                {
+                  "name": "state",
+                  "item": [
+                    {
+                      "name": "Adobe Target Adobe Experience Cloud Update Activity State",
+                      "id": "299287ae-02f7-44d4-8fad-fcb59927f0dd",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"state\": \"activated\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/target/activities/:activityId/state",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "activities",
+                            ":activityId",
+                            "state"
+                          ],
+                          "variable": [
+                            {
+                              "id": "fc17e44e-ac3b-4134-9732-41621ad152a5",
+                              "key": "activityId",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Activates, deactivates, or archives a Target activity by updating its state. Valid state transitions depend on the current state."
+                      },
+                      "response": [
+                        {
+                          "id": "ee348e4c-e4ca-4eb3-ba74-b4f215d3804e",
+                          "name": "Activity state updated successfully.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"state\": \"activated\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/target/activities/:activityId/state",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "target",
+                                "activities",
+                                ":activityId",
+                                "state"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "activityId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"type\": \"ap\",\n  \"state\": \"approved\",\n  \"priority\": \"<integer>\",\n  \"modifiedAt\": \"<dateTime>\",\n  \"startsAt\": \"<dateTime>\",\n  \"endsAt\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:02:49.000Z",
+                          "updatedAt": "2026-06-05T15:02:49.000Z",
+                          "uid": "35240-ee348e4c-e4ca-4eb3-ba74-b4f215d3804e"
+                        },
+                        {
+                          "id": "4831381c-129a-498d-bd88-66643e01ec22",
+                          "name": "Invalid state transition.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"state\": \"activated\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/target/activities/:activityId/state",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "target",
+                                "activities",
+                                ":activityId",
+                                "state"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "activityId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:02:49.000Z",
+                          "updatedAt": "2026-06-05T15:02:49.000Z",
+                          "uid": "35240-4831381c-129a-498d-bd88-66643e01ec22"
+                        },
+                        {
+                          "id": "ba7601d9-758d-4f67-ac0c-9973da9f869c",
+                          "name": "Activity not found.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"state\": \"activated\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/target/activities/:activityId/state",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "target",
+                                "activities",
+                                ":activityId",
+                                "state"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "activityId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:02:49.000Z",
+                          "updatedAt": "2026-06-05T15:02:49.000Z",
+                          "uid": "35240-ba7601d9-758d-4f67-ac0c-9973da9f869c"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-299287ae-02f7-44d4-8fad-fcb59927f0dd"
+                    }
+                  ],
+                  "id": "395fa22e-7a46-48cb-a79a-3f6fe1cc93fa",
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-395fa22e-7a46-48cb-a79a-3f6fe1cc93fa"
+                },
+                {
+                  "name": "Adobe Target Adobe Experience Cloud Get an Activity",
+                  "id": "469a4d50-ec13-492d-bbd4-a9982e4d81d2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/target/activities/:activityId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "activities",
+                        ":activityId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4b5db26c-22e3-4fe8-9a56-aa2e0b1bff1b",
+                          "key": "activityId",
+                          "value": "<integer>",
+                          "description": "(Required) The Target activity ID."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the full configuration and metadata of a single Target activity by its activity ID, including experiences, audiences, metrics, and scheduling."
+                  },
+                  "response": [
+                    {
+                      "id": "7d7d4b76-b5b3-45e1-ac7f-b80d5c9873d2",
+                      "name": "Activity details returned successfully.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/target/activities/:activityId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "activities",
+                            ":activityId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "activityId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"type\": \"ap\",\n  \"state\": \"approved\",\n  \"priority\": \"<integer>\",\n  \"modifiedAt\": \"<dateTime>\",\n  \"startsAt\": \"<dateTime>\",\n  \"endsAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-7d7d4b76-b5b3-45e1-ac7f-b80d5c9873d2"
+                    },
+                    {
+                      "id": "c469c5c2-6f76-4d32-8f3e-52ea3a17259b",
+                      "name": "Activity not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/target/activities/:activityId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "activities",
+                            ":activityId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "activityId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-c469c5c2-6f76-4d32-8f3e-52ea3a17259b"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-469a4d50-ec13-492d-bbd4-a9982e4d81d2"
+                },
+                {
+                  "name": "Adobe Target Adobe Experience Cloud Update an Activity",
+                  "id": "0f8f2e68-520c-4a2e-9c53-f204c450e6a1",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"ap\",\n  \"priority\": \"<integer>\",\n  \"startsAt\": \"<dateTime>\",\n  \"endsAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/target/activities/:activityId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "activities",
+                        ":activityId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "45f11610-1bd5-42f3-a810-1e7a823dd292",
+                          "key": "activityId",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Updates an existing Target activity with new configuration. The full activity object must be provided in the request body."
+                  },
+                  "response": [
+                    {
+                      "id": "0bcb2427-a202-42cc-a3a7-98a7845c53e8",
+                      "name": "Activity updated successfully.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"ap\",\n  \"priority\": \"<integer>\",\n  \"startsAt\": \"<dateTime>\",\n  \"endsAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/target/activities/:activityId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "activities",
+                            ":activityId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "activityId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"type\": \"ap\",\n  \"state\": \"approved\",\n  \"priority\": \"<integer>\",\n  \"modifiedAt\": \"<dateTime>\",\n  \"startsAt\": \"<dateTime>\",\n  \"endsAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-0bcb2427-a202-42cc-a3a7-98a7845c53e8"
+                    },
+                    {
+                      "id": "773e0e41-f69f-41a2-bd4a-6a8f3200caed",
+                      "name": "Invalid activity definition.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"ap\",\n  \"priority\": \"<integer>\",\n  \"startsAt\": \"<dateTime>\",\n  \"endsAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/target/activities/:activityId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "activities",
+                            ":activityId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "activityId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-773e0e41-f69f-41a2-bd4a-6a8f3200caed"
+                    },
+                    {
+                      "id": "0e74ec72-32c5-4ea8-b6e4-afd11e9192a7",
+                      "name": "Activity not found.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"ap\",\n  \"priority\": \"<integer>\",\n  \"startsAt\": \"<dateTime>\",\n  \"endsAt\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/target/activities/:activityId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "activities",
+                            ":activityId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "activityId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-0e74ec72-32c5-4ea8-b6e4-afd11e9192a7"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-0f8f2e68-520c-4a2e-9c53-f204c450e6a1"
+                },
+                {
+                  "name": "Adobe Target Adobe Experience Cloud Delete an Activity",
+                  "id": "ce1e82ac-701a-4cca-b9f5-73ea9c94219f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/target/activities/:activityId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "activities",
+                        ":activityId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "985e7814-76a1-4cd4-a8ec-c0dca187c026",
+                          "key": "activityId",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Permanently deletes a Target activity. Active activities should be deactivated before deletion."
+                  },
+                  "response": [
+                    {
+                      "id": "e3464209-0393-4345-ae88-831f275c9896",
+                      "name": "Activity deleted successfully.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/target/activities/:activityId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "activities",
+                            ":activityId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "activityId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-e3464209-0393-4345-ae88-831f275c9896"
+                    },
+                    {
+                      "id": "0c94bbb0-dfe3-447e-a903-2625e0662db2",
+                      "name": "Activity not found.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/target/activities/:activityId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "activities",
+                            ":activityId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "activityId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-0c94bbb0-dfe3-447e-a903-2625e0662db2"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-ce1e82ac-701a-4cca-b9f5-73ea9c94219f"
+                }
+              ],
+              "id": "a073c3ef-4283-4604-b7d0-34efee0e6fdc",
+              "createdAt": "2026-06-05T15:02:49.000Z",
+              "updatedAt": "2026-06-05T15:02:49.000Z",
+              "uid": "35240-a073c3ef-4283-4604-b7d0-34efee0e6fdc"
+            },
+            {
+              "name": "Adobe Target Adobe Experience Cloud List Activities",
+              "id": "9e01978c-d2cd-449a-ab5e-dd03997fd562",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/target/activities?limit=10&offset=0&sortBy=modifiedAt",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "target",
+                    "activities"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of activities to return.",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Number of activities to skip for pagination.",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Field to sort results by.",
+                      "key": "sortBy",
+                      "value": "modifiedAt"
+                    }
+                  ]
+                },
+                "description": "Returns a paginated list of all Target activities (A/B tests, experience targeting, multivariate tests, and automated personalization) in the tenant. Each entry includes the activity ID, name, type, state, and modification date."
+              },
+              "response": [
+                {
+                  "id": "1e428d1c-0af6-49e9-b83b-5071784adf71",
+                  "name": "A paginated list of activities.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/target/activities?limit=10&offset=0&sortBy=modifiedAt",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "activities"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of activities to return.",
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Number of activities to skip for pagination.",
+                          "key": "offset",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Field to sort results by.",
+                          "key": "sortBy",
+                          "value": "modifiedAt"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"activities\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"type\": \"ab\",\n      \"state\": \"deactivated\",\n      \"priority\": \"<integer>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"startsAt\": \"<dateTime>\",\n      \"endsAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"type\": \"xt\",\n      \"state\": \"archived\",\n      \"priority\": \"<integer>\",\n      \"modifiedAt\": \"<dateTime>\",\n      \"startsAt\": \"<dateTime>\",\n      \"endsAt\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-1e428d1c-0af6-49e9-b83b-5071784adf71"
+                },
+                {
+                  "id": "045dd7c9-be77-4898-b96f-504de9be31f2",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/target/activities?limit=10&offset=0&sortBy=modifiedAt",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "activities"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of activities to return.",
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Number of activities to skip for pagination.",
+                          "key": "offset",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Field to sort results by.",
+                          "key": "sortBy",
+                          "value": "modifiedAt"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-045dd7c9-be77-4898-b96f-504de9be31f2"
+                },
+                {
+                  "id": "ab81c4ff-a20e-47ec-9a45-4e062c66b7b0",
+                  "name": "Insufficient permissions.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/target/activities?limit=10&offset=0&sortBy=modifiedAt",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "activities"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of activities to return.",
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Number of activities to skip for pagination.",
+                          "key": "offset",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Field to sort results by.",
+                          "key": "sortBy",
+                          "value": "modifiedAt"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-ab81c4ff-a20e-47ec-9a45-4e062c66b7b0"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:49.000Z",
+              "updatedAt": "2026-06-05T15:02:49.000Z",
+              "uid": "35240-9e01978c-d2cd-449a-ab5e-dd03997fd562"
+            },
+            {
+              "name": "Adobe Target Adobe Experience Cloud Create an Activity",
+              "id": "3d09f4b3-0f05-4787-8f82-7d60c1e26a5f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"ap\",\n  \"priority\": \"<integer>\",\n  \"startsAt\": \"<dateTime>\",\n  \"endsAt\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/target/activities",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "target",
+                    "activities"
+                  ]
+                },
+                "description": "Creates a new Target activity of the specified type (AB, XT, MVT, or Automated Personalization). The request body must include the activity name, type, and at least one experience with associated offers."
+              },
+              "response": [
+                {
+                  "id": "d0ea4a39-e96c-4793-b49d-d060401221e6",
+                  "name": "Activity created successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"ap\",\n  \"priority\": \"<integer>\",\n  \"startsAt\": \"<dateTime>\",\n  \"endsAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/target/activities",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "activities"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"type\": \"ap\",\n  \"state\": \"approved\",\n  \"priority\": \"<integer>\",\n  \"modifiedAt\": \"<dateTime>\",\n  \"startsAt\": \"<dateTime>\",\n  \"endsAt\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-d0ea4a39-e96c-4793-b49d-d060401221e6"
+                },
+                {
+                  "id": "a187e9b0-d7ef-4074-87b3-82b2d45fa7b7",
+                  "name": "Invalid activity definition.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"ap\",\n  \"priority\": \"<integer>\",\n  \"startsAt\": \"<dateTime>\",\n  \"endsAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/target/activities",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "activities"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-a187e9b0-d7ef-4074-87b3-82b2d45fa7b7"
+                },
+                {
+                  "id": "df0f2e71-1c53-45e7-af64-5c71394421b8",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"ap\",\n  \"priority\": \"<integer>\",\n  \"startsAt\": \"<dateTime>\",\n  \"endsAt\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/target/activities",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "activities"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-df0f2e71-1c53-45e7-af64-5c71394421b8"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:49.000Z",
+              "updatedAt": "2026-06-05T15:02:49.000Z",
+              "uid": "35240-3d09f4b3-0f05-4787-8f82-7d60c1e26a5f"
+            }
+          ],
+          "id": "0a162614-472e-4f3e-817a-944e2b017bbb",
+          "createdAt": "2026-06-05T15:02:49.000Z",
+          "updatedAt": "2026-06-05T15:02:49.000Z",
+          "uid": "35240-0a162614-472e-4f3e-817a-944e2b017bbb"
+        },
+        {
+          "name": "audiences",
+          "item": [
+            {
+              "name": "{audienceId}",
+              "item": [
+                {
+                  "name": "Adobe Target Adobe Experience Cloud Get an Audience",
+                  "id": "62ea9c4a-9374-49ff-860b-c05c82207b5e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/target/audiences/:audienceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "audiences",
+                        ":audienceId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "159d7fb8-b686-4378-b581-bb5edc4f6eeb",
+                          "key": "audienceId",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the full definition of a single audience by its audience ID, including all targeting rules and conditions."
+                  },
+                  "response": [
+                    {
+                      "id": "51a07d93-4baf-4730-96a1-2f46dad90d93",
+                      "name": "Audience details returned successfully.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/target/audiences/:audienceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "audiences",
+                            ":audienceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"targetRule\": {}\n}",
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-51a07d93-4baf-4730-96a1-2f46dad90d93"
+                    },
+                    {
+                      "id": "26e49a1f-e646-45c5-b338-c18f62280fb5",
+                      "name": "Audience not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/target/audiences/:audienceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "audiences",
+                            ":audienceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-26e49a1f-e646-45c5-b338-c18f62280fb5"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-62ea9c4a-9374-49ff-860b-c05c82207b5e"
+                },
+                {
+                  "name": "Adobe Target Adobe Experience Cloud Update an Audience",
+                  "id": "c2650c4a-adf0-4353-8104-6b4c0f8c5830",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"targetRule\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/target/audiences/:audienceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "audiences",
+                        ":audienceId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "9117b96b-3036-4e36-8b95-b22f658a0943",
+                          "key": "audienceId",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Updates an existing audience with new targeting rules or metadata."
+                  },
+                  "response": [
+                    {
+                      "id": "e6011cfa-126a-4d01-ba4a-e2eb47c0fec0",
+                      "name": "Audience updated successfully.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"targetRule\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/target/audiences/:audienceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "audiences",
+                            ":audienceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"targetRule\": {}\n}",
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-e6011cfa-126a-4d01-ba4a-e2eb47c0fec0"
+                    },
+                    {
+                      "id": "533aa3ea-2db2-4b73-901e-0d2ee76b79cf",
+                      "name": "Audience not found.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"targetRule\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/target/audiences/:audienceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "audiences",
+                            ":audienceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-533aa3ea-2db2-4b73-901e-0d2ee76b79cf"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-c2650c4a-adf0-4353-8104-6b4c0f8c5830"
+                },
+                {
+                  "name": "Adobe Target Adobe Experience Cloud Delete an Audience",
+                  "id": "21232e35-2106-44fd-9266-1478da8a0f7c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/target/audiences/:audienceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "audiences",
+                        ":audienceId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "dc00997c-481b-4008-a4a0-c2553650b1c7",
+                          "key": "audienceId",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Permanently deletes an audience. Audiences in use by active activities cannot be deleted."
+                  },
+                  "response": [
+                    {
+                      "id": "dde1da34-7c1b-4d62-ac81-3ca62cff2748",
+                      "name": "Audience deleted successfully.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/target/audiences/:audienceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "audiences",
+                            ":audienceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-dde1da34-7c1b-4d62-ac81-3ca62cff2748"
+                    },
+                    {
+                      "id": "f494a1b9-bc24-4cc4-9d9a-0106013c9d89",
+                      "name": "Audience not found.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/target/audiences/:audienceId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "audiences",
+                            ":audienceId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "audienceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-f494a1b9-bc24-4cc4-9d9a-0106013c9d89"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-21232e35-2106-44fd-9266-1478da8a0f7c"
+                }
+              ],
+              "id": "263eefeb-6aa4-4e8b-9e5c-3429adb433d8",
+              "createdAt": "2026-06-05T15:02:49.000Z",
+              "updatedAt": "2026-06-05T15:02:49.000Z",
+              "uid": "35240-263eefeb-6aa4-4e8b-9e5c-3429adb433d8"
+            },
+            {
+              "name": "Adobe Target Adobe Experience Cloud List Audiences",
+              "id": "ead243b8-0358-4322-9ef1-2f670fca8786",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/target/audiences?limit=10&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "target",
+                    "audiences"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                },
+                "description": "Returns a paginated list of all audiences configured in Adobe Target. Each audience includes its ID, name, description, and targeting rules."
+              },
+              "response": [
+                {
+                  "id": "97c8fbe7-af0e-46d8-8895-9384c3824510",
+                  "name": "A paginated list of audiences.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/target/audiences?limit=10&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "audiences"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"audiences\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"targetRule\": {}\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"targetRule\": {}\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-97c8fbe7-af0e-46d8-8895-9384c3824510"
+                },
+                {
+                  "id": "f21c2b7f-cfc8-47be-a182-0e7b09ba882f",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/target/audiences?limit=10&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "audiences"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-f21c2b7f-cfc8-47be-a182-0e7b09ba882f"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:49.000Z",
+              "updatedAt": "2026-06-05T15:02:49.000Z",
+              "uid": "35240-ead243b8-0358-4322-9ef1-2f670fca8786"
+            },
+            {
+              "name": "Adobe Target Adobe Experience Cloud Create an Audience",
+              "id": "e6d09433-1bc5-4928-9bf6-706379c518b1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"targetRule\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/target/audiences",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "target",
+                    "audiences"
+                  ]
+                },
+                "description": "Creates a new audience in Adobe Target with the specified name and targeting rules."
+              },
+              "response": [
+                {
+                  "id": "9c634eb6-a4f7-4515-9c3f-750a67b9b0d3",
+                  "name": "Audience created successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"targetRule\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/target/audiences",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "audiences"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"targetRule\": {}\n}",
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-9c634eb6-a4f7-4515-9c3f-750a67b9b0d3"
+                },
+                {
+                  "id": "f2dd0284-5dfe-4a38-b681-bd714644c2b4",
+                  "name": "Invalid audience definition.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"targetRule\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/target/audiences",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "audiences"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-f2dd0284-5dfe-4a38-b681-bd714644c2b4"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:49.000Z",
+              "updatedAt": "2026-06-05T15:02:49.000Z",
+              "uid": "35240-e6d09433-1bc5-4928-9bf6-706379c518b1"
+            }
+          ],
+          "id": "db4a0ccc-ca16-4dd8-bab8-e472e70281c6",
+          "createdAt": "2026-06-05T15:02:49.000Z",
+          "updatedAt": "2026-06-05T15:02:49.000Z",
+          "uid": "35240-db4a0ccc-ca16-4dd8-bab8-e472e70281c6"
+        },
+        {
+          "name": "offers",
+          "item": [
+            {
+              "name": "{offerId}",
+              "item": [
+                {
+                  "name": "Adobe Target Adobe Experience Cloud Get an Offer",
+                  "id": "ca5e6852-36c4-4505-b43f-e20d4a2c4aec",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/target/offers/:offerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "offers",
+                        ":offerId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "1b089939-368e-4384-8e08-f2ac8cd0f7f1",
+                          "key": "offerId",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a single offer by its offer ID, including the content payload and metadata."
+                  },
+                  "response": [
+                    {
+                      "id": "c841fd4f-468c-4954-af28-bae5bc5374e0",
+                      "name": "Offer details returned successfully.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/target/offers/:offerId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "offers",
+                            ":offerId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "offerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"type\": \"content\",\n  \"content\": \"<string>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-c841fd4f-468c-4954-af28-bae5bc5374e0"
+                    },
+                    {
+                      "id": "d25b846b-8fee-4dd4-a580-8e513072d774",
+                      "name": "Offer not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/target/offers/:offerId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "offers",
+                            ":offerId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "offerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-d25b846b-8fee-4dd4-a580-8e513072d774"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-ca5e6852-36c4-4505-b43f-e20d4a2c4aec"
+                },
+                {
+                  "name": "Adobe Target Adobe Experience Cloud Update an Offer",
+                  "id": "c3b5d221-60bb-4ce0-9362-84b8d48f1058",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"content\",\n  \"content\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/target/offers/:offerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "offers",
+                        ":offerId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "8bb9aa2e-f26d-47fc-b48f-e7f957a50a24",
+                          "key": "offerId",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Updates an existing offer with new content or metadata."
+                  },
+                  "response": [
+                    {
+                      "id": "e6ddacd3-5be5-498a-aa00-7aa2b44a7da9",
+                      "name": "Offer updated successfully.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"content\",\n  \"content\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/target/offers/:offerId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "offers",
+                            ":offerId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "offerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"type\": \"content\",\n  \"content\": \"<string>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-e6ddacd3-5be5-498a-aa00-7aa2b44a7da9"
+                    },
+                    {
+                      "id": "39bc848e-1995-4aa0-80fb-23367ca11339",
+                      "name": "Offer not found.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"content\",\n  \"content\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/target/offers/:offerId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "offers",
+                            ":offerId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "offerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-39bc848e-1995-4aa0-80fb-23367ca11339"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-c3b5d221-60bb-4ce0-9362-84b8d48f1058"
+                },
+                {
+                  "name": "Adobe Target Adobe Experience Cloud Delete an Offer",
+                  "id": "46e002ea-a62c-4ff5-ad92-686dbcec313b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/target/offers/:offerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "offers",
+                        ":offerId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f2e8bf77-b443-4324-ad85-a4e370235d63",
+                          "key": "offerId",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Permanently deletes an offer. Offers in use by active activities cannot be deleted."
+                  },
+                  "response": [
+                    {
+                      "id": "ec8dc395-5267-43e6-adef-b216045f269d",
+                      "name": "Offer deleted successfully.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/target/offers/:offerId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "offers",
+                            ":offerId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "offerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-ec8dc395-5267-43e6-adef-b216045f269d"
+                    },
+                    {
+                      "id": "85baf802-1c6f-45f1-ac38-cb1f018c271b",
+                      "name": "Offer not found.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/target/offers/:offerId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "target",
+                            "offers",
+                            ":offerId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "offerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-85baf802-1c6f-45f1-ac38-cb1f018c271b"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-46e002ea-a62c-4ff5-ad92-686dbcec313b"
+                }
+              ],
+              "id": "78321512-6ecf-4df5-8746-ffa12bf893c3",
+              "createdAt": "2026-06-05T15:02:49.000Z",
+              "updatedAt": "2026-06-05T15:02:49.000Z",
+              "uid": "35240-78321512-6ecf-4df5-8746-ffa12bf893c3"
+            },
+            {
+              "name": "Adobe Target Adobe Experience Cloud List Offers",
+              "id": "68fe5c6c-db65-473a-b948-12a3b0d8a465",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/target/offers?limit=10&offset=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "target",
+                    "offers"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ]
+                },
+                "description": "Returns a paginated list of content offers configured in Adobe Target. Offers include HTML, JSON, and redirect offer types."
+              },
+              "response": [
+                {
+                  "id": "fcd4150f-10db-41de-a036-295e2ff4b139",
+                  "name": "A paginated list of offers.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/target/offers?limit=10&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "offers"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"total\": \"<integer>\",\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"offers\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"type\": \"dynamic\",\n      \"content\": \"<string>\",\n      \"modifiedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"type\": \"content\",\n      \"content\": \"<string>\",\n      \"modifiedAt\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-fcd4150f-10db-41de-a036-295e2ff4b139"
+                },
+                {
+                  "id": "c991c743-4bec-4a04-9cec-b0879a38a1dd",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/target/offers?limit=10&offset=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "offers"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "key": "offset",
+                          "value": "0"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-c991c743-4bec-4a04-9cec-b0879a38a1dd"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:49.000Z",
+              "updatedAt": "2026-06-05T15:02:49.000Z",
+              "uid": "35240-68fe5c6c-db65-473a-b948-12a3b0d8a465"
+            },
+            {
+              "name": "Adobe Target Adobe Experience Cloud Create an Offer",
+              "id": "a8aed3d5-d780-4150-b5cc-bef1f1fbb08a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"content\",\n  \"content\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/target/offers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "target",
+                    "offers"
+                  ]
+                },
+                "description": "Creates a new content offer in Adobe Target. The offer can be HTML content, a JSON payload, or a redirect URL."
+              },
+              "response": [
+                {
+                  "id": "5db30d0d-5542-4d07-9705-d987c78d054d",
+                  "name": "Offer created successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"content\",\n  \"content\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/target/offers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "offers"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"type\": \"content\",\n  \"content\": \"<string>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-5db30d0d-5542-4d07-9705-d987c78d054d"
+                },
+                {
+                  "id": "7fc3a3ef-9191-4efd-b622-bd789e4fcdbb",
+                  "name": "Invalid offer definition.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"content\",\n  \"content\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/target/offers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "offers"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-7fc3a3ef-9191-4efd-b622-bd789e4fcdbb"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:49.000Z",
+              "updatedAt": "2026-06-05T15:02:49.000Z",
+              "uid": "35240-a8aed3d5-d780-4150-b5cc-bef1f1fbb08a"
+            }
+          ],
+          "id": "10fac5d9-8b19-463c-9dc2-38da88dae2a4",
+          "createdAt": "2026-06-05T15:02:49.000Z",
+          "updatedAt": "2026-06-05T15:02:49.000Z",
+          "uid": "35240-10fac5d9-8b19-463c-9dc2-38da88dae2a4"
+        },
+        {
+          "name": "properties",
+          "item": [
+            {
+              "name": "Adobe Target Adobe Experience Cloud List Properties",
+              "id": "fba73126-1746-48b6-af95-66064b04ad73",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/target/properties",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "target",
+                    "properties"
+                  ]
+                },
+                "description": "Returns a list of enterprise properties configured for the Adobe Target tenant. Properties are used with enterprise permissions to control access to activities and offers."
+              },
+              "response": [
+                {
+                  "id": "8d3b25ee-faea-4207-807c-922cbe6f7f15",
+                  "name": "A list of properties.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/target/properties",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "properties"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"properties\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"token\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"token\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-8d3b25ee-faea-4207-807c-922cbe6f7f15"
+                },
+                {
+                  "id": "9fe5ef7e-b331-473f-a302-a3ae90e816b4",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/target/properties",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "properties"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-9fe5ef7e-b331-473f-a302-a3ae90e816b4"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:49.000Z",
+              "updatedAt": "2026-06-05T15:02:49.000Z",
+              "uid": "35240-fba73126-1746-48b6-af95-66064b04ad73"
+            }
+          ],
+          "id": "0cebbda3-743a-48b0-b045-5196a564d072",
+          "createdAt": "2026-06-05T15:02:49.000Z",
+          "updatedAt": "2026-06-05T15:02:49.000Z",
+          "uid": "35240-0cebbda3-743a-48b0-b045-5196a564d072"
+        },
+        {
+          "name": "environments",
+          "item": [
+            {
+              "name": "Adobe Target Adobe Experience Cloud List Environments",
+              "id": "02484d6b-1932-4503-a05c-0ce900a231c6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/target/environments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "target",
+                    "environments"
+                  ]
+                },
+                "description": "Returns a list of environments (development, staging, production) configured for the Adobe Target tenant."
+              },
+              "response": [
+                {
+                  "id": "d301c25c-8a62-4a70-b9c5-46108368c92b",
+                  "name": "A list of environments.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/target/environments",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "environments"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"environments\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-d301c25c-8a62-4a70-b9c5-46108368c92b"
+                },
+                {
+                  "id": "295719a9-03ce-4ab9-b390-d8f622e3b710",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/target/environments",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "target",
+                        "environments"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-295719a9-03ce-4ab9-b390-d8f622e3b710"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:49.000Z",
+              "updatedAt": "2026-06-05T15:02:49.000Z",
+              "uid": "35240-02484d6b-1932-4503-a05c-0ce900a231c6"
+            }
+          ],
+          "id": "979f5570-0271-4332-a36b-a31b79fd7933",
+          "createdAt": "2026-06-05T15:02:49.000Z",
+          "updatedAt": "2026-06-05T15:02:49.000Z",
+          "uid": "35240-979f5570-0271-4332-a36b-a31b79fd7933"
+        }
+      ],
+      "id": "8957f70d-1ebd-42c2-9e79-796c0ff37136",
+      "createdAt": "2026-06-05T15:02:49.000Z",
+      "updatedAt": "2026-06-05T15:02:49.000Z",
+      "uid": "35240-8957f70d-1ebd-42c2-9e79-796c0ff37136"
+    },
+    {
+      "name": "rest",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "delivery",
+              "item": [
+                {
+                  "name": "Adobe Target Adobe Experience Cloud Deliver Personalized Experiences",
+                  "id": "dc5f88ed-2b3e-432d-8c18-08a6f382942d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"context\": {\n    \"channel\": \"web\",\n    \"userAgent\": \"<string>\"\n  },\n  \"execute\": {\n    \"mboxes\": [\n      {\n        \"name\": \"<string>\",\n        \"index\": \"<integer>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"index\": \"<integer>\"\n      }\n    ]\n  },\n  \"prefetch\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/rest/v1/delivery?client=<string>&sessionId=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "rest",
+                        "v1",
+                        "delivery"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Adobe Target client code.",
+                          "key": "client",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Visitor session ID.",
+                          "key": "sessionId",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "The Target Delivery API endpoint for fetching personalized content for one or more mboxes. Used by client-side and server-side implementations to retrieve offers, execute page load decisions, and prefetch content for subsequent views."
+                  },
+                  "response": [
+                    {
+                      "id": "76c52c48-846b-4b48-ae5f-cfd26ed812cc",
+                      "name": "Personalized content delivered successfully.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"context\": {\n    \"channel\": \"web\",\n    \"userAgent\": \"<string>\"\n  },\n  \"execute\": {\n    \"mboxes\": [\n      {\n        \"name\": \"<string>\",\n        \"index\": \"<integer>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"index\": \"<integer>\"\n      }\n    ]\n  },\n  \"prefetch\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/rest/v1/delivery?client=<string>&sessionId=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "rest",
+                            "v1",
+                            "delivery"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Adobe Target client code.",
+                              "key": "client",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Visitor session ID.",
+                              "key": "sessionId",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"requestId\": \"<string>\",\n  \"execute\": {\n    \"mboxes\": [\n      {\n        \"name\": \"<string>\",\n        \"options\": [\n          {\n            \"type\": \"<string>\",\n            \"content\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"content\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"options\": [\n          {\n            \"type\": \"<string>\",\n            \"content\": \"<string>\"\n          },\n          {\n            \"type\": \"<string>\",\n            \"content\": \"<string>\"\n          }\n        ]\n      }\n    ]\n  },\n  \"prefetch\": {}\n}",
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-76c52c48-846b-4b48-ae5f-cfd26ed812cc"
+                    },
+                    {
+                      "id": "3123c473-6abe-4c25-a41a-af5aeae594b4",
+                      "name": "Invalid delivery request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"context\": {\n    \"channel\": \"web\",\n    \"userAgent\": \"<string>\"\n  },\n  \"execute\": {\n    \"mboxes\": [\n      {\n        \"name\": \"<string>\",\n        \"index\": \"<integer>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"index\": \"<integer>\"\n      }\n    ]\n  },\n  \"prefetch\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/rest/v1/delivery?client=<string>&sessionId=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "rest",
+                            "v1",
+                            "delivery"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Adobe Target client code.",
+                              "key": "client",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Visitor session ID.",
+                              "key": "sessionId",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:49.000Z",
+                      "updatedAt": "2026-06-05T15:02:49.000Z",
+                      "uid": "35240-3123c473-6abe-4c25-a41a-af5aeae594b4"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:49.000Z",
+                  "updatedAt": "2026-06-05T15:02:49.000Z",
+                  "uid": "35240-dc5f88ed-2b3e-432d-8c18-08a6f382942d"
+                }
+              ],
+              "id": "b7a9c7b8-928c-4f84-9f61-20efedf9e066",
+              "createdAt": "2026-06-05T15:02:49.000Z",
+              "updatedAt": "2026-06-05T15:02:49.000Z",
+              "uid": "35240-b7a9c7b8-928c-4f84-9f61-20efedf9e066"
+            }
+          ],
+          "id": "6a98acbb-af1a-4c08-a1c7-d9e674017bb2",
+          "createdAt": "2026-06-05T15:02:49.000Z",
+          "updatedAt": "2026-06-05T15:02:49.000Z",
+          "uid": "35240-6a98acbb-af1a-4c08-a1c7-d9e674017bb2"
+        }
+      ],
+      "id": "2d13b098-3a25-4f76-9981-556aac6a2974",
+      "createdAt": "2026-06-05T15:02:49.000Z",
+      "updatedAt": "2026-06-05T15:02:49.000Z",
+      "uid": "35240-2d13b098-3a25-4f76-9981-556aac6a2974"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "tenant",
+      "value": "mytenant"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://mc.adobe.io/{{tenant}}"
+    }
+  ]
+}

@@ -1,0 +1,394 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Campaign API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud List Profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mc.adobe.io/{organization}/campaign/profileAndServices/profile",
+            "params": [
+              {
+                "name": "_lineCount",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of profiles to return per page."
+              },
+              {
+                "name": "_lineStart",
+                "value": "",
+                "type": "query",
+                "description": "Starting line number for pagination."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Filter profiles by email address."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of subscriber profiles in the Adobe Campaign database. Profiles can be filtered by email, first name, last name, and custom attributes using query parameters."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Create a Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mc.adobe.io/{organization}/campaign/profileAndServices/profile",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new subscriber profile in the Adobe Campaign database with the provided attributes including email, first name, last name, and any custom fields."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Get a Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mc.adobe.io/{organization}/campaign/profileAndServices/profile/:profilePKey",
+            "params": [
+              {
+                "name": "profilePKey",
+                "value": "",
+                "type": "path",
+                "description": "The primary key of the profile."
+              }
+            ]
+          },
+          "docs": "Retrieves a single subscriber profile by its primary key (PKey), including all standard and custom attributes."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Update a Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://mc.adobe.io/{organization}/campaign/profileAndServices/profile/:profilePKey",
+            "params": [
+              {
+                "name": "profilePKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates specific attributes of an existing subscriber profile using a partial update. Only the fields provided in the request body will be modified."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Delete a Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://mc.adobe.io/{organization}/campaign/profileAndServices/profile/:profilePKey",
+            "params": [
+              {
+                "name": "profilePKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Permanently deletes a subscriber profile from the Adobe Campaign database. This action cannot be undone."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Default",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud List Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mc.adobe.io/{organization}/campaign/profileAndServices/service",
+            "params": [
+              {
+                "name": "_lineCount",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of subscription services configured in Adobe Campaign. Services represent mailing lists or subscription topics that profiles can subscribe to."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Create a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mc.adobe.io/{organization}/campaign/profileAndServices/service",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new subscription service in Adobe Campaign with the specified name, label, and configuration."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Get a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mc.adobe.io/{organization}/campaign/profileAndServices/service/:servicePKey",
+            "params": [
+              {
+                "name": "servicePKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a subscription service by its primary key."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Subscribe a Profile to a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mc.adobe.io/{organization}/campaign/profileAndServices/service/:servicePKey/subscriptions",
+            "params": [
+              {
+                "name": "servicePKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Subscribes an existing profile to the specified subscription service by providing the profile primary key."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Workflows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud List Workflows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mc.adobe.io/{organization}/campaign/workflow",
+            "params": [
+              {
+                "name": "_lineCount",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of workflows configured in Adobe Campaign. Each workflow includes its ID, label, status, and schedule information."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Get a Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mc.adobe.io/{organization}/campaign/workflow/:workflowPKey",
+            "params": [
+              {
+                "name": "workflowPKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a single workflow by its primary key, including its activities, transitions, and execution history."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Execute a Workflow Command",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mc.adobe.io/{organization}/campaign/workflow/:workflowPKey/commands",
+            "params": [
+              {
+                "name": "workflowPKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a command on a workflow such as start, pause, resume, or stop. The command triggers the corresponding state transition in the workflow execution engine."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transactional Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Send a Transactional Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://mc.adobe.io/{organization}/campaign/mcAdobe/:transactionalMessageId",
+            "params": [
+              {
+                "name": "transactionalMessageId",
+                "value": "",
+                "type": "path",
+                "description": "The transactional message template identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers a real-time transactional message to a recipient. Transactional messages are used for event-driven communications such as order confirmations, password resets, and shipping notifications."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Get Transactional Message Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mc.adobe.io/{organization}/campaign/mcAdobe/:transactionalMessageId/:eventId",
+            "params": [
+              {
+                "name": "transactionalMessageId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "The event ID returned when the message was triggered."
+              }
+            ]
+          },
+          "docs": "Retrieves the delivery status of a previously sent transactional message by its event ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud List Resource Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mc.adobe.io/{organization}/campaign/profileAndServicesExt/resourceType"
+          },
+          "docs": "Returns metadata about the available custom resources and their fields in the Adobe Campaign data model. Useful for discovering extended profile attributes and custom resource schemas."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Content",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud List Email Deliveries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mc.adobe.io/{organization}/campaign/email",
+            "params": [
+              {
+                "name": "_lineCount",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of email deliveries including their subject, status, and scheduling metadata."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Get an Email Delivery",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://mc.adobe.io/{organization}/campaign/email/:emailPKey",
+            "params": [
+              {
+                "name": "emailPKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the full details of an email delivery by its primary key, including the subject, HTML content, sender, and delivery status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

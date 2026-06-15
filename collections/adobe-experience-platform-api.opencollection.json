@@ -1,0 +1,676 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Experience Platform API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Schemas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud List Schemas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://platform.adobe.io/data/foundation/schemaregistry/tenant/schemas",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor for the next page of results."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of XDM schemas defined in the tenant container. Each schema entry includes its title, description, and meta information such as the schema ID and version."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Create a Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://platform.adobe.io/data/foundation/schemaregistry/tenant/schemas",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new XDM schema in the tenant container. The request body must include the schema title, allOf references to a base class, and any mixin or field group references."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Get a Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://platform.adobe.io/data/foundation/schemaregistry/tenant/schemas/:schemaId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "schemaId",
+                "value": "",
+                "type": "path",
+                "description": "URL-encoded schema meta:altId or $id."
+              }
+            ]
+          },
+          "docs": "Retrieves the full definition of an XDM schema by its URL-encoded schema ID, including all field definitions, mixins, and class references."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Update a Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://platform.adobe.io/data/foundation/schemaregistry/tenant/schemas/:schemaId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "schemaId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the entire definition of an existing XDM schema with the provided request body."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Delete a Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://platform.adobe.io/data/foundation/schemaregistry/tenant/schemas/:schemaId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "schemaId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a tenant-defined XDM schema. Only schemas that are not referenced by datasets or other resources can be deleted."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud List Datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://platform.adobe.io/data/foundation/catalog/dataSets",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of datasets registered in the Data Catalog for the current sandbox. Each dataset includes its name, schema reference, creation date, and status."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Create a Dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://platform.adobe.io/data/foundation/catalog/dataSets",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new dataset in the Data Catalog. The request body must include a name and a reference to an existing XDM schema. Optionally configure tags, file format, and ingestion settings."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Get a Dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://platform.adobe.io/data/foundation/catalog/dataSets/:datasetId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the metadata and configuration for a single dataset by its dataset ID."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Delete a Dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://platform.adobe.io/data/foundation/catalog/dataSets/:datasetId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a dataset and all associated batches from the Data Catalog. This action cannot be undone."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Batches",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Create a Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://platform.adobe.io/data/foundation/import/batches",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new batch for data ingestion into a specified dataset. Returns a batch ID that can be used to upload files and signal batch completion."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Get Batch Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://platform.adobe.io/data/foundation/import/batches/:batchId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "batchId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the current status and metadata for a batch ingestion operation identified by its batch ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Get Profile Entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://platform.adobe.io/data/core/ups/access/entities",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "schema.name",
+                "value": "",
+                "type": "query",
+                "description": "XDM schema name for the entity type."
+              },
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "query",
+                "description": "The identity value to look up."
+              },
+              {
+                "name": "entityIdNS",
+                "value": "",
+                "type": "query",
+                "description": "Identity namespace code."
+              }
+            ]
+          },
+          "docs": "Retrieves unified profile entities by identity. Provide an identity namespace and value to look up profile records, experience events, or other entity types associated with a specific individual."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Segments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud List Segment Definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://platform.adobe.io/data/core/ups/segment/definitions",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of audience segment definitions configured in the platform. Each segment includes its name, PQL expression, and evaluation status."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Create a Segment Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://platform.adobe.io/data/core/ups/segment/definitions",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new audience segment definition using a Profile Query Language (PQL) expression. The segment will be evaluated against the unified profile store."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Get a Segment Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://platform.adobe.io/data/core/ups/segment/definitions/:segmentId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "segmentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a single segment definition by its ID, including the PQL expression, merge policy, and evaluation schedule."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Delete a Segment Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://platform.adobe.io/data/core/ups/segment/definitions/:segmentId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "segmentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a segment definition by its ID. Segment jobs already running will complete but no new evaluations will occur."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Identities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud List Identity Namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://platform.adobe.io/data/foundation/identity/namespaces",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns a list of all identity namespaces available in the current IMS organization, including standard namespaces (ECID, Email, Phone) and custom namespaces."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Create an Identity Namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://platform.adobe.io/data/foundation/identity/namespaces",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a custom identity namespace for use in identity resolution and profile unification. The namespace must have a unique code and name."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Queries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud List Queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://platform.adobe.io/data/foundation/query/queries",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of queries that have been submitted to the Query Service, including their SQL statements, status, and execution metadata."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Submit a Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://platform.adobe.io/data/foundation/query/queries",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a new SQL query to the Query Service for execution against datasets in the Data Lake. Returns a query ID that can be used to poll for results."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Get Query Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://platform.adobe.io/data/foundation/query/queries/:queryId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "queryId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the status, execution metadata, and results reference for a previously submitted query."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Classes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud List Classes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://platform.adobe.io/data/foundation/schemaregistry/tenant/classes",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of XDM classes in the tenant container. Classes define the base structure and behavior type for schemas."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sandboxes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud List Sandboxes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://platform.adobe.io/data/foundation/sandbox-management/sandboxes"
+          },
+          "docs": "Returns a list of all sandboxes available in the current IMS organization, including development and production sandboxes."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Create a Sandbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://platform.adobe.io/data/foundation/sandbox-management/sandboxes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new development sandbox within the IMS organization. Production sandboxes can only be created by system administrators."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Get a Sandbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://platform.adobe.io/data/foundation/sandbox-management/sandboxes/:sandboxName",
+            "params": [
+              {
+                "name": "sandboxName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves details for a single sandbox including its name, title, type, state, and region."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Delete a Sandbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://platform.adobe.io/data/foundation/sandbox-management/sandboxes/:sandboxName",
+            "params": [
+              {
+                "name": "sandboxName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a development sandbox and all its contained resources. Production sandboxes cannot be deleted, only reset."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

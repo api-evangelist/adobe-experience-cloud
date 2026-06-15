@@ -1,0 +1,4551 @@
+{
+  "info": {
+    "_postman_id": "f1d934df-77ea-4cf5-9ba8-481604dc6b97",
+    "name": "Adobe Experience Cloud Adobe Journey Optimizer API",
+    "description": "The Adobe Journey Optimizer API enables programmatic management of customer journeys, messages, campaigns, offers, and content across channels including email, push, SMS, and in-app. It provides endpoints for creating and managing journey orchestrations, configuring offer decisioning, managing content templates, and accessing journey execution data.\n\nContact Support:\n Name: Adobe Developer",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:51.000Z",
+    "updatedAt": "2026-06-05T15:02:51.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f1d934df-77ea-4cf5-9ba8-481604dc6b97"
+  },
+  "item": [
+    {
+      "name": "journey",
+      "item": [
+        {
+          "name": "journeys",
+          "item": [
+            {
+              "name": "{journeyId}",
+              "item": [
+                {
+                  "name": "publish",
+                  "item": [
+                    {
+                      "name": "Adobe Journey Optimizer Adobe Experience Cloud Publish a Journey",
+                      "id": "9e3cad4b-2ab4-402c-b46c-a9e219271fd1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/journey/journeys/:journeyId/publish",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "journey",
+                            "journeys",
+                            ":journeyId",
+                            "publish"
+                          ],
+                          "variable": [
+                            {
+                              "id": "0d2a739c-7f89-45b0-822c-538b881c3d0d",
+                              "key": "journeyId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Publishes a draft journey, making it live and ready to receive qualifying profiles. Published journeys begin processing entry events immediately."
+                      },
+                      "response": [
+                        {
+                          "id": "4258b1c5-a826-4f26-a340-a8ed1d1db635",
+                          "name": "Journey published successfully.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "(Required) The sandbox name.",
+                                "key": "x-sandbox-name",
+                                "value": "prod"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/journey/journeys/:journeyId/publish",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "journey",
+                                "journeys",
+                                ":journeyId",
+                                "publish"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "journeyId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"status\": \"stopped\",\n  \"version\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:02:51.000Z",
+                          "updatedAt": "2026-06-05T15:02:51.000Z",
+                          "uid": "35240-4258b1c5-a826-4f26-a340-a8ed1d1db635"
+                        },
+                        {
+                          "id": "fceadbbe-a770-4c07-a9f2-efbc30af611c",
+                          "name": "Journey cannot be published due to validation errors.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "(Required) The sandbox name.",
+                                "key": "x-sandbox-name",
+                                "value": "prod"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/journey/journeys/:journeyId/publish",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "journey",
+                                "journeys",
+                                ":journeyId",
+                                "publish"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "journeyId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:02:51.000Z",
+                          "updatedAt": "2026-06-05T15:02:51.000Z",
+                          "uid": "35240-fceadbbe-a770-4c07-a9f2-efbc30af611c"
+                        },
+                        {
+                          "id": "629e2cd4-0260-4a29-94a1-88ca5dc6fad1",
+                          "name": "Journey not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "(Required) The sandbox name.",
+                                "key": "x-sandbox-name",
+                                "value": "prod"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/journey/journeys/:journeyId/publish",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "journey",
+                                "journeys",
+                                ":journeyId",
+                                "publish"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "journeyId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:02:51.000Z",
+                          "updatedAt": "2026-06-05T15:02:51.000Z",
+                          "uid": "35240-629e2cd4-0260-4a29-94a1-88ca5dc6fad1"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-9e3cad4b-2ab4-402c-b46c-a9e219271fd1"
+                    }
+                  ],
+                  "id": "963f59a8-d333-4ae0-9492-c058efbdc29e",
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-963f59a8-d333-4ae0-9492-c058efbdc29e"
+                },
+                {
+                  "name": "stop",
+                  "item": [
+                    {
+                      "name": "Adobe Journey Optimizer Adobe Experience Cloud Stop a Journey",
+                      "id": "09c0ff99-e1b0-432a-b644-57da8c63fa20",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/journey/journeys/:journeyId/stop",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "journey",
+                            "journeys",
+                            ":journeyId",
+                            "stop"
+                          ],
+                          "variable": [
+                            {
+                              "id": "5a8c52bb-ddc0-4995-b81e-e58d4323d00c",
+                              "key": "journeyId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Stops an active journey. No new profiles will enter the journey, and existing profiles will exit at the next activity."
+                      },
+                      "response": [
+                        {
+                          "id": "7afbc2f5-5e4c-4341-ae02-f36678b37417",
+                          "name": "Journey stopped successfully.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "(Required) The sandbox name.",
+                                "key": "x-sandbox-name",
+                                "value": "prod"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/journey/journeys/:journeyId/stop",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "journey",
+                                "journeys",
+                                ":journeyId",
+                                "stop"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "journeyId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"status\": \"stopped\",\n  \"version\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T15:02:51.000Z",
+                          "updatedAt": "2026-06-05T15:02:51.000Z",
+                          "uid": "35240-7afbc2f5-5e4c-4341-ae02-f36678b37417"
+                        },
+                        {
+                          "id": "b1800ef9-be39-44ad-9dbd-4b01f2b5f9c1",
+                          "name": "Journey not found.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "(Required) The sandbox name.",
+                                "key": "x-sandbox-name",
+                                "value": "prod"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/journey/journeys/:journeyId/stop",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "journey",
+                                "journeys",
+                                ":journeyId",
+                                "stop"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "journeyId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:02:51.000Z",
+                          "updatedAt": "2026-06-05T15:02:51.000Z",
+                          "uid": "35240-b1800ef9-be39-44ad-9dbd-4b01f2b5f9c1"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-09c0ff99-e1b0-432a-b644-57da8c63fa20"
+                    }
+                  ],
+                  "id": "4e5151c2-5d39-4eba-8946-8fa538fff18b",
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-4e5151c2-5d39-4eba-8946-8fa538fff18b"
+                },
+                {
+                  "name": "Adobe Journey Optimizer Adobe Experience Cloud Get a Journey",
+                  "id": "22c5b343-1501-46da-a8ea-ad40e91a6678",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/journey/journeys/:journeyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "journey",
+                        "journeys",
+                        ":journeyId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f7c2faa6-651f-44bb-a099-0ed702fe62bf",
+                          "key": "journeyId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the full definition of a customer journey by its ID, including entry conditions, activities, transitions, and channel configurations."
+                  },
+                  "response": [
+                    {
+                      "id": "d9dbcb8a-5b28-4a6e-be68-27757e73350e",
+                      "name": "Journey details returned successfully.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/journey/journeys/:journeyId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "journey",
+                            "journeys",
+                            ":journeyId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "journeyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"status\": \"stopped\",\n  \"version\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-d9dbcb8a-5b28-4a6e-be68-27757e73350e"
+                    },
+                    {
+                      "id": "70e5ef67-cc29-4799-bba0-22602db6cdd3",
+                      "name": "Journey not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/journey/journeys/:journeyId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "journey",
+                            "journeys",
+                            ":journeyId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "journeyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-70e5ef67-cc29-4799-bba0-22602db6cdd3"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-22c5b343-1501-46da-a8ea-ad40e91a6678"
+                },
+                {
+                  "name": "Adobe Journey Optimizer Adobe Experience Cloud Update a Journey",
+                  "id": "bc03de6e-36b9-405c-8e8c-bcfce068c115",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"entryCondition\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/journey/journeys/:journeyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "journey",
+                        "journeys",
+                        ":journeyId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "0bd9746b-5102-4848-97ef-7033809fb1ca",
+                          "key": "journeyId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Updates a draft journey with new configuration. Only journeys in draft status can be modified."
+                  },
+                  "response": [
+                    {
+                      "id": "68461299-173e-49b9-9fb3-7c87a32d27e2",
+                      "name": "Journey updated successfully.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"entryCondition\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/journey/journeys/:journeyId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "journey",
+                            "journeys",
+                            ":journeyId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "journeyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"status\": \"stopped\",\n  \"version\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-68461299-173e-49b9-9fb3-7c87a32d27e2"
+                    },
+                    {
+                      "id": "29db038a-31c1-4a64-87d9-df9d464716fc",
+                      "name": "Invalid journey definition or journey is not in draft status.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"entryCondition\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/journey/journeys/:journeyId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "journey",
+                            "journeys",
+                            ":journeyId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "journeyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-29db038a-31c1-4a64-87d9-df9d464716fc"
+                    },
+                    {
+                      "id": "573e77d8-75f7-424a-91d6-2a955a77e2b6",
+                      "name": "Journey not found.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"entryCondition\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/journey/journeys/:journeyId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "journey",
+                            "journeys",
+                            ":journeyId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "journeyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-573e77d8-75f7-424a-91d6-2a955a77e2b6"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-bc03de6e-36b9-405c-8e8c-bcfce068c115"
+                },
+                {
+                  "name": "Adobe Journey Optimizer Adobe Experience Cloud Delete a Journey",
+                  "id": "2594819b-f430-4b23-91b0-51a38c89ea3a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/journey/journeys/:journeyId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "journey",
+                        "journeys",
+                        ":journeyId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "81aa0130-00f9-447c-81b8-556deea637f0",
+                          "key": "journeyId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Deletes a journey in draft or closed status. Active journeys must be stopped before deletion."
+                  },
+                  "response": [
+                    {
+                      "id": "2928555b-f9a9-4dfd-b28c-6a615510ee9b",
+                      "name": "Journey deleted successfully.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/journey/journeys/:journeyId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "journey",
+                            "journeys",
+                            ":journeyId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "journeyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-2928555b-f9a9-4dfd-b28c-6a615510ee9b"
+                    },
+                    {
+                      "id": "776a27d5-2cbf-4785-b2a4-46ebe7e37480",
+                      "name": "Journey not found.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/journey/journeys/:journeyId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "journey",
+                            "journeys",
+                            ":journeyId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "journeyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-776a27d5-2cbf-4785-b2a4-46ebe7e37480"
+                    },
+                    {
+                      "id": "1d433b1e-6c79-48b6-a771-11da493e3533",
+                      "name": "Journey is active and cannot be deleted.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/journey/journeys/:journeyId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "journey",
+                            "journeys",
+                            ":journeyId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "journeyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Conflict",
+                      "code": 409,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-1d433b1e-6c79-48b6-a771-11da493e3533"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-2594819b-f430-4b23-91b0-51a38c89ea3a"
+                }
+              ],
+              "id": "536820ce-6072-426f-b591-3d1d0e22261d",
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-536820ce-6072-426f-b591-3d1d0e22261d"
+            },
+            {
+              "name": "Adobe Journey Optimizer Adobe Experience Cloud List Journeys",
+              "id": "386d58b5-7e96-4289-a72e-adc5489f8974",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The sandbox name.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/journey/journeys?limit=20&page=0",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "journey",
+                    "journeys"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    }
+                  ]
+                },
+                "description": "Returns a paginated list of all customer journeys configured in the organization. Each journey includes its ID, name, status, and version."
+              },
+              "response": [
+                {
+                  "id": "14f97f3d-ddc5-4971-86aa-4cad7064222f",
+                  "name": "A paginated list of journeys.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/journey/journeys?limit=20&page=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "journey",
+                        "journeys"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "key": "page",
+                          "value": "0"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"journeys\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"status\": \"stopped\",\n      \"version\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"status\": \"closed\",\n      \"version\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"modifiedAt\": \"<dateTime>\"\n    }\n  ],\n  \"totalCount\": \"<integer>\"\n}",
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-14f97f3d-ddc5-4971-86aa-4cad7064222f"
+                },
+                {
+                  "id": "f05d8878-b5d0-4eb5-a92e-2bd5d95b70cb",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/journey/journeys?limit=20&page=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "journey",
+                        "journeys"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        },
+                        {
+                          "key": "page",
+                          "value": "0"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-f05d8878-b5d0-4eb5-a92e-2bd5d95b70cb"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-386d58b5-7e96-4289-a72e-adc5489f8974"
+            },
+            {
+              "name": "Adobe Journey Optimizer Adobe Experience Cloud Create a Journey",
+              "id": "27793e50-bf12-488f-9f6f-a16b3dfac30e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The sandbox name.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"entryCondition\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/journey/journeys",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "journey",
+                    "journeys"
+                  ]
+                },
+                "description": "Creates a new customer journey with the specified entry conditions, activities, and channel actions. The journey starts in draft status and must be published to become active."
+              },
+              "response": [
+                {
+                  "id": "0272641e-2193-4d76-9912-f0224c2ee942",
+                  "name": "Journey created successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"entryCondition\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/journey/journeys",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "journey",
+                        "journeys"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"status\": \"stopped\",\n  \"version\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"modifiedAt\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-0272641e-2193-4d76-9912-f0224c2ee942"
+                },
+                {
+                  "id": "de623b2a-686a-45d7-917d-2b2be7820c67",
+                  "name": "Invalid journey definition.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"entryCondition\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/journey/journeys",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "journey",
+                        "journeys"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-de623b2a-686a-45d7-917d-2b2be7820c67"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-27793e50-bf12-488f-9f6f-a16b3dfac30e"
+            }
+          ],
+          "id": "58caaf98-7596-46ea-a299-67eb57c5db67",
+          "createdAt": "2026-06-05T15:02:51.000Z",
+          "updatedAt": "2026-06-05T15:02:51.000Z",
+          "uid": "35240-58caaf98-7596-46ea-a299-67eb57c5db67"
+        }
+      ],
+      "id": "ed9ff2f6-93a9-4ce7-aa27-d3027995f12c",
+      "createdAt": "2026-06-05T15:02:51.000Z",
+      "updatedAt": "2026-06-05T15:02:51.000Z",
+      "uid": "35240-ed9ff2f6-93a9-4ce7-aa27-d3027995f12c"
+    },
+    {
+      "name": "campaign",
+      "item": [
+        {
+          "name": "campaigns",
+          "item": [
+            {
+              "name": "{campaignId}",
+              "item": [
+                {
+                  "name": "Adobe Journey Optimizer Adobe Experience Cloud Get a Campaign",
+                  "id": "9d4ece86-4b3a-461e-99c0-a15e01dfe00a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/campaigns/:campaignId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "campaigns",
+                        ":campaignId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "758cfe27-fe0b-4df9-9ad4-3649acc3ccee",
+                          "key": "campaignId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the full definition of a marketing campaign by its ID."
+                  },
+                  "response": [
+                    {
+                      "id": "3d2582dc-ff99-4a07-a2f2-76c31716f9dd",
+                      "name": "Campaign details returned successfully.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/campaigns/:campaignId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "campaigns",
+                            ":campaignId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "campaignId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"channel\": \"email\",\n  \"status\": \"scheduled\",\n  \"schedule\": {\n    \"startDate\": \"<dateTime>\",\n    \"endDate\": \"<dateTime>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-3d2582dc-ff99-4a07-a2f2-76c31716f9dd"
+                    },
+                    {
+                      "id": "bffc696f-a3e8-4a23-9d3d-e5bbc7405415",
+                      "name": "Campaign not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/campaigns/:campaignId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "campaigns",
+                            ":campaignId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "campaignId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-bffc696f-a3e8-4a23-9d3d-e5bbc7405415"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-9d4ece86-4b3a-461e-99c0-a15e01dfe00a"
+                },
+                {
+                  "name": "Adobe Journey Optimizer Adobe Experience Cloud Delete a Campaign",
+                  "id": "11fdcbd0-4527-49e8-be89-754da47d7f86",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/campaigns/:campaignId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "campaigns",
+                        ":campaignId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "1f79bee5-a45d-4568-9ce3-2904de1ed3ab",
+                          "key": "campaignId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Deletes a campaign that is in draft or completed status."
+                  },
+                  "response": [
+                    {
+                      "id": "de0829da-c584-4206-8f10-f3642ab6650d",
+                      "name": "Campaign deleted successfully.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/campaigns/:campaignId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "campaigns",
+                            ":campaignId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "campaignId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-de0829da-c584-4206-8f10-f3642ab6650d"
+                    },
+                    {
+                      "id": "0a0a5ba9-313d-4c53-a894-300c11451de5",
+                      "name": "Campaign not found.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/campaign/campaigns/:campaignId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "campaign",
+                            "campaigns",
+                            ":campaignId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "campaignId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-0a0a5ba9-313d-4c53-a894-300c11451de5"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-11fdcbd0-4527-49e8-be89-754da47d7f86"
+                }
+              ],
+              "id": "bab99493-1c2f-418c-9a30-a154811bbf30",
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-bab99493-1c2f-418c-9a30-a154811bbf30"
+            },
+            {
+              "name": "Adobe Journey Optimizer Adobe Experience Cloud List Campaigns",
+              "id": "725db543-9343-4384-addd-bc597abb468a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The sandbox name.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/campaign/campaigns?limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "campaign",
+                    "campaigns"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                },
+                "description": "Returns a paginated list of marketing campaigns. Each campaign includes its ID, name, channel, status, and schedule."
+              },
+              "response": [
+                {
+                  "id": "5801c36d-2a6e-4407-a6c5-4e983b7b20c8",
+                  "name": "A paginated list of campaigns.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/campaigns?limit=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "campaigns"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"campaigns\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"channel\": \"push\",\n      \"status\": \"scheduled\",\n      \"schedule\": {\n        \"startDate\": \"<dateTime>\",\n        \"endDate\": \"<dateTime>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"channel\": \"inApp\",\n      \"status\": \"scheduled\",\n      \"schedule\": {\n        \"startDate\": \"<dateTime>\",\n        \"endDate\": \"<dateTime>\"\n      }\n    }\n  ],\n  \"totalCount\": \"<integer>\"\n}",
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-5801c36d-2a6e-4407-a6c5-4e983b7b20c8"
+                },
+                {
+                  "id": "5403ee5a-98f0-4bf5-809d-a3e0f7e50479",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/campaigns?limit=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "campaigns"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-5403ee5a-98f0-4bf5-809d-a3e0f7e50479"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-725db543-9343-4384-addd-bc597abb468a"
+            },
+            {
+              "name": "Adobe Journey Optimizer Adobe Experience Cloud Create a Campaign",
+              "id": "1a10c293-229b-4ebe-b0df-2fc2859290e2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The sandbox name.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"channel\": \"push\",\n  \"description\": \"<string>\",\n  \"audienceId\": \"<string>\",\n  \"schedule\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/campaign/campaigns",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "campaign",
+                    "campaigns"
+                  ]
+                },
+                "description": "Creates a new marketing campaign with the specified channel, audience, content, and schedule configuration."
+              },
+              "response": [
+                {
+                  "id": "9fa00092-af12-4c54-a6bc-ef964f9962e8",
+                  "name": "Campaign created successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"channel\": \"push\",\n  \"description\": \"<string>\",\n  \"audienceId\": \"<string>\",\n  \"schedule\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/campaigns",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "campaigns"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"channel\": \"email\",\n  \"status\": \"scheduled\",\n  \"schedule\": {\n    \"startDate\": \"<dateTime>\",\n    \"endDate\": \"<dateTime>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-9fa00092-af12-4c54-a6bc-ef964f9962e8"
+                },
+                {
+                  "id": "eb437bc6-e461-40a2-8013-1ec165d48bfc",
+                  "name": "Invalid campaign definition.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"channel\": \"push\",\n  \"description\": \"<string>\",\n  \"audienceId\": \"<string>\",\n  \"schedule\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/campaign/campaigns",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "campaign",
+                        "campaigns"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-eb437bc6-e461-40a2-8013-1ec165d48bfc"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-1a10c293-229b-4ebe-b0df-2fc2859290e2"
+            }
+          ],
+          "id": "b5126e9c-9cec-47ae-bca8-d7d402db23e7",
+          "createdAt": "2026-06-05T15:02:51.000Z",
+          "updatedAt": "2026-06-05T15:02:51.000Z",
+          "uid": "35240-b5126e9c-9cec-47ae-bca8-d7d402db23e7"
+        }
+      ],
+      "id": "1f925f57-db94-4e92-ac72-f4e2d1f3417f",
+      "createdAt": "2026-06-05T15:02:51.000Z",
+      "updatedAt": "2026-06-05T15:02:51.000Z",
+      "uid": "35240-1f925f57-db94-4e92-ac72-f4e2d1f3417f"
+    },
+    {
+      "name": "messaging",
+      "item": [
+        {
+          "name": "messages",
+          "item": [
+            {
+              "name": "{messageId}",
+              "item": [
+                {
+                  "name": "Adobe Journey Optimizer Adobe Experience Cloud Get a Message",
+                  "id": "a39ff495-3869-49ec-8972-7ac6caa8a1c7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/messaging/messages/:messageId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "messaging",
+                        "messages",
+                        ":messageId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "02574002-8fa7-442b-bc81-3f8ed9725e01",
+                          "key": "messageId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the full definition of a channel message by its ID, including the content, channel configuration, and delivery settings."
+                  },
+                  "response": [
+                    {
+                      "id": "b2528598-617b-4e49-8c5b-271c5fda7f67",
+                      "name": "Message details returned successfully.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/messaging/messages/:messageId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "messaging",
+                            "messages",
+                            ":messageId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "messageId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"channel\": \"<string>\",\n  \"status\": \"<string>\",\n  \"content\": {}\n}",
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-b2528598-617b-4e49-8c5b-271c5fda7f67"
+                    },
+                    {
+                      "id": "781e5ff2-abf2-4e22-b3b0-cc89432470d3",
+                      "name": "Message not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/messaging/messages/:messageId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "messaging",
+                            "messages",
+                            ":messageId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "messageId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-781e5ff2-abf2-4e22-b3b0-cc89432470d3"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-a39ff495-3869-49ec-8972-7ac6caa8a1c7"
+                },
+                {
+                  "name": "Adobe Journey Optimizer Adobe Experience Cloud Delete a Message",
+                  "id": "946cc07c-f6de-46d5-bed1-fdc9264d70a6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/messaging/messages/:messageId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "messaging",
+                        "messages",
+                        ":messageId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "cdaeba10-4f86-4209-84dd-315b2b779e9e",
+                          "key": "messageId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Deletes a message configuration that is not in use by active journeys or campaigns."
+                  },
+                  "response": [
+                    {
+                      "id": "204df6d3-6c4d-4fa6-a9da-d083407de45b",
+                      "name": "Message deleted successfully.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/messaging/messages/:messageId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "messaging",
+                            "messages",
+                            ":messageId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "messageId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-204df6d3-6c4d-4fa6-a9da-d083407de45b"
+                    },
+                    {
+                      "id": "5bb8c590-b3a8-48c6-85f3-171a3fd2cb1a",
+                      "name": "Message not found.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/messaging/messages/:messageId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "messaging",
+                            "messages",
+                            ":messageId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "messageId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-5bb8c590-b3a8-48c6-85f3-171a3fd2cb1a"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-946cc07c-f6de-46d5-bed1-fdc9264d70a6"
+                }
+              ],
+              "id": "642a443d-ae82-49d3-86a2-3228c3eac866",
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-642a443d-ae82-49d3-86a2-3228c3eac866"
+            },
+            {
+              "name": "Adobe Journey Optimizer Adobe Experience Cloud List Messages",
+              "id": "53759471-6784-446b-bc65-46a9a7bd0d85",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The sandbox name.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/messaging/messages?limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messaging",
+                    "messages"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                },
+                "description": "Returns a paginated list of message configurations across all channels (email, push, SMS, in-app). Each message includes its ID, name, channel, and status."
+              },
+              "response": [
+                {
+                  "id": "774ee9aa-159e-43cb-aaea-57562cdd415d",
+                  "name": "A paginated list of messages.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/messaging/messages?limit=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "messaging",
+                        "messages"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"messages\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"channel\": \"<string>\",\n      \"status\": \"<string>\",\n      \"content\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"channel\": \"<string>\",\n      \"status\": \"<string>\",\n      \"content\": {}\n    }\n  ],\n  \"totalCount\": \"<integer>\"\n}",
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-774ee9aa-159e-43cb-aaea-57562cdd415d"
+                },
+                {
+                  "id": "89540c3b-5c1b-4468-8f13-9dab9d9572dc",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/messaging/messages?limit=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "messaging",
+                        "messages"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-89540c3b-5c1b-4468-8f13-9dab9d9572dc"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-53759471-6784-446b-bc65-46a9a7bd0d85"
+            },
+            {
+              "name": "Adobe Journey Optimizer Adobe Experience Cloud Create a Message",
+              "id": "23997122-de80-4278-8183-5bc8e9b2a4c1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The sandbox name.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"channel\": \"push\",\n  \"content\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/messaging/messages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "messaging",
+                    "messages"
+                  ]
+                },
+                "description": "Creates a new channel message configuration with the specified channel type, content, and surface settings."
+              },
+              "response": [
+                {
+                  "id": "c3dcb0dc-c73f-4167-b6ac-b0d8eb352c40",
+                  "name": "Message created successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"channel\": \"push\",\n  \"content\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/messaging/messages",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "messaging",
+                        "messages"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"channel\": \"<string>\",\n  \"status\": \"<string>\",\n  \"content\": {}\n}",
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-c3dcb0dc-c73f-4167-b6ac-b0d8eb352c40"
+                },
+                {
+                  "id": "c1644487-08c8-434e-877a-30436a744c6e",
+                  "name": "Invalid message definition.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"channel\": \"push\",\n  \"content\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/messaging/messages",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "messaging",
+                        "messages"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-c1644487-08c8-434e-877a-30436a744c6e"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-23997122-de80-4278-8183-5bc8e9b2a4c1"
+            }
+          ],
+          "id": "1a2bf4dc-6ccd-43d6-8501-69e3196011cd",
+          "createdAt": "2026-06-05T15:02:51.000Z",
+          "updatedAt": "2026-06-05T15:02:51.000Z",
+          "uid": "35240-1a2bf4dc-6ccd-43d6-8501-69e3196011cd"
+        }
+      ],
+      "id": "e6ac3112-bdab-432c-ad97-7ea3586fd83d",
+      "createdAt": "2026-06-05T15:02:51.000Z",
+      "updatedAt": "2026-06-05T15:02:51.000Z",
+      "uid": "35240-e6ac3112-bdab-432c-ad97-7ea3586fd83d"
+    },
+    {
+      "name": "offer",
+      "item": [
+        {
+          "name": "offers",
+          "item": [
+            {
+              "name": "{offerId}",
+              "item": [
+                {
+                  "name": "Adobe Journey Optimizer Adobe Experience Cloud Get an Offer",
+                  "id": "94dc09d0-81d3-49c4-b87f-031667811344",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/offer/offers/:offerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offer",
+                        "offers",
+                        ":offerId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "feabc8f7-778b-4bda-a518-49324d1dd6f5",
+                          "key": "offerId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the full definition of an offer by its ID, including content representations, eligibility rules, and constraints."
+                  },
+                  "response": [
+                    {
+                      "id": "f88552b7-8c05-4c59-9158-3b07a4eac21b",
+                      "name": "Offer details returned successfully.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/offer/offers/:offerId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "offer",
+                            "offers",
+                            ":offerId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "offerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"draft\",\n  \"representations\": [\n    {\n      \"channel\": \"<string>\",\n      \"placement\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"channel\": \"<string>\",\n      \"placement\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\",\n  \"priority\": \"<integer>\"\n}",
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-f88552b7-8c05-4c59-9158-3b07a4eac21b"
+                    },
+                    {
+                      "id": "1285f630-4245-4a61-a85d-07dafc570733",
+                      "name": "Offer not found.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/offer/offers/:offerId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "offer",
+                            "offers",
+                            ":offerId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "offerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-1285f630-4245-4a61-a85d-07dafc570733"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-94dc09d0-81d3-49c4-b87f-031667811344"
+                },
+                {
+                  "name": "Adobe Journey Optimizer Adobe Experience Cloud Update an Offer",
+                  "id": "8f856426-56c0-4a77-b1ac-a1188ffda3fe",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"eligibilityRule\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/offer/offers/:offerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offer",
+                        "offers",
+                        ":offerId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "8f3808e0-ef36-44b2-8ed4-2140aba8294b",
+                          "key": "offerId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Updates an existing offer with new content, eligibility rules, or priority settings."
+                  },
+                  "response": [
+                    {
+                      "id": "62317235-b390-498a-8acb-ba738e1a60a9",
+                      "name": "Offer updated successfully.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"eligibilityRule\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/offer/offers/:offerId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "offer",
+                            "offers",
+                            ":offerId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "offerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"draft\",\n  \"representations\": [\n    {\n      \"channel\": \"<string>\",\n      \"placement\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"channel\": \"<string>\",\n      \"placement\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\",\n  \"priority\": \"<integer>\"\n}",
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-62317235-b390-498a-8acb-ba738e1a60a9"
+                    },
+                    {
+                      "id": "ee80d95f-8c1b-4fa7-b312-302b38787d22",
+                      "name": "Offer not found.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"eligibilityRule\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/offer/offers/:offerId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "offer",
+                            "offers",
+                            ":offerId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "offerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-ee80d95f-8c1b-4fa7-b312-302b38787d22"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-8f856426-56c0-4a77-b1ac-a1188ffda3fe"
+                },
+                {
+                  "name": "Adobe Journey Optimizer Adobe Experience Cloud Delete an Offer",
+                  "id": "e516e9a2-13be-453f-8a83-4021cd44d921",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/offer/offers/:offerId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offer",
+                        "offers",
+                        ":offerId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f002e252-a088-4253-8544-6b3e8fde69f9",
+                          "key": "offerId",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Deletes an offer from the library. Offers in use by active decisions cannot be deleted."
+                  },
+                  "response": [
+                    {
+                      "id": "dda732d3-b64f-4ae3-b01b-d59d9423a206",
+                      "name": "Offer deleted successfully.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/offer/offers/:offerId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "offer",
+                            "offers",
+                            ":offerId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "offerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-dda732d3-b64f-4ae3-b01b-d59d9423a206"
+                    },
+                    {
+                      "id": "e9423ed6-76aa-493c-9c08-b0b387acc6eb",
+                      "name": "Offer not found.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "(Required) The sandbox name.",
+                            "key": "x-sandbox-name",
+                            "value": "prod"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/offer/offers/:offerId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "offer",
+                            "offers",
+                            ":offerId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "offerId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:02:51.000Z",
+                      "updatedAt": "2026-06-05T15:02:51.000Z",
+                      "uid": "35240-e9423ed6-76aa-493c-9c08-b0b387acc6eb"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-e516e9a2-13be-453f-8a83-4021cd44d921"
+                }
+              ],
+              "id": "6b778fbd-68f9-4783-8413-0589d980cd15",
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-6b778fbd-68f9-4783-8413-0589d980cd15"
+            },
+            {
+              "name": "Adobe Journey Optimizer Adobe Experience Cloud List Offers",
+              "id": "16dbd631-d5d5-4261-b895-5909ec7afed1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The sandbox name.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/offer/offers?limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offer",
+                    "offers"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                },
+                "description": "Returns a paginated list of personalized and fallback offers in the offer library. Each offer includes its ID, name, status, and representation details."
+              },
+              "response": [
+                {
+                  "id": "4047c4da-c26b-471a-8485-b575979a149c",
+                  "name": "A paginated list of offers.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/offer/offers?limit=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offer",
+                        "offers"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"offers\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"draft\",\n      \"representations\": [\n        {\n          \"channel\": \"<string>\",\n          \"placement\": \"<string>\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"channel\": \"<string>\",\n          \"placement\": \"<string>\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"startDate\": \"<dateTime>\",\n      \"endDate\": \"<dateTime>\",\n      \"priority\": \"<integer>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"status\": \"approved\",\n      \"representations\": [\n        {\n          \"channel\": \"<string>\",\n          \"placement\": \"<string>\",\n          \"content\": \"<string>\"\n        },\n        {\n          \"channel\": \"<string>\",\n          \"placement\": \"<string>\",\n          \"content\": \"<string>\"\n        }\n      ],\n      \"startDate\": \"<dateTime>\",\n      \"endDate\": \"<dateTime>\",\n      \"priority\": \"<integer>\"\n    }\n  ],\n  \"totalCount\": \"<integer>\"\n}",
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-4047c4da-c26b-471a-8485-b575979a149c"
+                },
+                {
+                  "id": "64b37813-59bc-4d80-ad74-6e2cd70a2ba3",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/offer/offers?limit=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offer",
+                        "offers"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-64b37813-59bc-4d80-ad74-6e2cd70a2ba3"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-16dbd631-d5d5-4261-b895-5909ec7afed1"
+            },
+            {
+              "name": "Adobe Journey Optimizer Adobe Experience Cloud Create an Offer",
+              "id": "5f2841fa-39fb-4894-8fa2-51a14abd0e3e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The sandbox name.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"eligibilityRule\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/offer/offers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offer",
+                    "offers"
+                  ]
+                },
+                "description": "Creates a new personalized offer with eligibility rules, content representations, and priority settings for use in offer decisioning."
+              },
+              "response": [
+                {
+                  "id": "a2d40dc5-bc4d-45b5-80e2-a12ce1062555",
+                  "name": "Offer created successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"eligibilityRule\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/offer/offers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offer",
+                        "offers"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"status\": \"draft\",\n  \"representations\": [\n    {\n      \"channel\": \"<string>\",\n      \"placement\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"channel\": \"<string>\",\n      \"placement\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\",\n  \"priority\": \"<integer>\"\n}",
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-a2d40dc5-bc4d-45b5-80e2-a12ce1062555"
+                },
+                {
+                  "id": "d0500e8b-ab22-4006-a84e-0772e5bcf3ac",
+                  "name": "Invalid offer definition.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"eligibilityRule\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/offer/offers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offer",
+                        "offers"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-d0500e8b-ab22-4006-a84e-0772e5bcf3ac"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-5f2841fa-39fb-4894-8fa2-51a14abd0e3e"
+            }
+          ],
+          "id": "9ebeab74-638a-4b8a-ad8a-d58c926173b1",
+          "createdAt": "2026-06-05T15:02:51.000Z",
+          "updatedAt": "2026-06-05T15:02:51.000Z",
+          "uid": "35240-9ebeab74-638a-4b8a-ad8a-d58c926173b1"
+        },
+        {
+          "name": "placements",
+          "item": [
+            {
+              "name": "Adobe Journey Optimizer Adobe Experience Cloud List Placements",
+              "id": "4bd07a49-3ffd-4d8b-b0a6-a8e002bcfe1e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The sandbox name.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/offer/placements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offer",
+                    "placements"
+                  ]
+                },
+                "description": "Returns a list of offer placements. Placements define the channel and content format where offers can be displayed."
+              },
+              "response": [
+                {
+                  "id": "a40f414a-be41-4269-b78f-3adf5fbb92a6",
+                  "name": "A list of placements.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/offer/placements",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offer",
+                        "placements"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"placements\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"channel\": \"<string>\",\n      \"contentType\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"channel\": \"<string>\",\n      \"contentType\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-a40f414a-be41-4269-b78f-3adf5fbb92a6"
+                },
+                {
+                  "id": "ec1d4e67-0abd-4e80-9a05-190313ec00f9",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/offer/placements",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offer",
+                        "placements"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-ec1d4e67-0abd-4e80-9a05-190313ec00f9"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-4bd07a49-3ffd-4d8b-b0a6-a8e002bcfe1e"
+            },
+            {
+              "name": "Adobe Journey Optimizer Adobe Experience Cloud Create a Placement",
+              "id": "a9b9fe44-cb58-4296-b015-8cf3b3762cbb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The sandbox name.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"channel\": \"<string>\",\n  \"contentType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/offer/placements",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offer",
+                    "placements"
+                  ]
+                },
+                "description": "Creates a new offer placement with the specified channel and content type configuration."
+              },
+              "response": [
+                {
+                  "id": "e6ef845a-181c-4310-ab33-ded128d817ae",
+                  "name": "Placement created successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"channel\": \"<string>\",\n  \"contentType\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/offer/placements",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offer",
+                        "placements"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"channel\": \"<string>\",\n  \"contentType\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-e6ef845a-181c-4310-ab33-ded128d817ae"
+                },
+                {
+                  "id": "9259ed4e-ed76-485b-992a-e4bcf9dcab64",
+                  "name": "Invalid placement definition.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"channel\": \"<string>\",\n  \"contentType\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/offer/placements",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offer",
+                        "placements"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-9259ed4e-ed76-485b-992a-e4bcf9dcab64"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-a9b9fe44-cb58-4296-b015-8cf3b3762cbb"
+            }
+          ],
+          "id": "8ee5765a-d62f-4867-9ae8-293f8e8966f5",
+          "createdAt": "2026-06-05T15:02:51.000Z",
+          "updatedAt": "2026-06-05T15:02:51.000Z",
+          "uid": "35240-8ee5765a-d62f-4867-9ae8-293f8e8966f5"
+        },
+        {
+          "name": "collections",
+          "item": [
+            {
+              "name": "Adobe Journey Optimizer Adobe Experience Cloud List Collections",
+              "id": "e9c2220e-4bdd-4493-a5b6-e6e24b6c27ad",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The sandbox name.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/offer/collections",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offer",
+                    "collections"
+                  ]
+                },
+                "description": "Returns a list of offer collections. Collections are groups of offers that share common tags or qualifiers."
+              },
+              "response": [
+                {
+                  "id": "3a931b0e-ab99-42bf-ae06-7477c2ad7a38",
+                  "name": "A list of collections.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/offer/collections",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offer",
+                        "collections"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"collections\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"filter\": {}\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"filter\": {}\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-3a931b0e-ab99-42bf-ae06-7477c2ad7a38"
+                },
+                {
+                  "id": "e24815cc-e1fa-450c-a333-2c618c6ac1c5",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/offer/collections",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offer",
+                        "collections"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-e24815cc-e1fa-450c-a333-2c618c6ac1c5"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-e9c2220e-4bdd-4493-a5b6-e6e24b6c27ad"
+            },
+            {
+              "name": "Adobe Journey Optimizer Adobe Experience Cloud Create a Collection",
+              "id": "7357ca16-338c-4305-938b-88db2a0da73b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The sandbox name.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"filter\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/offer/collections",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offer",
+                    "collections"
+                  ]
+                },
+                "description": "Creates a new offer collection with the specified filter criteria to group related offers."
+              },
+              "response": [
+                {
+                  "id": "d8fe2e24-81c5-47d8-a6e2-fe2397eaf137",
+                  "name": "Collection created successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"filter\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/offer/collections",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offer",
+                        "collections"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"filter\": {}\n}",
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-d8fe2e24-81c5-47d8-a6e2-fe2397eaf137"
+                },
+                {
+                  "id": "803ce719-14ca-4331-a896-dc491f4728a0",
+                  "name": "Invalid collection definition.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"filter\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/offer/collections",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offer",
+                        "collections"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-803ce719-14ca-4331-a896-dc491f4728a0"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-7357ca16-338c-4305-938b-88db2a0da73b"
+            }
+          ],
+          "id": "51314916-cade-4492-a8f5-f7d8a869c3aa",
+          "createdAt": "2026-06-05T15:02:51.000Z",
+          "updatedAt": "2026-06-05T15:02:51.000Z",
+          "uid": "35240-51314916-cade-4492-a8f5-f7d8a869c3aa"
+        },
+        {
+          "name": "decisionRules",
+          "item": [
+            {
+              "name": "Adobe Journey Optimizer Adobe Experience Cloud List Decision Rules",
+              "id": "7bdc7876-fa88-463a-b931-3725dcbcaec9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The sandbox name.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/offer/decisionRules",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offer",
+                    "decisionRules"
+                  ]
+                },
+                "description": "Returns a list of decision rules used to define offer eligibility criteria based on profile attributes and context data."
+              },
+              "response": [
+                {
+                  "id": "8a847131-8495-4d6a-bffe-e304879beeac",
+                  "name": "A list of decision rules.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/offer/decisionRules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offer",
+                        "decisionRules"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"decisionRules\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"condition\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"condition\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-8a847131-8495-4d6a-bffe-e304879beeac"
+                },
+                {
+                  "id": "8bae1e53-de3d-4223-a3ac-21f842bb737d",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/offer/decisionRules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offer",
+                        "decisionRules"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-8bae1e53-de3d-4223-a3ac-21f842bb737d"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-7bdc7876-fa88-463a-b931-3725dcbcaec9"
+            },
+            {
+              "name": "Adobe Journey Optimizer Adobe Experience Cloud Create a Decision Rule",
+              "id": "5a82f87f-02be-4b24-87f3-3980f87bb040",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The sandbox name.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"condition\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/offer/decisionRules",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offer",
+                    "decisionRules"
+                  ]
+                },
+                "description": "Creates a new decision rule using a PQL expression to define eligibility criteria for offer personalization."
+              },
+              "response": [
+                {
+                  "id": "1a0ae3bc-43ef-428d-a021-b1a6a3203c76",
+                  "name": "Decision rule created successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"condition\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/offer/decisionRules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offer",
+                        "decisionRules"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"condition\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-1a0ae3bc-43ef-428d-a021-b1a6a3203c76"
+                },
+                {
+                  "id": "e83ea3ef-59c4-42e9-acb9-413992173b4f",
+                  "name": "Invalid decision rule definition.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"condition\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/offer/decisionRules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "offer",
+                        "decisionRules"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-e83ea3ef-59c4-42e9-acb9-413992173b4f"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-5a82f87f-02be-4b24-87f3-3980f87bb040"
+            }
+          ],
+          "id": "4a019808-6917-4a0a-88ab-647ac3977cf0",
+          "createdAt": "2026-06-05T15:02:51.000Z",
+          "updatedAt": "2026-06-05T15:02:51.000Z",
+          "uid": "35240-4a019808-6917-4a0a-88ab-647ac3977cf0"
+        }
+      ],
+      "id": "21745baa-d29a-4428-96f6-756ec50cca3d",
+      "createdAt": "2026-06-05T15:02:51.000Z",
+      "updatedAt": "2026-06-05T15:02:51.000Z",
+      "uid": "35240-21745baa-d29a-4428-96f6-756ec50cca3d"
+    },
+    {
+      "name": "content",
+      "item": [
+        {
+          "name": "templates",
+          "item": [
+            {
+              "name": "Adobe Journey Optimizer Adobe Experience Cloud List Content Templates",
+              "id": "1b9b65de-b8ee-4032-bab1-25662cdff98c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) The sandbox name.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/content/templates?limit=20",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "content",
+                    "templates"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                },
+                "description": "Returns a paginated list of reusable content templates for email, push, SMS, and in-app channels."
+              },
+              "response": [
+                {
+                  "id": "2091457e-a7d6-4978-93fb-be99e72a605e",
+                  "name": "A paginated list of content templates.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/content/templates?limit=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "content",
+                        "templates"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"templates\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"channel\": \"<string>\",\n      \"content\": {},\n      \"createdAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"channel\": \"<string>\",\n      \"content\": {},\n      \"createdAt\": \"<dateTime>\"\n    }\n  ],\n  \"totalCount\": \"<integer>\"\n}",
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-2091457e-a7d6-4978-93fb-be99e72a605e"
+                },
+                {
+                  "id": "deab13c0-e0a1-4d87-aba4-6a833550fa68",
+                  "name": "Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/content/templates?limit=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "content",
+                        "templates"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-deab13c0-e0a1-4d87-aba4-6a833550fa68"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-1b9b65de-b8ee-4032-bab1-25662cdff98c"
+            },
+            {
+              "name": "Adobe Journey Optimizer Adobe Experience Cloud Create a Content Template",
+              "id": "c0aa5990-66ca-4b7d-93f2-e9d05f14f028",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The sandbox name.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"channel\": \"push\",\n  \"content\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/content/templates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "content",
+                    "templates"
+                  ]
+                },
+                "description": "Creates a new reusable content template for a specified channel with HTML or JSON content."
+              },
+              "response": [
+                {
+                  "id": "5a5b1d4c-3235-4db1-a1a4-87b46bb7741c",
+                  "name": "Content template created successfully.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"channel\": \"push\",\n  \"content\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/content/templates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "content",
+                        "templates"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"channel\": \"<string>\",\n  \"content\": {},\n  \"createdAt\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-5a5b1d4c-3235-4db1-a1a4-87b46bb7741c"
+                },
+                {
+                  "id": "61b83c82-1c02-43de-9fe5-328a46dda5b5",
+                  "name": "Invalid template definition.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The sandbox name.",
+                        "key": "x-sandbox-name",
+                        "value": "prod"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"channel\": \"push\",\n  \"content\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/content/templates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "content",
+                        "templates"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:51.000Z",
+                  "updatedAt": "2026-06-05T15:02:51.000Z",
+                  "uid": "35240-61b83c82-1c02-43de-9fe5-328a46dda5b5"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:51.000Z",
+              "updatedAt": "2026-06-05T15:02:51.000Z",
+              "uid": "35240-c0aa5990-66ca-4b7d-93f2-e9d05f14f028"
+            }
+          ],
+          "id": "d0616f41-51a4-4a57-ac01-515762453bf4",
+          "createdAt": "2026-06-05T15:02:51.000Z",
+          "updatedAt": "2026-06-05T15:02:51.000Z",
+          "uid": "35240-d0616f41-51a4-4a57-ac01-515762453bf4"
+        }
+      ],
+      "id": "9fc29567-e4f6-461b-852f-eec58448fd6d",
+      "createdAt": "2026-06-05T15:02:51.000Z",
+      "updatedAt": "2026-06-05T15:02:51.000Z",
+      "uid": "35240-9fc29567-e4f6-461b-852f-eec58448fd6d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://platform.adobe.io"
+    }
+  ]
+}
