@@ -109,6 +109,12 @@ type: Index
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
+  - type: VulnerabilityDisclosure
+    url: security/adobe-experience-cloud-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/adobe-experience-cloud-domain-security.yml
+  - type: Authentication
+    url: authentication/adobe-experience-cloud-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/adobe-experience-cloud/overview
   - type: Arazzo
