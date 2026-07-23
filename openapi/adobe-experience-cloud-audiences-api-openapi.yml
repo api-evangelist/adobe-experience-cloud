@@ -1,0 +1,251 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Cloud Adobe Analytics 2.0 Activities Audiences API
+  description: The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://analytics.adobe.io
+  description: Adobe Analytics Production API
+security:
+- bearerAuth: []
+- apiKey: []
+tags:
+- name: Audiences
+  description: Operations for managing Target audiences
+paths:
+  /target/audiences:
+    get:
+      operationId: listAudiences
+      summary: Adobe Target Adobe Experience Cloud List Audiences
+      description: Returns a paginated list of all audiences configured in Adobe Target. Each audience includes its ID, name, description, and targeting rules.
+      tags:
+      - Audiences
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 10
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: A paginated list of audiences.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudienceList'
+              examples:
+                listAudiences200Example:
+                  summary: Default listAudiences 200 response
+                  x-microcks-default: true
+                  value:
+                    total: 1
+                    offset: 1
+                    limit: 1
+                    audiences:
+                    - example
+        '401':
+          description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createAudience
+      summary: Adobe Target Adobe Experience Cloud Create an Audience
+      description: Creates a new audience in Adobe Target with the specified name and targeting rules.
+      tags:
+      - Audiences
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudienceInput'
+            examples:
+              createAudienceRequestExample:
+                summary: Default createAudience request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  description: example
+                  targetRule: {}
+      responses:
+        '200':
+          description: Audience created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audience'
+              examples:
+                createAudience200Example:
+                  summary: Default createAudience 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    description: example
+                    targetRule: {}
+        '400':
+          description: Invalid audience definition.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /target/audiences/{audienceId}:
+    get:
+      operationId: getAudience
+      summary: Adobe Target Adobe Experience Cloud Get an Audience
+      description: Retrieves the full definition of a single audience by its audience ID, including all targeting rules and conditions.
+      tags:
+      - Audiences
+      parameters:
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Audience details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audience'
+              examples:
+                getAudience200Example:
+                  summary: Default getAudience 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    description: example
+                    targetRule: {}
+        '404':
+          description: Audience not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateAudience
+      summary: Adobe Target Adobe Experience Cloud Update an Audience
+      description: Updates an existing audience with new targeting rules or metadata.
+      tags:
+      - Audiences
+      parameters:
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudienceInput'
+            examples:
+              updateAudienceRequestExample:
+                summary: Default updateAudience request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  description: example
+                  targetRule: {}
+      responses:
+        '200':
+          description: Audience updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audience'
+              examples:
+                updateAudience200Example:
+                  summary: Default updateAudience 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    description: example
+                    targetRule: {}
+        '404':
+          description: Audience not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteAudience
+      summary: Adobe Target Adobe Experience Cloud Delete an Audience
+      description: Permanently deletes an audience. Audiences in use by active activities cannot be deleted.
+      tags:
+      - Audiences
+      parameters:
+      - name: audienceId
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Audience deleted successfully.
+        '404':
+          description: Audience not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Audience:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        targetRule:
+          type: object
+    AudienceInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        targetRule:
+          type: object
+    AudienceList:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        audiences:
+          type: array
+          items:
+            $ref: '#/components/schemas/Audience'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via Adobe I/O.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe I/O client API key.

@@ -1,0 +1,352 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Cloud Adobe Analytics 2.0 Activities Profiles API
+  description: The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://analytics.adobe.io
+  description: Adobe Analytics Production API
+security:
+- bearerAuth: []
+- apiKey: []
+tags:
+- name: Profiles
+  description: Operations for managing subscriber profiles
+paths:
+  /campaign/profileAndServices/profile:
+    get:
+      operationId: listProfiles
+      summary: Adobe Campaign Adobe Experience Cloud List Profiles
+      description: Returns a paginated list of subscriber profiles in the Adobe Campaign database. Profiles can be filtered by email, first name, last name, and custom attributes using query parameters.
+      tags:
+      - Profiles
+      parameters:
+      - name: _lineCount
+        in: query
+        description: Maximum number of profiles to return per page.
+        schema:
+          type: integer
+          default: 25
+      - name: _lineStart
+        in: query
+        description: Starting line number for pagination.
+        schema:
+          type: integer
+          default: 0
+      - name: email
+        in: query
+        description: Filter profiles by email address.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A paginated list of profiles.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileList'
+              examples:
+                listProfiles200Example:
+                  summary: Default listProfiles 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - example
+                    count:
+                      value: 1
+        '401':
+          description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createProfile
+      summary: Adobe Campaign Adobe Experience Cloud Create a Profile
+      description: Creates a new subscriber profile in the Adobe Campaign database with the provided attributes including email, first name, last name, and any custom fields.
+      tags:
+      - Profiles
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileInput'
+            examples:
+              createProfileRequestExample:
+                summary: Default createProfile request
+                x-microcks-default: true
+                value:
+                  email: user@example.com
+                  firstName: Example Name
+                  lastName: Example Name
+                  birthDate: '2025-03-15'
+                  phone: example
+      responses:
+        '201':
+          description: Profile created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+              examples:
+                createProfile201Example:
+                  summary: Default createProfile 201 response
+                  x-microcks-default: true
+                  value:
+                    PKey: example
+                    email: user@example.com
+                    firstName: Example Name
+                    lastName: Example Name
+                    birthDate: '2025-03-15'
+                    phone: example
+                    created: '2025-03-15T14:30:00Z'
+                    lastModified: '2025-03-15T14:30:00Z'
+        '400':
+          description: Invalid profile data.
+        '409':
+          description: Profile with this email already exists.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /campaign/profileAndServices/profile/{profilePKey}:
+    get:
+      operationId: getProfile
+      summary: Adobe Campaign Adobe Experience Cloud Get a Profile
+      description: Retrieves a single subscriber profile by its primary key (PKey), including all standard and custom attributes.
+      tags:
+      - Profiles
+      parameters:
+      - name: profilePKey
+        in: path
+        required: true
+        description: The primary key of the profile.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Profile details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+              examples:
+                getProfile200Example:
+                  summary: Default getProfile 200 response
+                  x-microcks-default: true
+                  value:
+                    PKey: example
+                    email: user@example.com
+                    firstName: Example Name
+                    lastName: Example Name
+                    birthDate: '2025-03-15'
+                    phone: example
+                    created: '2025-03-15T14:30:00Z'
+                    lastModified: '2025-03-15T14:30:00Z'
+        '404':
+          description: Profile not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    patch:
+      operationId: updateProfile
+      summary: Adobe Campaign Adobe Experience Cloud Update a Profile
+      description: Updates specific attributes of an existing subscriber profile using a partial update. Only the fields provided in the request body will be modified.
+      tags:
+      - Profiles
+      parameters:
+      - name: profilePKey
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProfileInput'
+            examples:
+              updateProfileRequestExample:
+                summary: Default updateProfile request
+                x-microcks-default: true
+                value:
+                  email: user@example.com
+                  firstName: Example Name
+                  lastName: Example Name
+                  birthDate: '2025-03-15'
+                  phone: example
+      responses:
+        '200':
+          description: Profile updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profile'
+              examples:
+                updateProfile200Example:
+                  summary: Default updateProfile 200 response
+                  x-microcks-default: true
+                  value:
+                    PKey: example
+                    email: user@example.com
+                    firstName: Example Name
+                    lastName: Example Name
+                    birthDate: '2025-03-15'
+                    phone: example
+                    created: '2025-03-15T14:30:00Z'
+                    lastModified: '2025-03-15T14:30:00Z'
+        '404':
+          description: Profile not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteProfile
+      summary: Adobe Campaign Adobe Experience Cloud Delete a Profile
+      description: Permanently deletes a subscriber profile from the Adobe Campaign database. This action cannot be undone.
+      tags:
+      - Profiles
+      parameters:
+      - name: profilePKey
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Profile deleted successfully.
+        '404':
+          description: Profile not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /data/core/ups/access/entities:
+    get:
+      operationId: getProfileEntities
+      summary: Adobe Experience Platform Adobe Experience Cloud Get Profile Entities
+      description: Retrieves unified profile entities by identity. Provide an identity namespace and value to look up profile records, experience events, or other entity types associated with a specific individual.
+      tags:
+      - Profiles
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: schema.name
+        in: query
+        required: true
+        description: XDM schema name for the entity type.
+        schema:
+          type: string
+      - name: entityId
+        in: query
+        required: true
+        description: The identity value to look up.
+        schema:
+          type: string
+      - name: entityIdNS
+        in: query
+        required: true
+        description: Identity namespace code.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Profile entity data returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileEntity'
+              examples:
+                getProfileEntities200Example:
+                  summary: Default getProfileEntities 200 response
+                  x-microcks-default: true
+                  value:
+                    entity: {}
+                    lastModifiedAt: '2025-03-15T14:30:00Z'
+        '404':
+          description: No profile found for the given identity.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ProfileList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Profile'
+        count:
+          type: object
+          properties:
+            value:
+              type: integer
+    ProfileEntity:
+      type: object
+      properties:
+        entity:
+          type: object
+        lastModifiedAt:
+          type: string
+          format: date-time
+    ProfileInput:
+      type: object
+      properties:
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        phone:
+          type: string
+    Profile:
+      type: object
+      properties:
+        PKey:
+          type: string
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        phone:
+          type: string
+        created:
+          type: string
+          format: date-time
+        lastModified:
+          type: string
+          format: date-time
+  parameters:
+    sandboxHeader:
+      name: x-sandbox-name
+      in: header
+      required: true
+      description: The name of the sandbox to operate in.
+      schema:
+        type: string
+        default: prod
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via Adobe I/O.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe I/O client API key.

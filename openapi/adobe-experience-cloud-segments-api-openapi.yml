@@ -1,0 +1,560 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Cloud Adobe Analytics 2.0 Activities Segments API
+  description: The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://analytics.adobe.io
+  description: Adobe Analytics Production API
+security:
+- bearerAuth: []
+- apiKey: []
+tags:
+- name: Segments
+  description: Operations for managing analytics segments
+paths:
+  /api/{companyId}/segments:
+    get:
+      operationId: listSegments
+      summary: Adobe Analytics Adobe Experience Cloud List Segments
+      description: Returns a paginated list of segments available to the authenticated user. Segments can be filtered by report suite, owner, or tag. Each entry includes the segment ID, name, definition, and sharing status.
+      tags:
+      - Segments
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        description: The global company ID.
+        schema:
+          type: string
+      - name: rsids
+        in: query
+        description: Comma-separated list of report suite IDs to filter segments.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of results to return.
+        schema:
+          type: integer
+          default: 10
+      - name: page
+        in: query
+        description: Page number for pagination.
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: A paginated list of segments.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentList'
+              examples:
+                listSegments200Example:
+                  summary: Default listSegments 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - example
+                    totalElements: 1
+                    totalPages: 1
+        '401':
+          description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createSegment
+      summary: Adobe Analytics Adobe Experience Cloud Create a Segment
+      description: Creates a new segment in Adobe Analytics. The request body must include the segment name, report suite ID, and the segment definition with container and rule criteria.
+      tags:
+      - Segments
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        description: The global company ID.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Segment'
+            examples:
+              createSegmentRequestExample:
+                summary: Default createSegment request
+                x-microcks-default: true
+                value:
+                  id: abc123
+                  name: Example Name
+                  description: example
+                  rsid: abc123
+                  owner:
+                    id: 1
+                    name: Example Name
+                  definition: {}
+                  tags:
+                  - id: 1
+                    name: Example Name
+      responses:
+        '200':
+          description: Segment created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+              examples:
+                createSegment200Example:
+                  summary: Default createSegment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    rsid: abc123
+                    owner:
+                      id: 1
+                      name: Example Name
+                    definition: {}
+                    tags:
+                    - id: 1
+                      name: Example Name
+        '400':
+          description: Invalid segment definition.
+        '401':
+          description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/{companyId}/segments/{segmentId}:
+    get:
+      operationId: getSegment
+      summary: Adobe Analytics Adobe Experience Cloud Get a Segment
+      description: Retrieves the full definition and metadata for a single segment identified by its segment ID.
+      tags:
+      - Segments
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: segmentId
+        in: path
+        required: true
+        description: The segment ID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Segment details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+              examples:
+                getSegment200Example:
+                  summary: Default getSegment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    rsid: abc123
+                    owner:
+                      id: 1
+                      name: Example Name
+                    definition: {}
+                    tags:
+                    - id: 1
+                      name: Example Name
+        '401':
+          description: Authentication credentials are missing or invalid.
+        '404':
+          description: Segment not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateSegment
+      summary: Adobe Analytics Adobe Experience Cloud Update a Segment
+      description: Updates an existing segment with new definition or metadata. The full segment object must be provided in the request body.
+      tags:
+      - Segments
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: segmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Segment'
+            examples:
+              updateSegmentRequestExample:
+                summary: Default updateSegment request
+                x-microcks-default: true
+                value:
+                  id: abc123
+                  name: Example Name
+                  description: example
+                  rsid: abc123
+                  owner:
+                    id: 1
+                    name: Example Name
+                  definition: {}
+                  tags:
+                  - id: 1
+                    name: Example Name
+      responses:
+        '200':
+          description: Segment updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+              examples:
+                updateSegment200Example:
+                  summary: Default updateSegment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    rsid: abc123
+                    owner:
+                      id: 1
+                      name: Example Name
+                    definition: {}
+                    tags:
+                    - id: 1
+                      name: Example Name
+        '400':
+          description: Invalid segment definition.
+        '401':
+          description: Authentication credentials are missing or invalid.
+        '404':
+          description: Segment not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteSegment
+      summary: Adobe Analytics Adobe Experience Cloud Delete a Segment
+      description: Permanently deletes a segment identified by its segment ID. This action cannot be undone.
+      tags:
+      - Segments
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: segmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Segment deleted successfully.
+        '401':
+          description: Authentication credentials are missing or invalid.
+        '404':
+          description: Segment not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /data/core/ups/segment/definitions:
+    get:
+      operationId: listSegmentDefinitions
+      summary: Adobe Experience Platform Adobe Experience Cloud List Segment Definitions
+      description: Returns a paginated list of audience segment definitions configured in the platform. Each segment includes its name, PQL expression, and evaluation status.
+      tags:
+      - Segments
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 20
+      responses:
+        '200':
+          description: A list of segment definitions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentDefinitionList'
+              examples:
+                listSegmentDefinitions200Example:
+                  summary: Default listSegmentDefinitions 200 response
+                  x-microcks-default: true
+                  value:
+                    segments:
+                    - example
+                    page:
+                      totalCount: 1
+        '401':
+          description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createSegmentDefinition
+      summary: Adobe Experience Platform Adobe Experience Cloud Create a Segment Definition
+      description: Creates a new audience segment definition using a Profile Query Language (PQL) expression. The segment will be evaluated against the unified profile store.
+      tags:
+      - Segments
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentDefinitionInput'
+            examples:
+              createSegmentDefinitionRequestExample:
+                summary: Default createSegmentDefinition request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  description: example
+                  expression:
+                    type: PQL
+                    value: example
+                    format: pql/text
+                  schema:
+                    name: Example Name
+                  mergePolicyId: abc123
+      responses:
+        '201':
+          description: Segment definition created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentDefinition'
+              examples:
+                createSegmentDefinition201Example:
+                  summary: Default createSegmentDefinition 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    expression:
+                      type: standard
+                      value: example
+                    mergePolicyId: abc123
+                    evaluationInfo: {}
+        '400':
+          description: Invalid segment definition.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /data/core/ups/segment/definitions/{segmentId}:
+    get:
+      operationId: getSegmentDefinition
+      summary: Adobe Experience Platform Adobe Experience Cloud Get a Segment Definition
+      description: Retrieves a single segment definition by its ID, including the PQL expression, merge policy, and evaluation schedule.
+      tags:
+      - Segments
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: segmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Segment definition returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentDefinition'
+              examples:
+                getSegmentDefinition200Example:
+                  summary: Default getSegmentDefinition 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    expression:
+                      type: standard
+                      value: example
+                    mergePolicyId: abc123
+                    evaluationInfo: {}
+        '404':
+          description: Segment definition not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteSegmentDefinition
+      summary: Adobe Experience Platform Adobe Experience Cloud Delete a Segment Definition
+      description: Deletes a segment definition by its ID. Segment jobs already running will complete but no new evaluations will occur.
+      tags:
+      - Segments
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: segmentId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Segment definition deleted successfully.
+        '404':
+          description: Segment definition not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    SegmentDefinitionInput:
+      type: object
+      required:
+      - name
+      - expression
+      - schema
+      - mergePolicyId
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        expression:
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - PQL
+            value:
+              type: string
+            format:
+              type: string
+              enum:
+              - pql/text
+              - pql/json
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+        mergePolicyId:
+          type: string
+    Segment:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        rsid:
+          type: string
+        owner:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        definition:
+          type: object
+        tags:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+    SegmentList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Segment'
+        totalElements:
+          type: integer
+        totalPages:
+          type: integer
+    SegmentDefinitionList:
+      type: object
+      properties:
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/SegmentDefinition'
+        page:
+          type: object
+          properties:
+            totalCount:
+              type: integer
+    SegmentDefinition:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        expression:
+          type: object
+          properties:
+            type:
+              type: string
+            value:
+              type: string
+        mergePolicyId:
+          type: string
+        evaluationInfo:
+          type: object
+  parameters:
+    sandboxHeader:
+      name: x-sandbox-name
+      in: header
+      required: true
+      description: The name of the sandbox to operate in.
+      schema:
+        type: string
+        default: prod
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via Adobe I/O.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe I/O client API key.

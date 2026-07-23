@@ -1,0 +1,544 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Cloud Adobe Analytics 2.0 Activities Offers API
+  description: The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://analytics.adobe.io
+  description: Adobe Analytics Production API
+security:
+- bearerAuth: []
+- apiKey: []
+tags:
+- name: Offers
+  description: Operations for offer decisioning
+paths:
+  /offer/offers:
+    get:
+      operationId: listOffers
+      summary: Adobe Journey Optimizer Adobe Experience Cloud List Offers
+      description: Returns a paginated list of personalized and fallback offers in the offer library. Each offer includes its ID, name, status, and representation details.
+      tags:
+      - Offers
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 20
+      responses:
+        '200':
+          description: A paginated list of offers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferList'
+              examples:
+                listOffers200Example:
+                  summary: Default listOffers 200 response
+                  x-microcks-default: true
+                  value:
+                    offers:
+                    - example
+                    totalCount: 1
+        '401':
+          description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createOffer
+      summary: Adobe Journey Optimizer Adobe Experience Cloud Create an Offer
+      description: Creates a new personalized offer with eligibility rules, content representations, and priority settings for use in offer decisioning.
+      tags:
+      - Offers
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OfferInput'
+            examples:
+              createOfferRequestExample:
+                summary: Default createOffer request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  representations:
+                  - {}
+                  eligibilityRule: example
+                  priority: 1
+                  startDate: '2025-03-15T14:30:00Z'
+                  endDate: '2025-03-15T14:30:00Z'
+      responses:
+        '201':
+          description: Offer created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offer'
+              examples:
+                createOffer201Example:
+                  summary: Default createOffer 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    status: draft
+                    representations:
+                    - channel: example
+                      placement: example
+                      content: example
+                    startDate: '2025-03-15T14:30:00Z'
+                    endDate: '2025-03-15T14:30:00Z'
+                    priority: 1
+        '400':
+          description: Invalid offer definition.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /offer/offers/{offerId}:
+    get:
+      operationId: getOffer
+      summary: Adobe Journey Optimizer Adobe Experience Cloud Get an Offer
+      description: Retrieves the full definition of an offer by its ID, including content representations, eligibility rules, and constraints.
+      tags:
+      - Offers
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: offerId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Offer details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offer'
+              examples:
+                getOffer200Example:
+                  summary: Default getOffer 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    status: draft
+                    representations:
+                    - channel: example
+                      placement: example
+                      content: example
+                    startDate: '2025-03-15T14:30:00Z'
+                    endDate: '2025-03-15T14:30:00Z'
+                    priority: 1
+        '404':
+          description: Offer not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateOffer
+      summary: Adobe Journey Optimizer Adobe Experience Cloud Update an Offer
+      description: Updates an existing offer with new content, eligibility rules, or priority settings.
+      tags:
+      - Offers
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: offerId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OfferInput'
+            examples:
+              updateOfferRequestExample:
+                summary: Default updateOffer request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  representations:
+                  - {}
+                  eligibilityRule: example
+                  priority: 1
+                  startDate: '2025-03-15T14:30:00Z'
+                  endDate: '2025-03-15T14:30:00Z'
+      responses:
+        '200':
+          description: Offer updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offer'
+              examples:
+                updateOffer200Example:
+                  summary: Default updateOffer 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    status: draft
+                    representations:
+                    - channel: example
+                      placement: example
+                      content: example
+                    startDate: '2025-03-15T14:30:00Z'
+                    endDate: '2025-03-15T14:30:00Z'
+                    priority: 1
+        '404':
+          description: Offer not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteOffer
+      summary: Adobe Journey Optimizer Adobe Experience Cloud Delete an Offer
+      description: Deletes an offer from the library. Offers in use by active decisions cannot be deleted.
+      tags:
+      - Offers
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: offerId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Offer deleted successfully.
+        '404':
+          description: Offer not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /target/offers:
+    get:
+      operationId: listOffers
+      summary: Adobe Target Adobe Experience Cloud List Offers
+      description: Returns a paginated list of content offers configured in Adobe Target. Offers include HTML, JSON, and redirect offer types.
+      tags:
+      - Offers
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 10
+      - name: offset
+        in: query
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: A paginated list of offers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferList_2'
+              examples:
+                listOffers200Example:
+                  summary: Default listOffers 200 response
+                  x-microcks-default: true
+                  value:
+                    total: 1
+                    offset: 1
+                    limit: 1
+                    offers:
+                    - example
+        '401':
+          description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createOffer
+      summary: Adobe Target Adobe Experience Cloud Create an Offer
+      description: Creates a new content offer in Adobe Target. The offer can be HTML content, a JSON payload, or a redirect URL.
+      tags:
+      - Offers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OfferInput_2'
+            examples:
+              createOfferRequestExample:
+                summary: Default createOffer request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  type: content
+                  content: example
+      responses:
+        '200':
+          description: Offer created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offer_2'
+              examples:
+                createOffer200Example:
+                  summary: Default createOffer 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    type: content
+                    content: example
+                    modifiedAt: '2025-03-15T14:30:00Z'
+        '400':
+          description: Invalid offer definition.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /target/offers/{offerId}:
+    get:
+      operationId: getOffer
+      summary: Adobe Target Adobe Experience Cloud Get an Offer
+      description: Retrieves a single offer by its offer ID, including the content payload and metadata.
+      tags:
+      - Offers
+      parameters:
+      - name: offerId
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Offer details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offer_2'
+              examples:
+                getOffer200Example:
+                  summary: Default getOffer 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    type: content
+                    content: example
+                    modifiedAt: '2025-03-15T14:30:00Z'
+        '404':
+          description: Offer not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateOffer
+      summary: Adobe Target Adobe Experience Cloud Update an Offer
+      description: Updates an existing offer with new content or metadata.
+      tags:
+      - Offers
+      parameters:
+      - name: offerId
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OfferInput_2'
+            examples:
+              updateOfferRequestExample:
+                summary: Default updateOffer request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  type: content
+                  content: example
+      responses:
+        '200':
+          description: Offer updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Offer_2'
+              examples:
+                updateOffer200Example:
+                  summary: Default updateOffer 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    type: content
+                    content: example
+                    modifiedAt: '2025-03-15T14:30:00Z'
+        '404':
+          description: Offer not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteOffer
+      summary: Adobe Target Adobe Experience Cloud Delete an Offer
+      description: Permanently deletes an offer. Offers in use by active activities cannot be deleted.
+      tags:
+      - Offers
+      parameters:
+      - name: offerId
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Offer deleted successfully.
+        '404':
+          description: Offer not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Offer:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+          enum:
+          - draft
+          - approved
+          - archived
+        representations:
+          type: array
+          items:
+            type: object
+            properties:
+              channel:
+                type: string
+              placement:
+                type: string
+              content:
+                type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        priority:
+          type: integer
+    Offer_2:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - content
+          - redirect
+          - dynamic
+        content:
+          type: string
+        modifiedAt:
+          type: string
+          format: date-time
+    OfferList_2:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer_2'
+    OfferInput_2:
+      type: object
+      required:
+      - name
+      - type
+      - content
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - content
+          - redirect
+        content:
+          type: string
+    OfferInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        representations:
+          type: array
+          items:
+            type: object
+        eligibilityRule:
+          type: string
+        priority:
+          type: integer
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+    OfferList:
+      type: object
+      properties:
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer'
+        totalCount:
+          type: integer
+  parameters:
+    sandboxHeader:
+      name: x-sandbox-name
+      in: header
+      required: true
+      description: The sandbox name.
+      schema:
+        type: string
+        default: prod
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via Adobe I/O.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe I/O client API key.

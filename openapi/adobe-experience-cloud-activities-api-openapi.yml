@@ -1,0 +1,378 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Cloud Adobe Analytics 2.0 Activities API
+  description: The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://analytics.adobe.io
+  description: Adobe Analytics Production API
+security:
+- bearerAuth: []
+- apiKey: []
+tags:
+- name: Activities
+  description: Operations for managing Target activities (A/B, XT, MVT, AP)
+paths:
+  /target/activities:
+    get:
+      operationId: listActivities
+      summary: Adobe Target Adobe Experience Cloud List Activities
+      description: Returns a paginated list of all Target activities (A/B tests, experience targeting, multivariate tests, and automated personalization) in the tenant. Each entry includes the activity ID, name, type, state, and modification date.
+      tags:
+      - Activities
+      parameters:
+      - name: limit
+        in: query
+        description: Maximum number of activities to return.
+        schema:
+          type: integer
+          default: 10
+      - name: offset
+        in: query
+        description: Number of activities to skip for pagination.
+        schema:
+          type: integer
+          default: 0
+      - name: sortBy
+        in: query
+        description: Field to sort results by.
+        schema:
+          type: string
+          enum:
+          - name
+          - id
+          - modifiedAt
+      responses:
+        '200':
+          description: A paginated list of activities.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActivityList'
+              examples:
+                listActivities200Example:
+                  summary: Default listActivities 200 response
+                  x-microcks-default: true
+                  value:
+                    total: 1
+                    offset: 1
+                    limit: 1
+                    activities:
+                    - example
+        '401':
+          description: Authentication credentials are missing or invalid.
+        '403':
+          description: Insufficient permissions.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createActivity
+      summary: Adobe Target Adobe Experience Cloud Create an Activity
+      description: Creates a new Target activity of the specified type (AB, XT, MVT, or Automated Personalization). The request body must include the activity name, type, and at least one experience with associated offers.
+      tags:
+      - Activities
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivityInput'
+            examples:
+              createActivityRequestExample:
+                summary: Default createActivity request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  type: ab
+                  priority: 1
+                  startsAt: '2025-03-15T14:30:00Z'
+                  endsAt: '2025-03-15T14:30:00Z'
+      responses:
+        '200':
+          description: Activity created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+              examples:
+                createActivity200Example:
+                  summary: Default createActivity 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    type: ab
+                    state: approved
+                    priority: 1
+                    modifiedAt: '2025-03-15T14:30:00Z'
+                    startsAt: '2025-03-15T14:30:00Z'
+                    endsAt: '2025-03-15T14:30:00Z'
+        '400':
+          description: Invalid activity definition.
+        '401':
+          description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /target/activities/{activityId}:
+    get:
+      operationId: getActivity
+      summary: Adobe Target Adobe Experience Cloud Get an Activity
+      description: Retrieves the full configuration and metadata of a single Target activity by its activity ID, including experiences, audiences, metrics, and scheduling.
+      tags:
+      - Activities
+      parameters:
+      - name: activityId
+        in: path
+        required: true
+        description: The Target activity ID.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Activity details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+              examples:
+                getActivity200Example:
+                  summary: Default getActivity 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    type: ab
+                    state: approved
+                    priority: 1
+                    modifiedAt: '2025-03-15T14:30:00Z'
+                    startsAt: '2025-03-15T14:30:00Z'
+                    endsAt: '2025-03-15T14:30:00Z'
+        '404':
+          description: Activity not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateActivity
+      summary: Adobe Target Adobe Experience Cloud Update an Activity
+      description: Updates an existing Target activity with new configuration. The full activity object must be provided in the request body.
+      tags:
+      - Activities
+      parameters:
+      - name: activityId
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivityInput'
+            examples:
+              updateActivityRequestExample:
+                summary: Default updateActivity request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  type: ab
+                  priority: 1
+                  startsAt: '2025-03-15T14:30:00Z'
+                  endsAt: '2025-03-15T14:30:00Z'
+      responses:
+        '200':
+          description: Activity updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+              examples:
+                updateActivity200Example:
+                  summary: Default updateActivity 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    type: ab
+                    state: approved
+                    priority: 1
+                    modifiedAt: '2025-03-15T14:30:00Z'
+                    startsAt: '2025-03-15T14:30:00Z'
+                    endsAt: '2025-03-15T14:30:00Z'
+        '400':
+          description: Invalid activity definition.
+        '404':
+          description: Activity not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteActivity
+      summary: Adobe Target Adobe Experience Cloud Delete an Activity
+      description: Permanently deletes a Target activity. Active activities should be deactivated before deletion.
+      tags:
+      - Activities
+      parameters:
+      - name: activityId
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Activity deleted successfully.
+        '404':
+          description: Activity not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /target/activities/{activityId}/state:
+    put:
+      operationId: updateActivityState
+      summary: Adobe Target Adobe Experience Cloud Update Activity State
+      description: Activates, deactivates, or archives a Target activity by updating its state. Valid state transitions depend on the current state.
+      tags:
+      - Activities
+      parameters:
+      - name: activityId
+        in: path
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - state
+              properties:
+                state:
+                  type: string
+                  enum:
+                  - activated
+                  - deactivated
+                  - archived
+            examples:
+              updateActivityStateRequestExample:
+                summary: Default updateActivityState request
+                x-microcks-default: true
+                value:
+                  state: activated
+      responses:
+        '200':
+          description: Activity state updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+              examples:
+                updateActivityState200Example:
+                  summary: Default updateActivityState 200 response
+                  x-microcks-default: true
+                  value:
+                    id: 1
+                    name: Example Name
+                    type: ab
+                    state: approved
+                    priority: 1
+                    modifiedAt: '2025-03-15T14:30:00Z'
+                    startsAt: '2025-03-15T14:30:00Z'
+                    endsAt: '2025-03-15T14:30:00Z'
+        '400':
+          description: Invalid state transition.
+        '404':
+          description: Activity not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ActivityList:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        activities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Activity'
+    Activity:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - ab
+          - xt
+          - mvt
+          - ap
+        state:
+          type: string
+          enum:
+          - approved
+          - deactivated
+          - archived
+        priority:
+          type: integer
+        modifiedAt:
+          type: string
+          format: date-time
+        startsAt:
+          type: string
+          format: date-time
+        endsAt:
+          type: string
+          format: date-time
+    ActivityInput:
+      type: object
+      required:
+      - name
+      - type
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - ab
+          - xt
+          - mvt
+          - ap
+        priority:
+          type: integer
+        startsAt:
+          type: string
+          format: date-time
+        endsAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via Adobe I/O.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe I/O client API key.

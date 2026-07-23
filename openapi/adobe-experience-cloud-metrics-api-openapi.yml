@@ -1,0 +1,86 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Cloud Adobe Analytics 2.0 Activities Metrics API
+  description: The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://analytics.adobe.io
+  description: Adobe Analytics Production API
+security:
+- bearerAuth: []
+- apiKey: []
+tags:
+- name: Metrics
+  description: Operations for retrieving metric metadata
+paths:
+  /api/{companyId}/metrics:
+    get:
+      operationId: listMetrics
+      summary: Adobe Analytics Adobe Experience Cloud List Metrics
+      description: Returns all available metrics for a specified report suite. Each metric includes its ID, name, description, data type, and polarity.
+      tags:
+      - Metrics
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: rsid
+        in: query
+        required: true
+        description: Report suite ID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of metrics.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Metric'
+              examples:
+                listMetrics200Example:
+                  summary: Default listMetrics 200 response
+                  x-microcks-default: true
+                  value:
+                  - example
+        '401':
+          description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Metric:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+        polarity:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via Adobe I/O.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe I/O client API key.

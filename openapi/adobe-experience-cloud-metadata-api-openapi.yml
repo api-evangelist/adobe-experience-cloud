@@ -1,0 +1,73 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Cloud Adobe Analytics 2.0 Activities Metadata API
+  description: The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://analytics.adobe.io
+  description: Adobe Analytics Production API
+security:
+- bearerAuth: []
+- apiKey: []
+tags:
+- name: Metadata
+  description: Operations for retrieving resource metadata
+paths:
+  /campaign/profileAndServicesExt/resourceType:
+    get:
+      operationId: listMetadata
+      summary: Adobe Campaign Adobe Experience Cloud List Resource Metadata
+      description: Returns metadata about the available custom resources and their fields in the Adobe Campaign data model. Useful for discovering extended profile attributes and custom resource schemas.
+      tags:
+      - Metadata
+      responses:
+        '200':
+          description: Resource metadata returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        PKey:
+                          type: string
+                        name:
+                          type: string
+                        label:
+                          type: string
+              examples:
+                listMetadata200Example:
+                  summary: Default listMetadata 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - PKey: example
+                      name: Example Name
+                      label: example
+        '401':
+          description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via Adobe I/O.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe I/O client API key.

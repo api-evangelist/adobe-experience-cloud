@@ -1,0 +1,223 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Cloud Adobe Analytics 2.0 Activities Datasets API
+  description: The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://analytics.adobe.io
+  description: Adobe Analytics Production API
+security:
+- bearerAuth: []
+- apiKey: []
+tags:
+- name: Datasets
+  description: Operations for managing datasets in the Data Lake
+paths:
+  /data/foundation/catalog/dataSets:
+    get:
+      operationId: listDatasets
+      summary: Adobe Experience Platform Adobe Experience Cloud List Datasets
+      description: Returns a list of datasets registered in the Data Catalog for the current sandbox. Each dataset includes its name, schema reference, creation date, and status.
+      tags:
+      - Datasets
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 20
+      - name: start
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of datasets.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/Dataset'
+              examples:
+                listDatasets200Example:
+                  summary: Default listDatasets 200 response
+                  x-microcks-default: true
+                  value: {}
+        '401':
+          description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createDataset
+      summary: Adobe Experience Platform Adobe Experience Cloud Create a Dataset
+      description: Creates a new dataset in the Data Catalog. The request body must include a name and a reference to an existing XDM schema. Optionally configure tags, file format, and ingestion settings.
+      tags:
+      - Datasets
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatasetInput'
+            examples:
+              createDatasetRequestExample:
+                summary: Default createDataset request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  description: example
+                  schemaRef:
+                    id: abc123
+                    contentType: standard
+      responses:
+        '201':
+          description: Dataset created successfully.
+          headers:
+            Location:
+              description: URI of the newly created dataset.
+              schema:
+                type: string
+        '400':
+          description: Invalid dataset definition.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /data/foundation/catalog/dataSets/{datasetId}:
+    get:
+      operationId: getDataset
+      summary: Adobe Experience Platform Adobe Experience Cloud Get a Dataset
+      description: Retrieves the metadata and configuration for a single dataset by its dataset ID.
+      tags:
+      - Datasets
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: datasetId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Dataset details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dataset'
+              examples:
+                getDataset200Example:
+                  summary: Default getDataset 200 response
+                  x-microcks-default: true
+                  value:
+                    name: Example Name
+                    schemaRef:
+                      id: abc123
+                      contentType: standard
+                    fileDescription:
+                      format: example
+                    created: '2025-03-15T14:30:00Z'
+                    updated: '2025-03-15T14:30:00Z'
+                    status: active
+        '404':
+          description: Dataset not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteDataset
+      summary: Adobe Experience Platform Adobe Experience Cloud Delete a Dataset
+      description: Deletes a dataset and all associated batches from the Data Catalog. This action cannot be undone.
+      tags:
+      - Datasets
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: datasetId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Dataset deleted successfully.
+        '404':
+          description: Dataset not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Dataset:
+      type: object
+      properties:
+        name:
+          type: string
+        schemaRef:
+          type: object
+          properties:
+            id:
+              type: string
+            contentType:
+              type: string
+        fileDescription:
+          type: object
+          properties:
+            format:
+              type: string
+        created:
+          type: string
+          format: date-time
+        updated:
+          type: string
+          format: date-time
+        status:
+          type: string
+    DatasetInput:
+      type: object
+      required:
+      - name
+      - schemaRef
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        schemaRef:
+          type: object
+          required:
+          - id
+          - contentType
+          properties:
+            id:
+              type: string
+            contentType:
+              type: string
+  parameters:
+    sandboxHeader:
+      name: x-sandbox-name
+      in: header
+      required: true
+      description: The name of the sandbox to operate in.
+      schema:
+        type: string
+        default: prod
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via Adobe I/O.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe I/O client API key.

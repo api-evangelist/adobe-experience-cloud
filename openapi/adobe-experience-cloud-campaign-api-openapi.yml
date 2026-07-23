@@ -1,0 +1,221 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Cloud Adobe Analytics 2.0 Activities Campaign API
+  description: The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://analytics.adobe.io
+  description: Adobe Analytics Production API
+security:
+- bearerAuth: []
+- apiKey: []
+tags:
+- name: Campaign
+paths:
+  /campaign/profileAndServices/service:
+    get:
+      operationId: listServices
+      summary: Adobe Campaign Adobe Experience Cloud List Services
+      description: Returns a paginated list of subscription services configured in Adobe Campaign. Services represent mailing lists or subscription topics that profiles can subscribe to.
+      tags:
+      - Campaign
+      parameters:
+      - name: _lineCount
+        in: query
+        schema:
+          type: integer
+          default: 25
+      responses:
+        '200':
+          description: A paginated list of services.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceList'
+              examples:
+                listServices200Example:
+                  summary: Default listServices 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - example
+        '401':
+          description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createService
+      summary: Adobe Campaign Adobe Experience Cloud Create a Service
+      description: Creates a new subscription service in Adobe Campaign with the specified name, label, and configuration.
+      tags:
+      - Campaign
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceInput'
+            examples:
+              createServiceRequestExample:
+                summary: Default createService request
+                x-microcks-default: true
+                value:
+                  label: example
+                  name: Example Name
+                  messageType: email
+      responses:
+        '201':
+          description: Service created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+              examples:
+                createService201Example:
+                  summary: Default createService 201 response
+                  x-microcks-default: true
+                  value:
+                    PKey: example
+                    name: Example Name
+                    label: example
+                    mode: example
+                    created: '2025-03-15T14:30:00Z'
+        '400':
+          description: Invalid service definition.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /campaign/profileAndServices/service/{servicePKey}:
+    get:
+      operationId: getService
+      summary: Adobe Campaign Adobe Experience Cloud Get a Service
+      description: Retrieves the details of a subscription service by its primary key.
+      tags:
+      - Campaign
+      parameters:
+      - name: servicePKey
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Service details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Service'
+              examples:
+                getService200Example:
+                  summary: Default getService 200 response
+                  x-microcks-default: true
+                  value:
+                    PKey: example
+                    name: Example Name
+                    label: example
+                    mode: example
+                    created: '2025-03-15T14:30:00Z'
+        '404':
+          description: Service not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /campaign/profileAndServices/service/{servicePKey}/subscriptions:
+    post:
+      operationId: subscribeProfile
+      summary: Adobe Campaign Adobe Experience Cloud Subscribe a Profile to a Service
+      description: Subscribes an existing profile to the specified subscription service by providing the profile primary key.
+      tags:
+      - Campaign
+      parameters:
+      - name: servicePKey
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - subscriber
+              properties:
+                subscriber:
+                  type: object
+                  properties:
+                    PKey:
+                      type: string
+            examples:
+              subscribeProfileRequestExample:
+                summary: Default subscribeProfile request
+                x-microcks-default: true
+                value:
+                  subscriber:
+                    PKey: example
+      responses:
+        '201':
+          description: Subscription created successfully.
+        '400':
+          description: Invalid subscription request.
+        '404':
+          description: Service or profile not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ServiceInput:
+      type: object
+      required:
+      - label
+      properties:
+        label:
+          type: string
+        name:
+          type: string
+        messageType:
+          type: string
+          enum:
+          - email
+          - sms
+    Service:
+      type: object
+      properties:
+        PKey:
+          type: string
+        name:
+          type: string
+        label:
+          type: string
+        mode:
+          type: string
+        created:
+          type: string
+          format: date-time
+    ServiceList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via Adobe I/O.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe I/O client API key.

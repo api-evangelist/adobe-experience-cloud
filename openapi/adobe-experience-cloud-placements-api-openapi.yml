@@ -1,0 +1,145 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Cloud Adobe Analytics 2.0 Activities Placements API
+  description: The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://analytics.adobe.io
+  description: Adobe Analytics Production API
+security:
+- bearerAuth: []
+- apiKey: []
+tags:
+- name: Placements
+  description: Operations for managing offer placements
+paths:
+  /offer/placements:
+    get:
+      operationId: listPlacements
+      summary: Adobe Journey Optimizer Adobe Experience Cloud List Placements
+      description: Returns a list of offer placements. Placements define the channel and content format where offers can be displayed.
+      tags:
+      - Placements
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      responses:
+        '200':
+          description: A list of placements.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlacementList'
+              examples:
+                listPlacements200Example:
+                  summary: Default listPlacements 200 response
+                  x-microcks-default: true
+                  value:
+                    placements:
+                    - example
+        '401':
+          description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createPlacement
+      summary: Adobe Journey Optimizer Adobe Experience Cloud Create a Placement
+      description: Creates a new offer placement with the specified channel and content type configuration.
+      tags:
+      - Placements
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlacementInput'
+            examples:
+              createPlacementRequestExample:
+                summary: Default createPlacement request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  channel: example
+                  contentType: standard
+      responses:
+        '201':
+          description: Placement created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Placement'
+              examples:
+                createPlacement201Example:
+                  summary: Default createPlacement 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    channel: example
+                    contentType: standard
+        '400':
+          description: Invalid placement definition.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    PlacementInput:
+      type: object
+      required:
+      - name
+      - channel
+      - contentType
+      properties:
+        name:
+          type: string
+        channel:
+          type: string
+        contentType:
+          type: string
+    PlacementList:
+      type: object
+      properties:
+        placements:
+          type: array
+          items:
+            $ref: '#/components/schemas/Placement'
+    Placement:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        channel:
+          type: string
+        contentType:
+          type: string
+  parameters:
+    sandboxHeader:
+      name: x-sandbox-name
+      in: header
+      required: true
+      description: The sandbox name.
+      schema:
+        type: string
+        default: prod
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via Adobe I/O.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe I/O client API key.

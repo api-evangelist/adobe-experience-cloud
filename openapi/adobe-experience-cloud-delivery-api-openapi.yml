@@ -1,0 +1,156 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Cloud Adobe Analytics 2.0 Activities Delivery API
+  description: The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://analytics.adobe.io
+  description: Adobe Analytics Production API
+security:
+- bearerAuth: []
+- apiKey: []
+tags:
+- name: Delivery
+  description: Operations for real-time content delivery
+paths:
+  /rest/v1/delivery:
+    post:
+      operationId: deliverExperiences
+      summary: Adobe Target Adobe Experience Cloud Deliver Personalized Experiences
+      description: The Target Delivery API endpoint for fetching personalized content for one or more mboxes. Used by client-side and server-side implementations to retrieve offers, execute page load decisions, and prefetch content for subsequent views.
+      tags:
+      - Delivery
+      parameters:
+      - name: client
+        in: query
+        required: true
+        description: Adobe Target client code.
+        schema:
+          type: string
+      - name: sessionId
+        in: query
+        required: true
+        description: Visitor session ID.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeliveryRequest'
+            examples:
+              deliverExperiencesRequestExample:
+                summary: Default deliverExperiences request
+                x-microcks-default: true
+                value:
+                  context:
+                    channel: web
+                    userAgent: example
+                  execute:
+                    mboxes:
+                    - name: {}
+                      index: {}
+                  prefetch:
+                    views:
+                    - {}
+      responses:
+        '200':
+          description: Personalized content delivered successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeliveryResponse'
+              examples:
+                deliverExperiences200Example:
+                  summary: Default deliverExperiences 200 response
+                  x-microcks-default: true
+                  value:
+                    requestId: abc123
+                    execute:
+                      mboxes:
+                      - name: {}
+                        options: {}
+                    prefetch: {}
+        '400':
+          description: Invalid delivery request.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    DeliveryRequest:
+      type: object
+      properties:
+        context:
+          type: object
+          properties:
+            channel:
+              type: string
+              enum:
+              - web
+              - mobile
+            userAgent:
+              type: string
+        execute:
+          type: object
+          properties:
+            mboxes:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  index:
+                    type: integer
+        prefetch:
+          type: object
+          properties:
+            views:
+              type: array
+              items:
+                type: object
+    DeliveryResponse:
+      type: object
+      properties:
+        requestId:
+          type: string
+        execute:
+          type: object
+          properties:
+            mboxes:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  options:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        content:
+                          type: string
+        prefetch:
+          type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via Adobe I/O.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe I/O client API key.

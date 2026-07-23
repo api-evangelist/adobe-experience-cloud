@@ -1,0 +1,184 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Cloud Adobe Analytics 2.0 Activities Reports API
+  description: The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://analytics.adobe.io
+  description: Adobe Analytics Production API
+security:
+- bearerAuth: []
+- apiKey: []
+tags:
+- name: Reports
+  description: Operations for retrieving analytics report data
+paths:
+  /api/{companyId}/reports:
+    post:
+      operationId: getReport
+      summary: Adobe Analytics Adobe Experience Cloud Retrieve a Report
+      description: Submits a report request to Adobe Analytics and returns the resulting data. The request body defines the report suite, dimensions, metrics, date range, and any segment or filter criteria. Results are returned as a ranked or trended data set in JSON format.
+      tags:
+      - Reports
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        description: The global company ID for the Analytics account.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportRequest'
+            examples:
+              getReportRequestExample:
+                summary: Default getReport request
+                x-microcks-default: true
+                value:
+                  rsid: abc123
+                  globalFilters:
+                  - type: standard
+                    dateRange: example
+                  metricContainer:
+                    metrics:
+                    - id: {}
+                  dimension: example
+                  settings:
+                    limit: 1
+                    page: 1
+      responses:
+        '200':
+          description: Report data returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportResponse'
+              examples:
+                getReport200Example:
+                  summary: Default getReport 200 response
+                  x-microcks-default: true
+                  value:
+                    totalPages: 1
+                    firstPage: true
+                    lastPage: true
+                    numberOfElements: 1
+                    totalElements: 1
+                    rows:
+                    - itemId: abc123
+                      value: example
+                      data:
+                      - {}
+        '400':
+          description: Invalid report request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                getReport400Example:
+                  summary: Default getReport 400 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example
+                    errorDescription: example
+                    errorId: abc123
+        '401':
+          description: Authentication credentials are missing or invalid.
+        '403':
+          description: Insufficient permissions to access the requested report suite.
+        '429':
+          description: Rate limit exceeded.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ReportResponse:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+        firstPage:
+          type: boolean
+        lastPage:
+          type: boolean
+        numberOfElements:
+          type: integer
+        totalElements:
+          type: integer
+        rows:
+          type: array
+          items:
+            type: object
+            properties:
+              itemId:
+                type: string
+              value:
+                type: string
+              data:
+                type: array
+                items:
+                  type: number
+    ReportRequest:
+      type: object
+      properties:
+        rsid:
+          type: string
+          description: Report suite ID.
+        globalFilters:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              dateRange:
+                type: string
+        metricContainer:
+          type: object
+          properties:
+            metrics:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+        dimension:
+          type: string
+        settings:
+          type: object
+          properties:
+            limit:
+              type: integer
+            page:
+              type: integer
+    Error:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorDescription:
+          type: string
+        errorId:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via Adobe I/O.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe I/O client API key.

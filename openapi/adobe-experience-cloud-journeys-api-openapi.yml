@@ -1,0 +1,372 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Cloud Adobe Analytics 2.0 Activities Journeys API
+  description: The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://analytics.adobe.io
+  description: Adobe Analytics Production API
+security:
+- bearerAuth: []
+- apiKey: []
+tags:
+- name: Journeys
+  description: Operations for managing customer journeys
+paths:
+  /journey/journeys:
+    get:
+      operationId: listJourneys
+      summary: Adobe Journey Optimizer Adobe Experience Cloud List Journeys
+      description: Returns a paginated list of all customer journeys configured in the organization. Each journey includes its ID, name, status, and version.
+      tags:
+      - Journeys
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 20
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: A paginated list of journeys.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JourneyList'
+              examples:
+                listJourneys200Example:
+                  summary: Default listJourneys 200 response
+                  x-microcks-default: true
+                  value:
+                    journeys:
+                    - example
+                    totalCount: 1
+        '401':
+          description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createJourney
+      summary: Adobe Journey Optimizer Adobe Experience Cloud Create a Journey
+      description: Creates a new customer journey with the specified entry conditions, activities, and channel actions. The journey starts in draft status and must be published to become active.
+      tags:
+      - Journeys
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JourneyInput'
+            examples:
+              createJourneyRequestExample:
+                summary: Default createJourney request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  description: example
+                  entryCondition: {}
+                  activities:
+                  - {}
+      responses:
+        '201':
+          description: Journey created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Journey'
+              examples:
+                createJourney201Example:
+                  summary: Default createJourney 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    status: draft
+                    version: example
+                    createdAt: '2025-03-15T14:30:00Z'
+                    modifiedAt: '2025-03-15T14:30:00Z'
+        '400':
+          description: Invalid journey definition.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /journey/journeys/{journeyId}:
+    get:
+      operationId: getJourney
+      summary: Adobe Journey Optimizer Adobe Experience Cloud Get a Journey
+      description: Retrieves the full definition of a customer journey by its ID, including entry conditions, activities, transitions, and channel configurations.
+      tags:
+      - Journeys
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: journeyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Journey details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Journey'
+              examples:
+                getJourney200Example:
+                  summary: Default getJourney 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    status: draft
+                    version: example
+                    createdAt: '2025-03-15T14:30:00Z'
+                    modifiedAt: '2025-03-15T14:30:00Z'
+        '404':
+          description: Journey not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateJourney
+      summary: Adobe Journey Optimizer Adobe Experience Cloud Update a Journey
+      description: Updates a draft journey with new configuration. Only journeys in draft status can be modified.
+      tags:
+      - Journeys
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: journeyId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JourneyInput'
+            examples:
+              updateJourneyRequestExample:
+                summary: Default updateJourney request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  description: example
+                  entryCondition: {}
+                  activities:
+                  - {}
+      responses:
+        '200':
+          description: Journey updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Journey'
+              examples:
+                updateJourney200Example:
+                  summary: Default updateJourney 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    status: draft
+                    version: example
+                    createdAt: '2025-03-15T14:30:00Z'
+                    modifiedAt: '2025-03-15T14:30:00Z'
+        '400':
+          description: Invalid journey definition or journey is not in draft status.
+        '404':
+          description: Journey not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteJourney
+      summary: Adobe Journey Optimizer Adobe Experience Cloud Delete a Journey
+      description: Deletes a journey in draft or closed status. Active journeys must be stopped before deletion.
+      tags:
+      - Journeys
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: journeyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Journey deleted successfully.
+        '404':
+          description: Journey not found.
+        '409':
+          description: Journey is active and cannot be deleted.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /journey/journeys/{journeyId}/publish:
+    post:
+      operationId: publishJourney
+      summary: Adobe Journey Optimizer Adobe Experience Cloud Publish a Journey
+      description: Publishes a draft journey, making it live and ready to receive qualifying profiles. Published journeys begin processing entry events immediately.
+      tags:
+      - Journeys
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: journeyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Journey published successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Journey'
+              examples:
+                publishJourney200Example:
+                  summary: Default publishJourney 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    status: draft
+                    version: example
+                    createdAt: '2025-03-15T14:30:00Z'
+                    modifiedAt: '2025-03-15T14:30:00Z'
+        '400':
+          description: Journey cannot be published due to validation errors.
+        '404':
+          description: Journey not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /journey/journeys/{journeyId}/stop:
+    post:
+      operationId: stopJourney
+      summary: Adobe Journey Optimizer Adobe Experience Cloud Stop a Journey
+      description: Stops an active journey. No new profiles will enter the journey, and existing profiles will exit at the next activity.
+      tags:
+      - Journeys
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: journeyId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Journey stopped successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Journey'
+              examples:
+                stopJourney200Example:
+                  summary: Default stopJourney 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    status: draft
+                    version: example
+                    createdAt: '2025-03-15T14:30:00Z'
+                    modifiedAt: '2025-03-15T14:30:00Z'
+        '404':
+          description: Journey not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    JourneyList:
+      type: object
+      properties:
+        journeys:
+          type: array
+          items:
+            $ref: '#/components/schemas/Journey'
+        totalCount:
+          type: integer
+    Journey:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum:
+          - draft
+          - live
+          - stopped
+          - closed
+        version:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        modifiedAt:
+          type: string
+          format: date-time
+    JourneyInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        entryCondition:
+          type: object
+        activities:
+          type: array
+          items:
+            type: object
+  parameters:
+    sandboxHeader:
+      name: x-sandbox-name
+      in: header
+      required: true
+      description: The sandbox name.
+      schema:
+        type: string
+        default: prod
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via Adobe I/O.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe I/O client API key.

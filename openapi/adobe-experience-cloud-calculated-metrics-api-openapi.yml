@@ -1,0 +1,313 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Cloud Adobe Analytics 2.0 Activities Calculated Metrics API
+  description: The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://analytics.adobe.io
+  description: Adobe Analytics Production API
+security:
+- bearerAuth: []
+- apiKey: []
+tags:
+- name: Calculated Metrics
+  description: Operations for managing calculated metrics
+paths:
+  /api/{companyId}/calculatedmetrics:
+    get:
+      operationId: listCalculatedMetrics
+      summary: Adobe Analytics Adobe Experience Cloud List Calculated Metrics
+      description: Returns a paginated list of calculated metrics available to the authenticated user. Calculated metrics can be filtered by report suite, owner, or tag.
+      tags:
+      - Calculated Metrics
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: rsids
+        in: query
+        description: Comma-separated report suite IDs to filter.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 10
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: A paginated list of calculated metrics.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatedMetricList'
+              examples:
+                listCalculatedMetrics200Example:
+                  summary: Default listCalculatedMetrics 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - example
+                    totalElements: 1
+                    totalPages: 1
+        '401':
+          description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createCalculatedMetric
+      summary: Adobe Analytics Adobe Experience Cloud Create a Calculated Metric
+      description: Creates a new calculated metric in Adobe Analytics with the provided name, definition formula, report suite, and polarity settings.
+      tags:
+      - Calculated Metrics
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculatedMetric'
+            examples:
+              createCalculatedMetricRequestExample:
+                summary: Default createCalculatedMetric request
+                x-microcks-default: true
+                value:
+                  id: abc123
+                  name: Example Name
+                  description: example
+                  rsid: abc123
+                  owner:
+                    id: 1
+                    name: Example Name
+                  polarity: positive
+                  definition: {}
+      responses:
+        '200':
+          description: Calculated metric created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatedMetric'
+              examples:
+                createCalculatedMetric200Example:
+                  summary: Default createCalculatedMetric 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    rsid: abc123
+                    owner:
+                      id: 1
+                      name: Example Name
+                    polarity: positive
+                    definition: {}
+        '400':
+          description: Invalid calculated metric definition.
+        '401':
+          description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/{companyId}/calculatedmetrics/{calculatedMetricId}:
+    get:
+      operationId: getCalculatedMetric
+      summary: Adobe Analytics Adobe Experience Cloud Get a Calculated Metric
+      description: Retrieves the full definition and metadata for a single calculated metric identified by its ID.
+      tags:
+      - Calculated Metrics
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: calculatedMetricId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Calculated metric returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatedMetric'
+              examples:
+                getCalculatedMetric200Example:
+                  summary: Default getCalculatedMetric 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    rsid: abc123
+                    owner:
+                      id: 1
+                      name: Example Name
+                    polarity: positive
+                    definition: {}
+        '404':
+          description: Calculated metric not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateCalculatedMetric
+      summary: Adobe Analytics Adobe Experience Cloud Update a Calculated Metric
+      description: Updates an existing calculated metric with new definition or metadata.
+      tags:
+      - Calculated Metrics
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: calculatedMetricId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculatedMetric'
+            examples:
+              updateCalculatedMetricRequestExample:
+                summary: Default updateCalculatedMetric request
+                x-microcks-default: true
+                value:
+                  id: abc123
+                  name: Example Name
+                  description: example
+                  rsid: abc123
+                  owner:
+                    id: 1
+                    name: Example Name
+                  polarity: positive
+                  definition: {}
+      responses:
+        '200':
+          description: Calculated metric updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatedMetric'
+              examples:
+                updateCalculatedMetric200Example:
+                  summary: Default updateCalculatedMetric 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    rsid: abc123
+                    owner:
+                      id: 1
+                      name: Example Name
+                    polarity: positive
+                    definition: {}
+        '400':
+          description: Invalid definition.
+        '404':
+          description: Calculated metric not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteCalculatedMetric
+      summary: Adobe Analytics Adobe Experience Cloud Delete a Calculated Metric
+      description: Permanently deletes a calculated metric. This action cannot be undone.
+      tags:
+      - Calculated Metrics
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: calculatedMetricId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Calculated metric deleted successfully.
+        '404':
+          description: Calculated metric not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CalculatedMetric:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        rsid:
+          type: string
+        owner:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+        polarity:
+          type: string
+          enum:
+          - positive
+          - negative
+        definition:
+          type: object
+    CalculatedMetricList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/CalculatedMetric'
+        totalElements:
+          type: integer
+        totalPages:
+          type: integer
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via Adobe I/O.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe I/O client API key.

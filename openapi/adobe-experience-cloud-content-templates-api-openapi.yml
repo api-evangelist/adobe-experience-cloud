@@ -1,0 +1,161 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Cloud Adobe Analytics 2.0 Activities Content Templates API
+  description: The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://analytics.adobe.io
+  description: Adobe Analytics Production API
+security:
+- bearerAuth: []
+- apiKey: []
+tags:
+- name: Content Templates
+  description: Operations for managing reusable content templates
+paths:
+  /content/templates:
+    get:
+      operationId: listContentTemplates
+      summary: Adobe Journey Optimizer Adobe Experience Cloud List Content Templates
+      description: Returns a paginated list of reusable content templates for email, push, SMS, and in-app channels.
+      tags:
+      - Content Templates
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 20
+      responses:
+        '200':
+          description: A paginated list of content templates.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentTemplateList'
+              examples:
+                listContentTemplates200Example:
+                  summary: Default listContentTemplates 200 response
+                  x-microcks-default: true
+                  value:
+                    templates:
+                    - example
+                    totalCount: 1
+        '401':
+          description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createContentTemplate
+      summary: Adobe Journey Optimizer Adobe Experience Cloud Create a Content Template
+      description: Creates a new reusable content template for a specified channel with HTML or JSON content.
+      tags:
+      - Content Templates
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContentTemplateInput'
+            examples:
+              createContentTemplateRequestExample:
+                summary: Default createContentTemplate request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  channel: email
+                  content: {}
+      responses:
+        '201':
+          description: Content template created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContentTemplate'
+              examples:
+                createContentTemplate201Example:
+                  summary: Default createContentTemplate 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    channel: example
+                    content: {}
+                    createdAt: '2025-03-15T14:30:00Z'
+        '400':
+          description: Invalid template definition.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ContentTemplateList:
+      type: object
+      properties:
+        templates:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentTemplate'
+        totalCount:
+          type: integer
+    ContentTemplateInput:
+      type: object
+      required:
+      - name
+      - channel
+      properties:
+        name:
+          type: string
+        channel:
+          type: string
+          enum:
+          - email
+          - push
+          - sms
+          - inApp
+        content:
+          type: object
+    ContentTemplate:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        channel:
+          type: string
+        content:
+          type: object
+        createdAt:
+          type: string
+          format: date-time
+  parameters:
+    sandboxHeader:
+      name: x-sandbox-name
+      in: header
+      required: true
+      description: The sandbox name.
+      schema:
+        type: string
+        default: prod
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via Adobe I/O.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe I/O client API key.

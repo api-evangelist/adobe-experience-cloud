@@ -1,0 +1,248 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Cloud Adobe Analytics 2.0 Activities Campaigns API
+  description: The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://analytics.adobe.io
+  description: Adobe Analytics Production API
+security:
+- bearerAuth: []
+- apiKey: []
+tags:
+- name: Campaigns
+  description: Operations for managing marketing campaigns
+paths:
+  /campaign/campaigns:
+    get:
+      operationId: listCampaigns
+      summary: Adobe Journey Optimizer Adobe Experience Cloud List Campaigns
+      description: Returns a paginated list of marketing campaigns. Each campaign includes its ID, name, channel, status, and schedule.
+      tags:
+      - Campaigns
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 20
+      responses:
+        '200':
+          description: A paginated list of campaigns.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignList'
+              examples:
+                listCampaigns200Example:
+                  summary: Default listCampaigns 200 response
+                  x-microcks-default: true
+                  value:
+                    campaigns:
+                    - example
+                    totalCount: 1
+        '401':
+          description: Authentication credentials are missing or invalid.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createCampaign
+      summary: Adobe Journey Optimizer Adobe Experience Cloud Create a Campaign
+      description: Creates a new marketing campaign with the specified channel, audience, content, and schedule configuration.
+      tags:
+      - Campaigns
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CampaignInput'
+            examples:
+              createCampaignRequestExample:
+                summary: Default createCampaign request
+                x-microcks-default: true
+                value:
+                  name: Example Name
+                  description: example
+                  channel: email
+                  audienceId: abc123
+                  schedule: {}
+      responses:
+        '201':
+          description: Campaign created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+              examples:
+                createCampaign201Example:
+                  summary: Default createCampaign 201 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    channel: email
+                    status: draft
+                    schedule:
+                      startDate: '2025-03-15T14:30:00Z'
+                      endDate: '2025-03-15T14:30:00Z'
+        '400':
+          description: Invalid campaign definition.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /campaign/campaigns/{campaignId}:
+    get:
+      operationId: getCampaign
+      summary: Adobe Journey Optimizer Adobe Experience Cloud Get a Campaign
+      description: Retrieves the full definition of a marketing campaign by its ID.
+      tags:
+      - Campaigns
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: campaignId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Campaign details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+              examples:
+                getCampaign200Example:
+                  summary: Default getCampaign 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Name
+                    description: example
+                    channel: email
+                    status: draft
+                    schedule:
+                      startDate: '2025-03-15T14:30:00Z'
+                      endDate: '2025-03-15T14:30:00Z'
+        '404':
+          description: Campaign not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteCampaign
+      summary: Adobe Journey Optimizer Adobe Experience Cloud Delete a Campaign
+      description: Deletes a campaign that is in draft or completed status.
+      tags:
+      - Campaigns
+      parameters:
+      - $ref: '#/components/parameters/sandboxHeader'
+      - name: campaignId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Campaign deleted successfully.
+        '404':
+          description: Campaign not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CampaignInput:
+      type: object
+      required:
+      - name
+      - channel
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        channel:
+          type: string
+          enum:
+          - email
+          - push
+          - sms
+          - inApp
+        audienceId:
+          type: string
+        schedule:
+          type: object
+    Campaign:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        channel:
+          type: string
+          enum:
+          - email
+          - push
+          - sms
+          - inApp
+        status:
+          type: string
+          enum:
+          - draft
+          - scheduled
+          - live
+          - completed
+        schedule:
+          type: object
+          properties:
+            startDate:
+              type: string
+              format: date-time
+            endDate:
+              type: string
+              format: date-time
+    CampaignList:
+      type: object
+      properties:
+        campaigns:
+          type: array
+          items:
+            $ref: '#/components/schemas/Campaign'
+        totalCount:
+          type: integer
+  parameters:
+    sandboxHeader:
+      name: x-sandbox-name
+      in: header
+      required: true
+      description: The sandbox name.
+      schema:
+        type: string
+        default: prod
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via Adobe I/O.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe I/O client API key.

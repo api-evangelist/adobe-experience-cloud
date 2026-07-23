@@ -1,0 +1,151 @@
+openapi: 3.1.0
+info:
+  title: Adobe Experience Cloud Adobe Analytics 2.0 Activities Report Suites API
+  description: The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.
+  version: 2.0.0
+  contact:
+    name: Adobe Developer
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  license:
+    name: Proprietary
+    url: https://www.adobe.com/legal/terms.html
+servers:
+- url: https://analytics.adobe.io
+  description: Adobe Analytics Production API
+security:
+- bearerAuth: []
+- apiKey: []
+tags:
+- name: Report Suites
+  description: Operations for managing report suites
+paths:
+  /api/{companyId}/reportsuites:
+    get:
+      operationId: listReportSuites
+      summary: Adobe Analytics Adobe Experience Cloud List Report Suites
+      description: Returns a paginated list of report suites available to the authenticated user within the specified company. Each entry includes the report suite ID, name, and configuration metadata.
+      tags:
+      - Report Suites
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        description: The global company ID for the Analytics account.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of results to return per page.
+        schema:
+          type: integer
+          default: 10
+      - name: page
+        in: query
+        description: Page number for pagination.
+        schema:
+          type: integer
+          default: 0
+      responses:
+        '200':
+          description: A paginated list of report suites.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportSuiteList'
+              examples:
+                listReportSuites200Example:
+                  summary: Default listReportSuites 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - example
+                    totalElements: 1
+                    totalPages: 1
+        '401':
+          description: Authentication credentials are missing or invalid.
+        '403':
+          description: Insufficient permissions.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/{companyId}/reportsuites/{rsid}:
+    get:
+      operationId: getReportSuite
+      summary: Adobe Analytics Adobe Experience Cloud Get a Report Suite
+      description: Retrieves the configuration details for a single report suite identified by its report suite ID (rsid). Returns metadata including the name, currency, timezone, and enabled features.
+      tags:
+      - Report Suites
+      parameters:
+      - name: companyId
+        in: path
+        required: true
+        description: The global company ID.
+        schema:
+          type: string
+      - name: rsid
+        in: path
+        required: true
+        description: The report suite ID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Report suite details returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportSuite'
+              examples:
+                getReportSuite200Example:
+                  summary: Default getReportSuite 200 response
+                  x-microcks-default: true
+                  value:
+                    rsid: abc123
+                    name: Example Name
+                    currency: example
+                    timezone: 1
+                    calendarType: standard
+        '401':
+          description: Authentication credentials are missing or invalid.
+        '404':
+          description: Report suite not found.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ReportSuite:
+      type: object
+      properties:
+        rsid:
+          type: string
+        name:
+          type: string
+        currency:
+          type: string
+        timezone:
+          type: integer
+        calendarType:
+          type: string
+    ReportSuiteList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportSuite'
+        totalElements:
+          type: integer
+        totalPages:
+          type: integer
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 access token obtained via Adobe I/O.
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe I/O client API key.
