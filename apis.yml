@@ -1,102 +1,687 @@
 aid: adobe-experience-cloud
 url: https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/apis.yml
 apis:
-  - aid: adobe-experience-cloud:analytics-api
-    name: Adobe Analytics 2.0 API
-    tags:
-      - Analytics
-      - Digital Marketing
-      - Reporting
-    humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
-    properties:
-      - url: https://developer.adobe.com/analytics-apis/docs/2.0/
-        type: Documentation
-      - url: openapi/adobe-analytics-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and
-      configuration capabilities. It enables developers to retrieve report data, manage report suites, configure
-      calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics.
-  - aid: adobe-experience-cloud:experience-platform-api
-    name: Adobe Experience Platform API
-    tags:
-      - Customer Profiles
-      - Data Management
-      - Platform
-    humanURL: https://developer.adobe.com/experience-platform-apis/
-    properties:
-      - url: https://developer.adobe.com/experience-platform-apis/
-        type: Documentation
-      - url: openapi/adobe-experience-platform-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Adobe Experience Platform API provides RESTful access to core platform services including data ingestion,
-      unified profile management, identity resolution, dataset management, schema registry, query service, and
-      segmentation for building real-time customer profiles and orchestrating data workflows.
-  - aid: adobe-experience-cloud:target-api
-    name: Adobe Target API
-    tags:
-      - Optimization
-      - Personalization
-      - Testing
-    humanURL: https://developer.adobe.com/target/
-    properties:
-      - url: https://developer.adobe.com/target/
-        type: Documentation
-      - url: openapi/adobe-target-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Adobe Target API provides programmatic access to Adobe Target for managing A/B tests, experience targeting,
-      multivariate tests, automated personalization activities, audiences, offers, and real-time content delivery for
-      website and application personalization.
-  - aid: adobe-experience-cloud:journey-optimizer-api
-    name: Adobe Journey Optimizer API
-    tags:
-      - Journey Orchestration
-      - Messaging
-      - Offer Decisioning
-    humanURL: https://developer.adobe.com/journey-optimizer-apis/
-    properties:
-      - url: https://developer.adobe.com/journey-optimizer-apis/
-        type: Documentation
-      - url: openapi/adobe-journey-optimizer-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Adobe Journey Optimizer API enables programmatic management of customer journeys, campaigns, messages, offers,
-      placements, and content templates across email, push, SMS, and in-app channels for orchestrating personalized
-      multi-channel customer experiences.
-  - aid: adobe-experience-cloud:campaign-api
-    name: Adobe Campaign API
-    tags:
-      - Campaign Management
-      - Email Marketing
-      - Transactional Messaging
-    humanURL: https://developer.adobe.com/campaign-standard-apis/
-    properties:
-      - url: https://developer.adobe.com/campaign-standard-apis/
-        type: Documentation
-      - url: openapi/adobe-campaign-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Adobe Campaign API provides RESTful access to Adobe Campaign for managing subscriber profiles, subscription
-      services, marketing workflows, email deliveries, and real-time transactional messaging across email, SMS, and push
-      notification channels.
-  - aid: adobe-experience-cloud:io-events
-    name: Adobe I/O Events
-    tags:
-      - Events
-      - Integration
-      - Webhooks
-    humanURL: https://developer.adobe.com/events/docs/
-    properties:
-      - url: https://developer.adobe.com/events/docs/
-        type: Documentation
-      - url: asyncapi/adobe-io-events-asyncapi.yml
-        type: AsyncAPI
-    description: >-
-      Adobe I/O Events enables developers to receive near-real-time notifications from Adobe services via webhooks and
-      journal polling. Events are emitted when significant changes occur across Adobe Experience Cloud products for
-      building reactive integrations and automated workflows.
+- aid: adobe-experience-cloud:io-events
+  name: Adobe I/O Events
+  tags:
+  - Events
+  - Integration
+  - Webhooks
+  humanURL: https://developer.adobe.com/events/docs/
+  properties:
+  - url: https://developer.adobe.com/events/docs/
+    type: Documentation
+  - url: asyncapi/adobe-io-events-asyncapi.yml
+    type: AsyncAPI
+  description: >-
+    Adobe I/O Events enables developers to receive near-real-time notifications from Adobe services via
+    webhooks and journal polling. Events are emitted when significant changes occur across Adobe Experience
+    Cloud products for building reactive integrations and automated workflows.
+- aid: adobe-experience-cloud:adobe-experience-cloud-activities-api
+  name: Adobe Experience Cloud Activities API
+  description: Operations for managing Target activities (A/B, XT, MVT, AP)
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Activities
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-activities-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-audiences-api
+  name: Adobe Experience Cloud Audiences API
+  description: Operations for managing Target audiences
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Audiences
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-audiences-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-batches-api
+  name: Adobe Experience Cloud Batches API
+  description: Operations for batch data ingestion
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Batches
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-batches-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-calculated-metrics-api
+  name: Adobe Experience Cloud Calculated Metrics API
+  description: Operations for managing calculated metrics
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Calculated Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-calculated-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-campaign-api
+  name: Adobe Experience Cloud Campaign API
+  description: The Campaign API from Adobe Experience Cloud — 3 operation(s) for campaign.
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Campaign
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-campaign-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-campaigns-api
+  name: Adobe Experience Cloud Campaigns API
+  description: Operations for managing marketing campaigns
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Campaigns
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-campaigns-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-classes-api
+  name: Adobe Experience Cloud Classes API
+  description: Operations for managing XDM classes
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Classes
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-classes-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-collections-api
+  name: Adobe Experience Cloud Collections API
+  description: Operations for managing offer collections
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Collections
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-collections-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-content-api
+  name: Adobe Experience Cloud Content API
+  description: Operations for managing email and landing page content
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Content
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-content-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-content-templates-api
+  name: Adobe Experience Cloud Content Templates API
+  description: Operations for managing reusable content templates
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Content Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-content-templates-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-datasets-api
+  name: Adobe Experience Cloud Datasets API
+  description: Operations for managing datasets in the Data Lake
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Datasets
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-datasets-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-date-ranges-api
+  name: Adobe Experience Cloud Date Ranges API
+  description: Operations for managing saved date ranges
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Date Ranges
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-date-ranges-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-decision-rules-api
+  name: Adobe Experience Cloud Decision Rules API
+  description: Operations for managing offer eligibility rules
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Decision Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-decision-rules-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-delivery-api
+  name: Adobe Experience Cloud Delivery API
+  description: Operations for real-time content delivery
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Delivery
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-delivery-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-dimensions-api
+  name: Adobe Experience Cloud Dimensions API
+  description: Operations for retrieving dimension metadata
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Dimensions
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-dimensions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-environments-api
+  name: Adobe Experience Cloud Environments API
+  description: Operations for managing environments
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Environments
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-environments-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-identities-api
+  name: Adobe Experience Cloud Identities API
+  description: Operations for identity namespace management
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Identities
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-identities-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-journeys-api
+  name: Adobe Experience Cloud Journeys API
+  description: Operations for managing customer journeys
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Journeys
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-journeys-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-messages-api
+  name: Adobe Experience Cloud Messages API
+  description: Operations for managing channel messages
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-messages-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-metadata-api
+  name: Adobe Experience Cloud Metadata API
+  description: Operations for retrieving resource metadata
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-metadata-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-metrics-api
+  name: Adobe Experience Cloud Metrics API
+  description: Operations for retrieving metric metadata
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-offers-api
+  name: Adobe Experience Cloud Offers API
+  description: Operations for offer decisioning
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Offers
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-offers-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-placements-api
+  name: Adobe Experience Cloud Placements API
+  description: Operations for managing offer placements
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Placements
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-placements-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-profiles-api
+  name: Adobe Experience Cloud Profiles API
+  description: Operations for managing subscriber profiles
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-profiles-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-projects-api
+  name: Adobe Experience Cloud Projects API
+  description: Operations for managing Analysis Workspace projects
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-projects-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-properties-api
+  name: Adobe Experience Cloud Properties API
+  description: Operations for managing enterprise properties
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Properties
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-properties-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-queries-api
+  name: Adobe Experience Cloud Queries API
+  description: Operations for the Query Service
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Queries
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-queries-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-report-suites-api
+  name: Adobe Experience Cloud Report Suites API
+  description: Operations for managing report suites
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Report Suites
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-report-suites-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-reports-api
+  name: Adobe Experience Cloud Reports API
+  description: Operations for retrieving analytics report data
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-reports-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-sandboxes-api
+  name: Adobe Experience Cloud Sandboxes API
+  description: Operations for managing platform sandboxes
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Sandboxes
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-sandboxes-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-schemas-api
+  name: Adobe Experience Cloud Schemas API
+  description: Operations for managing XDM schemas via the Schema Registry
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Schemas
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-schemas-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-segments-api
+  name: Adobe Experience Cloud Segments API
+  description: Operations for managing analytics segments
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Segments
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-segments-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-transactional-messages-api
+  name: Adobe Experience Cloud Transactional Messages API
+  description: Operations for sending real-time transactional messages
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Transactional Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-transactional-messages-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-users-api
+  name: Adobe Experience Cloud Users API
+  description: Operations for managing analytics users
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-users-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
+- aid: adobe-experience-cloud:adobe-experience-cloud-workflows-api
+  name: Adobe Experience Cloud Workflows API
+  description: Operations for managing automated workflows
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Workflows
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-experience-cloud-workflows-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: Documentation
+    url: https://developer.adobe.com/experience-platform-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/target/
+  - type: Documentation
+    url: https://developer.adobe.com/journey-optimizer-apis/
+  - type: Documentation
+    url: https://developer.adobe.com/campaign-standard-apis/
 name: Adobe Experience Cloud
 tags:
   - Analytics
@@ -106,7 +691,20 @@ tags:
   - Campaign Management
   - Journey Orchestration
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/adobe-experience-cloud.png
 access: 3rd-Party
 common:
   - type: AgenticAccess
