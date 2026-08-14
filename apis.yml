@@ -8,6 +8,7 @@ apis:
   - Integration
   - Webhooks
   humanURL: https://developer.adobe.com/events/docs/
+  baseURL: https://api.adobe.io
   properties:
   - url: https://developer.adobe.com/events/docs/
     type: Documentation
@@ -20,12 +21,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-activities-api
   name: Adobe Experience Cloud Activities API
   description: Operations for managing Target activities (A/B, XT, MVT, AP)
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/target/
+  baseURL: https://mc.adobe.io/{tenant}
   tags:
   - Activities
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-activities-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-activities-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -39,12 +43,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-audiences-api
   name: Adobe Experience Cloud Audiences API
   description: Operations for managing Target audiences
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/target/
+  baseURL: https://mc.adobe.io/{tenant}
   tags:
   - Audiences
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-audiences-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-audiences-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -58,12 +65,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-batches-api
   name: Adobe Experience Cloud Batches API
   description: Operations for batch data ingestion
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/experience-platform-apis/
+  baseURL: https://platform.adobe.io
   tags:
   - Batches
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-batches-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-batches-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -78,11 +88,14 @@ apis:
   name: Adobe Experience Cloud Calculated Metrics API
   description: Operations for managing calculated metrics
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  baseURL: https://analytics.adobe.io
   tags:
   - Calculated Metrics
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-calculated-metrics-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-calculated-metrics-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -96,12 +109,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-campaign-api
   name: Adobe Experience Cloud Campaign API
   description: The Campaign API from Adobe Experience Cloud — 3 operation(s) for campaign.
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/campaign-standard-apis/
+  baseURL: https://mc.adobe.io/{organization}
   tags:
   - Campaign
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-campaign-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-campaign-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -115,12 +131,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-campaigns-api
   name: Adobe Experience Cloud Campaigns API
   description: Operations for managing marketing campaigns
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/journey-optimizer-apis/
+  baseURL: https://platform.adobe.io
   tags:
   - Campaigns
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-campaigns-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-campaigns-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -134,12 +153,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-classes-api
   name: Adobe Experience Cloud Classes API
   description: Operations for managing XDM classes
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/experience-platform-apis/
+  baseURL: https://platform.adobe.io
   tags:
   - Classes
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-classes-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-classes-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -153,12 +175,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-collections-api
   name: Adobe Experience Cloud Collections API
   description: Operations for managing offer collections
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/journey-optimizer-apis/
+  baseURL: https://platform.adobe.io
   tags:
   - Collections
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-collections-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-collections-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -172,12 +197,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-content-api
   name: Adobe Experience Cloud Content API
   description: Operations for managing email and landing page content
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/campaign-standard-apis/
+  baseURL: https://mc.adobe.io/{organization}
   tags:
   - Content
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-content-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-content-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -191,12 +219,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-content-templates-api
   name: Adobe Experience Cloud Content Templates API
   description: Operations for managing reusable content templates
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/journey-optimizer-apis/
+  baseURL: https://platform.adobe.io
   tags:
   - Content Templates
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-content-templates-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-content-templates-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -210,12 +241,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-datasets-api
   name: Adobe Experience Cloud Datasets API
   description: Operations for managing datasets in the Data Lake
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/experience-platform-apis/
+  baseURL: https://platform.adobe.io
   tags:
   - Datasets
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-datasets-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-datasets-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -230,11 +264,14 @@ apis:
   name: Adobe Experience Cloud Date Ranges API
   description: Operations for managing saved date ranges
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  baseURL: https://analytics.adobe.io
   tags:
   - Date Ranges
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-date-ranges-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-date-ranges-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -248,12 +285,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-decision-rules-api
   name: Adobe Experience Cloud Decision Rules API
   description: Operations for managing offer eligibility rules
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/journey-optimizer-apis/
+  baseURL: https://platform.adobe.io
   tags:
   - Decision Rules
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-decision-rules-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-decision-rules-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -267,12 +307,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-delivery-api
   name: Adobe Experience Cloud Delivery API
   description: Operations for real-time content delivery
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/target/
+  baseURL: https://delivery.adobetarget.com
   tags:
   - Delivery
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-delivery-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-delivery-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -287,11 +330,14 @@ apis:
   name: Adobe Experience Cloud Dimensions API
   description: Operations for retrieving dimension metadata
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  baseURL: https://analytics.adobe.io
   tags:
   - Dimensions
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-dimensions-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-dimensions-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -305,12 +351,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-environments-api
   name: Adobe Experience Cloud Environments API
   description: Operations for managing environments
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/target/
+  baseURL: https://mc.adobe.io/{tenant}
   tags:
   - Environments
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-environments-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-environments-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -324,12 +373,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-identities-api
   name: Adobe Experience Cloud Identities API
   description: Operations for identity namespace management
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/experience-platform-apis/
+  baseURL: https://platform.adobe.io
   tags:
   - Identities
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-identities-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-identities-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -343,12 +395,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-journeys-api
   name: Adobe Experience Cloud Journeys API
   description: Operations for managing customer journeys
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/journey-optimizer-apis/
+  baseURL: https://platform.adobe.io
   tags:
   - Journeys
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-journeys-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-journeys-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -362,12 +417,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-messages-api
   name: Adobe Experience Cloud Messages API
   description: Operations for managing channel messages
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/journey-optimizer-apis/
+  baseURL: https://platform.adobe.io
   tags:
   - Messages
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-messages-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-messages-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -381,12 +439,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-metadata-api
   name: Adobe Experience Cloud Metadata API
   description: Operations for retrieving resource metadata
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/campaign-standard-apis/
+  baseURL: https://mc.adobe.io/{organization}
   tags:
   - Metadata
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-metadata-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-metadata-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -401,11 +462,14 @@ apis:
   name: Adobe Experience Cloud Metrics API
   description: Operations for retrieving metric metadata
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  baseURL: https://analytics.adobe.io
   tags:
   - Metrics
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-metrics-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-metrics-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -419,12 +483,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-offers-api
   name: Adobe Experience Cloud Offers API
   description: Operations for offer decisioning
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/journey-optimizer-apis/
+  baseURL: https://platform.adobe.io
   tags:
   - Offers
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-offers-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-offers-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -438,12 +505,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-placements-api
   name: Adobe Experience Cloud Placements API
   description: Operations for managing offer placements
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/journey-optimizer-apis/
+  baseURL: https://platform.adobe.io
   tags:
   - Placements
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-placements-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-placements-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -457,12 +527,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-profiles-api
   name: Adobe Experience Cloud Profiles API
   description: Operations for managing subscriber profiles
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/campaign-standard-apis/
+  baseURL: https://mc.adobe.io/{organization}
   tags:
   - Profiles
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-profiles-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-profiles-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -477,11 +550,14 @@ apis:
   name: Adobe Experience Cloud Projects API
   description: Operations for managing Analysis Workspace projects
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  baseURL: https://analytics.adobe.io
   tags:
   - Projects
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-projects-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-projects-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -495,12 +571,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-properties-api
   name: Adobe Experience Cloud Properties API
   description: Operations for managing enterprise properties
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/target/
+  baseURL: https://mc.adobe.io/{tenant}
   tags:
   - Properties
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-properties-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-properties-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -514,12 +593,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-queries-api
   name: Adobe Experience Cloud Queries API
   description: Operations for the Query Service
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/experience-platform-apis/
+  baseURL: https://platform.adobe.io
   tags:
   - Queries
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-queries-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-queries-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -534,11 +616,14 @@ apis:
   name: Adobe Experience Cloud Report Suites API
   description: Operations for managing report suites
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  baseURL: https://analytics.adobe.io
   tags:
   - Report Suites
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-report-suites-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-report-suites-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -553,11 +638,14 @@ apis:
   name: Adobe Experience Cloud Reports API
   description: Operations for retrieving analytics report data
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  baseURL: https://analytics.adobe.io
   tags:
   - Reports
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-reports-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-reports-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -571,12 +659,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-sandboxes-api
   name: Adobe Experience Cloud Sandboxes API
   description: Operations for managing platform sandboxes
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/experience-platform-apis/
+  baseURL: https://platform.adobe.io
   tags:
   - Sandboxes
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-sandboxes-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-sandboxes-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -590,12 +681,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-schemas-api
   name: Adobe Experience Cloud Schemas API
   description: Operations for managing XDM schemas via the Schema Registry
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/experience-platform-apis/
+  baseURL: https://platform.adobe.io
   tags:
   - Schemas
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-schemas-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-schemas-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -609,12 +703,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-segments-api
   name: Adobe Experience Cloud Segments API
   description: Operations for managing analytics segments
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/experience-platform-apis/
+  baseURL: https://platform.adobe.io
   tags:
   - Segments
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-segments-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-segments-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -628,12 +725,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-transactional-messages-api
   name: Adobe Experience Cloud Transactional Messages API
   description: Operations for sending real-time transactional messages
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/campaign-standard-apis/
+  baseURL: https://mc.adobe.io/{organization}
   tags:
   - Transactional Messages
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-transactional-messages-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-transactional-messages-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -648,11 +748,14 @@ apis:
   name: Adobe Experience Cloud Users API
   description: Operations for managing analytics users
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  baseURL: https://analytics.adobe.io
   tags:
   - Users
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-users-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-users-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -666,12 +769,15 @@ apis:
 - aid: adobe-experience-cloud:adobe-experience-cloud-workflows-api
   name: Adobe Experience Cloud Workflows API
   description: Operations for managing automated workflows
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  humanURL: https://developer.adobe.com/campaign-standard-apis/
+  baseURL: https://mc.adobe.io/{organization}
   tags:
   - Workflows
   properties:
   - type: OpenAPI
     url: openapi/adobe-experience-cloud-workflows-api-openapi.yml
+  - type: Overlay
+    url: overlays/adobe-experience-cloud-workflows-overlay.yaml
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/
   - type: Documentation
@@ -882,8 +988,58 @@ common:
     url: json-ld/adobe-experience-cloud-journey-optimizer-api-context.jsonld
   - type: JSONLD
     url: json-ld/adobe-experience-cloud-target-api-context.jsonld
+  - type: WellKnown
+    url: well-known/adobe-experience-cloud-well-known.yml
+  - type: SecurityTxt
+    url: well-known/adobe-experience-cloud-security.txt
+  - type: Security
+    url: security/adobe-experience-cloud-vulnerability-disclosure.yml
+  - type: Packages
+    url: packages/adobe-experience-cloud-packages.yml
+  - type: SDKs
+    url: packages/adobe-experience-cloud-packages.yml
+  - type: CLI
+    url: cli/adobe-experience-cloud-cli.yml
+  - type: MCPServer
+    url: mcp/adobe-experience-cloud-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/adobe-experience-cloud-tool-crosswalk.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: LLMsTxt
+    url: llms/adobe-experience-cloud-llms.txt
+  - type: Conformance
+    url: conformance/adobe-experience-cloud-conformance.yml
+  - type: ErrorCatalog
+    url: errors/adobe-experience-cloud-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/adobe-experience-cloud-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/adobe-experience-cloud-changelog.yml
+  - type: OAuthScopes
+    url: scopes/adobe-experience-cloud-scopes.yml
+  - type: Conventions
+    url: conventions/adobe-experience-cloud-conventions.yml
+  - type: Sandbox
+    url: sandbox/adobe-experience-cloud-sandbox.yml
+  - type: Components
+    url: components/adobe-experience-cloud-components.yml
+  - type: DataModel
+    url: data-model/adobe-experience-cloud-data-model.yml
+  - type: Webhooks
+    url: asyncapi/adobe-io-events-asyncapi.yml
+  - type: Plans
+    url: plans/adobe-experience-cloud-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/adobe-experience-cloud-rate-limits.yml
+  - type: FinOps
+    url: finops/adobe-experience-cloud-finops.yml
+  - type: APIReference
+    url: https://developer.adobe.com/apis/
+  - type: Postman
+    url: https://www.postman.com/kinlaneapi/adobe-experience-cloud/overview
 created: '2025-01-01'
-modified: '2026-04-19'
+modified: '2026-08-13'
 description: >-
   Adobe Experience Cloud is an integrated suite of applications and services for digital marketing, analytics,
   advertising, and commerce. It provides tools for content management, personalization, customer journey orchestration,
@@ -893,3 +1049,8 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 specificationVersion: '0.19'
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 68
+  pass: local-v1
