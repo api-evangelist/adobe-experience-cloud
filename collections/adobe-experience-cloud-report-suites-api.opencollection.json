@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Report Suites API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Report Suites",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics Adobe Experience Cloud List Report Suites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/:companyId/reportsuites",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "The global company ID for the Analytics account."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return per page."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of report suites available to the authenticated user within the specified company. Each entry includes the report suite ID, name, and configuration metadata."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Adobe Experience Cloud Get a Report Suite",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/:companyId/reportsuites/:rsid",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "The global company ID."
+              },
+              {
+                "name": "rsid",
+                "value": "",
+                "type": "path",
+                "description": "The report suite ID."
+              }
+            ]
+          },
+          "docs": "Retrieves the configuration details for a single report suite identified by its report suite ID (rsid). Returns metadata including the name, currency, timezone, and enabled features."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

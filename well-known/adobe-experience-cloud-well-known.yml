@@ -1,0 +1,230 @@
+generated: '2026-08-13'
+method: probed
+source: live HTTPS probes of every apis.yml / OpenAPI servers[] host plus the Adobe IMS
+  and Adobe-hosted MCP authorization hosts
+description: >-
+  /.well-known/ probe of every host Adobe Experience Cloud serves an API or a docs
+  console from. Two real documents are served: a PGP-signed security.txt on adobe.com,
+  and full OAuth 2.0 / OpenID Connect discovery metadata on Adobe IMS
+  (ims-na1.adobelogin.com) and on the three authorization servers that front Adobe's
+  hosted MCP endpoints. The API hosts themselves (analytics.adobe.io, platform.adobe.io,
+  mc.adobe.io) serve nothing under /.well-known/.
+notes: >-
+  developer.adobe.com and adobe.io are single-page-application catch-alls: EVERY
+  /.well-known/ path returns HTTP 200 with the same 1,203,904-byte HTML shell. These
+  are recorded as soft-200 misses, not hits. Only the adobe.com security.txt and the
+  IMS / MCP OAuth metadata documents below are real documents.
+summary:
+  hosts_probed: 10
+  paths_probed: 40
+  real_documents: 7
+  soft_200_html_shells: 14
+hosts:
+  - host: adobe.com
+    paths:
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/plain
+        document: true
+        file: well-known/adobe-experience-cloud-security.txt
+        note: PGP-signed RFC 9116 security.txt; Expires 2027-07-30.
+  - host: ims-na1.adobelogin.com
+    role: Adobe Identity Management System (IMS) — the OAuth/OIDC provider for every
+      Experience Cloud API
+    paths:
+      - path: /.well-known/openid-configuration
+        status: 200
+        content_type: application/json
+        document: true
+        file: well-known/adobe-experience-cloud-ims-openid-configuration.json
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: application/json
+        document: true
+        file: well-known/adobe-experience-cloud-ims-oauth-authorization-server.json
+  - host: oauth.adobeaemcloud.com
+    role: authorization server for the Adobe-hosted AEM MCP servers
+    paths:
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: application/json
+        document: true
+        file: well-known/adobe-experience-cloud-aem-oauth-authorization-server.json
+      - path: /.well-known/openid-configuration
+        status: 200
+        content_type: application/json
+        document: true
+        note: Same payload as oauth-authorization-server plus id_token signing algs;
+          not saved separately.
+  - host: aa-mcp.adobe.io
+    role: Adobe Analytics MCP server
+    paths:
+      - path: /.well-known/oauth-protected-resource
+        status: 200
+        content_type: application/json
+        document: true
+        note: 'resource https://aa-mcp.adobe.io/mcp; scopes openid, AdobeID,
+          additional_info.projectedProductContext'
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: application/json
+        document: true
+        file: well-known/adobe-experience-cloud-aa-mcp-oauth-authorization-server.json
+  - host: cja-mcp.adobe.io
+    role: Adobe Customer Journey Analytics MCP server
+    paths:
+      - path: /.well-known/oauth-protected-resource/mcp
+        status: 200
+        content_type: application/json
+        document: true
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: application/json
+        document: true
+        file: well-known/adobe-experience-cloud-cja-mcp-oauth-authorization-server.json
+  - host: mcp.adobeaemcloud.com
+    role: Adobe-hosted AEM MCP servers
+    paths:
+      - path: /.well-known/oauth-protected-resource/adobe/mcp/content
+        status: 200
+        content_type: application/json
+        document: true
+        note: 'resource https://mcp.adobeaemcloud.com/adobe/mcp/content;
+          authorization_servers [https://oauth.adobeaemcloud.com]'
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+        document: false
+      - path: /.well-known/agent-card.json
+        status: 403
+        document: false
+      - path: /.well-known/oauth-protected-resource
+        status: 200
+        content_type: text/html
+        document: false
+        note: SOFT 200 — returns the AEM Cloud Service HTML shell, not a document.
+  - host: developer.adobe.com
+    paths:
+      - path: /.well-known/security.txt
+        status: 200
+        document: false
+        note: SOFT 200 — SPA catch-all HTML shell (1,203,904 bytes), identical for every path.
+      - path: /.well-known/openid-configuration
+        status: 200
+        document: false
+        note: SOFT 200 — SPA catch-all HTML shell.
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        document: false
+        note: SOFT 200 — SPA catch-all HTML shell.
+      - path: /.well-known/api-catalog
+        status: 200
+        document: false
+        note: SOFT 200 — SPA catch-all HTML shell.
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        document: false
+        note: SOFT 200 — SPA catch-all HTML shell.
+      - path: /.well-known/agent-card.json
+        status: 200
+        document: false
+        note: SOFT 200 — SPA catch-all HTML shell. NOT an agent card.
+      - path: /.well-known/agent.json
+        status: 200
+        document: false
+        note: SOFT 200 — SPA catch-all HTML shell. NOT an agent card.
+  - host: adobe.io
+    paths:
+      - path: /.well-known/security.txt
+        status: 200
+        document: false
+        note: SOFT 200 — same SPA catch-all shell as developer.adobe.com.
+      - path: /.well-known/openid-configuration
+        status: 200
+        document: false
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        document: false
+      - path: /.well-known/api-catalog
+        status: 200
+        document: false
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        document: false
+      - path: /.well-known/agent-card.json
+        status: 200
+        document: false
+      - path: /.well-known/agent.json
+        status: 200
+        document: false
+  - host: platform.adobe.io
+    role: Experience Platform / Journey Optimizer API host
+    paths:
+      - path: /.well-known/security.txt
+        status: 404
+        document: false
+      - path: /.well-known/openid-configuration
+        status: 404
+        document: false
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        document: false
+      - path: /.well-known/api-catalog
+        status: 404
+        document: false
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        document: false
+      - path: /.well-known/agent-card.json
+        status: 404
+        document: false
+      - path: /.well-known/agent.json
+        status: 404
+        document: false
+  - host: analytics.adobe.io
+    role: Adobe Analytics 2.0 API host
+    paths:
+      - path: /.well-known/security.txt
+        status: 404
+        document: false
+      - path: /.well-known/openid-configuration
+        status: 404
+        document: false
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        document: false
+      - path: /.well-known/api-catalog
+        status: 404
+        document: false
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        document: false
+      - path: /.well-known/agent-card.json
+        status: 404
+        document: false
+      - path: /.well-known/agent.json
+        status: 404
+        document: false
+  - host: mc.adobe.io
+    role: Campaign Standard / Target admin API host
+    paths:
+      - path: /.well-known/security.txt
+        status: 404
+        document: false
+      - path: /.well-known/openid-configuration
+        status: 404
+        document: false
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        document: false
+      - path: /.well-known/api-catalog
+        status: 404
+        document: false
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        document: false
+      - path: /.well-known/agent-card.json
+        status: 404
+        document: false
+      - path: /.well-known/agent.json
+        status: 404
+        document: false

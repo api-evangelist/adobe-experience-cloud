@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Classes API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Classes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud List Classes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/data/foundation/schemaregistry/tenant/classes",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of XDM classes in the tenant container. Classes define the base structure and behavior type for schemas."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,106 @@
+generated: '2026-08-13'
+method: searched
+source: https://experienceleague.adobe.com/en/docs/experience-platform/sandbox/home,
+  openapi/adobe-experience-cloud-sandboxes-api-openapi.yml,
+  openapi/adobe-experience-cloud-environments-api-openapi.yml
+docs: https://experienceleague.adobe.com/en/docs/experience-platform/sandbox/home
+description: >-
+  Adobe Experience Cloud's test environment is a first-class, API-managed product feature,
+  not a test-key mode. Experience Platform partitions a single instance into virtual
+  sandboxes, each with its own isolated library of schemas, datasets and profiles, and
+  every API call selects one with the x-sandbox-name header. Adobe Target uses a separate
+  mechanism — environments. There are no test API keys, no test card numbers and no time
+  simulation, because Experience Cloud is not a payments platform.
+model: partitioned-environments
+key_prefixes: null
+test_credentials: null
+note: >-
+  Credentials are identical across sandboxes. The same Adobe IMS token and x-api-key call
+  production and development; the ONLY thing separating them is the x-sandbox-name header
+  value. That makes a wrong or missing header a production-write hazard, and it is the
+  single most important operational fact in this artifact.
+sandboxes:
+  types:
+    - name: production
+      description: >-
+        Meant to be used with profiles in your production environment. Multiple production
+        sandboxes may be created. Profiles count against your licensed Profile commitment,
+        measured cumulatively across all authorized production sandboxes, as does Total
+        Data Volume.
+      resettable: true
+      convertible: n/a
+    - name: development
+      description: >-
+        Used exclusively for development. Isolated from production data. Development
+        sandboxes CANNOT be converted to production sandboxes.
+      resettable: true
+      convertible: false
+  entitlement:
+    default_license: 5 sandboxes total, classifiable as production or development
+    source: https://experienceleague.adobe.com/en/docs/experience-platform/sandbox/home
+  isolation: >-
+    Each sandbox holds its own independent library of Experience Platform resources —
+    schemas, datasets, profiles, audiences, merge policies.
+  reset: >-
+    Both production and development sandboxes have a reset feature that removes all
+    customer-created resources from the sandbox.
+selection:
+  header: x-sandbox-name
+  required: true
+  applies_to:
+    - Adobe Experience Platform
+    - Adobe Journey Optimizer
+    - Adobe Real-Time CDP
+  example: 'x-sandbox-name: prod'
+  quote: >-
+    "When making calls to Experience Platform APIs, a sandbox name must be supplied under
+    the header x-sandbox-name."
+  gap: >-
+    x-sandbox-name is NOT declared as a parameter on any operation in this repo's OpenAPI
+    set — zero header parameters are declared across all 110 operations. A client
+    generated from the spec alone will call the default sandbox without knowing it.
+management_api:
+  openapi: openapi/adobe-experience-cloud-sandboxes-api-openapi.yml
+  base: https://platform.adobe.io
+  operations:
+    - operationId: listSandboxes
+      method: GET
+      path: /data/foundation/sandbox-management/sandboxes
+    - operationId: createSandbox
+      method: POST
+      path: /data/foundation/sandbox-management/sandboxes
+    - operationId: getSandbox
+      method: GET
+      path: /data/foundation/sandbox-management/sandboxes/{sandboxName}
+    - operationId: deleteSandbox
+      method: DELETE
+      path: /data/foundation/sandbox-management/sandboxes/{sandboxName}
+  entity_fields:
+    - name
+    - title
+    - type
+    - state
+    - region
+target_environments:
+  product: Adobe Target
+  mechanism: environments
+  openapi: openapi/adobe-experience-cloud-environments-api-openapi.yml
+  operations:
+    - operationId: listEnvironments
+      method: GET
+      path: /target/environments
+  note: >-
+    Target separates traffic by environment (typically production / staging / development)
+    rather than by sandbox. Environments are listed via the Admin API and referenced when
+    delivering experiences.
+not_applicable:
+  test_cards: >-
+    None. Experience Cloud is a marketing/analytics suite, not a payments API — there are
+    no test card numbers or bank accounts to publish.
+  test_clocks: >-
+    None. No time-simulation facility is published. Segmentation evaluation latency is
+    documented as a real-world guardrail (up to 350ms edge, up to 5 minutes streaming), not
+    something a test harness can fast-forward.
+  fixtures: >-
+    No fixture/trigger tooling. Populating a development sandbox means ingesting real data
+    through the same Data Ingestion APIs used in production.

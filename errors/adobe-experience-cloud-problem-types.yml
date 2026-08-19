@@ -1,0 +1,114 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/adobe-experience-cloud-*-api-openapi.yml (36 refined specs, 110 operations);
+  error envelope shape read from components.schemas.Error
+description: >-
+  Error catalog derived from the 4xx/5xx responses declared across every Adobe Experience
+  Cloud OpenAPI in this repo. The contract does NOT use RFC 9457 problem+json — the single
+  documented error body is an Adobe-shaped envelope of errorCode / errorDescription /
+  errorId, served as application/json and declared only on 400. Every other status is
+  declared with a description and no body schema.
+format: adobe-error-envelope
+rfc9457: false
+envelope:
+  media_type: application/json
+  schema: Error
+  fields:
+    - name: errorCode
+      type: string
+      description: Adobe error code string.
+    - name: errorDescription
+      type: string
+      description: Human-readable description of the failure.
+    - name: errorId
+      type: string
+      description: Correlation id for the failed request — quote it to Adobe support.
+  note: >-
+    errorId is the trace handle. It is the only request-correlation field in the contract;
+    there is no separate request-id response header declared in these specs.
+summary:
+  statuses_declared: 6
+  operations_covered: 110
+  operations_declaring_429: 1
+  bodied_statuses: 1
+problem_types:
+  - status: 400
+    title: Bad Request
+    schema: Error
+    media_type: application/json
+    operations: 33
+    meaning: Request body or parameters failed validation.
+    examples:
+      - Invalid batch configuration.
+      - Invalid placement definition.
+      - Invalid namespace definition.
+      - Journey cannot be published due to validation errors.
+    remediation: Fix the payload against the operation's requestBody schema. For Journey
+      Optimizer publish calls, validate the journey in the UI first — publish returns 400
+      for journey-level validation failures, not just malformed JSON.
+  - status: 401
+    title: Unauthorized
+    schema: null
+    operations: 41
+    meaning: Authentication credentials are missing or invalid.
+    remediation: >-
+      Every Experience Cloud API needs BOTH an IMS bearer token in Authorization and the
+      Developer Console client id in x-api-key. A 401 most often means the token expired
+      (IMS access tokens are short-lived) or x-api-key was omitted. Re-mint at
+      https://ims-na1.adobelogin.com/ims/token/v3.
+  - status: 403
+    title: Forbidden
+    schema: null
+    operations: 4
+    meaning: Authenticated, but the account lacks permission for this resource.
+    examples:
+      - Insufficient permissions to access the requested report suite.
+      - Insufficient permissions.
+    remediation: Grant the developer account the product profile in the Adobe Admin
+      Console (adminconsole.adobe.com). Authenticating with an Adobe ID is not sufficient
+      — organization-level product permissions are separate.
+  - status: 404
+    title: Not Found
+    schema: null
+    operations: 50
+    meaning: The addressed resource does not exist, or is not visible in the current
+      sandbox / report suite / tenant.
+    examples:
+      - Schema not found.
+      - Service not found.
+      - Report suite not found.
+      - Service or profile not found.
+    remediation: >-
+      On Experience Platform, a 404 frequently means the wrong sandbox — the x-sandbox-name
+      header scopes every lookup. On Analytics, check the companyId path segment and rsid.
+  - status: 409
+    title: Conflict
+    schema: null
+    operations: 3
+    meaning: The resource is in a state that forbids the requested change.
+    examples:
+      - Schema is in use and cannot be deleted.
+      - Journey is active and cannot be deleted.
+      - Profile with this email already exists.
+    remediation: Stop or unpublish the resource first (stopJourney before deleteJourney),
+      or detach dependent datasets before deleting a schema.
+  - status: 429
+    title: Too Many Requests
+    schema: null
+    operations: 1
+    meaning: Rate limit exceeded.
+    declared_on:
+      - getReport
+    remediation: >-
+      Back off and retry. The specs declare no Retry-After or RateLimit-* response header,
+      and Adobe's published guardrails are throughput ceilings rather than per-key request
+      budgets — see rate-limits/adobe-experience-cloud-rate-limits.yml.
+    gap: >-
+      429 is declared on exactly ONE of 110 operations even though the throttling applies
+      across the platform. An agent reading this contract cannot tell which calls can be
+      throttled.
+gaps:
+  - No 5xx response is declared on any operation in the contract.
+  - 401/403/404/409/429 carry no response body schema, so a client cannot parse a
+    machine-readable reason for anything except a 400.
+  - No RFC 9457 application/problem+json anywhere in the surface.

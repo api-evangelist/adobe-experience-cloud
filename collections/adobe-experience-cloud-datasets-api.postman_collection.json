@@ -1,0 +1,719 @@
+{
+  "item": [
+    {
+      "id": "23c02d5b-e236-4bbc-8bdf-f571c6f4d277",
+      "name": "Datasets",
+      "description": {
+        "content": "Operations for managing datasets in the Data Lake",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cad570ab-ac8e-4616-b931-6453adf6c244",
+          "name": "Adobe Experience Platform Adobe Experience Cloud List Datasets",
+          "request": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud List Datasets",
+            "description": {
+              "content": "Returns a list of datasets registered in the Data Catalog for the current sandbox. Each dataset includes its name, schema reference, creation date, and status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "foundation",
+                "catalog",
+                "dataSets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The name of the sandbox to operate in.",
+                "key": "x-sandbox-name",
+                "value": "prod"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93615b75-e331-459d-b8c9-bfe1a8a6add1",
+              "name": "A list of datasets.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "foundation",
+                    "catalog",
+                    "dataSets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The name of the sandbox to operate in.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbbf1527-8929-47f1-9077-63aaa78743cd",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "foundation",
+                    "catalog",
+                    "dataSets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "start",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The name of the sandbox to operate in.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c708353c-747d-4259-8861-896907742ada",
+          "name": "Adobe Experience Platform Adobe Experience Cloud Create a Dataset",
+          "request": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Create a Dataset",
+            "description": {
+              "content": "Creates a new dataset in the Data Catalog. The request body must include a name and a reference to an existing XDM schema. Optionally configure tags, file format, and ingestion settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "foundation",
+                "catalog",
+                "dataSets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The name of the sandbox to operate in.",
+                "key": "x-sandbox-name",
+                "value": "prod"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"schemaRef\": {\n    \"id\": \"<string>\",\n    \"contentType\": \"<string>\"\n  },\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "168d2e55-c30d-4cc8-b361-70a33574f03b",
+              "name": "Dataset created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "foundation",
+                    "catalog",
+                    "dataSets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The name of the sandbox to operate in.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Name\",\n  \"description\": \"example\",\n  \"schemaRef\": {\n    \"id\": \"abc123\",\n    \"contentType\": \"standard\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "URI of the newly created dataset.",
+                  "key": "Location",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ee4077aa-5d1f-4432-b826-df8bbf8e964b",
+              "name": "Invalid dataset definition.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "foundation",
+                    "catalog",
+                    "dataSets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The name of the sandbox to operate in.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Name\",\n  \"description\": \"example\",\n  \"schemaRef\": {\n    \"id\": \"abc123\",\n    \"contentType\": \"standard\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd488bea-ac25-4174-b7b4-8113b7a23c3c",
+          "name": "Adobe Experience Platform Adobe Experience Cloud Get a Dataset",
+          "request": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Get a Dataset",
+            "description": {
+              "content": "Retrieves the metadata and configuration for a single dataset by its dataset ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "foundation",
+                "catalog",
+                "dataSets",
+                ":datasetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "datasetId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The name of the sandbox to operate in.",
+                "key": "x-sandbox-name",
+                "value": "prod"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3c52f80d-96e7-440a-8277-af94b7ff6f23",
+              "name": "Dataset details returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "foundation",
+                    "catalog",
+                    "dataSets",
+                    ":datasetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "datasetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The name of the sandbox to operate in.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"Example Name\",\n  \"schemaRef\": {\n    \"id\": \"abc123\",\n    \"contentType\": \"standard\"\n  },\n  \"fileDescription\": {\n    \"format\": \"example\"\n  },\n  \"created\": \"2025-03-15T14:30:00Z\",\n  \"updated\": \"2025-03-15T14:30:00Z\",\n  \"status\": \"active\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c123659-98b5-4e6d-ab6d-359ce63c39c2",
+              "name": "Dataset not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "foundation",
+                    "catalog",
+                    "dataSets",
+                    ":datasetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "datasetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The name of the sandbox to operate in.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9a978e3-14a5-43f8-ac9f-ffecd8f70fa8",
+          "name": "Adobe Experience Platform Adobe Experience Cloud Delete a Dataset",
+          "request": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Delete a Dataset",
+            "description": {
+              "content": "Deletes a dataset and all associated batches from the Data Catalog. This action cannot be undone.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "data",
+                "foundation",
+                "catalog",
+                "dataSets",
+                ":datasetId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "datasetId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The name of the sandbox to operate in.",
+                "key": "x-sandbox-name",
+                "value": "prod"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d99a3852-7f4d-4501-8afe-90621ee79308",
+              "name": "Dataset deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "foundation",
+                    "catalog",
+                    "dataSets",
+                    ":datasetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "datasetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The name of the sandbox to operate in.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4f1995ae-a35b-490d-bab5-ade87285555e",
+              "name": "Dataset not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "data",
+                    "foundation",
+                    "catalog",
+                    "dataSets",
+                    ":datasetId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "datasetId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The name of the sandbox to operate in.",
+                    "key": "x-sandbox-name",
+                    "value": "prod"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://analytics.adobe.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9a7fbc87-cb30-4a6c-89a4-f992d651a438",
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Datasets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.\n\nContact Support:\n Name: Adobe Developer",
+      "type": "text/plain"
+    }
+  }
+}

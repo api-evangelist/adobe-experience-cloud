@@ -1,0 +1,165 @@
+generated: '2026-08-13'
+method: derived
+source: live discovery probes (ims-na1.adobelogin.com, oauth.adobeaemcloud.com,
+  aa-mcp.adobe.io, cja-mcp.adobe.io, mcp.adobeaemcloud.com, adobe.com/.well-known/security.txt),
+  openapi/adobe-experience-cloud-*-api-openapi.yml, and asyncapi/adobe-io-events-asyncapi.yml
+description: >-
+  Which industry and cross-cutting standards Adobe Experience Cloud actually conforms to,
+  each with the evidence that decided it. Adobe conforms strongly on the identity and agent
+  side — OAuth 2.0, OIDC, RFC 8414, RFC 9728, MCP, RFC 9116 — and not at all on the HTTP
+  hygiene side: no RFC 9457 problem details, no RFC 8594 sunset headers, no idempotency,
+  no rate-limit headers.
+standards:
+  - id: oauth2
+    name: OAuth 2.0 (RFC 6749)
+    conforms: true
+    evidence: >-
+      Adobe IMS publishes authorize/token/revoke endpoints and every Experience Cloud API
+      takes a bearer token. https://ims-na1.adobelogin.com/ims/token/v3.
+  - id: oidc
+    name: OpenID Connect Discovery 1.0
+    conforms: true
+    evidence: >-
+      https://ims-na1.adobelogin.com/.well-known/openid-configuration returns 200 with
+      issuer, authorization_endpoint, token_endpoint, jwks_uri and scopes_supported.
+      oauth.adobeaemcloud.com publishes the same.
+  - id: rfc8414
+    name: OAuth 2.0 Authorization Server Metadata (RFC 8414)
+    conforms: true
+    evidence: >-
+      Four hosts return a valid /.well-known/oauth-authorization-server document:
+      ims-na1.adobelogin.com, oauth.adobeaemcloud.com, aa-mcp.adobe.io, cja-mcp.adobe.io.
+  - id: rfc9728
+    name: OAuth 2.0 Protected Resource Metadata (RFC 9728)
+    conforms: true
+    evidence: >-
+      Every MCP endpoint returns a 401 with a WWW-Authenticate carrying resource_metadata,
+      and that URL resolves to a valid protected-resource document naming its authorization
+      server. Probed on aa-mcp.adobe.io, cja-mcp.adobe.io and mcp.adobeaemcloud.com.
+  - id: rfc7636
+    name: PKCE (RFC 7636)
+    conforms: true
+    evidence: All four authorization servers advertise code_challenge_methods_supported S256.
+  - id: rfc7591
+    name: OAuth 2.0 Dynamic Client Registration (RFC 7591)
+    conforms: true
+    evidence: >-
+      registration_endpoint published by oauth.adobeaemcloud.com, aa-mcp.adobe.io and
+      cja-mcp.adobe.io — which is what lets an arbitrary MCP client connect without a
+      pre-provisioned client id.
+  - id: mcp
+    name: Model Context Protocol
+    conforms: true
+    evidence: >-
+      Nine Adobe-hosted HTTPS MCP endpoints across three hosts answer JSON-RPC with a
+      well-formed MCP error object. See mcp/adobe-experience-cloud-mcp.yml.
+  - id: rfc9116
+    name: security.txt (RFC 9116)
+    conforms: true
+    evidence: >-
+      https://adobe.com/.well-known/security.txt returns 200 — PGP-signed, with Contact,
+      Policy, Encryption, Acknowledgments, Preferred-Languages and Expires 2027-07-30.
+  - id: openapi
+    name: OpenAPI 3.1
+    conforms: true
+    evidence: 36 refined + 5 source specs in this repo, all openapi 3.1.0, covering 110
+      operations.
+    note: The specs are API Evangelist harvests of Adobe's documented surface, not
+      Adobe-published machine-readable contracts. Adobe does not publish an OpenAPI
+      document for Experience Cloud at a stable URL.
+  - id: asyncapi
+    name: AsyncAPI
+    conforms: true
+    evidence: asyncapi/adobe-io-events-asyncapi.yml describes the Adobe I/O Events surface.
+    note: Same provenance caveat as OpenAPI — derived here, not published by Adobe.
+  - id: cloudevents
+    name: CloudEvents
+    conforms: true
+    evidence: >-
+      Adobe I/O Events documents its event payload as a JSON object describing something
+      that happened, emitted by registered Event Providers to a subscriber webhook URL.
+      https://developer.adobe.com/events/docs/guides/
+    confidence: medium
+  - id: webhooks
+    name: Webhook delivery
+    conforms: true
+    evidence: >-
+      Adobe I/O Events webhooks — an application registers a webhook URL and event types,
+      and each event results in an HTTP request to that URL.
+      https://developer.adobe.com/events/docs/guides/
+  - id: rfc9457
+    name: Problem Details for HTTP APIs (RFC 9457)
+    conforms: false
+    evidence: >-
+      No application/problem+json anywhere in the contract. Errors use an Adobe envelope of
+      errorCode / errorDescription / errorId, declared only on 400.
+  - id: rfc8594
+    name: Sunset HTTP Header (RFC 8594)
+    conforms: false
+    evidence: No Sunset or Deprecation header on any operation; zero operations marked
+      deprecated.
+  - id: idempotency
+    name: Idempotency keys (draft-ietf-httpapi-idempotency-key-header)
+    conforms: false
+    evidence: >-
+      Zero occurrences of "idempoten" across every spec, collection and example in this
+      repo. No operation declares any header parameter at all.
+  - id: rate-limit-headers
+    name: RateLimit header fields (draft-ietf-httpapi-ratelimit-headers)
+    conforms: false
+    evidence: >-
+      No X-RateLimit-*, RateLimit-* or Retry-After declared. 429 is declared on 1 of 110
+      operations.
+  - id: pagination
+    name: Consistent pagination
+    conforms: false
+    evidence: >-
+      Five different pagination shapes across five products (offset/limit+total;
+      page/limit+content/totalElements/totalPages; limit+totalCount; start/limit+_page;
+      _lineStart/_lineCount). No Link header, no next-page URL.
+  - id: json-schema
+    name: JSON Schema
+    conforms: true
+    evidence: >-
+      Experience Platform's Schema Registry is built on JSON Schema — the Schema entity
+      carries $id, meta:altId and allOf composition (XDM).
+  - id: json-api
+    name: JSON:API
+    conforms: false
+    evidence: No JSON:API envelope, type/attributes/relationships structure or
+      application/vnd.api+json media type anywhere.
+  - id: odata
+    name: OData
+    conforms: false
+    evidence: No $metadata, $filter or OData conventions in the surface.
+  - id: scim
+    name: SCIM
+    conforms: false
+    evidence: >-
+      User management is exposed as GET /api/{companyId}/users on Adobe Analytics with an
+      Adobe-shaped User entity; identity provisioning is handled by the Adobe Admin Console
+      and the User Management API, neither of which is a SCIM surface in this contract.
+  - id: a2a
+    name: A2A Agent Card
+    conforms: false
+    evidence: >-
+      No agent card on any host. /.well-known/agent-card.json and /.well-known/agent.json
+      return 404 on platform.adobe.io, analytics.adobe.io and mc.adobe.io; 403 on
+      mcp.adobeaemcloud.com; and a soft-200 SPA HTML shell on developer.adobe.com and
+      adobe.io.
+  - id: llmstxt
+    name: llms.txt
+    conforms: true
+    evidence: >-
+      https://experienceleague.adobe.com/llms.txt returns 200 with a spec-conformant
+      H1/blockquote document carrying a version log, product scope, curated URL lists,
+      robots.txt alignment, markdown endpoints and an MCP server section.
+compliance_program:
+  published: unknown
+  note: >-
+    Adobe operates a trust center at adobe.com/trust and a HackerOne program, and the
+    security.txt names a security policy. The trust/compliance pages themselves
+    (www.adobe.com/trust.html, /trust/compliance/compliance-list.html) timed out on every
+    request from this run, so NO named certification is recorded here. Absence of a claim
+    is deliberate — see security/adobe-experience-cloud-vulnerability-disclosure.yml for
+    what was verified.

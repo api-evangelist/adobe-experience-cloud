@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Schemas API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Schemas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud List Schemas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/data/foundation/schemaregistry/tenant/schemas",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results per page."
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor for the next page of results."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of XDM schemas defined in the tenant container. Each schema entry includes its title, description, and meta information such as the schema ID and version."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Create a Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/data/foundation/schemaregistry/tenant/schemas",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new XDM schema in the tenant container. The request body must include the schema title, allOf references to a base class, and any mixin or field group references."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Get a Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/data/foundation/schemaregistry/tenant/schemas/:schemaId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "schemaId",
+                "value": "",
+                "type": "path",
+                "description": "URL-encoded schema meta:altId or $id."
+              }
+            ]
+          },
+          "docs": "Retrieves the full definition of an XDM schema by its URL-encoded schema ID, including all field definitions, mixins, and class references."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Update a Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://analytics.adobe.io/data/foundation/schemaregistry/tenant/schemas/:schemaId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "schemaId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the entire definition of an existing XDM schema with the provided request body."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Delete a Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.adobe.io/data/foundation/schemaregistry/tenant/schemas/:schemaId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "schemaId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a tenant-defined XDM schema. Only schemas that are not referenced by datasets or other resources can be deleted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Queries API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Queries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud List Queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/data/foundation/query/queries",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of queries that have been submitted to the Query Service, including their SQL statements, status, and execution metadata."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Submit a Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/data/foundation/query/queries",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a new SQL query to the Query Service for execution against datasets in the Data Lake. Returns a query ID that can be used to poll for results."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Get Query Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/data/foundation/query/queries/:queryId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "queryId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the status, execution metadata, and results reference for a previously submitted query."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

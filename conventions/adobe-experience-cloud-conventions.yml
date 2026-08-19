@@ -1,0 +1,170 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/adobe-experience-cloud-*-api-openapi.yml (36 refined specs, 110 operations),
+  https://developer.adobe.com/analytics-apis/docs/2.0/guides/,
+  https://developer.adobe.com/experience-platform-apis/,
+  https://ims-na1.adobelogin.com/.well-known/openid-configuration
+description: >-
+  Cross-cutting runtime semantics for Adobe Experience Cloud. The honest headline is that
+  there are no platform-wide conventions: Experience Cloud is five separately-built product
+  APIs sharing one identity provider. Authentication is the only thing that is genuinely
+  uniform. Pagination, collection envelopes, tenancy scoping and versioning each differ per
+  product, and idempotency does not exist anywhere in the contract.
+authentication:
+  style: OAuth 2.0 bearer token + client API key, both required on every call
+  headers:
+    - name: Authorization
+      value: Bearer <IMS access token>
+      required: true
+    - name: x-api-key
+      value: <Adobe Developer Console client id>
+      required: true
+    - name: x-gw-ims-org-id
+      value: <IMS org id>@AdobeOrg
+      required: conditional
+      note: Required by Experience Platform, Journey Optimizer and the MCP servers; not
+        declared in the Analytics 2.0 spec.
+  provider: Adobe Identity Management System (IMS)
+  discovery: https://ims-na1.adobelogin.com/.well-known/openid-configuration
+  token_endpoint: https://ims-na1.adobelogin.com/ims/token/v3
+  authorization_endpoint: https://ims-na1.adobelogin.com/ims/authorize/v2
+  note: >-
+    Both credentials are needed. A valid bearer token alone returns 401 — 41 of 110
+    operations declare that status. Product entitlement is granted separately in the Adobe
+    Admin Console; a correctly-authenticated identity with no product profile returns 403.
+  cross_ref: authentication/adobe-experience-cloud-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  evidence: >-
+    Zero occurrences of "idempoten" across all 36 OpenAPIs, the five _original specs, the
+    Postman collections and the examples in this repo. No operation declares any header
+    parameter at all. There is no safe-retry primitive on any write operation, including
+    sendTransactionalMessage (POST /campaign/mcAdobe/{transactionalMessageId}), which is a
+    message-send.
+  implication: >-
+    An agent retrying a failed POST on this platform can double-send. Retries must be
+    guarded client-side by checking for the created resource before re-issuing.
+pagination:
+  uniform: false
+  styles:
+    - name: offset/limit with total
+      products:
+        - Adobe Target
+      params:
+        - offset
+        - limit
+      response_fields:
+        - total
+        - offset
+        - limit
+    - name: page/limit with Spring-style envelope
+      products:
+        - Adobe Analytics
+        - Adobe Campaign Standard
+      params:
+        - page
+        - limit
+      response_fields:
+        - content
+        - totalElements
+        - totalPages
+    - name: limit with totalCount
+      products:
+        - Adobe Journey Optimizer
+        - Offer Decisioning
+      params:
+        - limit
+      response_fields:
+        - totalCount
+    - name: cursor page object
+      products:
+        - Adobe Experience Platform
+      params:
+        - start
+        - limit
+      response_fields:
+        - _page
+    - name: line window
+      products:
+        - Adobe Experience Platform (Query Service)
+      params:
+        - _lineStart
+        - _lineCount
+  note: >-
+    Five pagination shapes in one platform. `limit` is the only parameter that appears
+    across products (18 operations); `page` (7) and `offset` (3) do not overlap. There is
+    no Link header and no next-page URL anywhere in the contract — a client must reconstruct
+    the next request itself, and must know which product it is talking to to do so.
+tenancy:
+  note: Scoping is positional and differs per product; getting it wrong reads as a 404.
+  scopes:
+    - product: Adobe Analytics
+      carrier: '/api/{companyId}/... path segment plus rsid'
+    - product: Adobe Target
+      carrier: mc.adobe.io/{tenant} server variable
+    - product: Adobe Campaign Standard
+      carrier: mc.adobe.io/{organization} server variable
+    - product: Adobe Experience Platform / Journey Optimizer
+      carrier: x-sandbox-name header
+      note: Documented by Adobe as required on every AEP call; not declared as a parameter
+        in this repo's specs.
+field_expansion:
+  supported: partial
+  note: Adobe Analytics uses an `expansion` query parameter on several endpoints to inflate
+    component metadata. Not present outside Analytics.
+metadata:
+  supported: false
+  note: No free-form metadata / custom-attribute bag on any entity in the contract.
+request_tracing:
+  header: null
+  body_field: errorId
+  note: >-
+    There is no request-id request or response header in the contract. The only correlation
+    handle is `errorId` inside the error envelope — available on failure only, and only on
+    400 where a body schema is declared. Adobe Target's DeliveryResponse also carries a
+    `requestId` field in the success body.
+versioning:
+  uniform: false
+  schemes:
+    - product: Adobe Analytics
+      style: path
+      current: '2.0'
+      example: https://analytics.adobe.io/api/{companyId}/reports (2.0 API family)
+    - product: Adobe Target Delivery
+      style: path
+      current: v1
+      example: https://delivery.adobetarget.com/rest/v1/delivery
+    - product: Adobe Experience Platform
+      style: service-path
+      note: Versioning is per service under platform.adobe.io/data/foundation/<service>;
+        no single platform version number.
+    - product: Adobe Campaign Standard
+      style: none-in-path
+      example: https://mc.adobe.io/{organization}/campaign/...
+  cross_ref: lifecycle/adobe-experience-cloud-lifecycle.yml
+error_envelope:
+  format: adobe-error-envelope
+  rfc9457: false
+  media_type: application/json
+  fields:
+    - errorCode
+    - errorDescription
+    - errorId
+  declared_on:
+    - 400
+  note: 401/403/404/409/429 declare a description and no body schema.
+  cross_ref: errors/adobe-experience-cloud-problem-types.yml
+rate_limit_signaling:
+  headers: []
+  status: 429
+  retry_after: false
+  note: >-
+    429 is declared on exactly one operation (getReport). No X-RateLimit-*, no RateLimit-*,
+    no Retry-After anywhere in the contract. Adobe publishes throughput guardrails in prose
+    instead of runtime headers, so a client cannot see how close it is to a limit.
+  cross_ref: rate-limits/adobe-experience-cloud-rate-limits.yml
+content_negotiation:
+  request: application/json
+  response: application/json
+  note: application/json only across all 110 operations.

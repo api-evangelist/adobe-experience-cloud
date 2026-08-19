@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Identities API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Identities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud List Identity Namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/data/foundation/identity/namespaces",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns a list of all identity namespaces available in the current IMS organization, including standard namespaces (ECID, Email, Phone) and custom namespaces."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Create an Identity Namespace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/data/foundation/identity/namespaces",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a custom identity namespace for use in identity resolution and profile unification. The namespace must have a unique code and name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,178 @@
+generated: '2026-08-13'
+method: probed
+source: https://oauth.adobeaemcloud.com/.well-known/oauth-authorization-server,
+  https://aa-mcp.adobe.io/.well-known/oauth-authorization-server,
+  https://cja-mcp.adobe.io/.well-known/oauth-authorization-server,
+  https://ims-na1.adobelogin.com/.well-known/openid-configuration — all fetched
+  unauthenticated on 2026-08-13
+docs: https://developer.adobe.com/developer-console/docs/guides/authentication/
+description: >-
+  OAuth scopes Adobe Experience Cloud actually advertises, read from live RFC 8414 /
+  OpenID Connect discovery documents rather than from prose. Three authorization servers
+  publish scopes_supported: Adobe IMS itself (the base identity scopes), the AEM MCP
+  authorization server (the only place Adobe publishes fine-grained product scopes), and
+  the Adobe Analytics / CJA MCP servers (which reuse the IMS base plus a product-context
+  scope).
+note: >-
+  The OpenAPI contracts in this repo declare NO oauth2 securityScheme — they declare
+  http/bearer plus an apiKey header — so derive-oauth-scopes.py produced nothing. Every
+  scope below therefore comes from a live discovery document, not from the spec. That is
+  the stronger evidence, and it is why this artifact is method: probed rather than derived.
+summary:
+  authorization_servers: 4
+  distinct_scopes: 15
+  product_scopes: 8
+  pkce: S256
+  dynamic_client_registration: true
+authorization_servers:
+  - name: Adobe IMS
+    issuer: https://ims-na1.adobelogin.com
+    discovery: https://ims-na1.adobelogin.com/.well-known/openid-configuration
+    http_status: 200
+    authorization_endpoint: https://ims-na1.adobelogin.com/ims/authorize/v2
+    token_endpoint: https://ims-na1.adobelogin.com/ims/token/v3
+    jwks_uri: https://ims-na1.adobelogin.com/ims/keys
+    scopes:
+      - openid
+      - email
+      - profile
+  - name: AEM Cloud Service OAuth (fronts the AEM MCP servers)
+    issuer: https://oauth.adobeaemcloud.com
+    discovery: https://oauth.adobeaemcloud.com/.well-known/oauth-authorization-server
+    http_status: 200
+    authorization_endpoint: https://oauth.adobeaemcloud.com/oauth/authorize
+    token_endpoint: https://oauth.adobeaemcloud.com/oauth/token
+    revocation_endpoint: https://oauth.adobeaemcloud.com/oauth/revoke
+    registration_endpoint: https://oauth.adobeaemcloud.com/register
+    jwks_uri: https://oauth.adobeaemcloud.com/jwks
+    grant_types:
+      - authorization_code
+      - refresh_token
+    pkce: S256
+    token_endpoint_auth_methods:
+      - client_secret_post
+  - name: Adobe Analytics MCP
+    issuer: https://aa-mcp.adobe.io
+    discovery: https://aa-mcp.adobe.io/.well-known/oauth-authorization-server
+    http_status: 200
+    registration_endpoint: https://aa-mcp.adobe.io/register
+    delegates_to: https://ims-na1.adobelogin.com
+    token_endpoint_auth_methods:
+      - none
+    pkce: S256
+  - name: Adobe Customer Journey Analytics MCP
+    issuer: https://cja-mcp.adobe.io
+    discovery: https://cja-mcp.adobe.io/.well-known/oauth-authorization-server
+    http_status: 200
+    registration_endpoint: https://cja-mcp.adobe.io/register
+    delegates_to: https://ims-na1.adobelogin.com
+    pkce: S256
+scopes:
+  - name: openid
+    kind: identity
+    servers:
+      - ims
+      - aem
+      - aa-mcp
+      - cja-mcp
+    description: OpenID Connect base scope.
+  - name: email
+    kind: identity
+    servers:
+      - ims
+    description: Release the authenticated user's email address.
+  - name: profile
+    kind: identity
+    servers:
+      - ims
+    description: Release the authenticated user's profile claims.
+  - name: AdobeID
+    kind: identity
+    servers:
+      - aem
+      - aa-mcp
+      - cja-mcp
+    description: Adobe ID identity scope — the base scope for every Adobe API call.
+  - name: read_organizations
+    kind: identity
+    servers:
+      - aem
+    description: Read the IMS organizations the user belongs to.
+  - name: additional_info
+    kind: identity
+    servers:
+      - aem
+    description: Additional IMS profile information.
+  - name: additional_info.ownerOrg
+    kind: identity
+    servers:
+      - aem
+    description: The owning IMS organization of the authenticated identity.
+  - name: additional_info.projectedProductContext
+    kind: entitlement
+    servers:
+      - aem
+      - aa-mcp
+      - cja-mcp
+    description: >-
+      The user's projected product entitlements. This is the scope that carries Experience
+      Cloud product authorization — it is what turns an authenticated Adobe ID into an
+      identity that may call Analytics or CJA.
+  - name: aem.sites
+    kind: product
+    product: Adobe Experience Manager
+    servers:
+      - aem
+    description: AEM Sites — pages and site content.
+  - name: aem.assets.author
+    kind: product
+    product: Adobe Experience Manager Assets
+    servers:
+      - aem
+    description: Author-tier access to AEM Assets.
+  - name: aem.assets.delivery
+    kind: product
+    product: Adobe Experience Manager Assets
+    servers:
+      - aem
+    description: Delivery-tier access to AEM Assets.
+  - name: aem.fragments.management
+    kind: product
+    product: Adobe Experience Manager
+    servers:
+      - aem
+    description: Content fragment management — create, read, patch fragments and models.
+  - name: aem.folders
+    kind: product
+    product: Adobe Experience Manager
+    servers:
+      - aem
+    description: Folder operations.
+  - name: aem.repository
+    kind: product
+    product: Adobe Experience Manager
+    servers:
+      - aem
+    description: Repository-level access.
+  - name: aem.contentai
+    kind: product
+    product: Adobe Experience Manager Content AI
+    servers:
+      - aem
+    description: Content AI indexes — keyword, semantic, hybrid and natural-language search.
+  - name: aem.adobe.experimental
+    kind: product
+    product: Adobe Experience Manager
+    servers:
+      - aem
+    description: Experimental AEM capabilities.
+gaps:
+  - >-
+    Analytics, Target, Campaign, Journey Optimizer and Experience Platform publish no
+    fine-grained OAuth scopes. Authorization for those products is granted out-of-band as
+    product profiles in the Adobe Admin Console and surfaces to the token only as
+    additional_info.projectedProductContext. An agent cannot request least-privilege access
+    to Adobe Analytics the way it can to AEM Sites.
+  - >-
+    The OpenAPI contracts declare bearer + apiKey rather than an oauth2 flow, so the scopes
+    above are invisible to any tool that reads only the spec.

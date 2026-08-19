@@ -1,0 +1,162 @@
+generated: '2026-08-13'
+method: derived
+source: mcp/adobe-experience-cloud-mcp.yml (tool names published by Adobe in
+  github.com/adobe/skills) bound to operationIds in openapi/adobe-experience-cloud-*-api-openapi.yml
+description: >-
+  Binds each Adobe Analytics / CJA MCP tool to the Adobe Analytics 2.0 REST operation it
+  backs, so an agent can see which tool inherits which operation's parameters and request
+  body. The live MCP schemas are OAuth-gated (tools/list returns 401), so every binding
+  below is by name and semantics against the published REST contract, and confidence is
+  set accordingly. Nothing here was invented: every `rest` value is an operationId that
+  exists in this repo's OpenAPI, and every `tool` value is a name Adobe itself invokes in
+  its published agent skills.
+surfaces:
+  openapi:
+    - openapi/adobe-experience-cloud-reports-api-openapi.yml
+    - openapi/adobe-experience-cloud-report-suites-api-openapi.yml
+    - openapi/adobe-experience-cloud-metrics-api-openapi.yml
+    - openapi/adobe-experience-cloud-dimensions-api-openapi.yml
+    - openapi/adobe-experience-cloud-segments-api-openapi.yml
+    - openapi/adobe-experience-cloud-calculated-metrics-api-openapi.yml
+  mcp:
+    - url: https://aa-mcp.adobe.io/mcp
+      gated: true
+      gate: OAuth (Adobe IMS) — anonymous tools/list returns 401
+    - url: https://cja-mcp.adobe.io/mcp
+      gated: true
+      gate: OAuth (Adobe IMS) — anonymous tools/list returns 401
+  graphql: null
+coverage:
+  mcp_tools_documented: 21
+  mapped_to_rest: 8
+  mcp_only: 6
+  rest_only: 100
+  note: >-
+    rest_only counts every operation across all 36 refined Experience Cloud OpenAPIs that
+    has no corresponding MCP tool — Target, Campaign, Journey Optimizer, Offer Decisioning
+    and most of Experience Platform have a REST surface and no agent tool.
+crosswalk:
+  - tool: runReport
+    category: reporting
+    rest:
+      - getReport
+    binding: POST /api/{companyId}/reports
+    confidence: high
+    note: The Analytics 2.0 reporting endpoint. Both the tool and the operation take a
+      report request body of metrics, dimensions and date range.
+  - tool: findReportSuites
+    category: discovery
+    rest:
+      - listReportSuites
+      - getReportSuite
+    binding: GET /api/{companyId}/reportsuites
+    confidence: high
+  - tool: setDefaultReportSuite
+    category: session
+    rest:
+      - getReportSuite
+    binding: GET /api/{companyId}/reportsuites/{rsid}
+    confidence: medium
+    note: Session-state tool; it resolves and pins an rsid the REST API takes as a path
+      or body parameter. No REST equivalent for the pinning itself.
+  - tool: findMetrics
+    category: discovery
+    rest:
+      - listMetrics
+    binding: GET /api/{companyId}/metrics
+    confidence: high
+  - tool: findDimensions
+    category: discovery
+    rest:
+      - listDimensions
+    binding: GET /api/{companyId}/dimensions
+    confidence: high
+  - tool: findSegments
+    category: discovery
+    rest:
+      - listSegments
+    binding: GET /api/{companyId}/segments
+    confidence: high
+  - tool: describeSegment
+    category: discovery
+    rest:
+      - getSegment
+    binding: GET /api/{companyId}/segments/{segmentId}
+    confidence: high
+  - tool: upsertSegment
+    category: write
+    rest:
+      - createSegment
+      - updateSegment
+    binding: POST /api/{companyId}/segments, PUT /api/{companyId}/segments/{segmentId}
+    confidence: medium
+    note: One tool spanning two REST operations; the tool decides create vs update from
+      whether a segmentId is supplied.
+  - tool: findCalculatedMetrics
+    category: discovery
+    rest:
+      - listCalculatedMetrics
+    binding: GET /api/{companyId}/calculatedmetrics
+    confidence: high
+  - tool: describeMetric
+    category: discovery
+    rest:
+      - listMetrics
+      - getCalculatedMetric
+    binding: GET /api/{companyId}/metrics, GET /api/{companyId}/calculatedmetrics/{calculatedMetricId}
+    confidence: medium
+    note: Resolves either a standard or a calculated metric; which REST operation backs a
+      given call depends on the metric id supplied.
+mcp_only:
+  - tool: setSessionDefaults
+    reason: Client-side session state (reportSuiteId + globalCompanyId). The REST API
+      carries these as a path parameter and a header on every call instead.
+  - tool: searchDimensionItems
+    reason: Item-value search inside a dimension. Adobe Analytics 2.0 exposes dimension
+      items only as report breakdowns, not as a dedicated REST search endpoint, so this
+      tool composes a report request rather than mapping 1:1.
+  - tool: listComponentUsage
+    reason: Component usage reporting. No public Analytics 2.0 REST operation in this
+      repo's contract.
+  - tool: findDataViews
+    reason: Customer Journey Analytics data views. CJA has its own API (cja.adobe.io) that
+      is not captured in this repo's OpenAPI set.
+  - tool: setDefaultSessionDataViewId
+    reason: CJA session state; no REST equivalent.
+  - tool: get-aem-page-content
+    reason: AEM as a Cloud Service content tool. AEM has no OpenAPI in this repo.
+rest_only_note: Representative operations with a published REST contract and no agent
+  tool — the gap between what Experience Cloud can do over HTTP and what it can do over MCP.
+rest_only_examples:
+  - operationIds:
+      - listActivities
+      - createActivity
+      - updateActivityState
+      - deliverExperiences
+    product: Adobe Target
+  - operationIds:
+      - listJourneys
+      - createJourney
+      - publishJourney
+      - stopJourney
+    product: Adobe Journey Optimizer
+  - operationIds:
+      - listOffers
+      - createOffer
+      - listDecisionRules
+      - listPlacements
+    product: Offer Decisioning
+  - operationIds:
+      - listSchemas
+      - createSchema
+      - listDatasets
+      - createBatch
+      - listQueries
+      - listSandboxes
+    product: Adobe Experience Platform
+  - operationIds:
+      - listProfiles
+      - subscribeProfile
+      - sendTransactionalMessage
+      - listWorkflows
+    product: Adobe Campaign Standard

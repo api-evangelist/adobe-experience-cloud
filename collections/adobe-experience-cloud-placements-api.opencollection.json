@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Placements API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Placements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Journey Optimizer Adobe Experience Cloud List Placements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/offer/placements",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns a list of offer placements. Placements define the channel and content format where offers can be displayed."
+        },
+        {
+          "info": {
+            "name": "Adobe Journey Optimizer Adobe Experience Cloud Create a Placement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/offer/placements",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new offer placement with the specified channel and content type configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

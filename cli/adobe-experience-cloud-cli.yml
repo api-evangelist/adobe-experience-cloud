@@ -1,0 +1,111 @@
+generated: '2026-08-13'
+method: searched
+source: https://github.com/adobe/aio-cli (README.md, fetched via the GitHub contents API
+  2026-08-13), https://registry.npmjs.org/@adobe/aio-cli
+docs: https://developer.adobe.com/app-builder/docs/guides/
+description: >-
+  Adobe ships one first-party CLI across the Adobe Developer platform: the Adobe I/O
+  Extensible CLI (`aio`), an oclif-based tool whose plugin set covers Developer Console
+  projects, IMS authentication, Adobe I/O Events, App Builder apps and Adobe I/O Runtime.
+  It is a platform/tenant CLI rather than a per-product one — there is no `aio analytics`
+  or `aio target` command group, so day-to-day Analytics, Target, Campaign and Journey
+  Optimizer work is done over REST or through the MCP servers, not the CLI.
+name: aio
+package: '@adobe/aio-cli'
+version: 11.1.2
+published: '2026-06-03'
+repository: https://github.com/adobe/aio-cli
+license: Apache-2.0
+framework: oclif
+official: true
+install:
+  - method: npm
+    command: npm install -g @adobe/aio-cli
+    global: true
+requirements:
+  node: Node.js (README example runs node v24)
+command_groups:
+  - group: aio app
+    description: App Builder application lifecycle — scaffold, build, deploy, run, test,
+      undeploy, logs, state and DB management.
+    representative_commands:
+      - aio app init
+      - aio app add action
+      - aio app add event
+      - aio app add extension
+      - aio app add service
+      - aio app build
+      - aio app deploy
+      - aio app dev
+      - aio app run
+      - aio app test
+      - aio app undeploy
+      - aio app logs
+      - aio app info
+      - aio app config get log-forwarding
+      - aio app config set log-forwarding
+      - aio app state list
+      - aio app db provision
+      - aio app db stats
+  - group: aio auth
+    description: Adobe IMS authentication — log in, log out, manage auth contexts and
+      inspect the current token.
+    representative_commands:
+      - aio auth login
+      - aio auth logout
+      - aio auth ctx
+    plugin: '@adobe/aio-cli-plugin-auth'
+  - group: aio console
+    description: Adobe Developer Console — select organization, project and workspace, and
+      download the workspace credentials every Experience Cloud API call needs.
+    plugin: '@adobe/aio-cli-plugin-console'
+  - group: aio event
+    description: Adobe I/O Events — providers, event metadata, registrations and journalling.
+    plugin: '@adobe/aio-cli-plugin-events'
+  - group: aio runtime
+    description: Adobe I/O Runtime (serverless actions, triggers, rules, packages).
+    plugin: '@adobe/aio-cli-plugin-runtime'
+  - group: aio config
+    description: Local CLI configuration store.
+    plugin: '@adobe/aio-cli-plugin-config'
+  - group: aio certificate
+    description: Generate and inspect certificates for Developer Console credentials.
+    plugin: '@adobe/aio-cli-plugin-certificate'
+  - group: aio info
+    description: Report CLI, plugin and environment versions.
+    plugin: '@adobe/aio-cli-plugin-info'
+  - group: aio telemetry
+    description: Manage CLI telemetry opt-in.
+    plugin: '@adobe/aio-cli-plugin-telemetry'
+plugins:
+  - '@adobe/aio-cli-plugin-app'
+  - '@adobe/aio-cli-plugin-app-dev'
+  - '@adobe/aio-cli-plugin-app-templates'
+  - '@adobe/aio-cli-plugin-auth'
+  - '@adobe/aio-cli-plugin-certificate'
+  - '@adobe/aio-cli-plugin-config'
+  - '@adobe/aio-cli-plugin-console'
+  - '@adobe/aio-cli-plugin-events'
+  - '@adobe/aio-cli-plugin-info'
+  - '@adobe/aio-cli-plugin-runtime'
+  - '@adobe/aio-cli-plugin-telemetry'
+key_flows:
+  - name: Get credentials for any Experience Cloud API
+    steps:
+      - aio login
+      - aio console org select
+      - aio console project select
+      - aio console workspace select
+      - aio app use
+    note: This is the CLI path to the Authorization bearer token and x-api-key that every
+      Analytics / Target / Campaign / Journey Optimizer / Experience Platform call requires.
+  - name: Subscribe to Adobe I/O Events
+    steps:
+      - aio event provider list
+      - aio event eventmetadata list <providerId>
+      - aio event registration create
+gaps:
+  - >-
+    No product-level command groups. There is no `aio analytics report`, `aio target
+    activity` or `aio aep schema` — the CLI manages the developer platform, not the
+    Experience Cloud data plane.

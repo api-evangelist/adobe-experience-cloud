@@ -1,0 +1,83 @@
+generated: '2026-08-13'
+method: searched
+source: https://status.adobe.com/, https://experienceleague.adobe.com/en/docs/release-notes/experience-cloud/current,
+  https://developer.adobe.com/events/docs/whats_new/, and openapi/adobe-experience-cloud-*-api-openapi.yml
+description: >-
+  Versioning, deprecation and operational-transparency posture for Adobe Experience Cloud.
+  Adobe runs a public status page and a dated monthly changelog, and it retires products
+  in public (Campaign Standard, Target's at.js, Analytics 1.4), but it publishes no
+  machine-readable deprecation signal: nothing in the contract is marked deprecated, and
+  no operation returns Deprecation or Sunset headers.
+versioning:
+  uniform: false
+  note: Each product versions independently; there is no Experience Cloud API version.
+  schemes:
+    - product: Adobe Analytics
+      style: path
+      current: '2.0'
+      note: The 2.0 API family replaced the 1.4 API. 1.4 is retired.
+    - product: Adobe Target Delivery
+      style: path
+      current: v1
+    - product: Adobe Target Admin
+      style: none-in-path
+      note: mc.adobe.io/{tenant}/target/... with no version segment.
+    - product: Adobe Campaign Standard
+      style: none-in-path
+    - product: Adobe Experience Platform
+      style: per-service
+      note: platform.adobe.io/data/foundation/<service>; version is a per-service concern.
+    - product: Adobe Experience Manager as a Cloud Service
+      style: continuous-release
+      note: Continuously released; feature availability is gated on a minimum release
+        number (for example the AEM MCP content server requires release 26309).
+deprecation:
+  policy_published: false
+  policy_url: null
+  announcement_channel: https://experienceleague.adobe.com/en/docs/release-notes/experience-cloud/current
+  machine_readable: false
+  note: >-
+    No formal API deprecation policy — no stated notice period, no support window, no
+    versioned lifecycle contract. Adobe announces retirements product by product in
+    release notes when they happen.
+  rfc8594_headers: false
+  sunset_header: false
+  deprecation_header: false
+  deprecated_operations: 0
+  evidence: >-
+    Zero operations across the 36 refined OpenAPIs carry `deprecated: true`, and no
+    operation declares a Deprecation or Sunset response header. Adobe announces
+    end-of-life in per-product release notes and Experience League prose only.
+  known_retirements:
+    - product: Adobe Campaign Standard
+      note: Superseded by Adobe Journey Optimizer; Adobe publishes a migration path.
+    - product: Adobe Analytics 1.4 API
+      note: Superseded by the 2.0 API family.
+    - product: Adobe Target at.js
+      note: Superseded by the Experience Platform Web SDK (@adobe/alloy).
+  implication: >-
+    A client cannot detect an impending removal from a response. Deprecation discovery on
+    this platform is a human reading release notes.
+status_page:
+  published: true
+  url: https://status.adobe.com/
+  http_status: 200
+  scope: All Adobe cloud products including every Experience Cloud application.
+  machine_readable: unknown
+  note: Adobe runs its own status platform rather than Statuspage.io; no documented JSON
+    status endpoint was found.
+  cross_ref: Also surfaced inside the monthly central release note as "Adobe System Status".
+sla:
+  published: false
+  note: >-
+    Availability commitments are contractual per product and per tier, not published.
+    Experience Cloud is sold enterprise-only (see plans/adobe-experience-cloud-plans-pricing.yml),
+    and the SLA travels with the contract.
+release_notes:
+  url: https://experienceleague.adobe.com/en/docs/release-notes/experience-cloud/current
+  cadence: monthly
+  machine_readable: https://experienceleague.adobe.com/en/docs/release-notes/experience-cloud/current.md
+  cross_ref: changelog/adobe-experience-cloud-changelog.yml
+developer_whats_new:
+  url: https://developer.adobe.com/events/docs/whats_new/
+  scope: Adobe I/O Events surface changes.

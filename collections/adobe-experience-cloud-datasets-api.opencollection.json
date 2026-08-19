@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Datasets API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud List Datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/data/foundation/catalog/dataSets",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of datasets registered in the Data Catalog for the current sandbox. Each dataset includes its name, schema reference, creation date, and status."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Create a Dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/data/foundation/catalog/dataSets",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new dataset in the Data Catalog. The request body must include a name and a reference to an existing XDM schema. Optionally configure tags, file format, and ingestion settings."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Get a Dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/data/foundation/catalog/dataSets/:datasetId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the metadata and configuration for a single dataset by its dataset ID."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Delete a Dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.adobe.io/data/foundation/catalog/dataSets/:datasetId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a dataset and all associated batches from the Data Catalog. This action cannot be undone."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Workflows API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workflows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud List Workflows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/campaign/workflow",
+            "params": [
+              {
+                "name": "_lineCount",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of workflows configured in Adobe Campaign. Each workflow includes its ID, label, status, and schedule information."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Get a Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/campaign/workflow/:workflowPKey",
+            "params": [
+              {
+                "name": "workflowPKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a single workflow by its primary key, including its activities, transitions, and execution history."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Execute a Workflow Command",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/campaign/workflow/:workflowPKey/commands",
+            "params": [
+              {
+                "name": "workflowPKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a command on a workflow such as start, pause, resume, or stop. The command triggers the corresponding state transition in the workflow execution engine."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

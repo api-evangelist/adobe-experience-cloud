@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Dimensions API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dimensions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics Adobe Experience Cloud List Dimensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/:companyId/dimensions",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "rsid",
+                "value": "",
+                "type": "query",
+                "description": "Report suite ID."
+              }
+            ]
+          },
+          "docs": "Returns all available dimensions for a specified report suite. Each dimension includes its ID, name, description, data type, and segmentable status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

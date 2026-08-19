@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Campaign API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Campaign",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud List Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/campaign/profileAndServices/service",
+            "params": [
+              {
+                "name": "_lineCount",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of subscription services configured in Adobe Campaign. Services represent mailing lists or subscription topics that profiles can subscribe to."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Create a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/campaign/profileAndServices/service",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new subscription service in Adobe Campaign with the specified name, label, and configuration."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Get a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/campaign/profileAndServices/service/:servicePKey",
+            "params": [
+              {
+                "name": "servicePKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a subscription service by its primary key."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Subscribe a Profile to a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/campaign/profileAndServices/service/:servicePKey/subscriptions",
+            "params": [
+              {
+                "name": "servicePKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Subscribes an existing profile to the specified subscription service by providing the profile primary key."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,49 @@
+# generated: '2026-08-13'
+# method: generated
+# source: openapi/adobe-experience-cloud-audiences-api-openapi.yml + Adobe developer documentation
+overlay: 1.0.0
+info:
+  title: API Evangelist enrichment overlay — Adobe Experience Cloud Adobe Analytics 2.0 Activities Audiences
+    API
+  version: 1.0.0
+extends: ../openapi/adobe-experience-cloud-audiences-api-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance and the product this contract actually belongs to.
+  update:
+    x-api-evangelist:
+      provider: adobe-experience-cloud
+      product: Adobe Target
+      docs: https://developer.adobe.com/target/
+      enriched: '2026-08-13'
+      artifacts:
+      - conventions/adobe-experience-cloud-conventions.yml
+      - errors/adobe-experience-cloud-problem-types.yml
+      - authentication/adobe-experience-cloud-authentication.yml
+      - scopes/adobe-experience-cloud-scopes.yml
+      - rate-limits/adobe-experience-cloud-rate-limits.yml
+- target: $.info
+  description: 'Document the runtime facts the base contract omits: no idempotency primitive, no rate-limit
+    response headers, no RFC 9457 problem details.'
+  update:
+    x-runtime-semantics:
+      idempotency: false
+      rate_limit_headers: []
+      retry_after: false
+      rfc9457: false
+      error_envelope:
+      - errorCode
+      - errorDescription
+      - errorId
+- target: $.components.securitySchemes
+  description: Name the identity provider behind bearerAuth. Adobe IMS discovery is public.
+  update:
+    x-identity-provider:
+      name: Adobe Identity Management System (IMS)
+      issuer: https://ims-na1.adobelogin.com
+      discovery: https://ims-na1.adobelogin.com/.well-known/openid-configuration
+      token_endpoint: https://ims-na1.adobelogin.com/ims/token/v3
+- target: $.info
+  description: Tenancy carrier for this product, documented by Adobe but not expressed as a declared header.
+  update:
+    x-tenancy: mc.adobe.io/{tenant} server variable

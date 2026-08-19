@@ -1,0 +1,164 @@
+{
+  "item": [
+    {
+      "id": "259f7b5a-17ef-49a1-9f3e-1237c8d603e8",
+      "name": "Metadata",
+      "description": {
+        "content": "Operations for retrieving resource metadata",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c11a14ff-1267-46ff-b241-82bff9d7606b",
+          "name": "Adobe Campaign Adobe Experience Cloud List Resource Metadata",
+          "request": {
+            "name": "Adobe Campaign Adobe Experience Cloud List Resource Metadata",
+            "description": {
+              "content": "Returns metadata about the available custom resources and their fields in the Adobe Campaign data model. Useful for discovering extended profile attributes and custom resource schemas.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "campaign",
+                "profileAndServicesExt",
+                "resourceType"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a456ca4-18b9-43be-b28a-1d1409e5c4cf",
+              "name": "Resource metadata returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "profileAndServicesExt",
+                    "resourceType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"PKey\": \"example\",\n      \"name\": \"Example Name\",\n      \"label\": \"example\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91bf6880-3331-44cf-b99b-1de780a057c1",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    "profileAndServicesExt",
+                    "resourceType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://analytics.adobe.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e81f7340-5b98-4f0c-9fe5-68861614a31e",
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Metadata API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.\n\nContact Support:\n Name: Adobe Developer",
+      "type": "text/plain"
+    }
+  }
+}

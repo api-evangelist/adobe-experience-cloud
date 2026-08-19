@@ -1,0 +1,251 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Segments API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Segments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics Adobe Experience Cloud List Segments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/:companyId/segments",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "The global company ID."
+              },
+              {
+                "name": "rsids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of report suite IDs to filter segments."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of segments available to the authenticated user. Segments can be filtered by report suite, owner, or tag. Each entry includes the segment ID, name, definition, and sharing status."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Adobe Experience Cloud Create a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/api/:companyId/segments",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "The global company ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new segment in Adobe Analytics. The request body must include the segment name, report suite ID, and the segment definition with container and rule criteria."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Adobe Experience Cloud Get a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/:companyId/segments/:segmentId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "segmentId",
+                "value": "",
+                "type": "path",
+                "description": "The segment ID."
+              }
+            ]
+          },
+          "docs": "Retrieves the full definition and metadata for a single segment identified by its segment ID."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Adobe Experience Cloud Update a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://analytics.adobe.io/api/:companyId/segments/:segmentId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "segmentId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing segment with new definition or metadata. The full segment object must be provided in the request body."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Adobe Experience Cloud Delete a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.adobe.io/api/:companyId/segments/:segmentId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "segmentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Permanently deletes a segment identified by its segment ID. This action cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud List Segment Definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/data/core/ups/segment/definitions",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of audience segment definitions configured in the platform. Each segment includes its name, PQL expression, and evaluation status."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Create a Segment Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/data/core/ups/segment/definitions",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new audience segment definition using a Profile Query Language (PQL) expression. The segment will be evaluated against the unified profile store."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Get a Segment Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/data/core/ups/segment/definitions/:segmentId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "segmentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a single segment definition by its ID, including the PQL expression, merge policy, and evaluation schedule."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Delete a Segment Definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.adobe.io/data/core/ups/segment/definitions/:segmentId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "segmentId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a segment definition by its ID. Segment jobs already running will complete but no new evaluations will occur."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

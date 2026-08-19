@@ -1,0 +1,117 @@
+generated: '2026-08-13'
+method: searched
+source: https://github.com/adobe/skills — "Adobe Skills for Agents", Apache-2.0,
+  plugins/adobe-analytics/skills/ and plugins/adobe-cja/skills/, fetched via the GitHub
+  contents API on 2026-08-13
+description: >-
+  Agent Skills PUBLISHED BY ADOBE for its Experience Cloud analytics products, saved
+  verbatim. Adobe distributes these through a Claude Code / Cursor plugin marketplace
+  (github.com/adobe/skills), where each plugin bundles the skills plus a .mcp.json
+  pointing at Adobe's hosted MCP server. These are not skills API Evangelist wrote for
+  Adobe — they are Adobe's own, and they are the source of the MCP tool names recorded
+  in mcp/adobe-experience-cloud-mcp.yml.
+upstream:
+  repository: https://github.com/adobe/skills
+  marketplace: adobe-skills
+  license: Apache-2.0
+  owner: Adobe
+  install:
+    claude_code:
+      - /plugin marketplace add adobe/skills
+      - /plugin install adobe-analytics@adobe-skills
+      - /plugin install adobe-cja@adobe-skills
+  repo_scope: >-
+    The upstream repository carries 160 SKILL.md files across plugins for AEM (6.5 LTS,
+    Cloud Service, Edge Delivery Services, project management), App Builder, Commerce,
+    Creative Cloud, Workfront, Web and Stardust. Only the two Experience Cloud analytics
+    plugins are mirrored here, because they are the ones bound to the API contracts in
+    this repo.
+summary:
+  skill_count: 11
+  plugins: 2
+  method: searched
+skills:
+  - name: aa-kpi-pulse
+    plugin: adobe-analytics
+    file: skills/adobe-experience-cloud-aa-kpi-pulse.md
+    api: Adobe Analytics 2.0 API
+    mcp: https://aa-mcp.adobe.io/mcp
+    tools:
+      - findReportSuites
+      - setSessionDefaults
+      - findMetrics
+      - runReport
+    description: KPI digest with period-over-period change and top mover callout.
+  - name: aa-top-movers-watchlist
+    plugin: adobe-analytics
+    file: skills/adobe-experience-cloud-aa-top-movers-watchlist.md
+    api: Adobe Analytics 2.0 API
+    mcp: https://aa-mcp.adobe.io/mcp
+    description: Ranks dimension items by biggest gain or loss for a metric between two
+      periods.
+  - name: aa-conversion-funnel-analysis
+    plugin: adobe-analytics
+    file: skills/adobe-experience-cloud-aa-conversion-funnel-analysis.md
+    api: Adobe Analytics 2.0 API
+    mcp: https://aa-mcp.adobe.io/mcp
+    description: Step-by-step fallout analysis across a multi-step conversion funnel.
+  - name: aa-segment-performance-comparator
+    plugin: adobe-analytics
+    file: skills/adobe-experience-cloud-aa-segment-performance-comparator.md
+    api: Adobe Analytics 2.0 API
+    mcp: https://aa-mcp.adobe.io/mcp
+    description: Side-by-side KPI comparison across two or more audience segments.
+  - name: aa-executive-briefing
+    plugin: adobe-analytics
+    file: skills/adobe-experience-cloud-aa-executive-briefing.md
+    api: Adobe Analytics 2.0 API
+    mcp: https://aa-mcp.adobe.io/mcp
+    description: Executive-ready performance summary covering key metrics, trends and
+      drivers.
+  - name: cja-kpi-pulse
+    plugin: adobe-cja
+    file: skills/adobe-experience-cloud-cja-kpi-pulse.md
+    api: Adobe Customer Journey Analytics
+    mcp: https://cja-mcp.adobe.io/mcp
+    description: KPI digest with period-over-period change, trend direction and dimension
+      breakdown.
+  - name: cja-top-movers-watchlist
+    plugin: adobe-cja
+    file: skills/adobe-experience-cloud-cja-top-movers-watchlist.md
+    api: Adobe Customer Journey Analytics
+    mcp: https://cja-mcp.adobe.io/mcp
+    description: Ranks dimension items by biggest gain or loss for a metric.
+  - name: cja-funnel-health-check
+    plugin: adobe-cja
+    file: skills/adobe-experience-cloud-cja-funnel-health-check.md
+    api: Adobe Customer Journey Analytics
+    mcp: https://cja-mcp.adobe.io/mcp
+    description: Step-by-step fallout analysis across a multi-step conversion funnel.
+  - name: cja-dimension-analysis
+    plugin: adobe-cja
+    file: skills/adobe-experience-cloud-cja-dimension-analysis.md
+    api: Adobe Customer Journey Analytics
+    mcp: https://cja-mcp.adobe.io/mcp
+    description: Cardinality, distribution, trends, anomalies and data quality for a
+      dimension; renders an interactive HTML dashboard or markdown report.
+  - name: cja-segment-performance-comparator
+    plugin: adobe-cja
+    file: skills/adobe-experience-cloud-cja-segment-performance-comparator.md
+    api: Adobe Customer Journey Analytics
+    mcp: https://cja-mcp.adobe.io/mcp
+    description: Side-by-side KPI comparison across two or more audience segments.
+  - name: cja-executive-briefing
+    plugin: adobe-cja
+    file: skills/adobe-experience-cloud-cja-executive-briefing.md
+    api: Adobe Customer Journey Analytics
+    mcp: https://cja-mcp.adobe.io/mcp
+    description: Leadership-ready performance briefing with KPI tiles, narrative bullets
+      and driver analysis as a print-ready HTML document.
+related_agent_context:
+  agents_md:
+    published: true
+    note: >-
+      Adobe states that AEM as a Cloud Service projects support a generated AGENTS.md at
+      the project root. It is generated per customer project, not served from an Adobe
+      host, so there is no single canonical file to mirror here.
+    source: https://experienceleague.adobe.com/en/docs/experience-manager-learn/cloud-service/ai/ai-assisted-development/overview

@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Metadata API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud List Resource Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/campaign/profileAndServicesExt/resourceType"
+          },
+          "docs": "Returns metadata about the available custom resources and their fields in the Adobe Campaign data model. Useful for discovering extended profile attributes and custom resource schemas."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

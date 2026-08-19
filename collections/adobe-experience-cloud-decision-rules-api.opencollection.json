@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Decision Rules API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Decision Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Journey Optimizer Adobe Experience Cloud List Decision Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/offer/decisionRules",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns a list of decision rules used to define offer eligibility criteria based on profile attributes and context data."
+        },
+        {
+          "info": {
+            "name": "Adobe Journey Optimizer Adobe Experience Cloud Create a Decision Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/offer/decisionRules",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new decision rule using a PQL expression to define eligibility criteria for offer personalization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

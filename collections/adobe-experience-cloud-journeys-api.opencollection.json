@@ -1,0 +1,198 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Journeys API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Journeys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Journey Optimizer Adobe Experience Cloud List Journeys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/journey/journeys",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all customer journeys configured in the organization. Each journey includes its ID, name, status, and version."
+        },
+        {
+          "info": {
+            "name": "Adobe Journey Optimizer Adobe Experience Cloud Create a Journey",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/journey/journeys",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new customer journey with the specified entry conditions, activities, and channel actions. The journey starts in draft status and must be published to become active."
+        },
+        {
+          "info": {
+            "name": "Adobe Journey Optimizer Adobe Experience Cloud Get a Journey",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/journey/journeys/:journeyId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "journeyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the full definition of a customer journey by its ID, including entry conditions, activities, transitions, and channel configurations."
+        },
+        {
+          "info": {
+            "name": "Adobe Journey Optimizer Adobe Experience Cloud Update a Journey",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://analytics.adobe.io/journey/journeys/:journeyId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "journeyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a draft journey with new configuration. Only journeys in draft status can be modified."
+        },
+        {
+          "info": {
+            "name": "Adobe Journey Optimizer Adobe Experience Cloud Delete a Journey",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.adobe.io/journey/journeys/:journeyId",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "journeyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a journey in draft or closed status. Active journeys must be stopped before deletion."
+        },
+        {
+          "info": {
+            "name": "Adobe Journey Optimizer Adobe Experience Cloud Publish a Journey",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/journey/journeys/:journeyId/publish",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "journeyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Publishes a draft journey, making it live and ready to receive qualifying profiles. Published journeys begin processing entry events immediately."
+        },
+        {
+          "info": {
+            "name": "Adobe Journey Optimizer Adobe Experience Cloud Stop a Journey",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/journey/journeys/:journeyId/stop",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "journeyId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Stops an active journey. No new profiles will enter the journey, and existing profiles will exit at the next activity."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

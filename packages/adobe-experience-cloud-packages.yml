@@ -1,0 +1,181 @@
+generated: '2026-08-13'
+method: searched
+source: registry.npmjs.org, pypi.org/pypi/<pkg>/json, search.maven.org/solrsearch —
+  all queried unauthenticated on 2026-08-13; package identity confirmed against the
+  github.com/adobe organization named in each package's repository field
+description: >-
+  First-party Adobe client libraries and SDKs that wrap Adobe Experience Cloud APIs.
+  Adobe's client-library strategy is Node-first: the Adobe I/O (aio) library family on
+  npm covers Analytics, Target, Campaign Standard, Real-Time Customer Profile and I/O
+  Events, with a single Python package (aepp) for Experience Platform and a Java library
+  family for I/O Events / IMS. Every entry below carries the version and publish date
+  read from the registry metadata endpoint, not from prose.
+summary:
+  package_count: 14
+  official_count: 14
+  registries:
+    - npm
+    - pypi
+    - maven
+  oldest_release: '2023-06-19'
+  newest_release: '2026-08-11'
+notes: >-
+  Currency signal — the wrappers split cleanly into maintained and stale. @adobe/alloy
+  (Web SDK, 2026-07-30), aepp (2026-08-11), @adobe/aio-cli (2026-06-03) and
+  @adobe/aio-lib-events (2026-05-13) are current. @adobe/target-nodejs-sdk and
+  @adobe/target-tools last shipped in 2023, and @adobe/aio-sdk / @adobe/aio-lib-core-config
+  last shipped in 2024 — all four predate the API surfaces they wrap.
+packages:
+  - name: '@adobe/aio-cli'
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/aio-cli
+    repository: https://github.com/adobe/aio-cli
+    official: true
+    kind: cli
+    version: 11.1.2
+    published: '2026-06-03'
+    description: Adobe I/O Extensible CLI — the umbrella CLI for Adobe Developer Console
+      projects, App Builder apps and the aio plugin family.
+  - name: '@adobe/aio-lib-analytics'
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/aio-lib-analytics
+    official: true
+    kind: sdk
+    wraps: Adobe Analytics 2.0 API (analytics.adobe.io)
+    version: 4.0.2
+    published: '2025-09-03'
+    description: Adobe Analytics SDK.
+  - name: '@adobe/aio-lib-target'
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/aio-lib-target
+    repository: https://github.com/adobe/aio-lib-target
+    official: true
+    kind: sdk
+    wraps: Adobe Target Admin API (mc.adobe.io/{tenant}/target)
+    version: 4.0.3
+    published: '2026-03-31'
+    description: Adobe Target SDK.
+  - name: '@adobe/aio-lib-campaign-standard'
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/aio-lib-campaign-standard
+    repository: https://github.com/adobe/aio-lib-campaign-standard
+    official: true
+    kind: sdk
+    wraps: Adobe Campaign Standard API (mc.adobe.io/{organization}/campaign)
+    version: 4.0.3
+    published: '2026-03-31'
+    description: Adobe I/O Campaign Standard SDK.
+  - name: '@adobe/aio-lib-customer-profile'
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/aio-lib-customer-profile
+    repository: https://github.com/adobe/aio-lib-customer-profile
+    official: true
+    kind: sdk
+    wraps: Real-Time Customer Profile (platform.adobe.io/data/core/ups)
+    version: 3.0.2
+    published: '2025-09-03'
+    description: Adobe I/O Customer Profile Lib.
+  - name: '@adobe/aio-lib-events'
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/aio-lib-events
+    repository: https://github.com/adobe/aio-lib-events
+    official: true
+    kind: sdk
+    wraps: Adobe I/O Events (event registrations, journalling, webhooks)
+    version: 4.1.0
+    published: '2026-05-13'
+    description: Adobe I/O Events client library.
+  - name: '@adobe/aio-lib-ims'
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/aio-lib-ims
+    repository: https://github.com/adobe/aio-lib-ims
+    official: true
+    kind: auth
+    wraps: Adobe IMS (ims-na1.adobelogin.com) token acquisition
+    version: 8.1.2
+    published: '2026-04-29'
+    description: Adobe IMS (Identity Management System) support module providing low-level
+      IMS HTTP API access.
+  - name: '@adobe/alloy'
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/alloy
+    repository: https://github.com/adobe/alloy
+    official: true
+    kind: web-sdk
+    wraps: Adobe Experience Platform Edge Network
+    version: 2.35.0
+    published: '2026-07-30'
+    description: Adobe Experience Platform Web SDK — the browser library that sends events
+      to the Edge Network and renders Target/Offer Decisioning personalization.
+  - name: '@adobe/aio-lib-state'
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/aio-lib-state
+    repository: https://github.com/adobe/aio-lib-state
+    official: true
+    kind: sdk
+    version: 5.3.1
+    published: '2026-02-03'
+    description: Key-value store abstraction used by App Builder runtime actions.
+  - name: '@adobe/aio-lib-web'
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/aio-lib-web
+    repository: https://github.com/adobe/aio-lib-web
+    official: true
+    kind: sdk
+    version: 7.2.0
+    published: '2026-05-11'
+    description: Build/deploy tooling for App Builder static sites.
+  - name: '@adobe/aio-sdk'
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/aio-sdk
+    repository: https://github.com/adobe/aio-sdk
+    official: true
+    kind: sdk-aggregate
+    version: 6.0.0
+    published: '2024-09-03'
+    description: Umbrella module bundling the Adobe Developer Platform SDKs. Last release
+      2024-09-03 — trails the individual aio-lib-* packages it aggregates.
+  - name: '@adobe/target-nodejs-sdk'
+    registry: npm
+    url: https://www.npmjs.com/package/@adobe/target-nodejs-sdk
+    repository: https://github.com/adobe/target-nodejs-sdk
+    official: true
+    kind: sdk
+    wraps: Adobe Target Delivery API (delivery.adobetarget.com/rest/v1/delivery)
+    version: 2.4.3
+    published: '2023-06-19'
+    description: Adobe Target Node.js SDK, Delivery API client. Last release 2023-06-19.
+  - name: aepp
+    registry: pypi
+    url: https://pypi.org/project/aepp/
+    repository: https://github.com/adobe/aepp
+    official: true
+    kind: sdk
+    wraps: Adobe Experience Platform APIs (platform.adobe.io) — schema registry, catalog,
+      query service, segmentation, identity, sandboxes
+    version: 0.5.8.post3
+    published: '2026-08-11'
+    description: Python package to manage AEP API endpoints plus helper functions. The
+      only first-party Python client in the Experience Cloud family.
+  - name: com.adobe.aio:aio-lib-java
+    registry: maven
+    url: https://central.sonatype.com/artifact/com.adobe.aio/aio-lib-java
+    repository: https://github.com/adobe/aio-lib-java
+    official: true
+    kind: sdk
+    wraps: Adobe I/O Events + IMS from the JVM
+    version: 2.0.2
+    published: '2025-03-22'
+    description: Adobe I/O Java library family (aio-lib-java-core, -ims, -events-ingress,
+      -events-journal). Nine artifacts under the com.adobe.aio group, all at 2.0.2.
+not_found:
+  - name: '@adobe/aep-mcp'
+    registry: npm
+    version: null
+    note: Probed registry.npmjs.org — 404 "Not found". Adobe ships its MCP servers as
+      hosted HTTPS endpoints, not as installable stdio packages, so there is no MCP
+      package to record. See mcp/adobe-experience-cloud-mcp.yml.
+  - name: '@adobe/experience-platform-mcp'
+    registry: npm
+    version: null
+    note: Probed registry.npmjs.org — 404 "Not found".

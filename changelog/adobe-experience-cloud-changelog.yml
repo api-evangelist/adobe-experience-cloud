@@ -1,0 +1,77 @@
+generated: '2026-08-13'
+method: searched
+source: https://experienceleague.adobe.com/en/docs/release-notes/experience-cloud/current
+docs: https://experienceleague.adobe.com/en/docs/release-notes/experience-cloud/current
+description: >-
+  Adobe publishes a dated, monthly, cross-product changelog for Experience Cloud —
+  "CX Enterprise central release notes" — on Experience League, plus per-product release
+  notes linked from it. The page is served as machine-readable markdown by appending .md,
+  which makes it one of the few enterprise-suite changelogs an agent can actually read.
+scheme: monthly-dated
+current_edition: August 2026
+last_updated: '2026-08-01'
+cadence: monthly
+machine_readable:
+  markdown_endpoint: https://experienceleague.adobe.com/en/docs/release-notes/experience-cloud/current.md
+  http_status: 200
+  format: markdown
+  note: Adobe documents the .md suffix as the AI-consumption path for any Experience League
+    page. See llms/adobe-experience-cloud-llms.txt, "Markdown Endpoints".
+  rss: null
+  json: null
+structure:
+  sections:
+    - What's new
+    - New events and webinars
+    - Latest CX Enterprise Coworker and AI resources
+    - New release notes — all applications
+    - New tutorials and Support articles
+  per_product_sections:
+    - Adobe Experience Platform
+    - Adobe Real-Time CDP
+    - Adobe Analytics
+    - Adobe Customer Journey Analytics
+    - Adobe Experience Manager
+    - Adobe Commerce
+    - Adobe Target
+    - Adobe Campaign
+    - Adobe Journey Optimizer
+    - Adobe Journey Optimizer B2B Edition
+    - Adobe Marketo Engage
+    - Adobe Workfront
+    - Adobe GenStudio for Performance Marketing
+    - Adobe Pass
+    - Adobe Brand Concierge
+    - Adobe Brand Visibility (formerly Adobe LLM Optimizer)
+entries:
+  - version: August 2026
+    date: '2026-08-01'
+    breaking: unknown
+    highlights:
+      - Cross-product central release note covering 16 Experience Cloud applications, each
+        with its own linked per-product release notes.
+      - Adobe LLM Optimizer renamed to Adobe Brand Visibility.
+    url: https://experienceleague.adobe.com/en/docs/release-notes/experience-cloud/current
+  - version: July 2026
+    date: '2026-07-09'
+    breaking: unknown
+    highlights:
+      - Dated entry present in the current central release note.
+  - version: June 2026
+    date: '2026-06-11'
+    breaking: unknown
+  - version: May 2026
+    date: '2026-05-21'
+    breaking: unknown
+gaps:
+  - >-
+    The central release note is editorial prose, not a structured changelog: it carries no
+    version numbers, no explicit breaking-change flag, and no per-API-operation diff. There
+    is no published API-level changelog for the Analytics 2.0, Target, Campaign, Journey
+    Optimizer or Experience Platform contracts — a consumer cannot tell from Adobe which
+    release changed which endpoint.
+  - No RSS/Atom feed and no JSON changelog endpoint; the .md rendering is the only
+    machine-readable form.
+related:
+  developer_whats_new: https://developer.adobe.com/events/docs/whats_new/
+  status_page: https://status.adobe.com/

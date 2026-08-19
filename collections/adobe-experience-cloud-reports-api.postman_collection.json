@@ -1,0 +1,392 @@
+{
+  "item": [
+    {
+      "id": "bb48feaf-c1c3-4d97-b437-5c07d87974f5",
+      "name": "Reports",
+      "description": {
+        "content": "Operations for retrieving analytics report data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cdbe881b-6f8b-4d3a-8156-5c3f44ce95ca",
+          "name": "Adobe Analytics Adobe Experience Cloud Retrieve a Report",
+          "request": {
+            "name": "Adobe Analytics Adobe Experience Cloud Retrieve a Report",
+            "description": {
+              "content": "Submits a report request to Adobe Analytics and returns the resulting data. The request body defines the report suite, dimensions, metrics, date range, and any segment or filter criteria. Results are returned as a ranked or trended data set in JSON format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":companyId",
+                "reports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "companyId",
+                  "description": "(Required) The global company ID for the Analytics account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rsid\": \"<string>\",\n  \"globalFilters\": [\n    {\n      \"type\": \"<string>\",\n      \"dateRange\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"dateRange\": \"<string>\"\n    }\n  ],\n  \"metricContainer\": {\n    \"metrics\": [\n      {\n        \"id\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\"\n      }\n    ]\n  },\n  \"dimension\": \"<string>\",\n  \"settings\": {\n    \"limit\": \"<integer>\",\n    \"page\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fffa4b38-9150-4135-8646-63ae57cf01fd",
+              "name": "Report data returned successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":companyId",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyId",
+                      "description": "(Required) The global company ID for the Analytics account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rsid\": \"abc123\",\n  \"globalFilters\": [\n    {\n      \"type\": \"standard\",\n      \"dateRange\": \"example\"\n    }\n  ],\n  \"metricContainer\": {\n    \"metrics\": [\n      {\n        \"id\": {}\n      }\n    ]\n  },\n  \"dimension\": \"example\",\n  \"settings\": {\n    \"limit\": 1,\n    \"page\": 1\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalPages\": 1,\n  \"firstPage\": true,\n  \"lastPage\": true,\n  \"numberOfElements\": 1,\n  \"totalElements\": 1,\n  \"rows\": [\n    {\n      \"itemId\": \"abc123\",\n      \"value\": \"example\",\n      \"data\": [\n        {}\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d26cf65b-7186-46e6-a5dc-d0c3f8adb8aa",
+              "name": "Invalid report request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":companyId",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyId",
+                      "description": "(Required) The global company ID for the Analytics account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rsid\": \"abc123\",\n  \"globalFilters\": [\n    {\n      \"type\": \"standard\",\n      \"dateRange\": \"example\"\n    }\n  ],\n  \"metricContainer\": {\n    \"metrics\": [\n      {\n        \"id\": {}\n      }\n    ]\n  },\n  \"dimension\": \"example\",\n  \"settings\": {\n    \"limit\": 1,\n    \"page\": 1\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example\",\n  \"errorDescription\": \"example\",\n  \"errorId\": \"abc123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19f75f6b-95b1-4ace-bef3-d5a370434f29",
+              "name": "Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":companyId",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyId",
+                      "description": "(Required) The global company ID for the Analytics account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rsid\": \"abc123\",\n  \"globalFilters\": [\n    {\n      \"type\": \"standard\",\n      \"dateRange\": \"example\"\n    }\n  ],\n  \"metricContainer\": {\n    \"metrics\": [\n      {\n        \"id\": {}\n      }\n    ]\n  },\n  \"dimension\": \"example\",\n  \"settings\": {\n    \"limit\": 1,\n    \"page\": 1\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4178d90c-7d0a-41c7-af15-ee44d1807678",
+              "name": "Insufficient permissions to access the requested report suite.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":companyId",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyId",
+                      "description": "(Required) The global company ID for the Analytics account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rsid\": \"abc123\",\n  \"globalFilters\": [\n    {\n      \"type\": \"standard\",\n      \"dateRange\": \"example\"\n    }\n  ],\n  \"metricContainer\": {\n    \"metrics\": [\n      {\n        \"id\": {}\n      }\n    ]\n  },\n  \"dimension\": \"example\",\n  \"settings\": {\n    \"limit\": 1,\n    \"page\": 1\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f241b88b-bd30-4494-b94a-e6b0ead921df",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":companyId",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyId",
+                      "description": "(Required) The global company ID for the Analytics account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rsid\": \"abc123\",\n  \"globalFilters\": [\n    {\n      \"type\": \"standard\",\n      \"dateRange\": \"example\"\n    }\n  ],\n  \"metricContainer\": {\n    \"metrics\": [\n      {\n        \"id\": {}\n      }\n    ]\n  },\n  \"dimension\": \"example\",\n  \"settings\": {\n    \"limit\": 1,\n    \"page\": 1\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://analytics.adobe.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7fc2df73-2c6d-4885-a00a-cce3442e178c",
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.\n\nContact Support:\n Name: Adobe Developer",
+      "type": "text/plain"
+    }
+  }
+}

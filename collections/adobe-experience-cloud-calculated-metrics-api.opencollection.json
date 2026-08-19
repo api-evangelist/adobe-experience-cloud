@@ -1,0 +1,153 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Calculated Metrics API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Calculated Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics Adobe Experience Cloud List Calculated Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/:companyId/calculatedmetrics",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "rsids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated report suite IDs to filter."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of calculated metrics available to the authenticated user. Calculated metrics can be filtered by report suite, owner, or tag."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Adobe Experience Cloud Create a Calculated Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/api/:companyId/calculatedmetrics",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new calculated metric in Adobe Analytics with the provided name, definition formula, report suite, and polarity settings."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Adobe Experience Cloud Get a Calculated Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/:companyId/calculatedmetrics/:calculatedMetricId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "calculatedMetricId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the full definition and metadata for a single calculated metric identified by its ID."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Adobe Experience Cloud Update a Calculated Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://analytics.adobe.io/api/:companyId/calculatedmetrics/:calculatedMetricId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "calculatedMetricId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing calculated metric with new definition or metadata."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Adobe Experience Cloud Delete a Calculated Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.adobe.io/api/:companyId/calculatedmetrics/:calculatedMetricId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "calculatedMetricId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Permanently deletes a calculated metric. This action cannot be undone."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,7 +1,62 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/adobe-analytics-api-openapi.yml, openapi/adobe-campaign-api-openapi.yml, openapi/adobe-experience-platform-api-openapi.yml,
-  openapi/adobe-journey-optimizer-api-openapi.yml, openapi/adobe-target-api-openapi.yml
+generated: '2026-08-13'
+method: searched
+docs: https://developer.adobe.com/developer-console/docs/guides/authentication/
+provider:
+  name: Adobe Identity Management System (IMS)
+  issuer: https://ims-na1.adobelogin.com
+  discovery: https://ims-na1.adobelogin.com/.well-known/openid-configuration
+  discovery_http_status: 200
+  authorization_endpoint: https://ims-na1.adobelogin.com/ims/authorize/v2
+  token_endpoint: https://ims-na1.adobelogin.com/ims/token/v3
+  jwks_uri: https://ims-na1.adobelogin.com/ims/keys
+  scopes_supported:
+    - openid
+    - email
+    - profile
+  probed: '2026-08-13'
+required_together:
+  note: >-
+    Both credentials are required on every Experience Cloud API call. A valid bearer token
+    WITHOUT x-api-key returns 401; a correctly authenticated identity with no product
+    profile granted in the Adobe Admin Console returns 403. 41 of 110 operations declare
+    401 and 4 declare 403.
+  headers:
+    - Authorization
+    - x-api-key
+    - x-gw-ims-org-id
+  conditional:
+    - header: x-gw-ims-org-id
+      required_by:
+        - Adobe Experience Platform
+        - Adobe Journey Optimizer
+        - the Adobe Analytics and CJA MCP servers
+      note: Not declared as a parameter in any spec in this repo, but documented by Adobe
+        and required by the MCP servers.
+    - header: x-sandbox-name
+      required_by:
+        - Adobe Experience Platform
+        - Adobe Journey Optimizer
+      note: Selects the sandbox. See sandbox/adobe-experience-cloud-sandbox.yml.
+credential_flow:
+  console: https://developer.adobe.com/console/
+  steps:
+    - Configure product permissions for the developer in the Adobe Admin Console
+      (adminconsole.adobe.com).
+    - Create a client configuration (project + workspace) in the Adobe Developer Console.
+    - Obtain OAuth Server-to-Server credentials; exchange them at
+      https://ims-na1.adobelogin.com/ims/token/v3 for a short-lived access token.
+  source: https://developer.adobe.com/analytics-apis/docs/2.0/guides/
+cross_ref:
+  scopes: scopes/adobe-experience-cloud-scopes.yml
+  conventions: conventions/adobe-experience-cloud-conventions.yml
+# The schemes[] block below is machine-derived from the OpenAPI set and is left intact.
+derived_source: openapi/adobe-experience-cloud-activities-api-openapi.yml, openapi/adobe-experience-cloud-audiences-api-openapi.yml,
+  openapi/adobe-experience-cloud-batches-api-openapi.yml, openapi/adobe-experience-cloud-calculated-metrics-api-openapi.yml,
+  openapi/adobe-experience-cloud-campaign-api-openapi.yml, openapi/adobe-experience-cloud-campaigns-api-openapi.yml,
+  openapi/adobe-experience-cloud-classes-api-openapi.yml, openapi/adobe-experience-cloud-collections-api-openapi.yml,
+  openapi/adobe-experience-cloud-content-api-openapi.yml, openapi/adobe-experience-cloud-content-templates-api-openapi.yml,
+  openapi/adobe-experience-cloud-datasets-api-openapi.yml, openapi/adobe-experience-cloud-date-ranges-api-openapi.yml
+  ...
 summary:
   types:
   - apiKey
@@ -15,19 +70,79 @@ schemes:
   bearerFormat: JWT
   description: OAuth 2.0 access token obtained via Adobe I/O.
   sources:
-  - openapi/adobe-analytics-api-openapi.yml
-  - openapi/adobe-campaign-api-openapi.yml
-  - openapi/adobe-experience-platform-api-openapi.yml
-  - openapi/adobe-journey-optimizer-api-openapi.yml
-  - openapi/adobe-target-api-openapi.yml
+  - openapi/adobe-experience-cloud-activities-api-openapi.yml
+  - openapi/adobe-experience-cloud-audiences-api-openapi.yml
+  - openapi/adobe-experience-cloud-batches-api-openapi.yml
+  - openapi/adobe-experience-cloud-calculated-metrics-api-openapi.yml
+  - openapi/adobe-experience-cloud-campaign-api-openapi.yml
+  - openapi/adobe-experience-cloud-campaigns-api-openapi.yml
+  - openapi/adobe-experience-cloud-classes-api-openapi.yml
+  - openapi/adobe-experience-cloud-collections-api-openapi.yml
+  - openapi/adobe-experience-cloud-content-api-openapi.yml
+  - openapi/adobe-experience-cloud-content-templates-api-openapi.yml
+  - openapi/adobe-experience-cloud-datasets-api-openapi.yml
+  - openapi/adobe-experience-cloud-date-ranges-api-openapi.yml
+  - openapi/adobe-experience-cloud-decision-rules-api-openapi.yml
+  - openapi/adobe-experience-cloud-delivery-api-openapi.yml
+  - openapi/adobe-experience-cloud-dimensions-api-openapi.yml
+  - openapi/adobe-experience-cloud-environments-api-openapi.yml
+  - openapi/adobe-experience-cloud-identities-api-openapi.yml
+  - openapi/adobe-experience-cloud-journeys-api-openapi.yml
+  - openapi/adobe-experience-cloud-messages-api-openapi.yml
+  - openapi/adobe-experience-cloud-metadata-api-openapi.yml
+  - openapi/adobe-experience-cloud-metrics-api-openapi.yml
+  - openapi/adobe-experience-cloud-offers-api-openapi.yml
+  - openapi/adobe-experience-cloud-placements-api-openapi.yml
+  - openapi/adobe-experience-cloud-profiles-api-openapi.yml
+  - openapi/adobe-experience-cloud-projects-api-openapi.yml
+  - openapi/adobe-experience-cloud-properties-api-openapi.yml
+  - openapi/adobe-experience-cloud-queries-api-openapi.yml
+  - openapi/adobe-experience-cloud-report-suites-api-openapi.yml
+  - openapi/adobe-experience-cloud-reports-api-openapi.yml
+  - openapi/adobe-experience-cloud-sandboxes-api-openapi.yml
+  - openapi/adobe-experience-cloud-schemas-api-openapi.yml
+  - openapi/adobe-experience-cloud-segments-api-openapi.yml
+  - openapi/adobe-experience-cloud-transactional-messages-api-openapi.yml
+  - openapi/adobe-experience-cloud-users-api-openapi.yml
+  - openapi/adobe-experience-cloud-workflows-api-openapi.yml
 - name: apiKey
   type: apiKey
   in: header
   parameter: x-api-key
   description: Adobe I/O client API key.
   sources:
-  - openapi/adobe-analytics-api-openapi.yml
-  - openapi/adobe-campaign-api-openapi.yml
-  - openapi/adobe-experience-platform-api-openapi.yml
-  - openapi/adobe-journey-optimizer-api-openapi.yml
-  - openapi/adobe-target-api-openapi.yml
+  - openapi/adobe-experience-cloud-activities-api-openapi.yml
+  - openapi/adobe-experience-cloud-audiences-api-openapi.yml
+  - openapi/adobe-experience-cloud-batches-api-openapi.yml
+  - openapi/adobe-experience-cloud-calculated-metrics-api-openapi.yml
+  - openapi/adobe-experience-cloud-campaign-api-openapi.yml
+  - openapi/adobe-experience-cloud-campaigns-api-openapi.yml
+  - openapi/adobe-experience-cloud-classes-api-openapi.yml
+  - openapi/adobe-experience-cloud-collections-api-openapi.yml
+  - openapi/adobe-experience-cloud-content-api-openapi.yml
+  - openapi/adobe-experience-cloud-content-templates-api-openapi.yml
+  - openapi/adobe-experience-cloud-datasets-api-openapi.yml
+  - openapi/adobe-experience-cloud-date-ranges-api-openapi.yml
+  - openapi/adobe-experience-cloud-decision-rules-api-openapi.yml
+  - openapi/adobe-experience-cloud-delivery-api-openapi.yml
+  - openapi/adobe-experience-cloud-dimensions-api-openapi.yml
+  - openapi/adobe-experience-cloud-environments-api-openapi.yml
+  - openapi/adobe-experience-cloud-identities-api-openapi.yml
+  - openapi/adobe-experience-cloud-journeys-api-openapi.yml
+  - openapi/adobe-experience-cloud-messages-api-openapi.yml
+  - openapi/adobe-experience-cloud-metadata-api-openapi.yml
+  - openapi/adobe-experience-cloud-metrics-api-openapi.yml
+  - openapi/adobe-experience-cloud-offers-api-openapi.yml
+  - openapi/adobe-experience-cloud-placements-api-openapi.yml
+  - openapi/adobe-experience-cloud-profiles-api-openapi.yml
+  - openapi/adobe-experience-cloud-projects-api-openapi.yml
+  - openapi/adobe-experience-cloud-properties-api-openapi.yml
+  - openapi/adobe-experience-cloud-queries-api-openapi.yml
+  - openapi/adobe-experience-cloud-report-suites-api-openapi.yml
+  - openapi/adobe-experience-cloud-reports-api-openapi.yml
+  - openapi/adobe-experience-cloud-sandboxes-api-openapi.yml
+  - openapi/adobe-experience-cloud-schemas-api-openapi.yml
+  - openapi/adobe-experience-cloud-segments-api-openapi.yml
+  - openapi/adobe-experience-cloud-transactional-messages-api-openapi.yml
+  - openapi/adobe-experience-cloud-users-api-openapi.yml
+  - openapi/adobe-experience-cloud-workflows-api-openapi.yml

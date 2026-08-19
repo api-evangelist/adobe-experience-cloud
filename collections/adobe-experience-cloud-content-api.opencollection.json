@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Content API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Content",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud List Email Deliveries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/campaign/email",
+            "params": [
+              {
+                "name": "_lineCount",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of email deliveries including their subject, status, and scheduling metadata."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Get an Email Delivery",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/campaign/email/:emailPKey",
+            "params": [
+              {
+                "name": "emailPKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the full details of an email delivery by its primary key, including the subject, HTML content, sender, and delivery status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

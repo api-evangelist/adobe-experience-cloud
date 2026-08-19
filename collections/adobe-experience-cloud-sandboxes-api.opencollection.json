@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Sandboxes API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sandboxes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud List Sandboxes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/data/foundation/sandbox-management/sandboxes"
+          },
+          "docs": "Returns a list of all sandboxes available in the current IMS organization, including development and production sandboxes."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Create a Sandbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/data/foundation/sandbox-management/sandboxes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new development sandbox within the IMS organization. Production sandboxes can only be created by system administrators."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Get a Sandbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/data/foundation/sandbox-management/sandboxes/:sandboxName",
+            "params": [
+              {
+                "name": "sandboxName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves details for a single sandbox including its name, title, type, state, and region."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Delete a Sandbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.adobe.io/data/foundation/sandbox-management/sandboxes/:sandboxName",
+            "params": [
+              {
+                "name": "sandboxName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a development sandbox and all its contained resources. Production sandboxes cannot be deleted, only reset."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

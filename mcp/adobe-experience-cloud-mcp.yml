@@ -1,0 +1,258 @@
+generated: '2026-08-13'
+method: searched
+source: https://experienceleague.adobe.com/llms.txt (Adobe's own published llms.txt,
+  "MCP Server Access" section), https://github.com/adobe/skills (plugins/adobe-analytics/.mcp.json
+  and plugins/adobe-cja/.mcp.json), and live JSON-RPC probes of every endpoint on 2026-08-13
+status: published
+description: >-
+  Adobe ships REMOTE, Adobe-hosted MCP servers for Experience Cloud. There are three
+  distinct hosts: aa-mcp.adobe.io (Adobe Analytics), cja-mcp.adobe.io (Customer Journey
+  Analytics), and mcp.adobeaemcloud.com (Adobe Experience Manager as a Cloud Service,
+  seven server paths). Every endpoint is a live HTTPS URL an MCP client POSTs to — none
+  of them is a stdio package a human has to install first. All are OAuth-gated behind
+  Adobe IMS, so tools/list returns 401 anonymously and the live inputSchemas require an
+  authenticated introspection.
+deployment:
+  mode: remote
+  endpoint: https://aa-mcp.adobe.io/mcp
+  auth: oauth
+  verified: probed
+  note: >-
+    Nine remote endpoints across three hosts are enumerated under endpoints[] below;
+    aa-mcp.adobe.io/mcp is named here as the primary Experience Cloud analytics surface.
+    No stdio/npx package exists — registry.npmjs.org returns 404 for @adobe/aep-mcp and
+    @adobe/experience-platform-mcp. Adobe distributes the CLIENT-side configuration (the
+    .mcp.json template plus agent skills) through the github.com/adobe/skills plugin
+    marketplace, but the servers themselves are hosted by Adobe.
+endpoints:
+  - name: adobe-analytics
+    product: Adobe Analytics
+    url: https://aa-mcp.adobe.io/mcp
+    transport: http
+    auth: oauth
+    probe:
+      method: 'POST {"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+      http_status: 401
+      body: Missing or empty Authorization token
+      www_authenticate: Bearer realm="OAuth", resource_metadata="https://aa-mcp.adobe.io/.well-known/oauth-protected-resource"
+      checked: '2026-08-13'
+    oauth:
+      protected_resource: https://aa-mcp.adobe.io/.well-known/oauth-protected-resource
+      authorization_server: https://aa-mcp.adobe.io/.well-known/oauth-authorization-server
+      authorization_endpoint: https://ims-na1.adobelogin.com/ims/authorize/v2
+      token_endpoint: https://ims-na1.adobelogin.com/ims/token/v3
+      registration_endpoint: https://aa-mcp.adobe.io/register
+      scopes:
+        - openid
+        - AdobeID
+        - additional_info.projectedProductContext
+      pkce: S256
+      dynamic_client_registration: true
+    additional_headers:
+      - Authorization
+      - x-gw-ims-org-id
+      - x-gw-ims-user-id
+    source: https://github.com/adobe/skills/blob/main/plugins/adobe-analytics/.mcp.json
+  - name: adobe-cja
+    product: Adobe Customer Journey Analytics
+    url: https://cja-mcp.adobe.io/mcp
+    transport: http
+    auth: oauth
+    probe:
+      method: 'POST {"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+      http_status: 401
+      body: Missing or empty Authorization token
+      www_authenticate: Bearer realm="OAuth", resource_metadata="https://cja-mcp.adobe.io/.well-known/oauth-protected-resource"
+      checked: '2026-08-13'
+    oauth:
+      protected_resource: https://cja-mcp.adobe.io/.well-known/oauth-protected-resource/mcp
+      authorization_server: https://cja-mcp.adobe.io/.well-known/oauth-authorization-server
+      authorization_endpoint: https://ims-na1.adobelogin.com/ims/authorize/v2
+      token_endpoint: https://ims-na1.adobelogin.com/ims/token/v3
+      registration_endpoint: https://cja-mcp.adobe.io/register
+      scopes:
+        - openid
+        - AdobeID
+        - additional_info.projectedProductContext
+      pkce: S256
+    additional_headers:
+      - Authorization
+      - x-gw-ims-org-id
+      - x-gw-ims-user-id
+      - x-data-view-id
+    source: https://github.com/adobe/skills/blob/main/plugins/adobe-cja/.mcp.json
+  - name: aem-unified
+    product: Adobe Experience Manager as a Cloud Service
+    url: https://mcp.adobeaemcloud.com/adobe/mcp/aem
+    transport: http
+    auth: oauth
+    probe:
+      http_status: 401
+      body: 'JSON-RPC error 401 "Authorization header is required"'
+      checked: '2026-08-13'
+    source: https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/ai-in-aem/mcp-support/using-mcp-with-aem-as-a-cloud-service
+  - name: aem-content
+    product: Adobe Experience Manager as a Cloud Service
+    url: https://mcp.adobeaemcloud.com/adobe/mcp/content
+    transport: http
+    auth: oauth
+    scope: Create, read, update and delete pages and content fragments; asset import and
+      asset search. Minimum AEM release 26309.
+    probe:
+      http_status: 401
+      www_authenticate: Bearer realm="oauth.adobeaemcloud.com", resource_metadata="https://mcp.adobeaemcloud.com/.well-known/oauth-protected-resource/adobe/mcp/content"
+      checked: '2026-08-13'
+  - name: aem-content-readonly
+    product: Adobe Experience Manager as a Cloud Service
+    url: https://mcp.adobeaemcloud.com/adobe/mcp/content-readonly
+    transport: http
+    auth: oauth
+    scope: Read-only (Get, List/Search) for pages and content fragments, plus asset search.
+    probe:
+      http_status: 401
+      checked: '2026-08-13'
+  - name: aem-cloudmanager
+    product: Adobe Cloud Manager
+    url: https://mcp.adobeaemcloud.com/adobe/mcp/cloudmanager
+    transport: http
+    auth: oauth
+    scope: Manage Cloud Manager programs, environments, repositories and pipelines.
+    probe:
+      http_status: 401
+      checked: '2026-08-13'
+  - name: aem-experience-governance
+    product: Adobe Experience Manager as a Cloud Service
+    url: https://mcp.adobeaemcloud.com/adobe/mcp/experience-governance
+    transport: http
+    auth: oauth
+    scope: Evaluate content against brand integrity and compliance rules.
+    probe:
+      http_status: 401
+      checked: '2026-08-13'
+  - name: aem-cloud-migration
+    product: Adobe Experience Manager as a Cloud Service
+    url: https://mcp.adobeaemcloud.com/adobe/mcp/cloud-migration
+    transport: http
+    auth: oauth
+    scope: Retrieve Best Practices Analyzer (BPA) findings.
+    probe:
+      http_status: 401
+      checked: '2026-08-13'
+  - name: aem-content-ai
+    product: Adobe Experience Manager Content AI
+    url: https://mcp.adobeaemcloud.com/adobe/mcp/content-ai
+    transport: http
+    auth: oauth
+    scope: Keyword, semantic, hybrid and natural-language search over Content AI indexes.
+    probe:
+      http_status: 502
+      body: '{"title":"Bad Gateway","detail":"Internal routing error, please contact support."}'
+      checked: '2026-08-13'
+      note: Documented in the AEM MCP servers overview but returned 502 on probe. Recorded
+        as documented-but-not-reachable, not as a verified endpoint.
+oauth_gateway:
+  aem:
+    issuer: https://oauth.adobeaemcloud.com
+    authorization_endpoint: https://oauth.adobeaemcloud.com/oauth/authorize
+    token_endpoint: https://oauth.adobeaemcloud.com/oauth/token
+    registration_endpoint: https://oauth.adobeaemcloud.com/register
+    scopes:
+      - AdobeID
+      - openid
+      - read_organizations
+      - aem.sites
+      - aem.assets.author
+      - aem.assets.delivery
+      - aem.fragments.management
+      - aem.folders
+      - aem.repository
+      - aem.contentai
+      - aem.adobe.experimental
+      - additional_info
+      - additional_info.ownerOrg
+      - additional_info.projectedProductContext
+    pkce: S256
+tools:
+  note: >-
+    tools/list returns 401 on every endpoint, so the live inputSchemas could not be read
+    anonymously. The tool NAMES below are quoted verbatim from Adobe's own published
+    agent skills in github.com/adobe/skills — they are what Adobe's skills invoke, not a
+    guess. Parameter schemas require an authenticated introspection.
+  source: https://github.com/adobe/skills (plugins/adobe-analytics/skills/*/SKILL.md,
+    plugins/adobe-cja/skills/*/SKILL.md)
+  adobe-analytics:
+    - name: runReport
+      description: Execute an Adobe Analytics report request.
+    - name: findReportSuites
+      description: Find/select the working report suite.
+    - name: setSessionDefaults
+      description: Set session context (reportSuiteId + globalCompanyId).
+    - name: setDefaultReportSuite
+      description: Set the default report suite for the session.
+    - name: findMetrics
+      description: Look up metrics available in the report suite.
+    - name: findDimensions
+      description: Look up dimensions available in the report suite.
+    - name: findSegments
+      description: Look up saved segments.
+    - name: findCalculatedMetrics
+      description: Look up calculated metrics.
+    - name: searchDimensionItems
+      description: Search item values inside a dimension.
+    - name: describeSegment
+      description: Describe a segment definition.
+    - name: describeMetric
+      description: Describe a metric definition.
+    - name: upsertSegment
+      description: Create or update a segment.
+    - name: listComponentUsage
+      description: Report component (dimension/metric/segment) usage.
+  adobe-cja:
+    - name: runReport
+      description: Execute a Customer Journey Analytics report request.
+    - name: findDataViews
+      description: Find/select the working CJA data view.
+    - name: setDefaultSessionDataViewId
+      description: Set the default data view for the session.
+    - name: findMetrics
+      description: Look up metrics in the data view.
+    - name: findDimensions
+      description: Look up dimensions in the data view.
+    - name: findSegments
+      description: Look up filters/segments.
+    - name: searchDimensionItems
+      description: Search item values inside a dimension.
+    - name: listComponentUsage
+      description: Report component usage across the data view.
+  aem_note: Named in the AEM MCP support documentation; the doc states tool availability
+    evolves and that clients should discover tools at runtime via tools/list.
+  aem:
+    - name: get-aem-page-content
+    - name: resolve_fragment_path
+    - name: get_fragment
+    - name: patch_fragment
+    - name: list_models
+    - name: get_model
+    - name: create_fragment
+clients:
+  documented_supported:
+    - Anthropic Claude
+    - OpenAI ChatGPT
+    - Claude Code
+    - Cursor
+    - GitHub Copilot
+    - Cline
+    - Windsurf
+    - OpenAI Codex
+    - Kiro
+    - Augment Code
+    - Amazon Quick
+    - Microsoft Copilot Studio
+  source: https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/ai-in-aem/mcp-support/using-mcp-with-aem-as-a-cloud-service
+access_model:
+  note: >-
+    Quoted from Adobe's llms.txt — "MCP tools run under the authenticated user's identity
+    and enforce the user's existing AEM permissions" and "MCP servers are designed for
+    human-operated clients with interactive UX; the MCP Tools spec recommends a human in
+    the loop to approve or deny tool invocations. Fully autonomous use should be treated
+    as a separate compatibility tier."

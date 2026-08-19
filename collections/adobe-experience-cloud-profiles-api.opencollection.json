@@ -1,0 +1,166 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Profiles API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud List Profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/campaign/profileAndServices/profile",
+            "params": [
+              {
+                "name": "_lineCount",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of profiles to return per page."
+              },
+              {
+                "name": "_lineStart",
+                "value": "",
+                "type": "query",
+                "description": "Starting line number for pagination."
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "Filter profiles by email address."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of subscriber profiles in the Adobe Campaign database. Profiles can be filtered by email, first name, last name, and custom attributes using query parameters."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Create a Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/campaign/profileAndServices/profile",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new subscriber profile in the Adobe Campaign database with the provided attributes including email, first name, last name, and any custom fields."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Get a Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/campaign/profileAndServices/profile/:profilePKey",
+            "params": [
+              {
+                "name": "profilePKey",
+                "value": "",
+                "type": "path",
+                "description": "The primary key of the profile."
+              }
+            ]
+          },
+          "docs": "Retrieves a single subscriber profile by its primary key (PKey), including all standard and custom attributes."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Update a Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://analytics.adobe.io/campaign/profileAndServices/profile/:profilePKey",
+            "params": [
+              {
+                "name": "profilePKey",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates specific attributes of an existing subscriber profile using a partial update. Only the fields provided in the request body will be modified."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Delete a Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.adobe.io/campaign/profileAndServices/profile/:profilePKey",
+            "params": [
+              {
+                "name": "profilePKey",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Permanently deletes a subscriber profile from the Adobe Campaign database. This action cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Adobe Experience Platform Adobe Experience Cloud Get Profile Entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/data/core/ups/access/entities",
+            "headers": [
+              {
+                "name": "x-sandbox-name",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "schema.name",
+                "value": "",
+                "type": "query",
+                "description": "XDM schema name for the entity type."
+              },
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "query",
+                "description": "The identity value to look up."
+              },
+              {
+                "name": "entityIdNS",
+                "value": "",
+                "type": "query",
+                "description": "Identity namespace code."
+              }
+            ]
+          },
+          "docs": "Retrieves unified profile entities by identity. Provide an identity namespace and value to look up profile records, experience events, or other entity types associated with a specific individual."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

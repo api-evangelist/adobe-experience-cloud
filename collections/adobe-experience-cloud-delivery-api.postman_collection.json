@@ -1,0 +1,224 @@
+{
+  "item": [
+    {
+      "id": "b82e87a8-216f-46a8-a3e8-85d88ae0b1c0",
+      "name": "Delivery",
+      "description": {
+        "content": "Operations for real-time content delivery",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0000a0d4-57b7-4e05-8170-28d0b32e1ce7",
+          "name": "Adobe Target Adobe Experience Cloud Deliver Personalized Experiences",
+          "request": {
+            "name": "Adobe Target Adobe Experience Cloud Deliver Personalized Experiences",
+            "description": {
+              "content": "The Target Delivery API endpoint for fetching personalized content for one or more mboxes. Used by client-side and server-side implementations to retrieve offers, execute page load decisions, and prefetch content for subsequent views.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "v1",
+                "delivery"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "client",
+                  "value": "<string>",
+                  "description": "(Required) Adobe Target client code."
+                },
+                {
+                  "disabled": false,
+                  "key": "sessionId",
+                  "value": "<string>",
+                  "description": "(Required) Visitor session ID."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"context\": {\n    \"channel\": \"<string>\",\n    \"userAgent\": \"<string>\"\n  },\n  \"execute\": {\n    \"mboxes\": [\n      {\n        \"name\": \"<string>\",\n        \"index\": \"<integer>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"index\": \"<integer>\"\n      }\n    ]\n  },\n  \"prefetch\": {\n    \"views\": [\n      \"<object>\",\n      \"<object>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ecf578c5-31d4-4e2a-8c21-c0a0252120fd",
+              "name": "Personalized content delivered successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "v1",
+                    "delivery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sessionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"context\": {\n    \"channel\": \"web\",\n    \"userAgent\": \"example\"\n  },\n  \"execute\": {\n    \"mboxes\": [\n      {\n        \"name\": {},\n        \"index\": {}\n      }\n    ]\n  },\n  \"prefetch\": {\n    \"views\": [\n      {}\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"abc123\",\n  \"execute\": {\n    \"mboxes\": [\n      {\n        \"name\": {},\n        \"options\": {}\n      }\n    ]\n  },\n  \"prefetch\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9eac2ac1-2039-4724-bf33-4c95454b5a90",
+              "name": "Invalid delivery request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "v1",
+                    "delivery"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "client",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sessionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"context\": {\n    \"channel\": \"web\",\n    \"userAgent\": \"example\"\n  },\n  \"execute\": {\n    \"mboxes\": [\n      {\n        \"name\": {},\n        \"index\": {}\n      }\n    ]\n  },\n  \"prefetch\": {\n    \"views\": [\n      {}\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://analytics.adobe.io",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "610e3926-2924-42d6-937a-3822efe419d0",
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Delivery API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.\n\nContact Support:\n Name: Adobe Developer",
+      "type": "text/plain"
+    }
+  }
+}

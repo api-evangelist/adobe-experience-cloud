@@ -1,0 +1,367 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/adobe-experience-cloud-*-api-openapi.yml — components.schemas $ref links
+  and id-reference fields across 36 refined specs (82 schemas)
+description: >-
+  Entity-relationship graph derived from the Adobe Experience Cloud OpenAPI set. Five
+  products share this repo's contract and each keeps its own object graph: Adobe Analytics
+  (report suite as the root scope), Adobe Target (activity/audience/offer), Adobe Campaign
+  Standard (profile/service/workflow), Adobe Journey Optimizer plus Offer Decisioning
+  (journey/campaign/message/offer), and Adobe Experience Platform (schema/dataset/batch/
+  segment/sandbox). The graph is deliberately shallow: the contract expresses containment
+  through *List wrappers, and cross-entity references through id fields rather than $ref.
+summary:
+  schemas: 82
+  entities: 38
+  list_wrappers: 24
+  relationships: 38
+  scoping_roots: 4
+scoping_roots:
+  - name: sandbox
+    products:
+      - Adobe Experience Platform
+      - Adobe Journey Optimizer
+    carried_as: x-sandbox-name header
+    note: Every AEP/AJO entity is invisible outside its sandbox. Sandbox is the hardest
+      partition in the whole surface.
+  - name: reportSuite (rsid)
+    products:
+      - Adobe Analytics
+    carried_as: rsid field / path parameter
+    note: Segments, calculated metrics, dimensions and metrics are all rsid-scoped.
+  - name: companyId (globalCompanyId)
+    products:
+      - Adobe Analytics
+    carried_as: /api/{companyId}/... path segment
+  - name: tenant / organization
+    products:
+      - Adobe Target
+      - Adobe Campaign Standard
+    carried_as: mc.adobe.io/{tenant} or mc.adobe.io/{organization} server variable
+entities:
+  - name: ReportSuite
+    product: Adobe Analytics
+    id_field: rsid
+    fields:
+      - rsid
+      - name
+      - currency
+      - timezone
+      - calendarType
+  - name: Segment
+    product: Adobe Analytics
+    id_field: id
+    fields:
+      - id
+      - name
+      - description
+      - rsid
+      - owner
+      - definition
+      - tags
+  - name: CalculatedMetric
+    product: Adobe Analytics
+    id_field: id
+    fields:
+      - id
+      - name
+      - rsid
+      - owner
+      - polarity
+      - definition
+  - name: Dimension
+    product: Adobe Analytics
+    id_field: id
+  - name: Metric
+    product: Adobe Analytics
+    id_field: id
+  - name: Project
+    product: Adobe Analytics
+    id_field: id
+  - name: User
+    product: Adobe Analytics
+    id_field: id
+  - name: ReportRequest
+    product: Adobe Analytics
+    fields:
+      - rsid
+      - globalFilters
+      - metricContainer
+      - dimension
+      - settings
+  - name: ReportResponse
+    product: Adobe Analytics
+    fields:
+      - totalPages
+      - firstPage
+      - lastPage
+      - numberOfElements
+      - totalElements
+      - rows
+  - name: Activity
+    product: Adobe Target
+    id_field: id
+  - name: Audience
+    product: Adobe Target
+    id_field: id
+  - name: Offer_2
+    product: Adobe Target
+    id_field: id
+    note: Named Offer_2 by the refine pass because Offer Decisioning also defines an
+      Offer. Two distinct products, two distinct entities, same word.
+  - name: Property
+    product: Adobe Target
+  - name: Environment
+    product: Adobe Target
+  - name: DeliveryRequest
+    product: Adobe Target
+    fields:
+      - context
+      - execute
+      - prefetch
+  - name: DeliveryResponse
+    product: Adobe Target
+    fields:
+      - requestId
+      - execute
+      - prefetch
+  - name: Profile
+    product: Adobe Campaign Standard
+    id_field: PKey
+  - name: Service
+    product: Adobe Campaign Standard
+    id_field: PKey
+  - name: Email
+    product: Adobe Campaign Standard
+    id_field: PKey
+  - name: Workflow
+    product: Adobe Campaign Standard
+    id_field: PKey
+  - name: TransactionalMessageRequest
+    product: Adobe Campaign Standard
+  - name: TransactionalMessageResponse
+    product: Adobe Campaign Standard
+    id_field: PKey
+  - name: Journey
+    product: Adobe Journey Optimizer
+    id_field: id
+  - name: Campaign
+    product: Adobe Journey Optimizer
+    id_field: id
+  - name: Message
+    product: Adobe Journey Optimizer
+    id_field: id
+  - name: ContentTemplate
+    product: Adobe Journey Optimizer
+    id_field: id
+  - name: Offer
+    product: Offer Decisioning
+    id_field: id
+  - name: Collection
+    product: Offer Decisioning
+    id_field: id
+  - name: DecisionRule
+    product: Offer Decisioning
+    id_field: id
+  - name: Placement
+    product: Offer Decisioning
+    id_field: id
+  - name: Schema
+    product: Adobe Experience Platform
+    id_field: $id
+    fields:
+      - $id
+      - title
+      - type
+      - 'meta:altId'
+      - version
+  - name: Dataset
+    product: Adobe Experience Platform
+    id_field: id
+    fields:
+      - name
+      - schemaRef
+      - fileDescription
+      - status
+  - name: Batch
+    product: Adobe Experience Platform
+    id_field: id
+  - name: SegmentDefinition
+    product: Adobe Experience Platform
+    id_field: id
+    fields:
+      - id
+      - name
+      - expression
+      - mergePolicyId
+      - evaluationInfo
+  - name: IdentityNamespace
+    product: Adobe Experience Platform
+    id_field: id
+  - name: ProfileEntity
+    product: Adobe Experience Platform
+  - name: Query
+    product: Adobe Experience Platform
+    id_field: id
+  - name: Sandbox
+    product: Adobe Experience Platform
+    id_field: name
+    fields:
+      - name
+      - title
+      - type
+      - state
+      - region
+relationships:
+  - from: ReportSuite
+    to: Segment
+    type: has_many
+    via: Segment.rsid
+    confidence: high
+  - from: ReportSuite
+    to: CalculatedMetric
+    type: has_many
+    via: CalculatedMetric.rsid
+    confidence: high
+  - from: ReportSuite
+    to: Dimension
+    type: has_many
+    via: rsid query parameter
+    confidence: medium
+  - from: ReportSuite
+    to: Metric
+    type: has_many
+    via: rsid query parameter
+    confidence: medium
+  - from: ReportRequest
+    to: ReportSuite
+    type: belongs_to
+    via: ReportRequest.rsid
+    confidence: high
+  - from: ReportRequest
+    to: Segment
+    type: has_many
+    via: ReportRequest.globalFilters
+    confidence: medium
+  - from: ReportRequest
+    to: ReportResponse
+    type: produces
+    via: getReport
+    confidence: high
+  - from: Campaign
+    to: Audience
+    type: belongs_to
+    via: CampaignInput.audienceId
+    confidence: high
+  - from: Journey
+    to: Message
+    type: has_many
+    via: JourneyInput.activities
+    confidence: medium
+  - from: Offer
+    to: Collection
+    type: has_many
+    via: Collection.filter
+    confidence: medium
+  - from: Offer
+    to: Placement
+    type: has_many
+    via: Offer.representations
+    confidence: medium
+  - from: DecisionRule
+    to: Offer
+    type: has_many
+    via: OfferInput.eligibilityRule
+    confidence: medium
+  - from: Service
+    to: Profile
+    type: has_many
+    via: subscribeProfile (POST /campaign/profileAndServices/service/{servicePKey}/subscriptions)
+    confidence: high
+  - from: Dataset
+    to: Schema
+    type: belongs_to
+    via: Dataset.schemaRef
+    confidence: high
+  - from: Batch
+    to: Dataset
+    type: belongs_to
+    via: createBatch request body datasetId
+    confidence: high
+  - from: SegmentDefinition
+    to: Schema
+    type: belongs_to
+    via: SegmentDefinitionInput.schema
+    confidence: high
+  - from: ProfileEntity
+    to: IdentityNamespace
+    type: belongs_to
+    via: entityIdNS query parameter
+    confidence: medium
+  - from: Sandbox
+    to: Schema
+    type: has_many
+    via: x-sandbox-name header
+    confidence: high
+  - from: Sandbox
+    to: Dataset
+    type: has_many
+    via: x-sandbox-name header
+    confidence: high
+  - from: Sandbox
+    to: SegmentDefinition
+    type: has_many
+    via: x-sandbox-name header
+    confidence: high
+list_wrappers:
+  note: >-
+    24 of the 82 schemas are collection envelopes. Three different pagination shapes coexist
+    in one platform contract — see conventions/adobe-experience-cloud-conventions.yml.
+  shapes:
+    - fields:
+        - total
+        - offset
+        - limit
+      wrappers:
+        - ActivityList
+        - AudienceList
+        - OfferList_2
+      product: Adobe Target
+    - fields:
+        - content
+        - totalElements
+        - totalPages
+      wrappers:
+        - CalculatedMetricList
+        - DateRangeList
+        - ProjectList
+        - ReportSuiteList
+        - SegmentList
+        - UserList
+        - ProfileList
+        - ServiceList
+        - EmailList
+        - WorkflowList
+      product: Adobe Analytics + Adobe Campaign Standard
+    - fields:
+        - totalCount
+      wrappers:
+        - CampaignList
+        - ContentTemplateList
+        - JourneyList
+        - MessageList
+        - OfferList
+      product: Adobe Journey Optimizer + Offer Decisioning
+    - fields:
+        - _page
+      wrappers:
+        - SchemaList
+        - QueryList
+      product: Adobe Experience Platform
+    - fields:
+        - results
+      wrappers:
+        - ClassList
+        - SchemaList
+      product: Adobe Experience Platform
+render: null

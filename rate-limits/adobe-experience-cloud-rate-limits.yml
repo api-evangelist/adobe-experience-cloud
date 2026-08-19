@@ -4,68 +4,133 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Adobe Experience Cloud
 providerId: adobe-experience-cloud
 created: '2026-05-04'
-modified: '2026-05-05'
-reconciled: false
+generated: '2026-08-13'
+method: searched
+modified: '2026-08-13'
+reconciled: true
+source: https://experienceleague.adobe.com/en/docs/experience-platform/profile/guardrails,
+  https://experienceleague.adobe.com/en/docs/experience-platform/query/guardrails,
+  openapi/adobe-experience-cloud-*-api-openapi.yml
+docs: https://experienceleague.adobe.com/en/docs/experience-platform/profile/guardrails
+# Upgraded 2026-08-13 from the 2026-05-04 bulk-sweep `generated` artifact: the entries
+# below now carry numbers Adobe publishes on Experience League, plus the honest finding
+# that the platform signals throttling with NO response headers at all.
 tags:
   - Rate Limiting
+  - Guardrails
   - Experience Cloud
   - Customer Data Platform
-notes: >-
-  Each Experience Cloud product publishes its own throttling envelope
-  (Experience Platform APIs use sandbox-scoped quotas, Target Delivery API
-  uses MBox-scoped pacing, AEM as a Cloud Service runs per-tenant
-  throttles). Specific numeric ceilings are configuration-dependent and
-  defer to the per-product developer docs.
 description: >-
-  Adobe Experience Cloud is a multi-product platform; rate limits vary per
-  service and per sandbox / tenant. Throttling responses are 429 across the
-  family; sustained excess on Edge Network endpoints can shed to 503.
-  Numeric ceilings are not unified and defer to product-specific docs.
-sources:
-  - https://developer.adobe.com/experience-platform-apis/
-  - https://developer.adobe.com/target/
-  - https://developer.adobe.com/experience-cloud/experience-manager-apis/
+  Adobe publishes limits as GUARDRAILS, not as per-key request budgets. Experience League
+  documents two kinds — performance guardrails (soft limits, exceed them and the system
+  degrades) and system-enforced guardrails (hard limits, exceed them and the call fails).
+  The numbers below are quoted from those pages. Critically, none of it is visible at
+  runtime: the contract declares no rate-limit response headers and no Retry-After, and
+  429 appears on exactly one of 110 operations.
+limit_count: 8
 responseCodes:
   throttled: 429
   serviceUnavailable: 503
+  sessionLimit: Session Limit Reached (Query Service error string)
+response_headers:
+  ratelimit: []
+  retry_after: false
+  note: >-
+    No X-RateLimit-*, no RateLimit-*, no Retry-After anywhere in the OpenAPI set. A client
+    cannot see remaining budget, reset time, or a recommended backoff. This is the single
+    biggest agent-readiness gap in the Experience Cloud runtime surface.
+guardrail_types:
+  - name: Performance guardrail
+    kind: soft
+    definition: Usage limits that relate to system performance; exceeding them degrades
+      the service rather than failing the call.
+  - name: System-enforced guardrail
+    kind: hard
+    definition: Limits enforced by the platform; exceeding them fails the call or queues it.
 limits:
-  - name: Experience Platform APIs (per sandbox)
+  - name: Edge segmentation throughput
+    product: Adobe Experience Platform
+    scope: organization (combined across production and development sandboxes)
+    metric: inbound events per second
+    limit: 1500
+    unit: RPS
+    type: performance
+    latency: up to 350 ms to process an inbound event
+    source: https://experienceleague.adobe.com/en/docs/experience-platform/profile/guardrails
+  - name: Streaming segmentation throughput
+    product: Adobe Experience Platform
+    scope: organization (combined across production and development sandboxes)
+    metric: inbound events per second
+    limit: 1500
+    unit: RPS
+    type: performance
+    latency: up to 5 minutes to qualify a profile for audience membership
+    source: https://experienceleague.adobe.com/en/docs/experience-platform/profile/guardrails
+  - name: Profile / ExperienceEvent batch ingestion
+    product: Adobe Experience Platform
+    scope: organization
+    metric: batches per day
+    limit: 90
+    type: performance
+    note: The COMBINED total of Profile and ExperienceEvent batches ingested each day
+      cannot exceed 90.
+    source: https://experienceleague.adobe.com/en/docs/experience-platform/profile/guardrails
+  - name: Flexible audience evaluation runs
+    product: Adobe Experience Platform
     scope: sandbox
-    metric: requests_per_minute
-    limit: see https://developer.adobe.com/experience-platform-apis/
-    notes: >-
-      Sandbox-scoped throttling on the Catalog, Schema Registry, Data
-      Ingestion, Query Service, and Profile APIs.
-  - name: Target Delivery API
-    scope: client-code
-    metric: requests_per_second
-    limit: see https://developer.adobe.com/target/
-    notes: >-
-      High-throughput edge endpoint with per-client-code pacing; concurrent
-      visitors and decisioning capacity vary by SKU.
-  - name: AEM as a Cloud Service
-    scope: tenant
-    metric: requests_per_minute
-    limit: see https://experienceleague.adobe.com/docs/experience-manager-cloud-service.html
-    notes: >-
-      Per-tenant throttles plus dispatcher / CDN caching layer in front.
-  - name: CJA Reporting API
-    scope: company
-    metric: requests_per_minute
-    limit: see https://developer.adobe.com/cja-apis/
-    notes: Per-company throttle similar to Adobe Analytics 2.0.
+    metric: runs per day
+    limit: 2
+    type: system-enforced
+    source: https://experienceleague.adobe.com/en/docs/experience-platform/profile/guardrails
+  - name: Query Service — ad hoc query execution time
+    product: Adobe Experience Platform (Query Service)
+    scope: query
+    metric: maximum execution time
+    limit: 10 minutes
+    type: system-enforced
+    source: https://experienceleague.adobe.com/en/docs/experience-platform/query/guardrails
+  - name: Query Service — batch query execution time
+    product: Adobe Experience Platform (Query Service)
+    scope: query
+    metric: maximum execution time
+    limit: 24 hours
+    type: system-enforced
+    source: https://experienceleague.adobe.com/en/docs/experience-platform/query/guardrails
+  - name: Query Service — accelerated store query concurrency
+    product: Adobe Experience Platform (Query Service)
+    scope: organization
+    metric: concurrent query slots
+    limit: 4
+    type: system-enforced
+    note: Excess queries are queued rather than rejected.
+    source: https://experienceleague.adobe.com/en/docs/experience-platform/query/guardrails
+  - name: Query Service — session concurrency
+    product: Adobe Experience Platform (Query Service)
+    scope: organization
+    metric: concurrent Query Service users
+    limit: entitlement-based
+    type: system-enforced
+    note: >-
+      "As specified in the application product description", +5 with every additional
+      package purchased. Exceeding it returns a `Session Limit Reached` error. Adobe
+      publishes the mechanism but ties the number to the contract.
+    source: https://experienceleague.adobe.com/en/docs/experience-platform/query/guardrails
+undocumented:
+  - product: Adobe Analytics 2.0 API
+    note: >-
+      The reporting endpoint (getReport) is the only operation in the entire contract that
+      declares 429, but no numeric per-key or per-company request ceiling was found
+      published. Recorded as an honest gap.
+    docs: https://developer.adobe.com/analytics-apis/docs/2.0/guides/
+  - product: Adobe Target
+    note: Delivery API pacing is per client code and SKU-dependent; no published number.
+    docs: https://developer.adobe.com/target/
+  - product: Adobe Campaign Standard
+    note: No published API throttling figures.
+  - product: Adobe Journey Optimizer
+    note: No published API throttling figures; message throughput is a contractual commit.
 policies:
-  - name: Backoff Strategy
-    description: Exponential backoff with jitter; honor Retry-After when present.
-  - name: Sandbox isolation
-    description: >-
-      Experience Platform throttling is per-sandbox; production and dev
-      sandboxes have independent quotas.
-  - name: Edge vs control plane
-    description: >-
-      Edge Network endpoints (Target, Edge Network, Web SDK) are tuned for
-      high-RPS visitor traffic; control-plane APIs (Catalog, Schema, Query)
-      are tuned for ops workloads with lower TPS but higher per-call cost.
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+  backoff: >-
+    Not published. With no Retry-After and no RateLimit headers, clients must implement
+    blind exponential backoff on 429 and 503.
+  burst: Not published.

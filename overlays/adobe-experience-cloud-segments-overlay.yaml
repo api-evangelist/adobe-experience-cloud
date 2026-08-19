@@ -1,0 +1,57 @@
+# generated: '2026-08-13'
+# method: generated
+# source: openapi/adobe-experience-cloud-segments-api-openapi.yml + Adobe developer documentation
+overlay: 1.0.0
+info:
+  title: API Evangelist enrichment overlay — Adobe Experience Cloud Adobe Analytics 2.0 Activities Segments
+    API
+  version: 1.0.0
+extends: ../openapi/adobe-experience-cloud-segments-api-openapi.yml
+actions:
+- target: $.info
+  description: Record API Evangelist provenance and the product this contract actually belongs to.
+  update:
+    x-api-evangelist:
+      provider: adobe-experience-cloud
+      product: Adobe Experience Platform
+      docs: https://developer.adobe.com/experience-platform-apis/
+      enriched: '2026-08-13'
+      artifacts:
+      - conventions/adobe-experience-cloud-conventions.yml
+      - errors/adobe-experience-cloud-problem-types.yml
+      - authentication/adobe-experience-cloud-authentication.yml
+      - scopes/adobe-experience-cloud-scopes.yml
+      - rate-limits/adobe-experience-cloud-rate-limits.yml
+- target: $.info
+  description: 'Document the runtime facts the base contract omits: no idempotency primitive, no rate-limit
+    response headers, no RFC 9457 problem details.'
+  update:
+    x-runtime-semantics:
+      idempotency: false
+      rate_limit_headers: []
+      retry_after: false
+      rfc9457: false
+      error_envelope:
+      - errorCode
+      - errorDescription
+      - errorId
+- target: $.components.securitySchemes
+  description: Name the identity provider behind bearerAuth. Adobe IMS discovery is public.
+  update:
+    x-identity-provider:
+      name: Adobe Identity Management System (IMS)
+      issuer: https://ims-na1.adobelogin.com
+      discovery: https://ims-na1.adobelogin.com/.well-known/openid-configuration
+      token_endpoint: https://ims-na1.adobelogin.com/ims/token/v3
+- target: $.info
+  description: Adobe documents x-sandbox-name as required on every Experience Platform / Journey Optimizer
+    call. It is not declared as a parameter in the base contract.
+  update:
+    x-required-headers:
+    - name: x-sandbox-name
+      required: true
+      description: Selects the Experience Platform sandbox. Omitting it targets the default sandbox.
+      source: https://experienceleague.adobe.com/en/docs/experience-platform/sandbox/home
+    - name: x-gw-ims-org-id
+      required: true
+      description: IMS organization id, formatted <id>@AdobeOrg.

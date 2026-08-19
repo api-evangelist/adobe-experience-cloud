@@ -1,0 +1,71 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities Transactional Messages API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactional Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Send a Transactional Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/campaign/mcAdobe/:transactionalMessageId",
+            "params": [
+              {
+                "name": "transactionalMessageId",
+                "value": "",
+                "type": "path",
+                "description": "The transactional message template identifier."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers a real-time transactional message to a recipient. Transactional messages are used for event-driven communications such as order confirmations, password resets, and shipping notifications."
+        },
+        {
+          "info": {
+            "name": "Adobe Campaign Adobe Experience Cloud Get Transactional Message Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/campaign/mcAdobe/:transactionalMessageId/:eventId",
+            "params": [
+              {
+                "name": "transactionalMessageId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "eventId",
+                "value": "",
+                "type": "path",
+                "description": "The event ID returned when the message was triggered."
+              }
+            ]
+          },
+          "docs": "Retrieves the delivery status of a previously sent transactional message by its event ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

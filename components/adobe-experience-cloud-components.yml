@@ -1,0 +1,105 @@
+generated: '2026-08-13'
+method: searched
+source: registry.npmjs.org, data.jsdelivr.com/v1/packages/npm/@adobe/alloy, and the
+  github.com/adobe repositories named in each package's repository field — all queried
+  2026-08-13
+description: >-
+  Client-side and embeddable surfaces Adobe ships for Experience Cloud, as distinct from
+  the server-side SDKs in packages/. Three families: the Edge Network collectors that run
+  in the browser and render personalization (Web SDK, Client Data Layer), the AEM
+  headless/SPA client libraries that render Adobe-managed content inside a customer app,
+  and the Spectrum design-system component libraries (web components and React) that make
+  a customer UI look like an Adobe product.
+summary:
+  family_count: 3
+  component_count: 6
+families:
+  - family: Edge Network / personalization runtime
+    description: >-
+      Browser libraries that send events to the Adobe Experience Platform Edge Network and
+      render Target / Offer Decisioning personalization in the page. This is where
+      Experience Cloud actually touches an end user's browser.
+    components:
+      - name: Adobe Experience Platform Web SDK
+        package: '@adobe/alloy'
+        registry: npm
+        version: 2.35.0
+        published: '2026-07-30'
+        repository: https://github.com/adobe/alloy
+        official: true
+        loader: true
+        cdn:
+          available: true
+          jsdelivr_api: https://data.jsdelivr.com/v1/packages/npm/@adobe/alloy
+          note: >-
+            Distributed both as an npm package and as a CDN build. Adobe's own
+            documentation ships a base-code snippet that loads alloy.js from the customer's
+            own hosted copy or from the Adobe Experience Platform Tags (Launch) library, so
+            the deployed version depends on the customer's tag property rather than on a
+            pinned URL.
+        supersedes:
+          - at.js (Adobe Target)
+          - AppMeasurement.js (Adobe Analytics)
+      - name: Adobe Client Data Layer
+        package: '@adobe/adobe-client-data-layer'
+        registry: npm
+        version: 3.0.1
+        published: '2025-09-03'
+        repository: https://github.com/adobe/adobe-client-data-layer
+        official: true
+        description: Event-driven client data layer used by AEM Core Components and read by
+          the Web SDK / Tags.
+  - family: AEM headless + SPA rendering
+    description: Client libraries that fetch Adobe Experience Manager content into a
+      customer-built front end.
+    components:
+      - name: AEM Headless Client (JS)
+        package: '@adobe/aem-headless-client-js'
+        registry: npm
+        version: 4.0.0
+        published: '2024-07-11'
+        repository: https://github.com/adobe/aem-headless-client-js
+        official: true
+        description: Client for AEM GraphQL persisted queries and content fragment delivery.
+        currency_note: Last release 2024-07-11 — nearly two years stale against a
+          continuously-released AEM Cloud Service.
+      - name: AEM SPA Component Mapping
+        package: '@adobe/aem-spa-component-mapping'
+        registry: npm
+        version: 1.1.1
+        published: '2021-04-15'
+        repository: https://github.com/adobe/aem-spa-component-mapping
+        official: true
+        description: Maps SPA front-end components to AEM resource types for the SPA Editor.
+        currency_note: Last release 2021-04-15. Recorded as published-but-dormant.
+  - family: Spectrum design system
+    description: >-
+      Adobe's design system, shipped as framework-agnostic web components and as React
+      components. Not an API client — included because it is the embeddable UI layer Adobe
+      publishes for building surfaces that sit inside Experience Cloud (App Builder
+      extensions, custom admin UIs).
+    components:
+      - name: Spectrum Web Components
+        package: '@spectrum-web-components/*'
+        example_package: '@spectrum-web-components/button'
+        registry: npm
+        version: 1.12.2
+        published: '2026-07-06'
+        repository: https://github.com/adobe/spectrum-web-components
+        official: true
+        kind: web-components
+      - name: React Spectrum
+        package: '@adobe/react-spectrum'
+        registry: npm
+        version: 3.47.3
+        published: '2026-07-31'
+        repository: https://github.com/adobe/react-spectrum
+        official: true
+        kind: react-components
+hosted_surfaces:
+  - name: Adobe Experience Platform Tags (formerly Launch)
+    description: >-
+      Adobe-hosted tag management. The Web SDK is most commonly deployed as a Tags
+      extension rather than as a direct script include, which means the version running on
+      a customer's site is set in the Tags property, not pinned in the page.
+    note: Recorded as a distribution mechanism, not a component library.

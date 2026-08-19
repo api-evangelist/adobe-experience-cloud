@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Experience Cloud Adobe Analytics 2.0 Activities API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Activities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Target Adobe Experience Cloud List Activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/target/activities",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of activities to return."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of activities to skip for pagination."
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort results by."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all Target activities (A/B tests, experience targeting, multivariate tests, and automated personalization) in the tenant. Each entry includes the activity ID, name, type, state, and modification date."
+        },
+        {
+          "info": {
+            "name": "Adobe Target Adobe Experience Cloud Create an Activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/target/activities",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Target activity of the specified type (AB, XT, MVT, or Automated Personalization). The request body must include the activity name, type, and at least one experience with associated offers."
+        },
+        {
+          "info": {
+            "name": "Adobe Target Adobe Experience Cloud Get an Activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/target/activities/:activityId",
+            "params": [
+              {
+                "name": "activityId",
+                "value": "",
+                "type": "path",
+                "description": "The Target activity ID."
+              }
+            ]
+          },
+          "docs": "Retrieves the full configuration and metadata of a single Target activity by its activity ID, including experiences, audiences, metrics, and scheduling."
+        },
+        {
+          "info": {
+            "name": "Adobe Target Adobe Experience Cloud Update an Activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://analytics.adobe.io/target/activities/:activityId",
+            "params": [
+              {
+                "name": "activityId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing Target activity with new configuration. The full activity object must be provided in the request body."
+        },
+        {
+          "info": {
+            "name": "Adobe Target Adobe Experience Cloud Delete an Activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.adobe.io/target/activities/:activityId",
+            "params": [
+              {
+                "name": "activityId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Permanently deletes a Target activity. Active activities should be deactivated before deletion."
+        },
+        {
+          "info": {
+            "name": "Adobe Target Adobe Experience Cloud Update Activity State",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://analytics.adobe.io/target/activities/:activityId/state",
+            "params": [
+              {
+                "name": "activityId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activates, deactivates, or archives a Target activity by updating its state. Valid state transitions depend on the current state."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
