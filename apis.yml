@@ -4,6 +4,10 @@ apis:
 - aid: adobe-experience-cloud:io-events
   name: Adobe I/O Events
   tags:
+  - Event
+  - Integration
+  - Webhook
+  tags_raw:
   - Events
   - Integration
   - Webhooks
@@ -178,6 +182,8 @@ apis:
   humanURL: https://developer.adobe.com/journey-optimizer-apis/
   baseURL: https://platform.adobe.io
   tags:
+  - Collection
+  tags_raw:
   - Collections
   properties:
   - type: OpenAPI
@@ -420,6 +426,8 @@ apis:
   humanURL: https://developer.adobe.com/journey-optimizer-apis/
   baseURL: https://platform.adobe.io
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
@@ -552,6 +560,8 @@ apis:
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
   baseURL: https://analytics.adobe.io
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
@@ -596,6 +606,8 @@ apis:
   humanURL: https://developer.adobe.com/experience-platform-apis/
   baseURL: https://platform.adobe.io
   tags:
+  - Query
+  tags_raw:
   - Queries
   properties:
   - type: OpenAPI
@@ -750,6 +762,8 @@ apis:
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
   baseURL: https://analytics.adobe.io
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
