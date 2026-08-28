@@ -11,8 +11,11 @@ info:
     executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: analyticsApi
-  url: ../openapi/adobe-analytics-api-openapi.yml
+- name: reportSuitesApi
+  url: ../openapi/adobe-experience-cloud-report-suites-api-openapi.yml
+  type: openapi
+- name: reportsApi
+  url: ../openapi/adobe-experience-cloud-reports-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: report-suite-discovery

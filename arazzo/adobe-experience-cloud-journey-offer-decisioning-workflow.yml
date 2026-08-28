@@ -13,8 +13,8 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: journeyOptimizerApi
-  url: ../openapi/adobe-journey-optimizer-api-openapi.yml
+- name: offersApi
+  url: ../openapi/adobe-experience-cloud-offers-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: offer-decisioning
@@ -63,7 +63,7 @@ workflows:
   steps:
   - stepId: createOffer
     description: Create a new personalized offer with eligibility and representations.
-    operationId: $sourceDescriptions.journeyOptimizerApi.createOffer
+    operationId: $sourceDescriptions.offersApi.createOffer
     parameters:
     - name: Authorization
       in: header
@@ -91,7 +91,7 @@ workflows:
       status: $response.body#/status
   - stepId: confirmOffer
     description: Read the offer back by id to confirm it was created.
-    operationId: $sourceDescriptions.journeyOptimizerApi.getOffer
+    operationId: $sourceDescriptions.offersApi.getOffer
     parameters:
     - name: offerId
       in: path
@@ -112,7 +112,7 @@ workflows:
       name: $response.body#/name
   - stepId: updateOffer
     description: Update the offer with a new priority and content.
-    operationId: $sourceDescriptions.journeyOptimizerApi.updateOffer
+    operationId: $sourceDescriptions.offersApi.updateOffer
     parameters:
     - name: offerId
       in: path

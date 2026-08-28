@@ -12,8 +12,8 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: journeyOptimizerApi
-  url: ../openapi/adobe-journey-optimizer-api-openapi.yml
+- name: journeysApi
+  url: ../openapi/adobe-experience-cloud-journeys-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: journey-create-publish

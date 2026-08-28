@@ -13,8 +13,14 @@ info:
     opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: targetApi
-  url: ../openapi/adobe-target-api-openapi.yml
+- name: activitiesApi
+  url: ../openapi/adobe-experience-cloud-activities-api-openapi.yml
+  type: openapi
+- name: audiencesApi
+  url: ../openapi/adobe-experience-cloud-audiences-api-openapi.yml
+  type: openapi
+- name: offersApi
+  url: ../openapi/adobe-experience-cloud-offers-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: audience-offer-activity
@@ -72,7 +78,7 @@ workflows:
       audienceId: $response.body#/id
   - stepId: createOffer
     description: Create a content offer for use in the activity.
-    operationId: $sourceDescriptions.targetApi.createOffer
+    operationId: $sourceDescriptions.offersApi.createOffer
     parameters:
     - name: Authorization
       in: header

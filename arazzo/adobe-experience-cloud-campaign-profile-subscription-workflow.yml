@@ -12,7 +12,10 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: campaignApi
-  url: ../openapi/adobe-campaign-api-openapi.yml
+  url: ../openapi/adobe-experience-cloud-campaign-api-openapi.yml
+  type: openapi
+- name: profilesApi
+  url: ../openapi/adobe-experience-cloud-profiles-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: profile-subscription

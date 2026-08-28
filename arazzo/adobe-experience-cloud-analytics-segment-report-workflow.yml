@@ -11,8 +11,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: analyticsApi
-  url: ../openapi/adobe-analytics-api-openapi.yml
+- name: reportsApi
+  url: ../openapi/adobe-experience-cloud-reports-api-openapi.yml
+  type: openapi
+- name: segmentsApi
+  url: ../openapi/adobe-experience-cloud-segments-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: segment-report

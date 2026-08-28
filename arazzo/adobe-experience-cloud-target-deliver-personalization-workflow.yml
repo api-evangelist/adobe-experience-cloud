@@ -13,8 +13,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: targetApi
-  url: ../openapi/adobe-target-api-openapi.yml
+- name: deliveryApi
+  url: ../openapi/adobe-experience-cloud-delivery-api-openapi.yml
+  type: openapi
+- name: offersApi
+  url: ../openapi/adobe-experience-cloud-offers-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: deliver-personalization
@@ -45,7 +48,7 @@ workflows:
   steps:
   - stepId: listOffers
     description: List the offers available in the Target account.
-    operationId: $sourceDescriptions.targetApi.listOffers
+    operationId: $sourceDescriptions.offersApi.listOffers
     parameters:
     - name: Authorization
       in: header
