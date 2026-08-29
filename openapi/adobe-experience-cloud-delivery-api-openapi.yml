@@ -1,17 +1,23 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Experience Cloud Adobe Analytics 2.0 Activities Delivery API
-  description: The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.
-  version: 2.0.0
+  title: Adobe Experience Cloud Adobe Target Delivery API
+  description: The Adobe Target API provides programmatic access to Adobe Target for managing activities, audiences, offers, properties, and environments. It enables developers to create and manage A/B tests, experience targeting, multivariate tests, and automated personalization activities, as well as deliver personalized content via the delivery API.
+  version: 1.0.0
   contact:
     name: Adobe Developer
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+    url: https://developer.adobe.com/target/
   license:
     name: Proprietary
     url: https://www.adobe.com/legal/terms.html
 servers:
-- url: https://analytics.adobe.io
-  description: Adobe Analytics Production API
+- url: https://mc.adobe.io/{tenant}
+  description: Adobe Target Admin API
+  variables:
+    tenant:
+      default: mytenant
+      description: Your Adobe Target tenant name.
+- url: https://delivery.adobetarget.com
+  description: Adobe Target Delivery API
 security:
 - bearerAuth: []
 - apiKey: []
@@ -85,6 +91,32 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    DeliveryResponse:
+      type: object
+      properties:
+        requestId:
+          type: string
+        execute:
+          type: object
+          properties:
+            mboxes:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  options:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        content:
+                          type: string
+        prefetch:
+          type: object
     DeliveryRequest:
       type: object
       properties:
@@ -117,40 +149,12 @@ components:
               type: array
               items:
                 type: object
-    DeliveryResponse:
-      type: object
-      properties:
-        requestId:
-          type: string
-        execute:
-          type: object
-          properties:
-            mboxes:
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  options:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        type:
-                          type: string
-                        content:
-                          type: string
-        prefetch:
-          type: object
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: OAuth 2.0 access token obtained via Adobe I/O.
     apiKey:
       type: apiKey
       in: header
       name: x-api-key
-      description: Adobe I/O client API key.

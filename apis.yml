@@ -839,6 +839,9 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/adobe-experience-cloud.png
 access: 3rd-Party
 common:
+  - type: CapabilityMap
+    url: capabilities/adobe-experience-cloud-capability-edges.yml
+    name: Adobe Experience Cloud Business Capability Map
   - type: AgenticAccess
     url: agentic-access/adobe-experience-cloud-agentic-access.yml
   - type: VulnerabilityDisclosure

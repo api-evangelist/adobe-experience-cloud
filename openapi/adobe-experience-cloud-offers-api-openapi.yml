@@ -1,17 +1,22 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Experience Cloud Adobe Analytics 2.0 Activities Offers API
-  description: The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics. The API uses OAuth 2.0 authentication via Adobe I/O and returns JSON responses.
-  version: 2.0.0
-  contact:
-    name: Adobe Developer
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  title: Adobe Experience Cloud Offers API
+  version: 1.0.0
   license:
     name: Proprietary
     url: https://www.adobe.com/legal/terms.html
+  description: 'Operations tagged Offers across 2 of this provider''s published API definitions: adobe-journey-optimizer-api-openapi.yml, adobe-target-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://analytics.adobe.io
-  description: Adobe Analytics Production API
+- url: https://platform.adobe.io
+  description: Adobe Journey Optimizer Production API
+- url: https://mc.adobe.io/{tenant}
+  description: Adobe Target Admin API
+  variables:
+    tenant:
+      default: mytenant
+      description: Your Adobe Target tenant name.
+- url: https://delivery.adobetarget.com
+  description: Adobe Target Delivery API
 security:
 - bearerAuth: []
 - apiKey: []
@@ -106,6 +111,9 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+    servers:
+    - url: https://platform.adobe.io
+      description: Adobe Journey Optimizer Production API
   /offer/offers/{offerId}:
     get:
       operationId: getOffer
@@ -226,6 +234,9 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+    servers:
+    - url: https://platform.adobe.io
+      description: Adobe Journey Optimizer Production API
   /target/offers:
     get:
       operationId: listOffers
@@ -308,6 +319,15 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+    servers:
+    - url: https://mc.adobe.io/{tenant}
+      description: Adobe Target Admin API
+      variables:
+        tenant:
+          default: mytenant
+          description: Your Adobe Target tenant name.
+    - url: https://delivery.adobetarget.com
+      description: Adobe Target Delivery API
   /target/offers/{offerId}:
     get:
       operationId: getOffer
@@ -411,6 +431,15 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+    servers:
+    - url: https://mc.adobe.io/{tenant}
+      description: Adobe Target Admin API
+      variables:
+        tenant:
+          default: mytenant
+          description: Your Adobe Target tenant name.
+    - url: https://delivery.adobetarget.com
+      description: Adobe Target Delivery API
 components:
   schemas:
     Offer:
@@ -445,53 +474,6 @@ components:
           format: date-time
         priority:
           type: integer
-    Offer_2:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        type:
-          type: string
-          enum:
-          - content
-          - redirect
-          - dynamic
-        content:
-          type: string
-        modifiedAt:
-          type: string
-          format: date-time
-    OfferList_2:
-      type: object
-      properties:
-        total:
-          type: integer
-        offset:
-          type: integer
-        limit:
-          type: integer
-        offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Offer_2'
-    OfferInput_2:
-      type: object
-      required:
-      - name
-      - type
-      - content
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-          enum:
-          - content
-          - redirect
-        content:
-          type: string
     OfferInput:
       type: object
       required:
@@ -522,6 +504,53 @@ components:
             $ref: '#/components/schemas/Offer'
         totalCount:
           type: integer
+    Offer_2:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - content
+          - redirect
+          - dynamic
+        content:
+          type: string
+        modifiedAt:
+          type: string
+          format: date-time
+    OfferInput_2:
+      type: object
+      required:
+      - name
+      - type
+      - content
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - content
+          - redirect
+        content:
+          type: string
+    OfferList_2:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer_2'
   parameters:
     sandboxHeader:
       name: x-sandbox-name
@@ -536,9 +565,10 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: OAuth 2.0 access token obtained via Adobe I/O.
     apiKey:
       type: apiKey
       in: header
       name: x-api-key
-      description: Adobe I/O client API key.
+x-refined-from:
+- adobe-journey-optimizer-api-openapi.yml
+- adobe-target-api-openapi.yml
