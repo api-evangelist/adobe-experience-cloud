@@ -360,6 +360,8 @@ apis:
   humanURL: https://developer.adobe.com/target/
   baseURL: https://mc.adobe.io/{tenant}
   tags:
+  - Environment
+  tags_raw:
   - Environments
   properties:
   - type: OpenAPI
@@ -674,6 +676,8 @@ apis:
   humanURL: https://developer.adobe.com/experience-platform-apis/
   baseURL: https://platform.adobe.io
   tags:
+  - Sandbox
+  tags_raw:
   - Sandboxes
   properties:
   - type: OpenAPI
@@ -696,6 +700,8 @@ apis:
   humanURL: https://developer.adobe.com/experience-platform-apis/
   baseURL: https://platform.adobe.io
   tags:
+  - Schema
+  tags_raw:
   - Schemas
   properties:
   - type: OpenAPI
