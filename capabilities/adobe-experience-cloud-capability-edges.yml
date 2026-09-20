@@ -1,0 +1,94 @@
+slug: adobe-experience-cloud
+provider: Adobe Experience Cloud
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 8
+edges:
+- tag: Profiles
+  spec_file: adobe-experience-cloud-profiles-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.8
+  evidence: POST /campaign/profileAndServices/profile createProfile; GET /data/core/ups/access/entities
+    getProfileEntities 'Get Profile Entities'
+  reason: CRUD over marketing/customer profiles plus unified profile entity access from the real-time
+    customer data platform is customer master/identity data management.
+- tag: Segments
+  spec_file: adobe-experience-cloud-segments-api-openapi.yml
+  capability_id: BC-420.20
+  capability_id_l1: BC-420
+  capability_name: Customer Segmentation Management
+  confidence: 0.8
+  evidence: POST /api/{companyId}/segments createSegment ... POST /data/core/ups/segment/definitions createSegmentDefinition
+  reason: Operations create and manage audience/segment definitions in Adobe Analytics and the Unified
+    Profile Service, which is customer segmentation for marketing audiences.
+- tag: Campaigns
+  spec_file: adobe-experience-cloud-campaigns-api-openapi.yml
+  capability_id: BC-400
+  capability_id_l1: BC-400
+  capability_name: Marketing Management
+  confidence: 0.75
+  evidence: POST /campaign/campaigns  createCampaign  Adobe Journey Optimizer ... Create a Campaign; schemas
+    CampaignInput, CampaignList
+  reason: Lifecycle CRUD over marketing campaigns in a cross-channel campaign execution product — clearly
+    marketing management; specific L2 (demand gen vs digital) not determinable from the operations.
+- tag: Audiences
+  spec_file: adobe-experience-cloud-audiences-api-openapi.yml
+  capability_id: BC-420.20
+  capability_id_l1: BC-420
+  capability_name: Customer Segmentation Management
+  confidence: 0.7
+  evidence: POST /target/audiences  createAudience  Adobe Target ... Create an Audience; schemas Audience,
+    AudienceInput
+  reason: CRUD over audience definitions used to target visitors — customer segmentation management.
+- tag: Content
+  spec_file: adobe-experience-cloud-content-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.7
+  evidence: GET /campaign/email  listEmails  Adobe Campaign ... List Email Deliveries; schemas EmailList,
+    Email
+  reason: Despite the 'Content' tag and the misleading concatenated title, the operations manage Adobe
+    Campaign email deliveries — outbound email campaign execution, i.e. digital/automated marketing. Some
+    residual ambiguity between digital marketing and demand generation keeps confidence at 0.7.
+- tag: Reports
+  spec_file: adobe-experience-cloud-reports-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.7
+  evidence: POST /api/{companyId}/reports getReport 'Retrieve a Report'
+  reason: Retrieving analytics report data is squarely reporting/analytics delivery; the ReportRequest/ReportResponse
+    schemas confirm a query-and-return analytics surface.
+- tag: Schemas
+  spec_file: adobe-experience-cloud-schemas-api-openapi.yml
+  capability_id: BC-610.40
+  capability_id_l1: BC-610
+  capability_name: Data Architecture Management
+  confidence: 0.7
+  evidence: GET /data/foundation/schemaregistry/tenant/schemas listSchemas ... Create a Schema
+  reason: Adobe Experience Platform Schema Registry CRUD — defining data schemas for the customer data
+    platform. This is data architecture / modelling of information assets rather than a marketing or product
+    capability. Moderate confidence as it could also be read as data governance.
+- tag: Transactional Messages
+  spec_file: adobe-experience-cloud-transactional-messages-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.7
+  evidence: POST /campaign/mcAdobe/{transactionalMessageId} sendTransactionalMessage  Adobe Campaign ...
+    Send a Transactional Message
+  reason: Adobe Campaign transactional message dispatch and status tracking — outbound digital messaging
+    execution, i.e. digital marketing automation. Some ambiguity as transactional messages can also be
+    operational customer notifications.
