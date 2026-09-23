@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Adobe Experience Cloud Adobe Journey Optimizer Placements API
+  title: Adobe Experience Cloud Adobe Journey Optimizer Placements…
   description: The Adobe Journey Optimizer API enables programmatic management of customer journeys, messages, campaigns, offers, and content across channels including email, push, SMS, and in-app. It provides endpoints for creating and managing journey orchestrations, configuring offer decisioning, managing content templates, and accessing journey execution data.
   version: 1.0.0
   contact:
@@ -92,17 +92,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Placement:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        channel:
-          type: string
-        contentType:
-          type: string
     PlacementInput:
       type: object
       required:
@@ -110,6 +99,17 @@ components:
       - channel
       - contentType
       properties:
+        name:
+          type: string
+        channel:
+          type: string
+        contentType:
+          type: string
+    Placement:
+      type: object
+      properties:
+        id:
+          type: string
         name:
           type: string
         channel:

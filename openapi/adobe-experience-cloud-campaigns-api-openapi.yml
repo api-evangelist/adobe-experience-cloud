@@ -164,6 +164,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CampaignList:
+      type: object
+      properties:
+        campaigns:
+          type: array
+          items:
+            $ref: '#/components/schemas/Campaign'
+        totalCount:
+          type: integer
     Campaign:
       type: object
       properties:
@@ -196,15 +205,6 @@ components:
             endDate:
               type: string
               format: date-time
-    CampaignList:
-      type: object
-      properties:
-        campaigns:
-          type: array
-          items:
-            $ref: '#/components/schemas/Campaign'
-        totalCount:
-          type: integer
     CampaignInput:
       type: object
       required:

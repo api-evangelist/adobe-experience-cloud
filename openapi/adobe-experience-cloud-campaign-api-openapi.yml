@@ -191,6 +191,13 @@ components:
           enum:
           - email
           - sms
+    ServiceList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
     Service:
       type: object
       properties:
@@ -205,13 +212,6 @@ components:
         created:
           type: string
           format: date-time
-    ServiceList:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Service'
   securitySchemes:
     bearerAuth:
       type: http

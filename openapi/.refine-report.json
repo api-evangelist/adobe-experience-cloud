@@ -61,7 +61,8 @@
     "adobe-target-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "tag 'Segments' spans 2 source specs (adobe-analytics-api-openapi.yml, adobe-experience-platform-api-openapi.yml): per-path servers applied",
     "tag 'Profiles' spans 2 source specs (adobe-campaign-api-openapi.yml, adobe-experience-platform-api-openapi.yml): per-path servers applied",
-    "tag 'Offers' spans 2 source specs (adobe-journey-optimizer-api-openapi.yml, adobe-target-api-openapi.yml): per-path servers applied"
+    "tag 'Offers' spans 2 source specs (adobe-journey-optimizer-api-openapi.yml, adobe-target-api-openapi.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "adobe-experience-cloud-activities-api-openapi.yml: previously refined output, superseded by openapi/_original/",

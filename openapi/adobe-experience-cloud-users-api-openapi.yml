@@ -106,6 +106,17 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    UserList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+        totalElements:
+          type: integer
+        totalPages:
+          type: integer
     User:
       type: object
       properties:
@@ -121,17 +132,6 @@ components:
           type: string
         admin:
           type: boolean
-    UserList:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/User'
-        totalElements:
-          type: integer
-        totalPages:
-          type: integer
   securitySchemes:
     bearerAuth:
       type: http

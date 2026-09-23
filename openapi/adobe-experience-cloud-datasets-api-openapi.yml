@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Adobe Experience Cloud Adobe Experience Platform Datasets API
+  title: Adobe Experience Cloud Adobe Experience Platform Datasets…
   description: The Adobe Experience Platform API provides RESTful access to the core services of Adobe Experience Platform, including data ingestion, unified profile management, identity resolution, dataset management, schema registry, query service, and segmentation. It enables developers to build and manage real-time customer profiles, ingest batch and streaming data, define XDM schemas, and orchestrate data workflows programmatically.
   version: 1.0.0
   contact:
@@ -155,6 +155,15 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    sandboxHeader:
+      name: x-sandbox-name
+      in: header
+      required: true
+      description: The name of the sandbox to operate in.
+      schema:
+        type: string
+        default: prod
   schemas:
     DatasetInput:
       type: object
@@ -201,15 +210,6 @@ components:
           format: date-time
         status:
           type: string
-  parameters:
-    sandboxHeader:
-      name: x-sandbox-name
-      in: header
-      required: true
-      description: The name of the sandbox to operate in.
-      schema:
-        type: string
-        default: prod
   securitySchemes:
     bearerAuth:
       type: http

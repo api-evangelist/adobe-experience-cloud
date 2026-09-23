@@ -156,6 +156,23 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    MessageInput:
+      type: object
+      required:
+      - name
+      - channel
+      properties:
+        name:
+          type: string
+        channel:
+          type: string
+          enum:
+          - email
+          - push
+          - sms
+          - inApp
+        content:
+          type: object
     Message:
       type: object
       properties:
@@ -178,23 +195,6 @@ components:
             $ref: '#/components/schemas/Message'
         totalCount:
           type: integer
-    MessageInput:
-      type: object
-      required:
-      - name
-      - channel
-      properties:
-        name:
-          type: string
-        channel:
-          type: string
-          enum:
-          - email
-          - push
-          - sms
-          - inApp
-        content:
-          type: object
   parameters:
     sandboxHeader:
       name: x-sandbox-name

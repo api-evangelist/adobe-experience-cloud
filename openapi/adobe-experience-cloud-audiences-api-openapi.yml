@@ -209,28 +209,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AudienceInput:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        targetRule:
-          type: object
-    Audience:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        description:
-          type: string
-        targetRule:
-          type: object
     AudienceList:
       type: object
       properties:
@@ -244,6 +222,28 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Audience'
+    Audience:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        targetRule:
+          type: object
+    AudienceInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        targetRule:
+          type: object
   securitySchemes:
     bearerAuth:
       type: http

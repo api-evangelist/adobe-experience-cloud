@@ -114,6 +114,15 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    sandboxHeader:
+      name: x-sandbox-name
+      in: header
+      required: true
+      description: The name of the sandbox to operate in.
+      schema:
+        type: string
+        default: prod
   schemas:
     Batch:
       type: object
@@ -134,15 +143,6 @@ components:
         completed:
           type: string
           format: date-time
-  parameters:
-    sandboxHeader:
-      name: x-sandbox-name
-      in: header
-      required: true
-      description: The name of the sandbox to operate in.
-      schema:
-        type: string
-        default: prod
   securitySchemes:
     bearerAuth:
       type: http

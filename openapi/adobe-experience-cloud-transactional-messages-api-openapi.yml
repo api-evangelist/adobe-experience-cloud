@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Adobe Experience Cloud Adobe Campaign Transactional Messages API
+  title: Adobe Experience Cloud Adobe Campaign Transactional…
   description: The Adobe Campaign API provides RESTful access to Adobe Campaign Standard and Classic capabilities for managing marketing campaigns, profiles, services, workflows, transactional messages, and content. It enables programmatic creation and execution of email, SMS, and push notification campaigns, subscriber management, and real-time transactional messaging.
   version: 1.0.0
   contact:
@@ -115,18 +115,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    TransactionalMessageRequest:
-      type: object
-      required:
-      - email
-      - ctx
-      properties:
-        email:
-          type: string
-          description: Recipient email address.
-        ctx:
-          type: object
-          description: Context data for personalizing the transactional message.
     TransactionalMessageResponse:
       type: object
       properties:
@@ -143,6 +131,18 @@ components:
           - failed
         email:
           type: string
+    TransactionalMessageRequest:
+      type: object
+      required:
+      - email
+      - ctx
+      properties:
+        email:
+          type: string
+          description: Recipient email address.
+        ctx:
+          type: object
+          description: Context data for personalizing the transactional message.
   securitySchemes:
     bearerAuth:
       type: http

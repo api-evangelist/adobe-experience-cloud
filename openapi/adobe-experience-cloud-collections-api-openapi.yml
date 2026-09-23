@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Adobe Experience Cloud Adobe Journey Optimizer Collections API
+  title: Adobe Experience Cloud Adobe Journey Optimizer Collections…
   description: The Adobe Journey Optimizer API enables programmatic management of customer journeys, messages, campaigns, offers, and content across channels including email, push, SMS, and in-app. It provides endpoints for creating and managing journey orchestrations, configuring offer decisioning, managing content templates, and accessing journey execution data.
   version: 1.0.0
   contact:
@@ -90,6 +90,13 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CollectionList:
+      type: object
+      properties:
+        collections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Collection'
     Collection:
       type: object
       properties:
@@ -108,13 +115,6 @@ components:
           type: string
         filter:
           type: object
-    CollectionList:
-      type: object
-      properties:
-        collections:
-          type: array
-          items:
-            $ref: '#/components/schemas/Collection'
   parameters:
     sandboxHeader:
       name: x-sandbox-name

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Adobe Experience Cloud Adobe Experience Platform Sandboxes API
+  title: Adobe Experience Cloud Adobe Experience Platform Sandboxes…
   description: The Adobe Experience Platform API provides RESTful access to the core services of Adobe Experience Platform, including data ingestion, unified profile management, identity resolution, dataset management, schema registry, query service, and segmentation. It enables developers to build and manage real-time customer profiles, ingest batch and streaming data, define XDM schemas, and orchestrate data workflows programmatically.
   version: 1.0.0
   contact:

@@ -95,13 +95,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    EmailList:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Email'
     Email:
       type: object
       properties:
@@ -123,6 +116,13 @@ components:
         created:
           type: string
           format: date-time
+    EmailList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Email'
   securitySchemes:
     bearerAuth:
       type: http

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Adobe Experience Cloud Adobe Journey Optimizer Content Templates API
+  title: Adobe Experience Cloud Adobe Journey Optimizer Content…
   description: The Adobe Journey Optimizer API enables programmatic management of customer journeys, messages, campaigns, offers, and content across channels including email, push, SMS, and in-app. It provides endpoints for creating and managing journey orchestrations, configuring offer decisioning, managing content templates, and accessing journey execution data.
   version: 1.0.0
   contact:
@@ -99,6 +99,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ContentTemplateList:
+      type: object
+      properties:
+        templates:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentTemplate'
+        totalCount:
+          type: integer
     ContentTemplate:
       type: object
       properties:
@@ -113,15 +122,6 @@ components:
         createdAt:
           type: string
           format: date-time
-    ContentTemplateList:
-      type: object
-      properties:
-        templates:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContentTemplate'
-        totalCount:
-          type: integer
     ContentTemplateInput:
       type: object
       required:

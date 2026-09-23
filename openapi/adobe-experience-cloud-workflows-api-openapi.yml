@@ -137,6 +137,13 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    WorkflowList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Workflow'
     Workflow:
       type: object
       properties:
@@ -158,13 +165,6 @@ components:
         created:
           type: string
           format: date-time
-    WorkflowList:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Workflow'
   securitySchemes:
     bearerAuth:
       type: http

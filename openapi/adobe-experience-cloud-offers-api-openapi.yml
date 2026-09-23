@@ -442,6 +442,27 @@ paths:
       description: Adobe Target Delivery API
 components:
   schemas:
+    OfferInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        representations:
+          type: array
+          items:
+            type: object
+        eligibilityRule:
+          type: string
+        priority:
+          type: integer
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
     Offer:
       type: object
       properties:
@@ -474,27 +495,6 @@ components:
           format: date-time
         priority:
           type: integer
-    OfferInput:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        representations:
-          type: array
-          items:
-            type: object
-        eligibilityRule:
-          type: string
-        priority:
-          type: integer
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
     OfferList:
       type: object
       properties:
@@ -504,6 +504,22 @@ components:
             $ref: '#/components/schemas/Offer'
         totalCount:
           type: integer
+    OfferInput_2:
+      type: object
+      required:
+      - name
+      - type
+      - content
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - content
+          - redirect
+        content:
+          type: string
     Offer_2:
       type: object
       properties:
@@ -522,22 +538,6 @@ components:
         modifiedAt:
           type: string
           format: date-time
-    OfferInput_2:
-      type: object
-      required:
-      - name
-      - type
-      - content
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-          enum:
-          - content
-          - redirect
-        content:
-          type: string
     OfferList_2:
       type: object
       properties:
