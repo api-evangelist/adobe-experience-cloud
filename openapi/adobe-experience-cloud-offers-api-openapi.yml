@@ -239,7 +239,7 @@ paths:
       description: Adobe Journey Optimizer Production API
   /target/offers:
     get:
-      operationId: listOffers
+      operationId: getTargetOffers
       summary: Adobe Target Adobe Experience Cloud List Offers
       description: Returns a paginated list of content offers configured in Adobe Target. Offers include HTML, JSON, and redirect offer types.
       tags:
@@ -277,8 +277,10 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      x-operation-id-source: normalized
+      x-operation-id-original: listOffers
     post:
-      operationId: createOffer
+      operationId: postTargetOffers
       summary: Adobe Target Adobe Experience Cloud Create an Offer
       description: Creates a new content offer in Adobe Target. The offer can be HTML content, a JSON payload, or a redirect URL.
       tags:
@@ -319,6 +321,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      x-operation-id-source: normalized
+      x-operation-id-original: createOffer
     servers:
     - url: https://mc.adobe.io/{tenant}
       description: Adobe Target Admin API
@@ -330,7 +334,7 @@ paths:
       description: Adobe Target Delivery API
   /target/offers/{offerId}:
     get:
-      operationId: getOffer
+      operationId: getTargetOffersByOfferId
       summary: Adobe Target Adobe Experience Cloud Get an Offer
       description: Retrieves a single offer by its offer ID, including the content payload and metadata.
       tags:
@@ -363,8 +367,10 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      x-operation-id-source: normalized
+      x-operation-id-original: getOffer
     put:
-      operationId: updateOffer
+      operationId: putTargetOffersByOfferId
       summary: Adobe Target Adobe Experience Cloud Update an Offer
       description: Updates an existing offer with new content or metadata.
       tags:
@@ -411,8 +417,10 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      x-operation-id-source: normalized
+      x-operation-id-original: updateOffer
     delete:
-      operationId: deleteOffer
+      operationId: deleteTargetOffersByOfferId
       summary: Adobe Target Adobe Experience Cloud Delete an Offer
       description: Permanently deletes an offer. Offers in use by active activities cannot be deleted.
       tags:
@@ -431,6 +439,8 @@ paths:
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
+      x-operation-id-source: normalized
+      x-operation-id-original: deleteOffer
     servers:
     - url: https://mc.adobe.io/{tenant}
       description: Adobe Target Admin API
@@ -442,27 +452,6 @@ paths:
       description: Adobe Target Delivery API
 components:
   schemas:
-    OfferInput:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        representations:
-          type: array
-          items:
-            type: object
-        eligibilityRule:
-          type: string
-        priority:
-          type: integer
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
     Offer:
       type: object
       properties:
@@ -495,6 +484,27 @@ components:
           format: date-time
         priority:
           type: integer
+    OfferInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        representations:
+          type: array
+          items:
+            type: object
+        eligibilityRule:
+          type: string
+        priority:
+          type: integer
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
     OfferList:
       type: object
       properties:

@@ -304,29 +304,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ActivityInput:
-      type: object
-      required:
-      - name
-      - type
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-          enum:
-          - ab
-          - xt
-          - mvt
-          - ap
-        priority:
-          type: integer
-        startsAt:
-          type: string
-          format: date-time
-        endsAt:
-          type: string
-          format: date-time
     Activity:
       type: object
       properties:
@@ -352,6 +329,29 @@ components:
         modifiedAt:
           type: string
           format: date-time
+        startsAt:
+          type: string
+          format: date-time
+        endsAt:
+          type: string
+          format: date-time
+    ActivityInput:
+      type: object
+      required:
+      - name
+      - type
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum:
+          - ab
+          - xt
+          - mvt
+          - ap
+        priority:
+          type: integer
         startsAt:
           type: string
           format: date-time

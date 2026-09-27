@@ -156,6 +156,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    MessageList:
+      type: object
+      properties:
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+        totalCount:
+          type: integer
     MessageInput:
       type: object
       required:
@@ -186,15 +195,6 @@ components:
           type: string
         content:
           type: object
-    MessageList:
-      type: object
-      properties:
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/Message'
-        totalCount:
-          type: integer
   parameters:
     sandboxHeader:
       name: x-sandbox-name

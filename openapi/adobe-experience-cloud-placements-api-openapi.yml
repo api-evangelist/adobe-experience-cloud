@@ -92,19 +92,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    PlacementInput:
-      type: object
-      required:
-      - name
-      - channel
-      - contentType
-      properties:
-        name:
-          type: string
-        channel:
-          type: string
-        contentType:
-          type: string
     Placement:
       type: object
       properties:
@@ -123,6 +110,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Placement'
+    PlacementInput:
+      type: object
+      required:
+      - name
+      - channel
+      - contentType
+      properties:
+        name:
+          type: string
+        channel:
+          type: string
+        contentType:
+          type: string
   parameters:
     sandboxHeader:
       name: x-sandbox-name

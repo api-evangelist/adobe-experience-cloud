@@ -95,16 +95,22 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    sandboxHeader:
-      name: x-sandbox-name
-      in: header
-      required: true
-      description: The name of the sandbox to operate in.
-      schema:
-        type: string
-        default: prod
   schemas:
+    IdentityNamespace:
+      type: object
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        idType:
+          type: string
+        standard:
+          type: boolean
     IdentityNamespaceInput:
       type: object
       required:
@@ -126,21 +132,15 @@ components:
           - CROSS_DEVICE
           - EMAIL
           - PHONE
-    IdentityNamespace:
-      type: object
-      properties:
-        id:
-          type: integer
-        code:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        idType:
-          type: string
-        standard:
-          type: boolean
+  parameters:
+    sandboxHeader:
+      name: x-sandbox-name
+      in: header
+      required: true
+      description: The name of the sandbox to operate in.
+      schema:
+        type: string
+        default: prod
   securitySchemes:
     bearerAuth:
       type: http

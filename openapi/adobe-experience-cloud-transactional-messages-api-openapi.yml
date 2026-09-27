@@ -115,6 +115,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    TransactionalMessageRequest:
+      type: object
+      required:
+      - email
+      - ctx
+      properties:
+        email:
+          type: string
+          description: Recipient email address.
+        ctx:
+          type: object
+          description: Context data for personalizing the transactional message.
     TransactionalMessageResponse:
       type: object
       properties:
@@ -131,18 +143,6 @@ components:
           - failed
         email:
           type: string
-    TransactionalMessageRequest:
-      type: object
-      required:
-      - email
-      - ctx
-      properties:
-        email:
-          type: string
-          description: Recipient email address.
-        ctx:
-          type: object
-          description: Context data for personalizing the transactional message.
   securitySchemes:
     bearerAuth:
       type: http

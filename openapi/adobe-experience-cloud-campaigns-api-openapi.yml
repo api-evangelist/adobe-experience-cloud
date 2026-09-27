@@ -164,15 +164,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CampaignList:
-      type: object
-      properties:
-        campaigns:
-          type: array
-          items:
-            $ref: '#/components/schemas/Campaign'
-        totalCount:
-          type: integer
     Campaign:
       type: object
       properties:
@@ -226,6 +217,15 @@ components:
           type: string
         schedule:
           type: object
+    CampaignList:
+      type: object
+      properties:
+        campaigns:
+          type: array
+          items:
+            $ref: '#/components/schemas/Campaign'
+        totalCount:
+          type: integer
   parameters:
     sandboxHeader:
       name: x-sandbox-name

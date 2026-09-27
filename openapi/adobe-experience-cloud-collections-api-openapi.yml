@@ -97,20 +97,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Collection'
-    Collection:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        filter:
-          type: object
     CollectionInput:
       type: object
       required:
       - name
       properties:
+        name:
+          type: string
+        filter:
+          type: object
+    Collection:
+      type: object
+      properties:
+        id:
+          type: string
         name:
           type: string
         filter:

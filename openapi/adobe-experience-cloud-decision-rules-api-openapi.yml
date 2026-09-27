@@ -99,23 +99,23 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DecisionRule'
-    DecisionRule:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        condition:
-          type: string
     DecisionRuleInput:
       type: object
       required:
       - name
       - condition
       properties:
+        name:
+          type: string
+        description:
+          type: string
+        condition:
+          type: string
+    DecisionRule:
+      type: object
+      properties:
+        id:
+          type: string
         name:
           type: string
         description:

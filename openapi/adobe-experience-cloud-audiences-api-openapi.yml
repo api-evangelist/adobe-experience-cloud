@@ -209,6 +209,17 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Audience:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        targetRule:
+          type: object
     AudienceList:
       type: object
       properties:
@@ -222,17 +233,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Audience'
-    Audience:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        description:
-          type: string
-        targetRule:
-          type: object
     AudienceInput:
       type: object
       required:

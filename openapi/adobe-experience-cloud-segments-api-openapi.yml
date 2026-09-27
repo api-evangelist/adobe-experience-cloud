@@ -444,17 +444,6 @@ paths:
       description: Adobe Experience Platform Production API
 components:
   schemas:
-    SegmentList:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Segment'
-        totalElements:
-          type: integer
-        totalPages:
-          type: integer
     Segment:
       type: object
       properties:
@@ -484,26 +473,29 @@ components:
                 type: integer
               name:
                 type: string
-    SegmentDefinition:
+    SegmentList:
       type: object
       properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        expression:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Segment'
+        totalElements:
+          type: integer
+        totalPages:
+          type: integer
+    SegmentDefinitionList:
+      type: object
+      properties:
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/SegmentDefinition'
+        page:
           type: object
           properties:
-            type:
-              type: string
-            value:
-              type: string
-        mergePolicyId:
-          type: string
-        evaluationInfo:
-          type: object
+            totalCount:
+              type: integer
     SegmentDefinitionInput:
       type: object
       required:
@@ -537,18 +529,26 @@ components:
               type: string
         mergePolicyId:
           type: string
-    SegmentDefinitionList:
+    SegmentDefinition:
       type: object
       properties:
-        segments:
-          type: array
-          items:
-            $ref: '#/components/schemas/SegmentDefinition'
-        page:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        expression:
           type: object
           properties:
-            totalCount:
-              type: integer
+            type:
+              type: string
+            value:
+              type: string
+        mergePolicyId:
+          type: string
+        evaluationInfo:
+          type: object
   parameters:
     sandboxHeader:
       name: x-sandbox-name

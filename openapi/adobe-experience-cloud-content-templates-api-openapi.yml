@@ -99,15 +99,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ContentTemplateList:
-      type: object
-      properties:
-        templates:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContentTemplate'
-        totalCount:
-          type: integer
     ContentTemplate:
       type: object
       properties:
@@ -139,6 +130,15 @@ components:
           - inApp
         content:
           type: object
+    ContentTemplateList:
+      type: object
+      properties:
+        templates:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentTemplate'
+        totalCount:
+          type: integer
   parameters:
     sandboxHeader:
       name: x-sandbox-name

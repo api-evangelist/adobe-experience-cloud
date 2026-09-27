@@ -302,15 +302,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    JourneyList:
-      type: object
-      properties:
-        journeys:
-          type: array
-          items:
-            $ref: '#/components/schemas/Journey'
-        totalCount:
-          type: integer
     Journey:
       type: object
       properties:
@@ -350,6 +341,15 @@ components:
           type: array
           items:
             type: object
+    JourneyList:
+      type: object
+      properties:
+        journeys:
+          type: array
+          items:
+            $ref: '#/components/schemas/Journey'
+        totalCount:
+          type: integer
   parameters:
     sandboxHeader:
       name: x-sandbox-name

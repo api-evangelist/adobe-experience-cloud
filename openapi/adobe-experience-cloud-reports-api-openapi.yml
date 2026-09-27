@@ -111,32 +111,6 @@ components:
           type: string
         errorId:
           type: string
-    ReportResponse:
-      type: object
-      properties:
-        totalPages:
-          type: integer
-        firstPage:
-          type: boolean
-        lastPage:
-          type: boolean
-        numberOfElements:
-          type: integer
-        totalElements:
-          type: integer
-        rows:
-          type: array
-          items:
-            type: object
-            properties:
-              itemId:
-                type: string
-              value:
-                type: string
-              data:
-                type: array
-                items:
-                  type: number
     ReportRequest:
       type: object
       properties:
@@ -171,6 +145,32 @@ components:
               type: integer
             page:
               type: integer
+    ReportResponse:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+        firstPage:
+          type: boolean
+        lastPage:
+          type: boolean
+        numberOfElements:
+          type: integer
+        totalElements:
+          type: integer
+        rows:
+          type: array
+          items:
+            type: object
+            properties:
+              itemId:
+                type: string
+              value:
+                type: string
+              data:
+                type: array
+                items:
+                  type: number
   securitySchemes:
     bearerAuth:
       type: http
