@@ -452,6 +452,36 @@ paths:
       description: Adobe Target Delivery API
 components:
   schemas:
+    OfferList:
+      type: object
+      properties:
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer'
+        totalCount:
+          type: integer
+    OfferInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        representations:
+          type: array
+          items:
+            type: object
+        eligibilityRule:
+          type: string
+        priority:
+          type: integer
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
     Offer:
       type: object
       properties:
@@ -484,36 +514,6 @@ components:
           format: date-time
         priority:
           type: integer
-    OfferInput:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        representations:
-          type: array
-          items:
-            type: object
-        eligibilityRule:
-          type: string
-        priority:
-          type: integer
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-    OfferList:
-      type: object
-      properties:
-        offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Offer'
-        totalCount:
-          type: integer
     OfferInput_2:
       type: object
       required:
@@ -530,6 +530,19 @@ components:
           - redirect
         content:
           type: string
+    OfferList_2:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer_2'
     Offer_2:
       type: object
       properties:
@@ -548,19 +561,6 @@ components:
         modifiedAt:
           type: string
           format: date-time
-    OfferList_2:
-      type: object
-      properties:
-        total:
-          type: integer
-        offset:
-          type: integer
-        limit:
-          type: integer
-        offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Offer_2'
   parameters:
     sandboxHeader:
       name: x-sandbox-name

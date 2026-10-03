@@ -209,11 +209,11 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Audience:
+    AudienceInput:
       type: object
+      required:
+      - name
       properties:
-        id:
-          type: integer
         name:
           type: string
         description:
@@ -233,11 +233,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Audience'
-    AudienceInput:
+    Audience:
       type: object
-      required:
-      - name
       properties:
+        id:
+          type: integer
         name:
           type: string
         description:

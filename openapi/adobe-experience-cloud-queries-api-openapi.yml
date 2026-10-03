@@ -154,6 +154,15 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    sandboxHeader:
+      name: x-sandbox-name
+      in: header
+      required: true
+      description: The name of the sandbox to operate in.
+      schema:
+        type: string
+        default: prod
   schemas:
     Query:
       type: object
@@ -193,15 +202,6 @@ components:
           properties:
             totalCount:
               type: integer
-  parameters:
-    sandboxHeader:
-      name: x-sandbox-name
-      in: header
-      required: true
-      description: The name of the sandbox to operate in.
-      schema:
-        type: string
-        default: prod
   securitySchemes:
     bearerAuth:
       type: http

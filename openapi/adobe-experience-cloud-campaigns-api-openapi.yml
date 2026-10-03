@@ -164,6 +164,36 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CampaignList:
+      type: object
+      properties:
+        campaigns:
+          type: array
+          items:
+            $ref: '#/components/schemas/Campaign'
+        totalCount:
+          type: integer
+    CampaignInput:
+      type: object
+      required:
+      - name
+      - channel
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        channel:
+          type: string
+          enum:
+          - email
+          - push
+          - sms
+          - inApp
+        audienceId:
+          type: string
+        schedule:
+          type: object
     Campaign:
       type: object
       properties:
@@ -196,36 +226,6 @@ components:
             endDate:
               type: string
               format: date-time
-    CampaignInput:
-      type: object
-      required:
-      - name
-      - channel
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        channel:
-          type: string
-          enum:
-          - email
-          - push
-          - sms
-          - inApp
-        audienceId:
-          type: string
-        schedule:
-          type: object
-    CampaignList:
-      type: object
-      properties:
-        campaigns:
-          type: array
-          items:
-            $ref: '#/components/schemas/Campaign'
-        totalCount:
-          type: integer
   parameters:
     sandboxHeader:
       name: x-sandbox-name

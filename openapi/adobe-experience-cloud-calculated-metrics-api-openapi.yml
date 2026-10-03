@@ -264,17 +264,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CalculatedMetricList:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/CalculatedMetric'
-        totalElements:
-          type: integer
-        totalPages:
-          type: integer
     CalculatedMetric:
       type: object
       properties:
@@ -300,6 +289,17 @@ components:
           - negative
         definition:
           type: object
+    CalculatedMetricList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/CalculatedMetric'
+        totalElements:
+          type: integer
+        totalPages:
+          type: integer
   securitySchemes:
     bearerAuth:
       type: http

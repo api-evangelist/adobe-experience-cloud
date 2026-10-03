@@ -294,32 +294,6 @@ paths:
       description: Adobe Experience Platform Production API
 components:
   schemas:
-    ProfileInput:
-      type: object
-      properties:
-        email:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        birthDate:
-          type: string
-          format: date
-        phone:
-          type: string
-    ProfileList:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Profile'
-        count:
-          type: object
-          properties:
-            value:
-              type: integer
     Profile:
       type: object
       properties:
@@ -342,6 +316,32 @@ components:
         lastModified:
           type: string
           format: date-time
+    ProfileList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Profile'
+        count:
+          type: object
+          properties:
+            value:
+              type: integer
+    ProfileInput:
+      type: object
+      properties:
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        phone:
+          type: string
     ProfileEntity:
       type: object
       properties:

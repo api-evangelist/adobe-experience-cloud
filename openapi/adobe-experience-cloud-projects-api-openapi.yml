@@ -106,6 +106,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ProjectList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+        totalElements:
+          type: integer
     Project:
       type: object
       properties:
@@ -125,15 +134,6 @@ components:
         modified:
           type: string
           format: date-time
-    ProjectList:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Project'
-        totalElements:
-          type: integer
   securitySchemes:
     bearerAuth:
       type: http

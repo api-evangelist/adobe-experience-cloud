@@ -484,18 +484,6 @@ components:
           type: integer
         totalPages:
           type: integer
-    SegmentDefinitionList:
-      type: object
-      properties:
-        segments:
-          type: array
-          items:
-            $ref: '#/components/schemas/SegmentDefinition'
-        page:
-          type: object
-          properties:
-            totalCount:
-              type: integer
     SegmentDefinitionInput:
       type: object
       required:
@@ -549,6 +537,18 @@ components:
           type: string
         evaluationInfo:
           type: object
+    SegmentDefinitionList:
+      type: object
+      properties:
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/SegmentDefinition'
+        page:
+          type: object
+          properties:
+            totalCount:
+              type: integer
   parameters:
     sandboxHeader:
       name: x-sandbox-name
