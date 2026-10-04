@@ -301,40 +301,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    sandboxHeader:
-      name: x-sandbox-name
-      in: header
-      required: true
-      description: The sandbox name.
-      schema:
-        type: string
-        default: prod
   schemas:
-    JourneyInput:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        entryCondition:
-          type: object
-        activities:
-          type: array
-          items:
-            type: object
-    JourneyList:
-      type: object
-      properties:
-        journeys:
-          type: array
-          items:
-            $ref: '#/components/schemas/Journey'
-        totalCount:
-          type: integer
     Journey:
       type: object
       properties:
@@ -359,6 +326,39 @@ components:
         modifiedAt:
           type: string
           format: date-time
+    JourneyList:
+      type: object
+      properties:
+        journeys:
+          type: array
+          items:
+            $ref: '#/components/schemas/Journey'
+        totalCount:
+          type: integer
+    JourneyInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        entryCondition:
+          type: object
+        activities:
+          type: array
+          items:
+            type: object
+  parameters:
+    sandboxHeader:
+      name: x-sandbox-name
+      in: header
+      required: true
+      description: The sandbox name.
+      schema:
+        type: string
+        default: prod
   securitySchemes:
     bearerAuth:
       type: http

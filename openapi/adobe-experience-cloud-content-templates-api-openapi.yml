@@ -99,6 +99,29 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ContentTemplate:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        channel:
+          type: string
+        content:
+          type: object
+        createdAt:
+          type: string
+          format: date-time
+    ContentTemplateList:
+      type: object
+      properties:
+        templates:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentTemplate'
+        totalCount:
+          type: integer
     ContentTemplateInput:
       type: object
       required:
@@ -116,29 +139,6 @@ components:
           - inApp
         content:
           type: object
-    ContentTemplateList:
-      type: object
-      properties:
-        templates:
-          type: array
-          items:
-            $ref: '#/components/schemas/ContentTemplate'
-        totalCount:
-          type: integer
-    ContentTemplate:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        channel:
-          type: string
-        content:
-          type: object
-        createdAt:
-          type: string
-          format: date-time
   parameters:
     sandboxHeader:
       name: x-sandbox-name

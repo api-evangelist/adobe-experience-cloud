@@ -91,15 +91,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    sandboxHeader:
-      name: x-sandbox-name
-      in: header
-      required: true
-      description: The sandbox name.
-      schema:
-        type: string
-        default: prod
   schemas:
     PlacementList:
       type: object
@@ -108,6 +99,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Placement'
+    Placement:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        channel:
+          type: string
+        contentType:
+          type: string
     PlacementInput:
       type: object
       required:
@@ -121,17 +123,15 @@ components:
           type: string
         contentType:
           type: string
-    Placement:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        channel:
-          type: string
-        contentType:
-          type: string
+  parameters:
+    sandboxHeader:
+      name: x-sandbox-name
+      in: header
+      required: true
+      description: The sandbox name.
+      schema:
+        type: string
+        default: prod
   securitySchemes:
     bearerAuth:
       type: http

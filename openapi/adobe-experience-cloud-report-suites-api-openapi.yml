@@ -114,6 +114,17 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ReportSuiteList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportSuite'
+        totalElements:
+          type: integer
+        totalPages:
+          type: integer
     ReportSuite:
       type: object
       properties:
@@ -127,17 +138,6 @@ components:
           type: integer
         calendarType:
           type: string
-    ReportSuiteList:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReportSuite'
-        totalElements:
-          type: integer
-        totalPages:
-          type: integer
   securitySchemes:
     bearerAuth:
       type: http

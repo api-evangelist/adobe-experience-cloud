@@ -102,40 +102,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ReportRequest:
-      type: object
-      properties:
-        rsid:
-          type: string
-          description: Report suite ID.
-        globalFilters:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-              dateRange:
-                type: string
-        metricContainer:
-          type: object
-          properties:
-            metrics:
-              type: array
-              items:
-                type: object
-                properties:
-                  id:
-                    type: string
-        dimension:
-          type: string
-        settings:
-          type: object
-          properties:
-            limit:
-              type: integer
-            page:
-              type: integer
     ReportResponse:
       type: object
       properties:
@@ -171,6 +137,40 @@ components:
           type: string
         errorId:
           type: string
+    ReportRequest:
+      type: object
+      properties:
+        rsid:
+          type: string
+          description: Report suite ID.
+        globalFilters:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              dateRange:
+                type: string
+        metricContainer:
+          type: object
+          properties:
+            metrics:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+        dimension:
+          type: string
+        settings:
+          type: object
+          properties:
+            limit:
+              type: integer
+            page:
+              type: integer
   securitySchemes:
     bearerAuth:
       type: http

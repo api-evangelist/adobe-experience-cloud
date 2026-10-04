@@ -484,6 +484,26 @@ components:
           type: integer
         totalPages:
           type: integer
+    SegmentDefinition:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        expression:
+          type: object
+          properties:
+            type:
+              type: string
+            value:
+              type: string
+        mergePolicyId:
+          type: string
+        evaluationInfo:
+          type: object
     SegmentDefinitionInput:
       type: object
       required:
@@ -517,26 +537,6 @@ components:
               type: string
         mergePolicyId:
           type: string
-    SegmentDefinition:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        expression:
-          type: object
-          properties:
-            type:
-              type: string
-            value:
-              type: string
-        mergePolicyId:
-          type: string
-        evaluationInfo:
-          type: object
     SegmentDefinitionList:
       type: object
       properties:

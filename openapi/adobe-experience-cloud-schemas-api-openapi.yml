@@ -227,16 +227,27 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    sandboxHeader:
-      name: x-sandbox-name
-      in: header
-      required: true
-      description: The name of the sandbox to operate in.
-      schema:
-        type: string
-        default: prod
   schemas:
+    SchemaInput:
+      type: object
+      required:
+      - title
+      - type
+      - allOf
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+        allOf:
+          type: array
+          items:
+            type: object
+            properties:
+              $ref:
+                type: string
     Schema:
       type: object
       properties:
@@ -264,26 +275,15 @@ components:
           properties:
             count:
               type: integer
-    SchemaInput:
-      type: object
-      required:
-      - title
-      - type
-      - allOf
-      properties:
-        title:
-          type: string
-        description:
-          type: string
-        type:
-          type: string
-        allOf:
-          type: array
-          items:
-            type: object
-            properties:
-              $ref:
-                type: string
+  parameters:
+    sandboxHeader:
+      name: x-sandbox-name
+      in: header
+      required: true
+      description: The name of the sandbox to operate in.
+      schema:
+        type: string
+        default: prod
   securitySchemes:
     bearerAuth:
       type: http
