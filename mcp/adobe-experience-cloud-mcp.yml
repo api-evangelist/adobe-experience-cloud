@@ -252,3 +252,20 @@ access_model:
     the user's existing AEM permissions" and "MCP servers are designed for human-operated clients with
     interactive UX; the MCP Tools spec recommends a human in the loop to approve or deny tool invocations.
     Fully autonomous use should be treated as a separate compatibility tier."
+rfc9728:
+  endpoint: https://aa-mcp.adobe.io/mcp
+  metadata_url: https://aa-mcp.adobe.io/.well-known/oauth-protected-resource
+  discovered_via: WWW-Authenticate resource_metadata on an anonymous POST initialize
+  fetched: '2026-09-25'
+  http_status: 200
+  content_type: application/json
+  document:
+    resource: https://aa-mcp.adobe.io/mcp
+    authorization_servers:
+    - https://aa-mcp.adobe.io
+    scopes_supported:
+    - openid
+    - AdobeID
+    - additional_info.projectedProductContext
+    bearer_methods_supported:
+    - header
