@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/adobe-experience-cloud/integrations
+- https://n8n.io/integrations/adobe-experience-cloud/
+- https://composio.dev/toolkits/adobe-experience-cloud
+- https://monid.ai/tools/adobe-experience-cloud
+checked:
+- https://composio.dev/toolkits/adobe-experience-cloud
+- https://monid.ai/tools/adobe-experience-cloud
+- https://n8n.io/integrations/adobe-experience-cloud/
+- https://zapier.com/apps/adobe-experience-cloud/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
