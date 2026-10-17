@@ -155,6 +155,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    QueryList:
+      type: object
+      properties:
+        queries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Query'
+        _page:
+          type: object
+          properties:
+            totalCount:
+              type: integer
     Query:
       type: object
       properties:
@@ -181,18 +193,6 @@ components:
           format: date-time
         rowCount:
           type: integer
-    QueryList:
-      type: object
-      properties:
-        queries:
-          type: array
-          items:
-            $ref: '#/components/schemas/Query'
-        _page:
-          type: object
-          properties:
-            totalCount:
-              type: integer
   parameters:
     sandboxHeader:
       name: x-sandbox-name

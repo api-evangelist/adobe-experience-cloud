@@ -89,32 +89,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  schemas:
-    CollectionList:
-      type: object
-      properties:
-        collections:
-          type: array
-          items:
-            $ref: '#/components/schemas/Collection'
-    Collection:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        filter:
-          type: object
-    CollectionInput:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        filter:
-          type: object
   parameters:
     sandboxHeader:
       name: x-sandbox-name
@@ -124,6 +98,32 @@ components:
       schema:
         type: string
         default: prod
+  schemas:
+    Collection:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        filter:
+          type: object
+    CollectionList:
+      type: object
+      properties:
+        collections:
+          type: array
+          items:
+            $ref: '#/components/schemas/Collection'
+    CollectionInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        filter:
+          type: object
   securitySchemes:
     bearerAuth:
       type: http

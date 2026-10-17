@@ -159,13 +159,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    SandboxList:
-      type: object
-      properties:
-        sandboxes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Sandbox'
     Sandbox:
       type: object
       properties:
@@ -179,6 +172,13 @@ components:
           type: string
         region:
           type: string
+    SandboxList:
+      type: object
+      properties:
+        sandboxes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sandbox'
   securitySchemes:
     bearerAuth:
       type: http

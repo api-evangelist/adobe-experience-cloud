@@ -177,20 +177,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Service:
-      type: object
-      properties:
-        PKey:
-          type: string
-        name:
-          type: string
-        label:
-          type: string
-        mode:
-          type: string
-        created:
-          type: string
-          format: date-time
     ServiceList:
       type: object
       properties:
@@ -212,6 +198,20 @@ components:
           enum:
           - email
           - sms
+    Service:
+      type: object
+      properties:
+        PKey:
+          type: string
+        name:
+          type: string
+        label:
+          type: string
+        mode:
+          type: string
+        created:
+          type: string
+          format: date-time
   securitySchemes:
     bearerAuth:
       type: http

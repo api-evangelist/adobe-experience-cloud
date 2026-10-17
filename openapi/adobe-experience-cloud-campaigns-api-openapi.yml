@@ -163,6 +163,15 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    sandboxHeader:
+      name: x-sandbox-name
+      in: header
+      required: true
+      description: The sandbox name.
+      schema:
+        type: string
+        default: prod
   schemas:
     CampaignInput:
       type: object
@@ -226,15 +235,6 @@ components:
             $ref: '#/components/schemas/Campaign'
         totalCount:
           type: integer
-  parameters:
-    sandboxHeader:
-      name: x-sandbox-name
-      in: header
-      required: true
-      description: The sandbox name.
-      schema:
-        type: string
-        default: prod
   securitySchemes:
     bearerAuth:
       type: http

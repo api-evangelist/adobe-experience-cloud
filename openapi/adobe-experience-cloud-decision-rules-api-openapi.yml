@@ -91,14 +91,16 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    sandboxHeader:
+      name: x-sandbox-name
+      in: header
+      required: true
+      description: The sandbox name.
+      schema:
+        type: string
+        default: prod
   schemas:
-    DecisionRuleList:
-      type: object
-      properties:
-        decisionRules:
-          type: array
-          items:
-            $ref: '#/components/schemas/DecisionRule'
     DecisionRuleInput:
       type: object
       required:
@@ -111,6 +113,13 @@ components:
           type: string
         condition:
           type: string
+    DecisionRuleList:
+      type: object
+      properties:
+        decisionRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/DecisionRule'
     DecisionRule:
       type: object
       properties:
@@ -122,15 +131,6 @@ components:
           type: string
         condition:
           type: string
-  parameters:
-    sandboxHeader:
-      name: x-sandbox-name
-      in: header
-      required: true
-      description: The sandbox name.
-      schema:
-        type: string
-        default: prod
   securitySchemes:
     bearerAuth:
       type: http

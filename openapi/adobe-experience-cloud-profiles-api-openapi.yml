@@ -308,18 +308,6 @@ components:
           format: date
         phone:
           type: string
-    ProfileList:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Profile'
-        count:
-          type: object
-          properties:
-            value:
-              type: integer
     Profile:
       type: object
       properties:
@@ -342,6 +330,18 @@ components:
         lastModified:
           type: string
           format: date-time
+    ProfileList:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Profile'
+        count:
+          type: object
+          properties:
+            value:
+              type: integer
     ProfileEntity:
       type: object
       properties:

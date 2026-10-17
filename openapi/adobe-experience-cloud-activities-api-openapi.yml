@@ -304,6 +304,19 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ActivityList:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        activities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Activity'
     Activity:
       type: object
       properties:
@@ -358,19 +371,6 @@ components:
         endsAt:
           type: string
           format: date-time
-    ActivityList:
-      type: object
-      properties:
-        total:
-          type: integer
-        offset:
-          type: integer
-        limit:
-          type: integer
-        activities:
-          type: array
-          items:
-            $ref: '#/components/schemas/Activity'
   securitySchemes:
     bearerAuth:
       type: http

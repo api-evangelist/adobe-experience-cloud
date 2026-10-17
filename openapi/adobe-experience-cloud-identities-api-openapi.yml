@@ -96,6 +96,21 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    IdentityNamespace:
+      type: object
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        idType:
+          type: string
+        standard:
+          type: boolean
     IdentityNamespaceInput:
       type: object
       required:
@@ -117,21 +132,6 @@ components:
           - CROSS_DEVICE
           - EMAIL
           - PHONE
-    IdentityNamespace:
-      type: object
-      properties:
-        id:
-          type: integer
-        code:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        idType:
-          type: string
-        standard:
-          type: boolean
   parameters:
     sandboxHeader:
       name: x-sandbox-name

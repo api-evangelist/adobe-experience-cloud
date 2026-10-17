@@ -155,7 +155,33 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    sandboxHeader:
+      name: x-sandbox-name
+      in: header
+      required: true
+      description: The sandbox name.
+      schema:
+        type: string
+        default: prod
   schemas:
+    MessageInput:
+      type: object
+      required:
+      - name
+      - channel
+      properties:
+        name:
+          type: string
+        channel:
+          type: string
+          enum:
+          - email
+          - push
+          - sms
+          - inApp
+        content:
+          type: object
     Message:
       type: object
       properties:
@@ -178,32 +204,6 @@ components:
             $ref: '#/components/schemas/Message'
         totalCount:
           type: integer
-    MessageInput:
-      type: object
-      required:
-      - name
-      - channel
-      properties:
-        name:
-          type: string
-        channel:
-          type: string
-          enum:
-          - email
-          - push
-          - sms
-          - inApp
-        content:
-          type: object
-  parameters:
-    sandboxHeader:
-      name: x-sandbox-name
-      in: header
-      required: true
-      description: The sandbox name.
-      schema:
-        type: string
-        default: prod
   securitySchemes:
     bearerAuth:
       type: http

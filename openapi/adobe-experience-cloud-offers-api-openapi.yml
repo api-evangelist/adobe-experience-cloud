@@ -461,6 +461,36 @@ components:
         type: string
         default: prod
   schemas:
+    OfferInput:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        representations:
+          type: array
+          items:
+            type: object
+        eligibilityRule:
+          type: string
+        priority:
+          type: integer
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+    OfferList:
+      type: object
+      properties:
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer'
+        totalCount:
+          type: integer
     Offer:
       type: object
       properties:
@@ -493,36 +523,35 @@ components:
           format: date-time
         priority:
           type: integer
-    OfferList:
-      type: object
-      properties:
-        offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Offer'
-        totalCount:
-          type: integer
-    OfferInput:
+    OfferInput_2:
       type: object
       required:
       - name
+      - type
+      - content
       properties:
         name:
           type: string
-        representations:
+        type:
+          type: string
+          enum:
+          - content
+          - redirect
+        content:
+          type: string
+    OfferList_2:
+      type: object
+      properties:
+        total:
+          type: integer
+        offset:
+          type: integer
+        limit:
+          type: integer
+        offers:
           type: array
           items:
-            type: object
-        eligibilityRule:
-          type: string
-        priority:
-          type: integer
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
+            $ref: '#/components/schemas/Offer_2'
     Offer_2:
       type: object
       properties:
@@ -541,35 +570,6 @@ components:
         modifiedAt:
           type: string
           format: date-time
-    OfferList_2:
-      type: object
-      properties:
-        total:
-          type: integer
-        offset:
-          type: integer
-        limit:
-          type: integer
-        offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Offer_2'
-    OfferInput_2:
-      type: object
-      required:
-      - name
-      - type
-      - content
-      properties:
-        name:
-          type: string
-        type:
-          type: string
-          enum:
-          - content
-          - redirect
-        content:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http
