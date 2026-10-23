@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/adobe-experience-cloud/integrations
 - https://n8n.io/integrations/adobe-experience-cloud/
@@ -10,7 +10,1144 @@ checked:
 - https://monid.ai/tools/adobe-experience-cloud
 - https://n8n.io/integrations/adobe-experience-cloud/
 - https://zapier.com/apps/adobe-experience-cloud/integrations
+- https://exchange.adobe.com/apps
+- https://exchange.adobe.com/apps/browse/cc
+- https://exchange.adobe.com/apps/browse/ec
+- https://exchange.adobe.com/robots.txt
 summary: null
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: 6sense
+  app: 6sense for Analytics and Target
+  apps:
+  - 6sense for Analytics and Target
+  listing_count: 1
+  partner: 6sense
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/105363
+  category: Adobe Exchange Experience Cloud listing (Analytics, Target)
+  products:
+  - Analytics
+  - Target
+  partner_url: https://6sense.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: Accenture PLC
+  app: Accenture | Intelligent Personalization Platform (AIPP)
+  apps:
+  - Accenture | Adobe ABM Accelerator
+  - Accenture | Intelligent Personalization Platform (AIPP)
+  - Avanade | B2B Experience-Driven Commerce Accelerator
+  - Avanade | ORBIT/Digital Experience Foundation for AEM-as-a-Cloud Service
+  listing_count: 4
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200053
+  category: Adobe Exchange Experience Cloud listing (Analytics, Audience Manager, Campaign, Commerce)
+  products:
+  - Analytics
+  - Audience Manager
+  - Campaign
+  - Commerce
+  - Experience Platform
+  - Experience Platform services
+  - Marketo Engage
+  - Target
+  partner_url: https://www.accenture.com/adobe
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: accenture
+    why: 'market-fit gate: partner''s own tags carry no creative / media / marketing / analytics / content / commerce
+      / e-sign / work-management term'
+- partner_name: Algolia
+  app: Algolia Destination Connector
+  apps:
+  - Algolia Destination Connector
+  - Algolia Insights for Adobe Event Forwarding
+  - Algolia Insights for Adobe Launch
+  - Algolia User Profiles Source Connector
+  listing_count: 4
+  partner: algolia
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600114
+  category: Adobe Exchange Experience Cloud listing (Experience Platform, Real-Time CDP)
+  products:
+  - Experience Platform
+  - Real-Time CDP
+  partner_url: https://www.algolia.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+- partner_name: Alteryx, Inc.
+  app: Alteryx Analytics Platform
+  apps:
+  - Alteryx Analytics Platform
+  listing_count: 1
+  partner: alteryx
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/103750
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: https://www.alteryx.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: AppsFlyer
+  app: AppsFlyer Extension for Launch by Adobe  (Mobile)
+  apps:
+  - AppsFlyer Extension for Launch by Adobe  (Mobile)
+  listing_count: 1
+  partner: appsflyer
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/101096
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: https://appsflyer.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: BRIGHTCOVE, INC
+  app: Brightcove Video Connector for Adobe Experience Manager
+  apps:
+  - Brightcove Video Connector for Adobe Experience Manager
+  listing_count: 1
+  partner: brightcove
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600310
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: https://www.brightcove.com/en/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: Bynder
+  app: Bynder for Adobe GenStudio
+  apps:
+  - Bynder for Adobe GenStudio
+  listing_count: 1
+  partner: bynder
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/ab4pt2ssop
+  category: Adobe Exchange Experience Cloud listing (GenStudio)
+  products:
+  - GenStudio
+  partner_url: https://www.bynder.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: CData Software
+  app: CData Marketo Engage Connectors
+  apps:
+  - CData Marketo Engage Connectors
+  listing_count: 1
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/108071
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: https://www.cdata.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+  partner_held:
+    candidate: cdata
+    why: 'market-fit gate: partner''s own tags carry no creative / media / marketing / analytics / content / commerce
+      / e-sign / work-management term'
+- partner_name: CDW
+  app: Sirius | Digital Foundation for Banking
+  apps:
+  - Sirius | Digital Foundation for Banking
+  listing_count: 1
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200158
+  category: Adobe Exchange Experience Cloud listing (Analytics, Campaign, Experience Platform services, Target)
+  products:
+  - Analytics
+  - Campaign
+  - Experience Platform services
+  - Target
+  partner_url: cdw.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+  partner_held:
+    candidate: cdw
+    why: 'market-fit gate: partner''s own tags carry no creative / media / marketing / analytics / content / commerce
+      / e-sign / work-management term'
+- partner_name: CHEQ
+  app: CHEQ
+  apps:
+  - CHEQ
+  listing_count: 1
+  partner: cheq-ai-technologies
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600234
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: https://cheq.ai/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: Cognizant Technology Solutions
+  app: Cognizant Netcentric | OptiMax for Adobe Edge Delivery Services
+  apps:
+  - Cognizant Netcentric | DigitalXn
+  - Cognizant Netcentric | OptiMax for Adobe Edge Delivery Services
+  - Cognizant Netcentric | X-Generation Fan Engagement Platform
+  listing_count: 3
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200017
+  category: Adobe Exchange Experience Cloud listing (Analytics, Experience Platform, Experience Platform apps, Experience
+    Platform services)
+  products:
+  - Analytics
+  - Experience Platform
+  - Experience Platform apps
+  - Experience Platform services
+  - Journey Optimizer
+  - Target
+  partner_url: cognizant.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: cognizant-technology
+    why: 'market-fit gate: partner''s own tags carry no creative / media / marketing / analytics / content / commerce
+      / e-sign / work-management term'
+- partner_name: ProKarma,Inc.DBA Concentrix Catalyst
+  app: Concentrix | Patient Intake Experience
+  apps:
+  - Concentrix | Patient Intake Experience
+  listing_count: 1
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200117
+  category: Adobe Exchange Experience Cloud listing (Experience Platform services)
+  products:
+  - Experience Platform services
+  partner_url: concentrix.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+  partner_held:
+    candidate: concentrix
+    why: 'market-fit gate: partner''s own tags carry no creative / media / marketing / analytics / content / commerce
+      / e-sign / work-management term'
+- partner_name: Deloitte Consulting
+  app: Deloitte Digital | Adobe Xccelerator
+  apps:
+  - Deloitte Digital | Adobe Xccelerator
+  - Deloitte Digital | Closed-Loop Marketing Solution
+  - Deloitte Digital | Connected Studio Powered by Adobe
+  - Deloitte Digital | Deloitte Digital Dual Zone
+  - Deloitte Digital | Experience Management in Digital Banking
+  listing_count: 5
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200129
+  category: Adobe Exchange Experience Cloud listing (Advertising Cloud, Analytics, Campaign, Commerce)
+  products:
+  - Advertising Cloud
+  - Analytics
+  - Campaign
+  - Commerce
+  - Customer Journey Analytics
+  - Experience Platform
+  - Experience Platform apps
+  - Experience Platform services
+  - Journey Optimizer
+  - Marketo Engage
+  - Real-Time CDP
+  - Target
+  - Workfront
+  partner_url: www.deloitte.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: deloitte
+    why: systems integrator / consultancy (Adobe solution listing), not a publisher of its own product
+- partner_name: Demandbase
+  app: Demandbase
+  apps:
+  - Demandbase
+  listing_count: 1
+  partner: demandbase
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/101605
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: www.demandbase.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: Epsilon
+  app: Epsilon Identity Essentials
+  apps:
+  - Agility Loyalty + Adobe Experience Cloud
+  - Epsilon Event API
+  - Epsilon Identity Essentials
+  - Epsilon Partner Sync Web Service
+  - Epsilon Site Tag
+  - Epsilon | PeopleCloud Identity Data Services for Adobe Experience Cloud
+  - Epsilon | PeopleCloud Loyalty & Adobe Experience Cloud
+  listing_count: 7
+  partner: epsilon
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600240
+  category: Adobe Exchange Experience Cloud listing (Analytics, Audience Manager, Campaign, Experience Manager)
+  products:
+  - Analytics
+  - Audience Manager
+  - Campaign
+  - Experience Manager
+  - Experience Platform
+  - Experience Platform services
+  - Target
+  partner_url: https://www.epsilon.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  other_publisher_names:
+  - Epsilon Americas
+- partner_name: Ernst & Young LLP U.S.
+  app: EY | Consumer Experience of the Future
+  apps:
+  - EY | Audience Data Platform Powered by AEP
+  - EY | Consumer Experience of the Future
+  - EY | Scalable Content Production with Adobe GenStudio for Performance Marketing
+  listing_count: 3
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200051
+  category: Adobe Exchange Experience Cloud listing (Analytics, Campaign, Experience Platform, Experience Platform
+    services)
+  products:
+  - Analytics
+  - Campaign
+  - Experience Platform
+  - Experience Platform services
+  - GenStudio
+  - Marketo Engage
+  - Target
+  - Workfront
+  partner_url: ey.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: ey
+    why: systems integrator / consultancy (Adobe solution listing), not a publisher of its own product
+- partner_name: FullStory
+  app: 'Fullstory Anywhere: Activation'
+  apps:
+  - Fullstory AEP Web Extension
+  - 'Fullstory Anywhere: Activation'
+  listing_count: 2
+  partner: fullstory
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600178
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: https://www.fullstory.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: GB Group plc
+  app: Loqate - Location Intelligence Services
+  apps:
+  - Loqate - Location Intelligence Services
+  listing_count: 1
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/109037
+  category: Adobe Exchange Experience Cloud listing (Commerce, Experience Platform)
+  products:
+  - Commerce
+  - Experience Platform
+  partner_url: https://www.gbgplc.com/en/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+  partner_held:
+    candidate: gbg
+    why: 'market-fit gate: partner''s own tags carry no creative / media / marketing / analytics / content / commerce
+      / e-sign / work-management term'
+- partner_name: HUMAN Security
+  app: HUMAN Sightline Cyberfraud Defense
+  apps:
+  - HUMAN Sightline Cyberfraud Defense
+  listing_count: 1
+  partner: human-security
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600610
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: https://www.humansecurity.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: INFOBIP LTD
+  app: Infobip Messaging for Adobe Journey Optimizer
+  apps:
+  - Infobip Messaging for Adobe Journey Optimizer
+  listing_count: 1
+  partner: infobip
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/109190
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: https://www.infobip.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: Infosys Limited
+  app: Infosys Aster | Product Launch Accelerator
+  apps:
+  - Blue Acorn iCi | Adobe Experience Manager Rapid Sync
+  - Blue Acorn iCi | CJA BOT Detection
+  - Blue Acorn iCi | Intelligent Commerce Foundation
+  - Infosys Aster | Product Launch Accelerator
+  - Infosys | Customer Journey Catalyst
+  - Infosys | Elevating CXM - Digital Experience Orchestrator
+  - Infosys | Legacy Modernization Launchpad for Content Management
+  - Infosys | Unified Reseller Network
+  listing_count: 8
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200256
+  category: Adobe Exchange Experience Cloud listing (Analytics, Commerce, Customer Journey Analytics, Experience
+    Platform)
+  products:
+  - Analytics
+  - Commerce
+  - Customer Journey Analytics
+  - Experience Platform
+  - Experience Platform apps
+  - Experience Platform services
+  - Firefly
+  - GenStudio
+  - Journey Optimizer
+  - Real-Time CDP
+  - Target
+  - Workfront
+  partner_url: http://infosys.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: infosys
+    why: 'market-fit gate: partner''s own tags carry no creative / media / marketing / analytics / content / commerce
+      / e-sign / work-management term'
+- partner_name: Kaltura Inc.
+  app: Professional Services for Kaltura AEM Connector installation
+  apps:
+  - Professional Services for Kaltura AEM Connector installation
+  listing_count: 1
+  partner: kaltura
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200203
+  category: Adobe Exchange Experience Cloud listing (Experience Platform services)
+  products:
+  - Experience Platform services
+  partner_url: https://www.kaltura.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: Knak
+  app: Knak GenStudio Plugin
+  apps:
+  - Knak - Email and landing page creation
+  - Knak GenStudio Plugin
+  listing_count: 2
+  partner: knak
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/ab4pvq84vr
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: knak.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: MoEngage Inc
+  app: MoEngage Event Forwarding
+  apps:
+  - MoEngage Event Forwarding
+  listing_count: 1
+  partner: moengage
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/109405
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: https://www.moengage.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: Nextdoor
+  app: Nextdoor Pixel
+  apps:
+  - Nextdoor Conversion API Extension
+  - Nextdoor Pixel
+  listing_count: 2
+  partner: nextdoor
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600209
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: nextdoor.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: OneTrust LLC
+  app: OneTrust Consent Collection
+  apps:
+  - OneTrust Consent Collection
+  listing_count: 1
+  partner: onetrust
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/101610
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: https://onetrust.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+- partner_name: Pega Systems
+  app: Pega Connector for Customer Decision Hub
+  apps:
+  - Pega Connector for Customer Decision Hub
+  listing_count: 1
+  partner: pega
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/107597
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: http://pega.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: Persado
+  app: Persado Connect for Launch
+  apps:
+  - Persado Connect for Launch
+  listing_count: 1
+  partner: persado
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/103745
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: www.persado.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: PwC
+  app: PwC Regulated Content Orchestrator
+  apps:
+  - PwC Regulated Content Orchestrator
+  - PwC | Customer Link and Adobe Experience Platform
+  - PwC | Experience Value Analyzer
+  - PwC | Market-Ready Content Powered by Adobe GenStudio
+  listing_count: 4
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600143
+  category: Adobe Exchange Experience Cloud listing (Analytics, Customer Journey Analytics, Experience Platform,
+    Experience Platform apps)
+  products:
+  - Analytics
+  - Customer Journey Analytics
+  - Experience Platform
+  - Experience Platform apps
+  - Experience Platform services
+  - GenStudio
+  - Journey Optimizer
+  - Real-Time CDP
+  - Target
+  - Workfront
+  partner_url: https://www.pwc.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  other_publisher_names:
+  - PricewaterhouseCoopers LLP
+  partner_held:
+    candidate: pricewaterhousecoopers
+    why: systems integrator / consultancy (Adobe solution listing), not a publisher of its own product
+- partner_name: Qualtrics, LLC.
+  app: Qualtrics Website Feedback
+  apps:
+  - Qualtrics Website Feedback
+  listing_count: 1
+  partner: qualtrics
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/101569
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: www.qualtrics.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: Quantcast Corporation
+  app: Quantcast
+  apps:
+  - Quantcast
+  listing_count: 1
+  partner: quantcast
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/90054
+  category: Adobe Exchange Experience Cloud listing (Audience Manager)
+  products:
+  - Audience Manager
+  partner_url: Quantcast.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: Quantum Metric, Inc
+  app: Quantum Metric for Adobe Customer Journey Analytics
+  apps:
+  - Quantum Metric for Adobe Customer Journey Analytics
+  - Quantum Metric for Adobe Tags
+  listing_count: 2
+  partner: quantum-metric
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600211
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: http://www.quantummetric.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: RainFocus, LLC
+  app: RainFocus Destination Connector
+  apps:
+  - RainFocus Destination Connector
+  - RainFocus Source Connector
+  - RainFocus Tag Extension
+  listing_count: 3
+  partner: rainfocus
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600117
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: rainfocus.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+- partner_name: Rokt
+  app: mParticle by Rokt
+  apps:
+  - Rokt Event API Forwarding
+  - Rokt for Tag Manager
+  - mParticle by Rokt
+  listing_count: 3
+  partner: rokt
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600224
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: https://www.rokt.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: Sinch
+  app: Sinch SMS and MMS for Adobe Journey Optimizer
+  apps:
+  - Sinch SMS and MMS for Adobe Journey Optimizer
+  listing_count: 1
+  partner: sinch
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/108589
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: http://www.sinch.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: Smartling
+  app: Smartling Connector for Adobe Marketo Engage
+  apps:
+  - Smartling Connector for Adobe Marketo Engage
+  listing_count: 1
+  partner: smartling
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/109391
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: https://www.smartling.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: Sprinklr
+  app: Sprinklr Integration for Adobe Firefly
+  apps:
+  - Sprinklr Integration for Adobe Firefly
+  listing_count: 1
+  partner: sprinklr
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600244
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: https://www.sprinklr.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: Stensul
+  app: Stensul for GenStudio for PM
+  apps:
+  - Stensul Governed Creation Platform
+  - Stensul for GenStudio for PM
+  - Stensul for GenStudio for Performance Marketing
+  listing_count: 3
+  partner: stensul
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/abr9sp5o98
+  category: Adobe Exchange Experience Cloud listing (Experience Platform, GenStudio)
+  products:
+  - Experience Platform
+  - GenStudio
+  partner_url: https://stensul.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: Tealium
+  app: Tealium Data Enrichment
+  apps:
+  - Tealium Data Enrichment
+  listing_count: 1
+  partner: tealium
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/105623
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: www.tealium.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: Transcend Inc.
+  app: Transcend
+  apps:
+  - Transcend
+  listing_count: 1
+  partner: transcend-io
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/109813
+  category: Adobe Exchange Experience Cloud listing (Analytics, Experience Platform)
+  products:
+  - Analytics
+  - Experience Platform
+  partner_url: transcend.io
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: Vibes
+  app: Vibes RCS, Wallet, SMS and MMS for Adobe Journey Optimizer
+  apps:
+  - Vibes RCS, Wallet, SMS and MMS for Adobe Journey Optimizer
+  listing_count: 1
+  partner: vibes-platform
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600179
+  category: Adobe Exchange Experience Cloud listing (Journey Optimizer)
+  products:
+  - Journey Optimizer
+  partner_url: https://vibes.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: Virtusa
+  app: Virtusa | Digital Enrollment of Customers Online
+  apps:
+  - Virtusa | AEP Customer 360
+  - Virtusa | Digital Enrollment of Customers Online
+  - Virtusa | Next Generation Digital Banking Launchpad
+  - Virtusa | vEngage
+  listing_count: 4
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200146
+  category: Adobe Exchange Experience Cloud listing (Acrobat Sign, Analytics, Campaign, Customer Journey Analytics)
+  products:
+  - Acrobat Sign
+  - Analytics
+  - Campaign
+  - Customer Journey Analytics
+  - Experience Platform
+  - Experience Platform services
+  - Journey Optimizer
+  - Target
+  partner_url: https://www.virtusa.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: virtusa
+    why: 'market-fit gate: partner''s own tags carry no creative / media / marketing / analytics / content / commerce
+      / e-sign / work-management term'
+- partner_name: Yext
+  app: Yext Conversion Tracking
+  apps:
+  - Yext Conversion Tracking
+  listing_count: 1
+  partner: yext
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/103174
+  category: Adobe Exchange Experience Cloud listing (Experience Platform)
+  products:
+  - Experience Platform
+  partner_url: yext.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: ZeroBounce
+  app: ZeroBounce Email Validation For Adobe Journey Optimizer
+  apps:
+  - ZeroBounce Email Validation For Adobe Journey Optimizer
+  listing_count: 1
+  partner: zerobounce
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600256
+  category: Adobe Exchange Experience Cloud listing (Experience Platform, Journey Optimizer)
+  products:
+  - Experience Platform
+  - Journey Optimizer
+  partner_url: https://www.zerobounce.net/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
 templates: []
