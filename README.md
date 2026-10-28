@@ -1,4 +1,4 @@
-# Adobe Experience Cloud (adobe-experience-cloud)
+# Adobe Experience Cloud
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,183 +66,388 @@
 
 Adobe Experience Cloud is an integrated suite of applications and services for digital marketing, analytics, advertising, and commerce. It provides tools for content management, personalization, customer journey orchestration, audience segmentation, real-time customer data platforms, offer decisioning, and cross-channel campaign execution, enabling organizations to deliver personalized customer experiences at scale.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/adobe-experience-cloud/refs/heads/main/apis.yml)
+**Areas:** Analytics · Customer Experience · Digital Marketing · Personalization · Campaign Management · Journey Orchestration
 
-## Scope
+## Adobe Experience Cloud on APIs.io
 
-- **Type:** Index
-- **Access:** 3rd-Party
+Everything profiled for Adobe Experience Cloud is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/adobe-experience-cloud/](https://apis.io/providers/adobe-experience-cloud/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (36)
 
-- Analytics
-- Customer Experience
-- Digital Marketing
-- Personalization
-- Campaign Management
-- Journey Orchestration
+- [Adobe I/O Events](https://apis.io/apis/adobe-experience-cloud/io-events/) — Adobe I/O Events enables developers to receive near-real-time notifications from Adobe services via webhooks and journal polling. Events are emitted when…
+- [Adobe Experience Cloud Activities API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-activities-api/) — Operations for managing Target activities (A/B, XT, MVT, AP)
+- [Adobe Experience Cloud Audiences API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-audiences-api/) — Operations for managing Target audiences
+- [Adobe Experience Cloud Batches API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-batches-api/) — Operations for batch data ingestion
+- [Adobe Experience Cloud Calculated Metrics API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-calculated-metrics-api/) — Operations for managing calculated metrics
+- [Adobe Experience Cloud Campaign API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-campaign-api/) — The Campaign API from Adobe Experience Cloud — 3 operation(s) for campaign.
+- [Adobe Experience Cloud Campaigns API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-campaigns-api/) — Operations for managing marketing campaigns
+- [Adobe Experience Cloud Classes API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-classes-api/) — Operations for managing XDM classes
+- [Adobe Experience Cloud Collections API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-collections-api/) — Operations for managing offer collections
+- [Adobe Experience Cloud Content API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-content-api/) — Operations for managing email and landing page content
+- [Adobe Experience Cloud Content Templates API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-content-templates-api/) — Operations for managing reusable content templates
+- [Adobe Experience Cloud Datasets API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-datasets-api/) — Operations for managing datasets in the Data Lake
+- [Adobe Experience Cloud Date Ranges API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-date-ranges-api/) — Operations for managing saved date ranges
+- [Adobe Experience Cloud Decision Rules API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-decision-rules-api/) — Operations for managing offer eligibility rules
+- [Adobe Experience Cloud Delivery API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-delivery-api/) — Operations for real-time content delivery
+- [Adobe Experience Cloud Dimensions API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-dimensions-api/) — Operations for retrieving dimension metadata
+- [Adobe Experience Cloud Environments API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-environments-api/) — Operations for managing environments
+- [Adobe Experience Cloud Identities API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-identities-api/) — Operations for identity namespace management
+- [Adobe Experience Cloud Journeys API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-journeys-api/) — Operations for managing customer journeys
+- [Adobe Experience Cloud Messages API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-messages-api/) — Operations for managing channel messages
+- [Adobe Experience Cloud Metadata API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-metadata-api/) — Operations for retrieving resource metadata
+- [Adobe Experience Cloud Metrics API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-metrics-api/) — Operations for retrieving metric metadata
+- [Adobe Experience Cloud Offers API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-offers-api/) — Operations for offer decisioning
+- [Adobe Experience Cloud Placements API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-placements-api/) — Operations for managing offer placements
+- [Adobe Experience Cloud Profiles API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-profiles-api/) — Operations for managing subscriber profiles
+- [Adobe Experience Cloud Projects API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-projects-api/) — Operations for managing Analysis Workspace projects
+- [Adobe Experience Cloud Properties API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-properties-api/) — Operations for managing enterprise properties
+- [Adobe Experience Cloud Queries API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-queries-api/) — Operations for the Query Service
+- [Adobe Experience Cloud Report Suites API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-report-suites-api/) — Operations for managing report suites
+- [Adobe Experience Cloud Reports API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-reports-api/) — Operations for retrieving analytics report data
+- [Adobe Experience Cloud Sandboxes API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-sandboxes-api/) — Operations for managing platform sandboxes
+- [Adobe Experience Cloud Schemas API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-schemas-api/) — Operations for managing XDM schemas via the Schema Registry
+- [Adobe Experience Cloud Segments API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-segments-api/) — Operations for managing analytics segments
+- [Adobe Experience Cloud Transactional Messages API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-transactional-messages-api/) — Operations for sending real-time transactional messages
+- [Adobe Experience Cloud Users API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-users-api/) — Operations for managing analytics users
+- [Adobe Experience Cloud Workflows API](https://apis.io/apis/adobe-experience-cloud/adobe-experience-cloud-workflows-api/) — Operations for managing automated workflows
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-01-01
-- **Modified:** 2026-04-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Arazzo workflows (17)
 
-### Adobe Analytics 2.0 API
+Multi-step workflows that chain operations into a business task.
 
-The Adobe Analytics 2.0 API provides programmatic access to Adobe Analytics reporting, management, and configuration capabilities. It enables developers to retrieve report data, manage report suites, configure calculated metrics, segments, and dimensions, and administer users and permissions within Adobe Analytics.
+- [Adobe Analytics Report Suite Discovery](https://apis.io/arazzos/adobe-experience-cloud/adobe-experience-cloud-analytics-report-suite-discovery-workflow/)
+- [Adobe Analytics Segment-Filtered Report](https://apis.io/arazzos/adobe-experience-cloud/adobe-experience-cloud-analytics-segment-report-workflow/)
+- [Adobe Campaign Profile Subscription](https://apis.io/arazzos/adobe-experience-cloud/adobe-experience-cloud-campaign-profile-subscription-workflow/)
+- [Adobe Campaign Transactional Message](https://apis.io/arazzos/adobe-experience-cloud/adobe-experience-cloud-campaign-transactional-message-workflow/)
+- [Adobe Campaign Workflow Execution](https://apis.io/arazzos/adobe-experience-cloud/adobe-experience-cloud-campaign-workflow-execution-workflow/)
+- [Adobe Experience Platform Audience Segment Definition](https://apis.io/arazzos/adobe-experience-cloud/adobe-experience-cloud-experience-platform-audience-segment-workflow/)
+- [Adobe Experience Platform Batch Ingestion](https://apis.io/arazzos/adobe-experience-cloud/adobe-experience-cloud-experience-platform-batch-ingestion-workflow/)
+- [Adobe Experience Platform Identity and Profile Lookup](https://apis.io/arazzos/adobe-experience-cloud/adobe-experience-cloud-experience-platform-identity-profile-lookup-workflow/)
+- [Adobe Experience Platform Query Service Execution](https://apis.io/arazzos/adobe-experience-cloud/adobe-experience-cloud-experience-platform-query-service-workflow/)
+- [Adobe Experience Platform Schema and Dataset Setup](https://apis.io/arazzos/adobe-experience-cloud/adobe-experience-cloud-experience-platform-schema-dataset-setup-workflow/)
+- [Adobe Journey Optimizer Campaign Launch](https://apis.io/arazzos/adobe-experience-cloud/adobe-experience-cloud-journey-campaign-launch-workflow/)
+- [Adobe Journey Optimizer Journey Create and Publish](https://apis.io/arazzos/adobe-experience-cloud/adobe-experience-cloud-journey-create-publish-workflow/)
+- [Adobe Journey Optimizer Message Authoring](https://apis.io/arazzos/adobe-experience-cloud/adobe-experience-cloud-journey-message-authoring-workflow/)
+- [Adobe Journey Optimizer Offer Decisioning](https://apis.io/arazzos/adobe-experience-cloud/adobe-experience-cloud-journey-offer-decisioning-workflow/)
+- [Adobe Target AB Activity Lifecycle](https://apis.io/arazzos/adobe-experience-cloud/adobe-experience-cloud-target-ab-activity-lifecycle-workflow/)
+- [Adobe Target Audience, Offer, and Activity Assembly](https://apis.io/arazzos/adobe-experience-cloud/adobe-experience-cloud-target-audience-offer-activity-workflow/)
+- [Adobe Target Deliver Personalization](https://apis.io/arazzos/adobe-experience-cloud/adobe-experience-cloud-target-deliver-personalization-workflow/)
 
-- **Human URL:** [https://developer.adobe.com/analytics-apis/docs/2.0/](https://developer.adobe.com/analytics-apis/docs/2.0/)
+#### AsyncAPI (1)
 
-#### Tags
+Event-driven and webhook contracts.
 
-- Analytics
-- Digital Marketing
-- Reporting
+- [Adobe I/O Events](https://apis.io/asyncapis/adobe-experience-cloud/adobe-io-events-asyncapi/)
 
-#### Properties
+#### Event channels (8)
 
-- [Documentation](https://developer.adobe.com/analytics-apis/docs/2.0/)
-- [OpenAPI](openapi/adobe-analytics-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/adobe-analytics-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-analytics-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Individual events and webhooks the provider emits.
 
-### Adobe Experience Platform API
+- [analytics/report-suite-change](https://apis.io/channels/adobe-experience-cloud/analytics-report-suite-change/)
+- [campaign/delivery-status](https://apis.io/channels/adobe-experience-cloud/campaign-delivery-status/)
+- [campaign/workflow-execution](https://apis.io/channels/adobe-experience-cloud/campaign-workflow-execution/)
+- [experience-platform/dataset-ingestion](https://apis.io/channels/adobe-experience-cloud/experience-platform-dataset-ingestion/)
+- [experience-platform/profile-update](https://apis.io/channels/adobe-experience-cloud/experience-platform-profile-update/)
+- [experience-platform/segment-evaluation](https://apis.io/channels/adobe-experience-cloud/experience-platform-segment-evaluation/)
+- [journey-optimizer/journey-step](https://apis.io/channels/adobe-experience-cloud/journey-optimizer-journey-step/)
+- [target/activity-state-change](https://apis.io/channels/adobe-experience-cloud/target-activity-state-change/)
 
-The Adobe Experience Platform API provides RESTful access to core platform services including data ingestion, unified profile management, identity resolution, dataset management, schema registry, query service, and segmentation for building real-time customer profiles and orchestrating data workflows.
+#### MCP servers (1)
 
-- **Human URL:** [https://developer.adobe.com/experience-platform-apis/](https://developer.adobe.com/experience-platform-apis/)
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [adobe-experience-cloud-mcp.yml](https://apis.io/servers/adobe-experience-cloud/adobe-experience-cloud-mcp-yml/)
 
-- Customer Profiles
-- Data Management
-- Platform
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://developer.adobe.com/experience-platform-apis/)
-- [OpenAPI](openapi/adobe-experience-platform-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/adobe-experience-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-experience-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Adobe Experience Cloud Agentic Access](https://apis.io/agentic-access/adobe-experience-cloud/adobe-experience-cloud-agentic-access/)
 
-### Adobe Target API
+#### JSON Schema (87)
 
-The Adobe Target API provides programmatic access to Adobe Target for managing A/B tests, experience targeting, multivariate tests, automated personalization activities, audiences, offers, and real-time content delivery for website and application personalization.
+The data models the API reads and writes.
 
-- **Human URL:** [https://developer.adobe.com/target/](https://developer.adobe.com/target/)
+- [Adobe Experience Cloud Campaign](https://apis.io/schemas/adobe-experience-cloud/adobe-experience-cloud-campaign/)
+- [Adobe Experience Cloud Event](https://apis.io/schemas/adobe-experience-cloud/adobe-experience-cloud-event/)
+- [Adobe Experience Cloud Journey](https://apis.io/schemas/adobe-experience-cloud/adobe-experience-cloud-journey/)
+- [Adobe Experience Cloud Offer](https://apis.io/schemas/adobe-experience-cloud/adobe-experience-cloud-offer/)
+- [Adobe Experience Cloud Profile](https://apis.io/schemas/adobe-experience-cloud/adobe-experience-cloud-profile/)
+- [Adobe Experience Cloud Segment](https://apis.io/schemas/adobe-experience-cloud/adobe-experience-cloud-segment/)
+- [CalculatedMetric](https://apis.io/schemas/adobe-experience-cloud/analytics-api-calculated-metric/)
+- [CalculatedMetricList](https://apis.io/schemas/adobe-experience-cloud/analytics-api-calculated-metric-list/)
+- [DateRangeList](https://apis.io/schemas/adobe-experience-cloud/analytics-api-date-range-list/)
+- [Dimension](https://apis.io/schemas/adobe-experience-cloud/analytics-api-dimension/)
+- [Metric](https://apis.io/schemas/adobe-experience-cloud/analytics-api-metric/)
+- [Project](https://apis.io/schemas/adobe-experience-cloud/analytics-api-project/)
+- [ProjectList](https://apis.io/schemas/adobe-experience-cloud/analytics-api-project-list/)
+- [ReportRequest](https://apis.io/schemas/adobe-experience-cloud/analytics-api-report-request/)
+- [ReportResponse](https://apis.io/schemas/adobe-experience-cloud/analytics-api-report-response/)
+- [ReportSuite](https://apis.io/schemas/adobe-experience-cloud/analytics-api-report-suite/)
+- [ReportSuiteList](https://apis.io/schemas/adobe-experience-cloud/analytics-api-report-suite-list/)
+- [Segment](https://apis.io/schemas/adobe-experience-cloud/analytics-api-segment/)
+- [SegmentList](https://apis.io/schemas/adobe-experience-cloud/analytics-api-segment-list/)
+- [User](https://apis.io/schemas/adobe-experience-cloud/analytics-api-user/)
+- [UserList](https://apis.io/schemas/adobe-experience-cloud/analytics-api-user-list/)
+- [Email](https://apis.io/schemas/adobe-experience-cloud/campaign-api-email/)
+- [EmailList](https://apis.io/schemas/adobe-experience-cloud/campaign-api-email-list/)
+- [Profile](https://apis.io/schemas/adobe-experience-cloud/campaign-api-profile/)
+- [ProfileInput](https://apis.io/schemas/adobe-experience-cloud/campaign-api-profile-input/)
+- …and 62 more published on APIs.io
 
-#### Tags
+#### JSON Structure (87)
 
-- Optimization
-- Personalization
-- Testing
+Data models expressed in JSON Structure.
 
-#### Properties
+- [Adobe Experience Cloud Campaign](https://apis.io/json-structure/adobe-experience-cloud/adobe-experience-cloud-campaign/)
+- [Adobe Experience Cloud Event](https://apis.io/json-structure/adobe-experience-cloud/adobe-experience-cloud-event/)
+- [Adobe Experience Cloud Journey](https://apis.io/json-structure/adobe-experience-cloud/adobe-experience-cloud-journey/)
+- [Adobe Experience Cloud Offer](https://apis.io/json-structure/adobe-experience-cloud/adobe-experience-cloud-offer/)
+- [Adobe Experience Cloud Profile](https://apis.io/json-structure/adobe-experience-cloud/adobe-experience-cloud-profile/)
+- [Adobe Experience Cloud Segment](https://apis.io/json-structure/adobe-experience-cloud/adobe-experience-cloud-segment/)
+- [Analytics Api Calculated Metric List Structure](https://apis.io/json-structure/adobe-experience-cloud/analytics-api-calculated-metric-list-structure/)
+- [Analytics Api Calculated Metric Structure](https://apis.io/json-structure/adobe-experience-cloud/analytics-api-calculated-metric-structure/)
+- [Analytics Api Date Range List Structure](https://apis.io/json-structure/adobe-experience-cloud/analytics-api-date-range-list-structure/)
+- [Analytics Api Dimension Structure](https://apis.io/json-structure/adobe-experience-cloud/analytics-api-dimension-structure/)
+- [Analytics Api Metric Structure](https://apis.io/json-structure/adobe-experience-cloud/analytics-api-metric-structure/)
+- [Analytics Api Project List Structure](https://apis.io/json-structure/adobe-experience-cloud/analytics-api-project-list-structure/)
+- [Analytics Api Project Structure](https://apis.io/json-structure/adobe-experience-cloud/analytics-api-project-structure/)
+- [Analytics Api Report Request Structure](https://apis.io/json-structure/adobe-experience-cloud/analytics-api-report-request-structure/)
+- [Analytics Api Report Response Structure](https://apis.io/json-structure/adobe-experience-cloud/analytics-api-report-response-structure/)
+- [Analytics Api Report Suite List Structure](https://apis.io/json-structure/adobe-experience-cloud/analytics-api-report-suite-list-structure/)
+- [Analytics Api Report Suite Structure](https://apis.io/json-structure/adobe-experience-cloud/analytics-api-report-suite-structure/)
+- [Analytics Api Segment List Structure](https://apis.io/json-structure/adobe-experience-cloud/analytics-api-segment-list-structure/)
+- [Analytics Api Segment Structure](https://apis.io/json-structure/adobe-experience-cloud/analytics-api-segment-structure/)
+- [Analytics Api User List Structure](https://apis.io/json-structure/adobe-experience-cloud/analytics-api-user-list-structure/)
+- [Analytics Api User Structure](https://apis.io/json-structure/adobe-experience-cloud/analytics-api-user-structure/)
+- [Campaign Api Email List Structure](https://apis.io/json-structure/adobe-experience-cloud/campaign-api-email-list-structure/)
+- [Campaign Api Email Structure](https://apis.io/json-structure/adobe-experience-cloud/campaign-api-email-structure/)
+- [Campaign Api Profile Input Structure](https://apis.io/json-structure/adobe-experience-cloud/campaign-api-profile-input-structure/)
+- [Campaign Api Profile List Structure](https://apis.io/json-structure/adobe-experience-cloud/campaign-api-profile-list-structure/)
+- …and 62 more published on APIs.io
 
-- [Documentation](https://developer.adobe.com/target/)
-- [OpenAPI](openapi/adobe-target-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/adobe-target-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-target-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### JSON-LD (7)
 
-### Adobe Journey Optimizer API
+Linked-data contexts for the provider's vocabulary.
 
-The Adobe Journey Optimizer API enables programmatic management of customer journeys, campaigns, messages, offers, placements, and content templates across email, push, SMS, and in-app channels for orchestrating personalized multi-channel customer experiences.
+- [Adobe Experience Cloud Analytics Api Context](https://apis.io/jsonld/adobe-experience-cloud/adobe-experience-cloud-analytics-api-context/)
+- [Adobe Experience Cloud Campaign Api Context](https://apis.io/jsonld/adobe-experience-cloud/adobe-experience-cloud-campaign-api-context/)
+- [Adobe Experience Cloud Context](https://apis.io/jsonld/adobe-experience-cloud/adobe-experience-cloud-context/)
+- [Adobe Experience Cloud Experience Platform Api Context](https://apis.io/jsonld/adobe-experience-cloud/adobe-experience-cloud-experience-platform-api-context/)
+- [Adobe Experience Cloud Io Events Context](https://apis.io/jsonld/adobe-experience-cloud/adobe-experience-cloud-io-events-context/)
+- [Adobe Experience Cloud Journey Optimizer Api Context](https://apis.io/jsonld/adobe-experience-cloud/adobe-experience-cloud-journey-optimizer-api-context/)
+- [Adobe Experience Cloud Target Api Context](https://apis.io/jsonld/adobe-experience-cloud/adobe-experience-cloud-target-api-context/)
 
-- **Human URL:** [https://developer.adobe.com/journey-optimizer-apis/](https://developer.adobe.com/journey-optimizer-apis/)
+#### Vocabulary (1)
 
-#### Tags
+The provider's domain terms, defined.
 
-- Journey Orchestration
-- Messaging
-- Offer Decisioning
+- [Adobe Experience Cloud Vocabulary](https://apis.io/vocabularies/adobe-experience-cloud/adobe-experience-cloud-vocabulary/)
 
-#### Properties
+#### Examples (87)
 
-- [Documentation](https://developer.adobe.com/journey-optimizer-apis/)
-- [OpenAPI](openapi/adobe-journey-optimizer-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/adobe-journey-optimizer-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-journey-optimizer-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Example requests and responses.
 
-### Adobe Campaign API
+- [Adobe Experience Cloud Campaign](https://apis.io/examples/adobe-experience-cloud/adobe-experience-cloud-campaign/)
+- [Adobe Experience Cloud Event](https://apis.io/examples/adobe-experience-cloud/adobe-experience-cloud-event/)
+- [Adobe Experience Cloud Journey](https://apis.io/examples/adobe-experience-cloud/adobe-experience-cloud-journey/)
+- [Adobe Experience Cloud Offer](https://apis.io/examples/adobe-experience-cloud/adobe-experience-cloud-offer/)
+- [Adobe Experience Cloud Profile](https://apis.io/examples/adobe-experience-cloud/adobe-experience-cloud-profile/)
+- [Adobe Experience Cloud Segment](https://apis.io/examples/adobe-experience-cloud/adobe-experience-cloud-segment/)
+- [Analytics Api Calculated Metric Example](https://apis.io/examples/adobe-experience-cloud/analytics-api-calculated-metric-example/)
+- [Analytics Api Calculated Metric List Example](https://apis.io/examples/adobe-experience-cloud/analytics-api-calculated-metric-list-example/)
+- [Analytics Api Date Range List Example](https://apis.io/examples/adobe-experience-cloud/analytics-api-date-range-list-example/)
+- [Analytics Api Dimension Example](https://apis.io/examples/adobe-experience-cloud/analytics-api-dimension-example/)
+- [Analytics Api Metric Example](https://apis.io/examples/adobe-experience-cloud/analytics-api-metric-example/)
+- [Analytics Api Project Example](https://apis.io/examples/adobe-experience-cloud/analytics-api-project-example/)
+- [Analytics Api Project List Example](https://apis.io/examples/adobe-experience-cloud/analytics-api-project-list-example/)
+- [Analytics Api Report Request Example](https://apis.io/examples/adobe-experience-cloud/analytics-api-report-request-example/)
+- [Analytics Api Report Response Example](https://apis.io/examples/adobe-experience-cloud/analytics-api-report-response-example/)
+- [Analytics Api Report Suite Example](https://apis.io/examples/adobe-experience-cloud/analytics-api-report-suite-example/)
+- [Analytics Api Report Suite List Example](https://apis.io/examples/adobe-experience-cloud/analytics-api-report-suite-list-example/)
+- [Analytics Api Segment Example](https://apis.io/examples/adobe-experience-cloud/analytics-api-segment-example/)
+- [Analytics Api Segment List Example](https://apis.io/examples/adobe-experience-cloud/analytics-api-segment-list-example/)
+- [Analytics Api User Example](https://apis.io/examples/adobe-experience-cloud/analytics-api-user-example/)
+- [Analytics Api User List Example](https://apis.io/examples/adobe-experience-cloud/analytics-api-user-list-example/)
+- [Campaign Api Email Example](https://apis.io/examples/adobe-experience-cloud/campaign-api-email-example/)
+- [Campaign Api Email List Example](https://apis.io/examples/adobe-experience-cloud/campaign-api-email-list-example/)
+- [Campaign Api Profile Example](https://apis.io/examples/adobe-experience-cloud/campaign-api-profile-example/)
+- [Campaign Api Profile Input Example](https://apis.io/examples/adobe-experience-cloud/campaign-api-profile-input-example/)
+- …and 62 more published on APIs.io
 
-The Adobe Campaign API provides RESTful access to Adobe Campaign for managing subscriber profiles, subscription services, marketing workflows, email deliveries, and real-time transactional messaging across email, SMS, and push notification channels.
+#### Collections (45)
 
-- **Human URL:** [https://developer.adobe.com/campaign-standard-apis/](https://developer.adobe.com/campaign-standard-apis/)
+Postman and Open Collection request collections.
 
-#### Tags
+- [Adobe Experience Cloud Adobe Analytics 2.0 API](https://apis.io/collections/adobe-experience-cloud/open-adobe-analytics-api/)
+- [Adobe Experience Cloud Adobe Campaign API](https://apis.io/collections/adobe-experience-cloud/open-adobe-campaign-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-activities-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Audiences API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-audiences-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Batches API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-batches-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Calculated Metrics API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-calculated-metrics-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Campaign API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-campaign-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Campaigns API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-campaigns-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Classes API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-classes-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Collections API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-collections-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Content API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-content-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Content Templates API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-content-templates-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Datasets API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-datasets-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Date Ranges API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-date-ranges-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Decision Rules API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-decision-rules-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Delivery API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-delivery-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Dimensions API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-dimensions-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Environments API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-environments-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Identities API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-identities-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Journeys API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-journeys-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Messages API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-messages-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Metadata API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-metadata-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Metrics API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-metrics-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Offers API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-offers-api/)
+- [Adobe Experience Cloud Adobe Analytics 2.0 Activities Placements API](https://apis.io/collections/adobe-experience-cloud/open-adobe-experience-cloud-placements-api/)
+- …and 20 more published on APIs.io
 
-- Campaign Management
-- Email Marketing
-- Transactional Messaging
+#### Overlays (70)
 
-#### Properties
+OpenAPI overlays, including conversational phrasing for each operation.
 
-- [Documentation](https://developer.adobe.com/campaign-standard-apis/)
-- [OpenAPI](openapi/adobe-campaign-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/adobe-campaign-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-campaign-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Adobe Experience Cloud Activities Api Phrasing Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-activities-api-phrasing-overlay/)
+- [Adobe Experience Cloud Activities Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-activities-overlay/)
+- [Adobe Experience Cloud Audiences Api Phrasing Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-audiences-api-phrasing-overlay/)
+- [Adobe Experience Cloud Audiences Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-audiences-overlay/)
+- [Adobe Experience Cloud Batches Api Phrasing Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-batches-api-phrasing-overlay/)
+- [Adobe Experience Cloud Batches Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-batches-overlay/)
+- [Adobe Experience Cloud Calculated Metrics Api Phrasing Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-calculated-metrics-api-phrasing-overlay/)
+- [Adobe Experience Cloud Calculated Metrics Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-calculated-metrics-overlay/)
+- [Adobe Experience Cloud Campaign Api Phrasing Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-campaign-api-phrasing-overlay/)
+- [Adobe Experience Cloud Campaign Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-campaign-overlay/)
+- [Adobe Experience Cloud Campaigns Api Phrasing Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-campaigns-api-phrasing-overlay/)
+- [Adobe Experience Cloud Campaigns Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-campaigns-overlay/)
+- [Adobe Experience Cloud Classes Api Phrasing Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-classes-api-phrasing-overlay/)
+- [Adobe Experience Cloud Classes Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-classes-overlay/)
+- [Adobe Experience Cloud Collections Api Phrasing Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-collections-api-phrasing-overlay/)
+- [Adobe Experience Cloud Collections Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-collections-overlay/)
+- [Adobe Experience Cloud Content Api Phrasing Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-content-api-phrasing-overlay/)
+- [Adobe Experience Cloud Content Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-content-overlay/)
+- [Adobe Experience Cloud Content Templates Api Phrasing Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-content-templates-api-phrasing-overlay/)
+- [Adobe Experience Cloud Content Templates Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-content-templates-overlay/)
+- [Adobe Experience Cloud Datasets Api Phrasing Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-datasets-api-phrasing-overlay/)
+- [Adobe Experience Cloud Datasets Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-datasets-overlay/)
+- [Adobe Experience Cloud Date Ranges Api Phrasing Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-date-ranges-api-phrasing-overlay/)
+- [Adobe Experience Cloud Date Ranges Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-date-ranges-overlay/)
+- [Adobe Experience Cloud Decision Rules Api Phrasing Overlay](https://apis.io/overlays/adobe-experience-cloud/adobe-experience-cloud-decision-rules-api-phrasing-overlay/)
+- …and 45 more published on APIs.io
 
-### Adobe I/O Events
+#### Governance rules (3)
 
-Adobe I/O Events enables developers to receive near-real-time notifications from Adobe services via webhooks and journal polling. Events are emitted when significant changes occur across Adobe Experience Cloud products for building reactive integrations and automated workflows.
+Spectral rulesets for the provider's contracts.
 
-- **Human URL:** [https://developer.adobe.com/events/docs/](https://developer.adobe.com/events/docs/)
+- [Adobe Experience Cloud — asyncapi rules](https://apis.io/rules/adobe-experience-cloud/adobe-experience-cloud-asyncapi-spectral-rules/)
+- [Adobe Experience Cloud — jsonschema rules](https://apis.io/rules/adobe-experience-cloud/adobe-experience-cloud-jsonschema-spectral-rules/)
+- [Adobe Experience Cloud API Rules](https://apis.io/rules/adobe-experience-cloud/adobe-experience-cloud-spectral-rules/)
 
-#### Tags
+#### Security (3)
 
-- Events
-- Integration
-- Webhooks
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Adobe Experience Cloud Authentication](https://apis.io/security/adobe-experience-cloud/adobe-experience-cloud-authentication/)
+- [Adobe Experience Cloud Domain Security](https://apis.io/security/adobe-experience-cloud/adobe-experience-cloud-domain-security/)
+- [Adobe Experience Cloud Vulnerability Disclosure](https://apis.io/security/adobe-experience-cloud/adobe-experience-cloud-vulnerability-disclosure/)
 
-- [Documentation](https://developer.adobe.com/events/docs/)
-- [AsyncAPI](asyncapi/adobe-io-events-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/adobe-analytics-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-analytics-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-campaign-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-campaign-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-experience-platform-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-experience-platform-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-journey-optimizer-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-journey-optimizer-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/adobe-target-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/adobe-target-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### OAuth scopes (1)
 
-## Common Properties
+The permissions the API asks for.
 
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [LinkedIn](https://www.linkedin.com/showcase/adobe-experience-cloud)
-- [Portal](https://developer.adobe.com/)
+- [Adobe Experience Cloud Scopes](https://apis.io/scopes/adobe-experience-cloud/adobe-experience-cloud-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Adobe Experience Cloud Plans Pricing](https://apis.io/plans/adobe-experience-cloud/adobe-experience-cloud-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Adobe Experience Cloud Rate Limits](https://apis.io/rate-limits/adobe-experience-cloud/adobe-experience-cloud-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Adobe Experience Cloud Finops](https://apis.io/finops/adobe-experience-cloud/adobe-experience-cloud-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.adobe.com/)
 - [Documentation](https://developer.adobe.com/developer-console/docs/guides/)
-- [Documentation](https://developer.adobe.com/apis/)
-- [Blog](https://blog.developer.adobe.com/)
+- [Getting started](https://developer.adobe.com/developer-console/docs/guides/getting-started/)
+- [API reference](https://developer.adobe.com/apis/)
 - [Support](https://experienceleague.adobe.com/)
-- [Terms of Service](https://www.adobe.com/legal/terms.html)
-- [Privacy Policy](https://www.adobe.com/privacy.html)
-- [Status Page](https://status.adobe.com/)
-- [Console](https://developer.adobe.com/console/)
-- [Sign Up](https://developer.adobe.com/)
-- [Getting Started](https://developer.adobe.com/developer-console/docs/guides/getting-started/)
-- [GitHub Organization](https://github.com/adobe)
-- [YouTube](https://www.youtube.com/user/AdobeDeveloperTV)
 - [Changelog](https://developer.adobe.com/events/docs/whats_new/)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
-- [Spectral Rules](rules/adobe-experience-cloud-spectral-rules.yml)
-- [Vocabulary](vocabulary/adobe-experience-cloud-vocabulary.yaml)
-- [JSON-LD](json-ld/adobe-experience-cloud-analytics-api-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON-LD](json-ld/adobe-experience-cloud-campaign-api-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON-LD](json-ld/adobe-experience-cloud-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON-LD](json-ld/adobe-experience-cloud-experience-platform-api-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON-LD](json-ld/adobe-experience-cloud-io-events-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON-LD](json-ld/adobe-experience-cloud-journey-optimizer-api-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON-LD](json-ld/adobe-experience-cloud-target-api-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+- [Blog](https://blog.developer.adobe.com/)
+- [Terms of service](https://www.adobe.com/legal/terms.html)
+- [Privacy policy](https://www.adobe.com/privacy.html)
+- [GitHub](https://github.com/adobe)
+- [Status](https://status.adobe.com/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 67.2** — exemplar · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 80.0 |
+| Contract quality | 68.9 |
+| Contract governance | 31.8 |
+| Operational transparency | 60.5 |
+| Developer ergonomics | 74.4 |
+| Access clarity | 42.1 |
+
+**Agent readiness 54.1** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | yes |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 40.2** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/adobe-experience-cloud/](https://apis.io/providers/adobe-experience-cloud/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Adobe Experience Cloud: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/adobe-experience-cloud/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
