@@ -1,0 +1,191 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Adobe Experience Cloud
+providerId: adobe-experience-cloud
+created: '2026-05-04'
+# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
+# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
+method: generated
+modified: '2026-05-05'
+reconciled: false
+tags:
+  - Experience Cloud
+  - Customer Data Platform
+  - Personalization
+  - Marketing
+  - Analytics
+notes: >-
+  Adobe Experience Cloud is the umbrella brand for Adobe's enterprise
+  marketing / analytics / commerce / data products. Every constituent
+  product is sold via contact-sales contract; there is no published list
+  pricing. Pricing lines vary per product (server calls, profiles, MAUs,
+  GMV, seats). API access is included with each product license.
+description: >-
+  Adobe Experience Cloud bundles Adobe Analytics, Customer Journey
+  Analytics, Real-Time CDP, Target, Campaign, Journey Optimizer, Marketo
+  Engage, Workfront, Commerce, and Experience Manager. Each product is
+  contracted independently with usage commit specific to its meter
+  (server calls, marketable profiles, sent messages, GMV, etc.). API access
+  is included with each license.
+sources:
+  - https://business.adobe.com/products/experience-cloud-products.html
+  - https://developer.adobe.com/experience-platform-apis/
+plans:
+  - id: adobe-experience-cloud-platform
+    name: Adobe Experience Platform (Real-Time CDP base)
+    type: enterprise
+    description: >-
+      Foundation customer-data platform that powers Real-Time CDP, Customer
+      Journey Analytics, and Journey Optimizer. Priced by addressable
+      profile count and data ingestion / activation throughput.
+    entries:
+      - label: Profiles + activation commit
+        name: aep_subscription
+        type: subscription
+        metric: profile
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: Real-Time CDP
+      - name: Experience Platform APIs
+      - name: Identity Service
+      - name: Edge Network
+  - id: adobe-experience-cloud-cja
+    name: Customer Journey Analytics
+    type: enterprise
+    description: >-
+      Cross-channel analytics built on Experience Platform; priced by
+      analyzable rows and connected datasets.
+    entries:
+      - label: CJA subscription
+        name: cja_subscription
+        type: subscription
+        metric: row
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: Cross-channel Workspace
+      - name: BI extension
+      - name: Reporting API
+  - id: adobe-experience-cloud-target
+    name: Adobe Target
+    type: enterprise
+    description: >-
+      A/B testing and personalization product priced by qualified visitors
+      and activations.
+    entries:
+      - label: Target subscription
+        name: target_subscription
+        type: subscription
+        metric: visitor
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: A/B and multivariate testing
+      - name: Server-side decisioning
+      - name: Recommendations
+  - id: adobe-experience-cloud-journey-optimizer
+    name: Adobe Journey Optimizer
+    type: enterprise
+    description: >-
+      Real-time orchestration product for triggered cross-channel customer
+      journeys; priced by addressable profiles and message volume.
+    entries:
+      - label: AJO subscription
+        name: ajo_subscription
+        type: subscription
+        metric: profile
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: Real-time journey orchestration
+      - name: Message delivery (email, SMS, push, in-app)
+      - name: Decisioning
+  - id: adobe-experience-cloud-aem
+    name: Adobe Experience Manager (AEM)
+    type: enterprise
+    description: >-
+      Enterprise CMS / DAM. Priced by managed-service tier and asset volume.
+    entries:
+      - label: AEM subscription
+        name: aem_subscription
+        type: subscription
+        metric: tenant
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: AEM Sites (CMS)
+      - name: AEM Assets (DAM)
+      - name: Headless content APIs
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - subscription
+  units:
+  - object
+  plans:
+  - name: Adobe Experience Platform (Real-Time CDP base)
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - year
+  - name: Customer Journey Analytics
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - year
+  - name: Adobe Target
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - year
+  - name: Adobe Journey Optimizer
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods:
+    - year
+  - name: Adobe Experience Manager (AEM)
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - object
+    periods:
+    - year
